@@ -1,0 +1,918 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>WLAN Exp Utilities &mdash; mango_wlan_exp wlan_exp v1.5.2   documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/rtd_overrides.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="mango_wlan_exp wlan_exp v1.5.2   documentation" href="index.html"/>
+        <link rel="up" title="Framework" href="wlan_exp.html"/>
+        <link rel="next" title="LTG Flow Configurations" href="ltg.html"/>
+        <link rel="prev" title="Ad hoc (IBSS) Node" href="node_ibss.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="index.html" class="fa fa-home"> mango_wlan_exp</a>
+        
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="wlan_exp.html">Framework</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="node.html">Node Classes</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">WLAN Exp Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ltg.html">LTG Flow Configurations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="device.html">WLAN Device</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="wlan_exp_log.html">Event Log</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="log_overview.html">Event Log Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="log_entry_types.html">Log Entry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="log_util.html">Event Log Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="log_util_hdf.html">HDF5 Utilities</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">mango_wlan_exp</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="wlan_exp.html">Framework</a> &raquo;</li>
+      
+    <li>WLAN Exp Utilities</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="_sources/wlan_exp_util.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="wlan-exp-utilities">
+<span id="wlan-exp-util"></span><h1>WLAN Exp Utilities<a class="headerlink" href="#wlan-exp-utilities" title="Permalink to this headline">¶</a></h1>
+<p>Common utilities for the WLAN Experiment framework.</p>
+<div class="section" id="uart-print-levels">
+<h2>UART Print Levels<a class="headerlink" href="#uart-print-levels" title="Permalink to this headline">¶</a></h2>
+<p>Defined UART print levels to control the verbosity of the wlan_exp UART output.</p>
+<dl class="data">
+<dt id="wlan_exp.util.uart_print_levels">
+<code class="descname">uart_print_levels</code><em class="property"> = {'NONE': 0, 'WARNING': 2, 'ERROR': 1, 'INFO': 3, 'DEBUG': 4}</em><a class="headerlink" href="#wlan_exp.util.uart_print_levels" title="Permalink to this definition">¶</a></dt>
+<dd><p>wlan_exp UART Print Levels:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal"><span class="pre">NONE</span></code>    - Do not print messages</li>
+<li><code class="docutils literal"><span class="pre">ERROR</span></code>   - Only print error messages</li>
+<li><code class="docutils literal"><span class="pre">WARNING</span></code> - Print error and warning messages</li>
+<li><code class="docutils literal"><span class="pre">INFO</span></code>    - Print error, warning and info messages</li>
+<li><code class="docutils literal"><span class="pre">DEBUG</span></code>   - Print error, warning, info and debug messages</li>
+</ul>
+</div></blockquote>
+<p>Use this dictionary for the <code class="docutils literal"><span class="pre">set_print_level()</span></code> command</p>
+</dd></dl>
+
+</div>
+<div class="section" id="transmit-receive-rate-definitions">
+<h2>Transmit / Receive Rate Definitions<a class="headerlink" href="#transmit-receive-rate-definitions" title="Permalink to this headline">¶</a></h2>
+<p>Supported transmit / receive rates for WlanExpNode</p>
+<dl class="data">
+<dt id="wlan_exp.util.phy_modes">
+<code class="descname">phy_modes</code><em class="property"> = {'NONHT': 1, 'HTMF': 2, 'DSSS': 0}</em><a class="headerlink" href="#wlan_exp.util.phy_modes" title="Permalink to this definition">¶</a></dt>
+<dd><p>PHY Modes</p>
+<blockquote>
+<div><ul class="simple">
+<li>&#8216;DSSS&#8217;  - DSSS (Rx only)</li>
+<li>&#8216;NONHT&#8217; - NONHT OFDM (11a/g)</li>
+<li>&#8216;HTMF&#8217;  - HTMF (11n)</li>
+</ul>
+</div></blockquote>
+<p>Use this dictionary to interpret <code class="docutils literal"><span class="pre">phy_mode</span></code> values encoded in Tx/Rx log entries</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="wlan_exp.util.get_rate_info">
+<code class="descname">get_rate_info</code><span class="sig-paren">(</span><em>mcs</em>, <em>phy_mode</em>, <em>phy_samp_rate=20</em>, <em>short_GI=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/util.html#get_rate_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.util.get_rate_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate dictionary with details about a PHY rate. The returned dictionary
+has fields:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal"><span class="pre">mcs</span></code>: the MCS index passed in the <code class="docutils literal"><span class="pre">mcs</span></code> argument, integer in 0 to 7</li>
+<li><code class="docutils literal"><span class="pre">phy_mode</span></code>: the PHY mode passed in the <code class="docutils literal"><span class="pre">phy_mode</span></code> argument, either <code class="docutils literal"><span class="pre">'NONHT'</span></code> or <code class="docutils literal"><span class="pre">'HTMF'</span></code></li>
+<li><code class="docutils literal"><span class="pre">desc</span></code>: string describing the rate</li>
+<li><code class="docutils literal"><span class="pre">NDBPS</span></code>: integer number of data bits per OFDM symbol for the rate</li>
+<li><code class="docutils literal"><span class="pre">phy_rate</span></code>: float data rate in Mbps</li>
+</ul>
+</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>mcs</strong> (<em>int</em>) &#8211;
+Modulation and coding scheme (MCS) index</li>
+<li><strong>phy_mode</strong> (<em>str, int</em>) &#8211;
+PHY mode (&#8216;NONHT&#8217;, &#8216;HTMF&#8217;)</li>
+<li><strong>phy_samp_rate</strong> (<em>int</em>) &#8211;
+PHY sampling rate (10, 20, 40)</li>
+<li><strong>short_GI</strong> (<em>bool</em>) &#8211;
+Short Guard Interval (GI) (True/False)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>rate_info</strong> &#8211;
+Rate info dictionary</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">dict</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="wlan_exp.util.rate_info_to_str">
+<code class="descname">rate_info_to_str</code><span class="sig-paren">(</span><em>rate_info</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/util.html#rate_info_to_str"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.util.rate_info_to_str" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert dictionary returned by <code class="docutils literal"><span class="pre">get_rate_info()</span></code> into a printable string.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>rate_info</strong> (<em>dict</em>) &#8211;
+Dictionary returned by <code class="docutils literal"><span class="pre">get_rate_info()</span></code></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>output</strong> &#8211;
+String representation of the rate</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Example</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">wlan_exp.util</span> <span class="kn">as</span> <span class="nn">util</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">get_rate_info</span><span class="p">(</span><span class="n">mcs</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">phy_mode</span><span class="o">=</span><span class="s">&#39;HTMF&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">util</span><span class="o">.</span><span class="n">rate_info_to_str</span><span class="p">(</span><span class="n">r</span><span class="p">))</span>
+<span class="go">26.0 Mbps (HTMF 16-QAM 1/2)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="channel-definitions">
+<h2>Channel Definitions<a class="headerlink" href="#channel-definitions" title="Permalink to this headline">¶</a></h2>
+<p>Supported channels for WlanExpNode</p>
+<dl class="data">
+<dt id="wlan_exp.util.wlan_channels">
+<code class="descname">wlan_channels</code><em class="property"> = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 36, 40, 44, 48]</em><a class="headerlink" href="#wlan_exp.util.wlan_channels" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of supported channels. Each value represents a 20MHz channel in the 2.4GHz
+or 5GHz bands. Use the <code class="docutils literal"><span class="pre">get_channel_info</span></code> method to lookup the actual center
+frequency for a given channel index.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="wlan_exp.util.get_channel_info">
+<code class="descname">get_channel_info</code><span class="sig-paren">(</span><em>channel</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/util.html#get_channel_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.util.get_channel_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get channel info dictionary based on channel number</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>channel</strong> (<em>int</em>) &#8211;
+Number of 802.11 channel
+(<a class="reference external" href="https://en.wikipedia.org/wiki/List_of_WLAN_channels">https://en.wikipedia.org/wiki/List_of_WLAN_channels</a>)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>channel_info</strong> &#8211;
+Channel info dictionary</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">dict</td>
+</tr>
+</tbody>
+</table>
+<p>The returned dictionary has fields:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal"><span class="pre">channel</span></code>: Integer channel index</li>
+<li><code class="docutils literal"><span class="pre">freq</span></code>: Integer channel center frequency, in MHz</li>
+</ul>
+</div></blockquote>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">wlan_exp.util</span> <span class="kn">as</span> <span class="nn">util</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">util</span><span class="o">.</span><span class="n">get_channel_info</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="go">{&#39;freq&#39;: 2432, &#39;channel&#39;: 5}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="wlan_exp.util.channel_info_to_str">
+<code class="descname">channel_info_to_str</code><span class="sig-paren">(</span><em>channel_info</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/util.html#channel_info_to_str"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.util.channel_info_to_str" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a channel info dictionary to a string.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>channel_info</strong> (<em>dict</em>) &#8211;
+Dictionary returned by <code class="docutils literal"><span class="pre">get_channel_info()</span></code></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>output</strong> &#8211;
+String representation of the &#8216;channel&#8217;</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="antenna-mode-definitions">
+<h2>Antenna Mode Definitions<a class="headerlink" href="#antenna-mode-definitions" title="Permalink to this headline">¶</a></h2>
+<p>Supported antenna modes for WlanExpNode</p>
+<dl class="attribute">
+<dt id="wlan_exp.util.wlan_rx_ant_modes">
+<code class="descclassname">util.</code><code class="descname">wlan_rx_ant_modes</code><em class="property"> = Dictionary of receive antenna modes</em><a class="headerlink" href="#wlan_exp.util.wlan_rx_ant_modes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="wlan_exp.util.wlan_tx_ant_modes">
+<code class="descclassname">util.</code><code class="descname">wlan_tx_ant_modes</code><em class="property"> = Dictionary of transmit antenna modes</em><a class="headerlink" href="#wlan_exp.util.wlan_tx_ant_modes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="mac-address-definitions">
+<h2>MAC Address Definitions<a class="headerlink" href="#mac-address-definitions" title="Permalink to this headline">¶</a></h2>
+<p>Pre-defined MAC address constants</p>
+<dl class="attribute">
+<dt id="wlan_exp.util.mac_addr_desc_map">
+<code class="descclassname">util.</code><code class="descname">mac_addr_desc_map</code><em class="property"> = List of tuples (MAC value, mask, description) that describe various MAC address ranges</em><a class="headerlink" href="#wlan_exp.util.mac_addr_desc_map" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="wlan_exp.util.mac_addr_mcast_mask">
+<code class="descclassname">util.</code><code class="descname">mac_addr_mcast_mask</code><em class="property"> = Multicast MAC Address Mask</em><a class="headerlink" href="#wlan_exp.util.mac_addr_mcast_mask" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="wlan_exp.util.mac_addr_local_mask">
+<code class="descclassname">util.</code><code class="descname">mac_addr_local_mask</code><em class="property"> = Local MAC Address Mask</em><a class="headerlink" href="#wlan_exp.util.mac_addr_local_mask" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="wlan_exp.util.mac_addr_broadcast">
+<code class="descclassname">util.</code><code class="descname">mac_addr_broadcast</code><em class="property"> = Broadcast MAC Address</em><a class="headerlink" href="#wlan_exp.util.mac_addr_broadcast" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="node-utility-functions">
+<h2>Node Utility Functions<a class="headerlink" href="#node-utility-functions" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="wlan_exp.util.init_nodes">
+<code class="descname">init_nodes</code><span class="sig-paren">(</span><em>nodes_config</em>, <em>network_config=None</em>, <em>node_factory=None</em>, <em>network_reset=True</em>, <em>output=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/util.html#init_nodes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.util.init_nodes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initalize wlan_exp nodes.</p>
+<p>The init_nodes function serves two purposes:  1) To initialize the node for
+participation in the experiment and 2) To retrieve all necessary information
+from the node to provide a valid python WlanExpNode object to be used in
+the experiment script.</p>
+<p>When a WARP node is first configured from a bitstream, its network interface is
+set to a default value such that it is part of the defalt subnet 10.0.0 but does not
+have a valid IP address for communication with the host.  As part of the init_nodes
+process, if network_reset is True, the host will reset the network configuration
+on the node and configure the node with a valid IP address.  If the network settings
+of a node have already been configured and are known to the python experiment script
+a priori, then it is not necessary to issue a network reset to reset the network
+settings on the node.  This can be extremely useful when trying to interact with a
+node via multiple python experiment scripts at the same time.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>nodes_config</strong> (<em>NodesConfiguration</em>) &#8211;
+A NodesConfiguration describing the nodes
+in the network.</li>
+<li><strong>network_config</strong> (<em>NetworkConfiguration, optional</em>) &#8211;
+A NetworkConfiguration object
+describing the network configuration</li>
+<li><strong>node_factory</strong> (<em>WlanExpNodeFactory, optional</em>) &#8211;
+A WlanExpNodeFactory or subclass
+to create nodes of a given node type</li>
+<li><strong>network_reset</strong> (<em>bool, optional</em>) &#8211;
+Issue a network reset command to the nodes to
+initialize / re-initialize their network interface.</li>
+<li><strong>output</strong> (<em>bool, optional</em>) &#8211;
+Print output about the nodes</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><p><strong>nodes</strong> &#8211;</p>
+<p>Initialized list of WlanExpNode / sub-classes of WlanExpNode depending on the
+hardware configuration of the WARP nodes.</p>
+</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list of WlanExpNode</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="wlan_exp.util.broadcast_cmd_set_mac_time">
+<code class="descname">broadcast_cmd_set_mac_time</code><span class="sig-paren">(</span><em>time</em>, <em>network_config</em>, <em>time_id=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/util.html#broadcast_cmd_set_mac_time"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.util.broadcast_cmd_set_mac_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize the MAC time on all of the wlan_exp nodes.</p>
+<p>This method will iterate through all network configurations and issue a broadcast
+packet on each network that will set the MAC time on the node to &#8216;time&#8217;.  The
+method keeps track of how long it takes to send each packet so that the time on all
+nodes is as close as possible even across networks.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>network_config</strong> (<em>NetworkConfiguration</em>) &#8211;
+One or more NetworkConfiguration objects
+that define the networks on which the set_time command will be broadcast</li>
+<li><strong>time</strong> (<em>int</em>) &#8211;
+Time to which the node&#8217;s MAC timestamp will be set (int microseconds)</li>
+<li><strong>time_id</strong> (<em>int, optional</em>) &#8211;
+Identifier used as part of the TIME_INFO log entry created by this command.
+If not specified, then a random number will be used.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="wlan_exp.util.broadcast_cmd_write_time_to_logs">
+<code class="descname">broadcast_cmd_write_time_to_logs</code><span class="sig-paren">(</span><em>network_config</em>, <em>time_id=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/util.html#broadcast_cmd_write_time_to_logs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.util.broadcast_cmd_write_time_to_logs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add the current host time to the log on each node.</p>
+<p>This method will iterate through all network configurations and issue a broadcast
+packet on each network that will add the current time to the log. The method
+keeps track of how long it takes to send each packet so that the time on all
+nodes is as close as possible even across networks.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>network_config</strong> (<em>NetworkConfiguration</em>) &#8211;
+One or more NetworkConfiguration objects
+that define the networks on which the log_write_time command will be broadcast</li>
+<li><strong>time_id</strong> (<em>int, optional</em>) &#8211;
+Identifier used as part of the TIME_INFO log entry created by this command.
+If not specified, then a random number will be used.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="wlan_exp.util.broadcast_cmd_write_exp_info_to_logs">
+<code class="descname">broadcast_cmd_write_exp_info_to_logs</code><span class="sig-paren">(</span><em>network_config</em>, <em>info_type</em>, <em>message=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/util.html#broadcast_cmd_write_exp_info_to_logs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.util.broadcast_cmd_write_exp_info_to_logs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add the EXP INFO log entry to the log on each node.</p>
+<p>This method will iterate through all network configurations and issue a broadcast
+packet on each network that will add the EXP_INFO log entry to the log</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>network_config</strong> (<em>NetworkConfiguration</em>) &#8211;
+One or more NetworkConfiguration objects
+that define the networks on which the log_write_exp_info command will be broadcast</li>
+<li><strong>info_type</strong> (<em>int</em>) &#8211;
+Type of the experiment info.  This is an arbitrary 16 bit number
+chosen by the experimentor</li>
+<li><strong>message</strong> (<em>int, str, bytes, optional</em>) &#8211;
+Information to be placed in the event log.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="wlan_exp.util.filter_nodes">
+<code class="descname">filter_nodes</code><span class="sig-paren">(</span><em>nodes</em>, <em>mac_high=None</em>, <em>mac_low=None</em>, <em>serial_number=None</em>, <em>warn=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/util.html#filter_nodes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.util.filter_nodes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a list of nodes that match all the values for the given filter parameters.</p>
+<p>Each of these filter parameters can be a single value or a list of values.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first">
+<li><p class="first"><strong>nodes</strong> (<em>list of WlanExpNode</em>) &#8211;
+List of WlanExpNode / sub-classes of WlanExpNode</p>
+</li>
+<li><p class="first"><strong>mac_high</strong> (<em>str, int, optional</em>) &#8211;
+Filter for CPU High functionality.  This value must be either
+an integer corresponding to a node type (see wlan_exp/defaults.py for node types)
+or the following strings:</p>
+<blockquote>
+<div><ul class="simple">
+<li><strong>&#8216;AP&#8217;</strong>   (equivalent to WLAN_EXP_HIGH_AP);</li>
+<li><strong>&#8216;STA&#8217;</strong>  (equivalent to WLAN_EXP_HIGH_STA);</li>
+<li><strong>&#8216;IBSS&#8217;</strong> (equivalent to WLAN_EXP_HIGH_IBSS).</li>
+</ul>
+</div></blockquote>
+<p>A value of None means that no filtering will occur for CPU High Functionality</p>
+</li>
+<li><p class="first"><strong>mac_low</strong> (<em>str, int, optional</em>) &#8211;
+Filter for CPU Low functionality.  This value must be either
+an integer corresponding to a node type (see wlan_exp/defaults.py for node types)
+or the following strings:</p>
+<blockquote>
+<div><ul class="simple">
+<li><strong>&#8216;DCF&#8217;</strong>   (equivalent to WLAN_EXP_LOW_DCF);</li>
+<li><strong>&#8216;NOMAC&#8217;</strong> (equivalent to WLAN_EXP_LOW_NOMAC).</li>
+</ul>
+</div></blockquote>
+<p>A value of None means that no filtering will occur for CPU Low Functionality</p>
+</li>
+<li><p class="first"><strong>serial_number</strong> (<em>str, optional</em>) &#8211;
+Filters nodes by WARPv3 serial number.  This value must be of
+the form:  &#8216;W3-a-XXXXX&#8217; where XXXXX is the five digit serial number of the board.</p>
+</li>
+<li><p class="first"><strong>warn</strong> (<em>bool, optional</em>) &#8211;
+Print warnings (default value is True)</p>
+</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>nodes</strong> &#8211;
+Filtered list of WlanExpNode / sub-classes of WlanExpNode</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list of WlanExpNode</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>If the return list of nodes is empty, then this method will issue a warning
+if the parameter warn is True.</p>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">filter_nodes</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">mac_high</span><span class="o">=</span><span class="s">&#39;AP&#39;</span><span class="p">,</span> <span class="n">mac_low</span><span class="o">=</span><span class="s">&#39;DCF&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">filter_nodes</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">mac_high</span><span class="o">=</span><span class="s">&#39;AP&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">filter_nodes</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">mac_high</span><span class="o">=</span><span class="s">&#39;AP&#39;</span><span class="p">,</span> <span class="n">mac_low</span><span class="o">=</span><span class="s">&#39;DCF&#39;</span><span class="p">,</span> <span class="n">serial_numbers</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;w3-a-00001&#39;</span><span class="p">,</span><span class="s">&#39;w3-a-00002&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="wlan_exp.util.check_bss_membership">
+<code class="descname">check_bss_membership</code><span class="sig-paren">(</span><em>nodes</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/util.html#check_bss_membership"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.util.check_bss_membership" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check that each of the nodes in the input list are members of the same
+BSS.  For a BSS to match, the &#8216;bssid&#8217;, &#8216;ssid&#8217; and &#8216;channel&#8217; must match.</p>
+<p>There are two acceptable patterns for the nodes argument</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>1 AP and 1+ STA and 0  IBSS (&#8220;infrastructure&#8221; network)</li>
+<li>0 AP and 0  STA and 2+ IBSS (&#8220;ad hoc&#8221; network)</li>
+</ol>
+</div></blockquote>
+<p>In the case that nodes is 1 AP and 1+ STA and 0 IBSS, then the following
+conditions must be met in order to return True</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>AP BSS must be non-null</li>
+<li>AP must have each STA in its station_info list</li>
+<li>Each STA BSS must match AP BSS</li>
+<li>Each STA must have AP as its only station_info. In the current STA
+implementation this condition is guaranteed if the STA BSS matches
+the AP BSS (previous condition)</li>
+</ol>
+</div></blockquote>
+<p>In the case that nodes is 0 AP and 0 STA and 2+ IBSS, then the following
+conditions must be met in order to return True</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>BSS must match at all nodes and be non-null</li>
+</ol>
+</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>nodes</strong> (<em>list of WlanExpNode</em>) &#8211;
+List of WlanExpNode / sub-classes of
+WlanExpNode</li>
+<li><strong>verbose</strong> (<em>bool</em>) &#8211;
+Print details on which nodes fail BSS membership checks</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>members</strong> &#8211;
+Boolean indicating whether the nodes were members of the same BSS</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">bool</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="misc-utility-functions">
+<h2>Misc Utility Functions<a class="headerlink" href="#misc-utility-functions" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="wlan_exp.util.create_locally_administered_bssid">
+<code class="descname">create_locally_administered_bssid</code><span class="sig-paren">(</span><em>mac_address</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/util.html#create_locally_administered_bssid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.util.create_locally_administered_bssid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a locally administered BSSID.</p>
+<p>Set &#8220;locally administered&#8221; bit to &#8216;1&#8217; and &#8220;multicast&#8221; bit to &#8216;0&#8217;</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>mac_address</strong> (<em>int, str</em>) &#8211;
+MAC address to be used as the base for the BSSID
+either as a 48-bit integer or a colon delimited string of the form:
+XX:XX:XX:XX:XX:XX</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>bssid</strong> &#8211;<p>BSSID with the &#8220;locally administerd&#8221; bit set to &#8216;1&#8217; and the &#8220;multicast&#8221; bit set to &#8216;0&#8217;</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="wlan_exp.util.int_to_ip">
+<code class="descname">int_to_ip</code><span class="sig-paren">(</span><em>ip_address</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/util.html#int_to_ip"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.util.int_to_ip" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert an integer to IP address string (dotted notation).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>ip_address</strong> (<em>int</em>) &#8211;
+Unsigned 32-bit integer representation of the IP address</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>ip_address</strong> &#8211;
+String version of an IP address of the form W.X.Y.Z</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="wlan_exp.util.ip_to_int">
+<code class="descname">ip_to_int</code><span class="sig-paren">(</span><em>ip_address</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/util.html#ip_to_int"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.util.ip_to_int" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert IP address string (dotted notation) to an integer.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>ip_address</strong> (<em>str</em>) &#8211;
+String version of an IP address of the form W.X.Y.Z</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>ip_address</strong> &#8211;
+Unsigned 32-bit integer representation of the IP address</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="wlan_exp.util.mac_addr_to_str">
+<code class="descname">mac_addr_to_str</code><span class="sig-paren">(</span><em>mac_address</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/util.html#mac_addr_to_str"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.util.mac_addr_to_str" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert an integer to a colon separated MAC address string.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>mac_address</strong> (<em>int</em>) &#8211;
+Unsigned 48-bit integer representation of the MAC address</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>mac_address</strong> &#8211;
+String version of an MAC address of the form XX:XX:XX:XX:XX:XX</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="wlan_exp.util.str_to_mac_addr">
+<code class="descname">str_to_mac_addr</code><span class="sig-paren">(</span><em>mac_address</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/util.html#str_to_mac_addr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.util.str_to_mac_addr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a colon separated MAC address string to an integer.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>mac_address</strong> (<em>str</em>) &#8211;
+String version of an MAC address of the form XX:XX:XX:XX:XX:XX</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>mac_address</strong> &#8211;
+Unsigned 48-bit integer representation of the MAC address</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="wlan_exp.util.mac_addr_to_byte_str">
+<code class="descname">mac_addr_to_byte_str</code><span class="sig-paren">(</span><em>mac_address</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/util.html#mac_addr_to_byte_str"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.util.mac_addr_to_byte_str" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert an integer to a MAC address byte string.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>mac_address</strong> (<em>int</em>) &#8211;
+Unsigned 48-bit integer representation of the MAC address</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>mac_address</strong> &#8211;
+Byte string version of an MAC address</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="wlan_exp.util.byte_str_to_mac_addr">
+<code class="descname">byte_str_to_mac_addr</code><span class="sig-paren">(</span><em>mac_address</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/util.html#byte_str_to_mac_addr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.util.byte_str_to_mac_addr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a MAC address byte string to an integer.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>mac_address</strong> (<em>str</em>) &#8211;
+Byte string version of an MAC address</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>mac_address</strong> &#8211;
+Unsigned 48-bit integer representation of the MAC address</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="wlan_exp.util.sn_to_str">
+<code class="descname">sn_to_str</code><span class="sig-paren">(</span><em>hw_generation</em>, <em>serial_number</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/util.html#sn_to_str"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.util.sn_to_str" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert serial number to a string for a given hardware generation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>hw_generation</strong> (<em>int</em>) &#8211;
+WARP hardware generation (currently only &#8216;3&#8217; is supported)</li>
+<li><strong>serial_number</strong> (<em>int</em>) &#8211;
+Integer representation of the WARP serial number</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>serial_number</strong> &#8211;
+String representation of the WARP serial number (of the form &#8216;W3-a-XXXXX&#8217;)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">str</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="wlan_exp.util.node_type_to_str">
+<code class="descname">node_type_to_str</code><span class="sig-paren">(</span><em>node_type</em>, <em>node_factory=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/util.html#node_type_to_str"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.util.node_type_to_str" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert the Node Type to a string description.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>node_type</strong> (<em>int</em>) &#8211;
+node type ID (u32)</li>
+<li><strong>node_factory</strong> (<em>WlanExpNodeFactory</em>) &#8211;
+A WlanExpNodeFactory or subclass to
+create nodes of a given type</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>node_type</strong> &#8211;
+String representation of the node type</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">str</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>By default, a dictionary of node types is built dynamically during init_nodes().
+If init_nodes() has not been run, then the method will try to create a node
+type dictionary.  If a node_factory is not provided then a default WlanExpNodeFactory
+will be used to determine the node type.  If a default WlanExpNodeFactory is used,
+then only framework node types will be known and custom node types will return:
+&#8220;Unknown node type: &lt;value&gt;&#8221;</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="wlan_exp.util.mac_addr_desc">
+<code class="descname">mac_addr_desc</code><span class="sig-paren">(</span><em>mac_addr</em>, <em>desc_map=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/util.html#mac_addr_desc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.util.mac_addr_desc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a string description of a MAC address.</p>
+<p>This is useful when printing a table of addresses.  Custom MAC address
+descriptions can be provided via the desc_map argument.  In addition
+to the provided desc_map, the global mac_addr_desc_map that describes
+mappings of different MAC addresses will also be used.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>mac_address</strong> (<em>int</em>) &#8211;
+64-bit integer representing 48-bit MAC address</li>
+<li><strong>desc_map</strong> (<em>list of tuple, optional</em>) &#8211;
+list of tuple or tuple of the form
+(addr_mask, addr_value, descritpion)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>description</strong> &#8211;
+Description of the MAC address or &#8216;&#8217; if address
+does not match any descriptions</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">str</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>The mac_address argument will be bitwise AND&#8217;d with each addr_mask, then
+compared to addr_value. If the result is non-zero the corresponding
+descprition will be returned.  This will only return the first description
+in the [desc_map, mac_addr_desc_map] list.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="wlan_exp.util.debug_here">
+<code class="descname">debug_here</code><span class="sig-paren">(</span><em>banner=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/util.html#debug_here"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.util.debug_here" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function that mimics the matlab keyboard command for interactive debbug.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>banner</strong> (<em>str</em>) &#8211;
+Banner message to be displayed before the interactive prompt</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="ltg.html" class="btn btn-neutral float-right" title="LTG Flow Configurations">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="node_ibss.html" class="btn btn-neutral" title="Ad hoc (IBSS) Node"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Mango Communications, Inc..
+    </p>
+  </div>
+
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'wlan_exp v1.5.2  ',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

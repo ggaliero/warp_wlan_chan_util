@@ -1,0 +1,43 @@
+802.11 Reference Design Experiments Framework (wlan_exp)
+
+  The 802.11 Reference Design Experiments Framework provides the basic python 
+communication structure for interacting with 802.11 nodes running on WARP 
+hardware.  The The basic file structure:
+
+  - node.py 
+      - wlan_exp Node (WlanExpNode) is a sub-class of a WARP Node and
+        provides the base class for a single WARP node running a version of
+        the 802.11 reference design (either Access Point (AP), Station (STA), 
+        or Ad-hoc (IBSS) node)
+  - node_*.py
+      - Sub-class of WlanExpNode to implement features specific to roles
+        of an 802.11 node.  Currently, the framework supports Access Points
+        (AP), Stations (STA), or Ad-hoc (IBSS) nodes.
+  - cmds.py
+      - Python definitions for each command that is communicated between 
+        the python node and the 802.11 node.
+  - info.py
+      - Python definitions for information structures used to communicate 
+        data between the host and the node.
+  - util.py
+      - Top level utility functions used to interact with multiple nodes
+
+
+Top Level Scripts:
+  - None
+
+
+Notes:
+    The 802.11 Reference Design Experiments Framework builds on top of the 
+802.11 reference design for WARP hardware:  https://warpproject.org/trac/wiki/802.11  
+to allow users to interact with nodes.
+
+    It also utilize the transport framework for communicating with WARP 
+nodes.  You can find the WARP documentation, binaries and toolchains on our 
+website at http://warpproject.org/. 
+ 
+    Learn more about the WARP Project at 
+https://warpproject.org/trac/wiki/about
+
+    If you have any questions about WARP, please use the forums at 
+https://warpproject.org/forums/

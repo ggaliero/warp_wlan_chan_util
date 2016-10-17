@@ -1,0 +1,522 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Event Log Overview &mdash; mango_wlan_exp wlan_exp v1.5.2   documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/rtd_overrides.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="mango_wlan_exp wlan_exp v1.5.2   documentation" href="index.html"/>
+        <link rel="up" title="Event Log" href="wlan_exp_log.html"/>
+        <link rel="next" title="Log Entry" href="log_entry_types.html"/>
+        <link rel="prev" title="Event Log" href="wlan_exp_log.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="index.html" class="fa fa-home"> mango_wlan_exp</a>
+        
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="wlan_exp.html">Framework</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="node.html">Node Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wlan_exp_util.html">WLAN Exp Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ltg.html">LTG Flow Configurations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="device.html">WLAN Device</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="wlan_exp_log.html">Event Log</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="">Event Log Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="log_entry_types.html">Log Entry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="log_util.html">Event Log Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="log_util_hdf.html">HDF5 Utilities</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">mango_wlan_exp</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="wlan_exp_log.html">Event Log</a> &raquo;</li>
+      
+    <li>Event Log Overview</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="_sources/log_overview.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="event-log-overview">
+<span id="log-overview"></span><h1>Event Log Overview<a class="headerlink" href="#event-log-overview" title="Permalink to this headline">¶</a></h1>
+<p>The 802.11 Reference Design implements a logging framework which records any
+user-specified event in the nodes of an experimental network. The 802.11
+Reference Design implements many useful log entry types, including Tx packets,
+Rx packets and low-level MAC re-transmissions. Users can create additional
+entry types to suit their research application.</p>
+<p>The basic flow for using log data in an experiments is:</p>
+<ol class="arabic simple">
+<li>Retrieve log data from one or more 802.11 Reference Design nodes</li>
+<li>Generate an index of each node&#8217;s log data</li>
+<li>Filter the index to select the required subset of log entry types</li>
+<li>Convert the log data and filtered index into structured arrays of log entries</li>
+<li>Process the log entries to calculate the statistics required for the experiment</li>
+</ol>
+<p>Log data retrieval (step 1) is implemented in the <code class="docutils literal"><span class="pre">log_get_all_new()</span></code> method.</p>
+<p>Log index generation and filtering (steps 2-3) and entry processing (steps 4-5) are described below.</p>
+<div class="section" id="components">
+<h2>Components<a class="headerlink" href="#components" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="log-data">
+<h3>Log Data<a class="headerlink" href="#log-data" title="Permalink to this headline">¶</a></h3>
+<p>The term <code class="docutils literal"><span class="pre">log_data</span></code> refers to a <cite>bytearray</cite> of raw log data retrieved from an
+802.11 Reference Design Node. The <code class="docutils literal"><span class="pre">log_data</span></code> is a tightly packed array of log
+entries, each composed of an entry header and arbitrary entry payload. The array
+of log data is a byte-for-byte copy of the log data retrieved from the node&#8217;s
+DRAM.</p>
+<p>The log data format is documented in the <a class="reference external" href="https://warpproject.org/trac/wiki/802.11/wlan_exp/log">user guide</a>.</p>
+<p>In Python scripts log data is retrieved using the log methods implemented in
+<cite>wlan_exp.node</cite>.</p>
+</div>
+<div class="section" id="raw-log-index">
+<h3>Raw Log Index<a class="headerlink" href="#raw-log-index" title="Permalink to this headline">¶</a></h3>
+<p>Log data can be quite large, often many gigabytes for a long trial. Re-parsing
+the full log data array to summarize its contents would be expensive. A more
+efficient approach is to generate an index describing the contents of each log
+data array at the time the array is retrieved, then save this index with the
+log data for easier processing in the future.</p>
+<p>We call this index the <strong>raw log index</strong>. The raw log index contains the
+location of each log entry in the log data and the entry type ID of that entry.</p>
+<p>For example, consider the log data array illustrated below.</p>
+<div class="figure align-center" id="id2">
+<img alt="Log data example" src="_images/wlan_exp_log_layout.png" />
+<p class="caption"><span class="caption-text">Example 112-byte log data array with 5 entries of 3 different entry types.</span></p>
+</div>
+<p>The blue areas show the log entry headers. Each header starts with a delimiter
+value, followed by a sequence number, the log entry type ID and the log entry
+length. Following the header is the log entry payload itself, illustrated as
+red, green and yellow here.</p>
+<p>This log data contains 5 log entries of 3 distinct types:</p>
+<ul class="simple">
+<li>Two entries of type ID 10 (red) at byte offsets 8 and 88</li>
+<li>Two entries of type ID 214 (green) at byte offsets 36 and 76</li>
+<li>One entry of type ID 3 (yellow) at byte offset 56</li>
+</ul>
+<p>The raw log index for this log data would be the dictionary:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="mi">10</span><span class="p">:</span>  <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">88</span><span class="p">],</span>
+ <span class="mi">214</span><span class="p">:</span> <span class="p">[</span><span class="mi">36</span><span class="p">,</span> <span class="mi">76</span><span class="p">],</span>
+ <span class="mi">3</span><span class="p">:</span>   <span class="p">[</span><span class="mi">56</span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In actual experiments the log data and corresponding index will be <strong>much</strong>
+larger. We have successfully tested these tools on log data with tens of
+millions of entries (on a 64-bit machine, of course).</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Notice that the dictionary keys are integer entry type IDs. This is
+by design, as it allows the raw log index to be generated using only the
+log data itself, with no dependence on the formats of the log entries
+themselves. The integer IDs will be translated into names in the log index
+filtering step, described below.</p>
+</div>
+</div>
+<div class="section" id="tools">
+<h3>Tools<a class="headerlink" href="#tools" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">log.util.gen_raw_log_index(log_data)</span></code> method will read a raw log data
+array and generate the log data index.</p>
+<p>The <code class="docutils literal"><span class="pre">log.util_hdf.log_data_to_hdf5(log_data,</span> <span class="pre">filename)</span></code> method will by
+default create and save the raw log index when saving log data to an HDF5 file.
+To disable the creation of the raw log index, pass <code class="docutils literal"><span class="pre">gen_index=False</span></code> to the
+command.</p>
+<p>The <code class="docutils literal"><span class="pre">log.util_hdf.hdf5_to_log_index(filename)</span></code> method will return the raw
+log index previously saved to an HDF5 file.</p>
+</div>
+</div>
+<div class="section" id="archiving-log-data">
+<h2>Archiving Log Data<a class="headerlink" href="#archiving-log-data" title="Permalink to this headline">¶</a></h2>
+<p>Log data retrieved from an 802.11 Reference Design node will initially be
+stored in RAM as a bytearray. In most experiments it is useful to write the
+log data to a file for archival and future processing.</p>
+<p>We recommend storing log data in <a class="reference external" href="http://www.hdfgroup.org/HDF5/">HDF5 files</a>
+using the <a class="reference external" href="http://docs.h5py.org/en/latest/index.html">h5py package</a>. The HDF5
+format is open, fast, well documented and supported by a wide variety of tools.</p>
+<div class="section" id="hdf5-log-data-format">
+<h3>HDF5 Log Data Format<a class="headerlink" href="#hdf5-log-data-format" title="Permalink to this headline">¶</a></h3>
+<p>The HDF5 format is built from two types of objects:</p>
+<ul class="simple">
+<li><strong>Dataset</strong> - an array of homogenous data with arbitrary dimensions</li>
+<li><strong>Group</strong> - a named level of hierarchy which can contain datasets and other groups</li>
+</ul>
+<p>Datasets and groups can also store <strong>attributes</strong>. Datasets and attributes
+retain their data types and dimensions when written to HDF5 files. The h5py
+package uses numpy arrays and datatypes as the Python interface to the
+underlying HDF5 data.</p>
+<p>One important concept is the <strong>root group</strong>. Every HDF5 file has a root group
+named <code class="docutils literal"><span class="pre">'/'</span></code>. Named datasets and groups can be added to the root group to
+build more complex hierarchy. Sub-groups have names, forming Unix-like paths
+to datasets and other groups, always starting with the root group <code class="docutils literal"><span class="pre">'/'</span></code>.</p>
+<p>The h5py package supports building HDF5 files with arbitrary hierarchy. We
+define a simple HDF5 hierarchy for storing 802.11 Reference Design log data in
+an HDF5 group. We call this group format a <code class="docutils literal"><span class="pre">wlan_exp_log_data_container</span></code>.
+When an HDF5 group is used as a <code class="docutils literal"><span class="pre">wlan_exp_log_data_container</span></code> it must have
+the format illustrated below:</p>
+<div class="highlight-python"><div class="highlight"><pre>wlan_exp_log_data_container (HDF5 group):
+       |- Attributes:
+       |      |- &#39;wlan_exp_log&#39;         (1,)      bool
+       |      |- &#39;wlan_exp_ver&#39;         (3,)      uint32
+       |      |- &lt;user provided attributes&gt;
+       |- Datasets:
+       |      |- &#39;log_data&#39;             (1,)      voidN  (where N is the size of the data in bytes)
+       |- Groups (optional):
+              |- &#39;raw_log_index&#39;
+                     |- Datasets:
+                        (dtype depends if largest offset in raw_log_index is &lt; 2^32)
+                            |- &lt;int&gt;    (N1,)     uint32/uint64
+                            |- &lt;int&gt;    (N2,)     uint32/uint64
+                            |- ...
+</pre></div>
+</div>
+<p>The elements of this format are:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">wlan_exp_log</span></code> attribute: must be present with boolean value True</li>
+<li><code class="docutils literal"><span class="pre">wlan_exp_ver</span></code> attribute: 3-tuple of integers recording the
+<cite>(major, minor, rev)</cite> version of the wlan_exp package that wrote the file</li>
+<li><code class="docutils literal"><span class="pre">log_data</span></code> dataset: the raw bytearray retrieved from the 802.11 Reference
+Design node, stored as a scalar value using the HDF5 opaque type</li>
+<li><code class="docutils literal"><span class="pre">raw_log_index</span></code> sub-group (optional): if present, must be a group with one
+dataset per log entry type, where each dataset contains the array of integers
+indicating the location of each log entry in the <code class="docutils literal"><span class="pre">log_data</span></code>. This
+group-of-datasets encodes the dictionary-of-arrays normally used to represent
+the <code class="docutils literal"><span class="pre">raw_log_index</span></code>.</li>
+<li>User provided attributes: additional attributes provided at the time of file
+creation. The <code class="docutils literal"><span class="pre">log.util_hdf</span></code> methods store these attributes when supplied
+by the user code. These can be useful to store additional experiment-specific
+details about the log data (i.e. date/time of the experiment, physical
+location of the nodes, etc.).</li>
+</ul>
+</div>
+<div class="section" id="writing-log-data-files">
+<h3>Writing Log Data Files<a class="headerlink" href="#writing-log-data-files" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">log_data_to_hdf5(log_data,</span> <span class="pre">filename)</span></code> method will create an HDF5 file
+with name <code class="docutils literal"><span class="pre">filename</span></code> for the supplied <code class="docutils literal"><span class="pre">log_data</span></code> bytearray. This method
+will automatically generate and store a raw log index for the <code class="docutils literal"><span class="pre">log_data</span></code>.</p>
+<p>The <code class="docutils literal"><span class="pre">log_data_to_hdf5</span></code> method will create an HDF5 file with a single
+<code class="docutils literal"><span class="pre">log_data</span></code> array (i.e. with log data from a single node) stored in the root
+group.</p>
+</div>
+<div class="section" id="reading-log-data-files">
+<h3>Reading Log Data Files<a class="headerlink" href="#reading-log-data-files" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">hdf5_to_log_data(filename)</span></code> method will read a <code class="docutils literal"><span class="pre">log_data</span></code> array from
+the HDF5 file named <code class="docutils literal"><span class="pre">filename</span></code>. The format of the returned array is identical
+to the bytearray retrieved from an 802.11 Reference Design node and can be used
+wherever the original <code class="docutils literal"><span class="pre">log_data</span></code> array would have been used.</p>
+<p>The <code class="docutils literal"><span class="pre">hdf5_to_log_index(filename)</span></code> method will read a raw log index from the
+HDF5 file named <code class="docutils literal"><span class="pre">filename</span></code>. The dictionary returned will be identical to
+re-generating the index from scratch (i.e. by calling
+<code class="docutils literal"><span class="pre">log.util.gen_raw_log_index(hdf5_to_log_data(filename))</span></code>). Retrieving the
+raw log index from an HDF5 file is typically must faster than re-generating
+the index from the log data.</p>
+</div>
+</div>
+<div class="section" id="filtered-log-indexes">
+<h2>Filtered Log Indexes<a class="headerlink" href="#filtered-log-indexes" title="Permalink to this headline">¶</a></h2>
+<p>In most cases the log data retrieved from a node will contain entries that are
+not required for a particular analysis. User scripts can select a subset of
+entry types for further processing by filtering the raw log index, then
+passing the log data and filtered index to downstream tools for further
+parsing.  Filtering the log index can be much faster than filtering the log
+data itself, especially for multi-gigabyte log data arrays.</p>
+<p>Log index filtering is implemented in the <code class="docutils literal"><span class="pre">log.util.filter_log_index(...)</span></code>
+method.</p>
+<p>The <code class="docutils literal"><span class="pre">filter_log_index</span></code> method takes a raw log index, stored as a dictionary,
+as input and produces a new log index, which is also a dictionary. The method
+implements two processes:</p>
+<ul class="simple">
+<li>Translation of dictionary keys</li>
+<li>Selection of a subset of entry types to include in the output dictionary</li>
+</ul>
+<div class="section" id="entry-type-translation">
+<h3>Entry Type Translation<a class="headerlink" href="#entry-type-translation" title="Permalink to this headline">¶</a></h3>
+<p>Raw log indexes use integer entry type IDs as dictionary keys. These IDs are
+taken directly from the log data itself, which allows index generation even if
+the corresponding entry types are not understood by the wlan_exp Python code.
+But remembering these &#8220;magic&#8221; numbers is inconvenient when building analysis
+scripts.</p>
+<p>The <code class="docutils literal"><span class="pre">filter_log_index</span></code> output dictionary uses entry type names as keys
+<a class="footnote-reference" href="#entry-type-names" id="id1">[1]</a>.</p>
+<p>For example, assume the following log entry type definitions:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">ENTRY_TYPE_RX_OFDM</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">ENTRY_TYPE_RX_DSSS</span> <span class="o">=</span> <span class="mi">11</span>
+<span class="n">ENTRY_TYPE_TX_HIGH</span> <span class="o">=</span> <span class="mi">20</span>
+
+<span class="n">entry_rx_ofdm</span> <span class="o">=</span> <span class="n">WlanExpLogEntryType</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;RX_OFDM&#39;</span><span class="p">,</span> <span class="n">entry_type_id</span><span class="o">=</span><span class="n">ENTRY_TYPE_RX_OFDM</span><span class="p">)</span>
+<span class="n">entry_rx_dsss</span> <span class="o">=</span> <span class="n">WlanExpLogEntryType</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;RX_DSSS&#39;</span><span class="p">,</span> <span class="n">entry_type_id</span><span class="o">=</span><span class="n">ENTRY_TYPE_RX_DSSS</span><span class="p">)</span>
+<span class="n">entry_tx_high</span> <span class="o">=</span> <span class="n">WlanExpLogEntryType</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;TX_HIGH&#39;</span><span class="p">,</span> <span class="n">entry_type_id</span><span class="o">=</span><span class="n">ENTRY_TYPE_TX_HIGH</span><span class="p">)</span>
+
+<span class="c"># Entry type fields omitted for clarity - actual field definitions are required!</span>
+</pre></div>
+</div>
+<p>And a raw log index with multiple instances of each entry type:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">my_raw_log_index</span>
+<span class="go">{10: [7724, 8116, 8428, 9716],</span>
+<span class="go"> 11: [3572, 4468, 6900],</span>
+<span class="go"> 20: [144, 336, 528, 720, 912, 1104, 1296, 1488]}</span>
+</pre></div>
+</div>
+<p>Using the <code class="docutils literal"><span class="pre">filter_log_index</span></code> method to translate the entry type keys will give:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="go">&gt;&gt;&gt;log_index = filter_log_index(my_raw_log_index)</span>
+<span class="go">&gt;&gt;&gt;log_index</span>
+<span class="go">{RX_OFDM: [7724, 8116, 8428, 9716],</span>
+<span class="go"> RX_DSSS: [3572, 4468, 6900],</span>
+<span class="go"> TX_HIGH: [144, 336, 528, 720, 912, 1104, 1296, 1488]}</span>
+</pre></div>
+</div>
+<p>Notice that the lists of log entry locations are unchanged, only the dictionary
+keys have been replaced. Now this index can be accessed by entry type name:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="go">&gt;&gt;&gt;log_index[&#39;TX_HIGH&#39;]</span>
+<span class="go">[144, 336, 528, 720, 912, 1104, 1296, 1488]</span>
+</pre></div>
+</div>
+<table class="docutils footnote" frame="void" id="entry-type-names" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>Technically, <code class="docutils literal"><span class="pre">filter_log_index</span></code> uses <em>instances</em> of
+the <code class="docutils literal"><span class="pre">wlan_exp.log.entry_types.WlanExpLogEntryType</span></code> class as keys in its
+output dictionary. The <code class="docutils literal"><span class="pre">wlan_exp.log.entry_types.WlanExpLogEntryType.__repr__</span></code>
+method returns the entry type name. The class itself overloads the <code class="docutils literal"><span class="pre">__eq__</span></code>
+and <code class="docutils literal"><span class="pre">__hash__</span></code> methods so an instance will &#8220;match&#8221; its name when the name
+is used to access a dictionary.</td></tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="entry-type-filtering">
+<h3>Entry Type Filtering<a class="headerlink" href="#entry-type-filtering" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">log.util.filter_log_index</span></code> method has three additional arguments which
+are used to construct the output dictionary:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">include_only</span></code>: List of entry type names to keep in output</li>
+<li><code class="docutils literal"><span class="pre">exclude</span></code>: List of entry type names to exclude from output</li>
+<li><code class="docutils literal"><span class="pre">merge</span></code>: Dictionary of entry type names to merge together in output</li>
+</ul>
+<p>The filter follows the a few basic rules:</p>
+<ol class="arabic simple">
+<li>If the <code class="docutils literal"><span class="pre">include_only</span></code> argument is present the <code class="docutils literal"><span class="pre">exclude</span></code> argument will be ignored</li>
+<li>Every requested output key in the <code class="docutils literal"><span class="pre">include_only</span></code> argument will be present in the output dictionary, even if its list of log entry locations is empty</li>
+<li>An instance of the <code class="docutils literal"><span class="pre">wlan_exp.log.entry_types.WlanExpLogEntryType</span></code> class must be previously created for each entry type included in the output</li>
+</ol>
+<p>One caveat when using <code class="docutils literal"><span class="pre">merge</span></code> is that, while the underlying data of the entry
+does not change, the offsets to access the data within that entry will now
+follow the merged entry type.  This means that entries should only be merged
+if one is a strict sub-set of another. For example, the <code class="docutils literal"><span class="pre">TX_HIGH</span></code> and the
+<code class="docutils literal"><span class="pre">TX_HIGH_LTG</span></code> entries are alomst identical; the <code class="docutils literal"><span class="pre">TX_HIGH_LTG</span></code> entries
+have the same fields in the same order, but have additional fields defined
+after the <code class="docutils literal"><span class="pre">TX_HIGH</span></code> definition ends.  The <code class="docutils literal"><span class="pre">TX_HIGH</span></code> entry is a strict
+sub-set of the <code class="docutils literal"><span class="pre">TX_HIGH_LTG</span></code> entry. Therefore, it is possible to merge
+the <code class="docutils literal"><span class="pre">TX_HIGH_LTG</span></code> and <code class="docutils literal"><span class="pre">TX_HIGH</span></code> entries together and treat all of them
+like <code class="docutils literal"><span class="pre">TX_HIGH</span></code> entries:  <code class="docutils literal"><span class="pre">merge={'TX_HIGH':</span> <span class="pre">['TX_HIGH',</span> <span class="pre">'TX_HIGH_LTG']}</span></code>.
+By doing this, all <code class="docutils literal"><span class="pre">TX_HIGH_LTG</span></code> entries will now be processsed as part of
+any processing on <code class="docutils literal"><span class="pre">TX_HIGH</span></code> entries.  However, the opposite merge should not
+be done: <code class="docutils literal"><span class="pre">merge={'TX_HIGH_LTG':</span> <span class="pre">['TX_HIGH',</span> <span class="pre">'TX_HIGH_LTG']}</span></code> since
+<code class="docutils literal"><span class="pre">TX_HIGH</span></code> entries do not have the extra LTG fields and will return garbage
+data if used.</p>
+<p>The following code snippets illustrate this include/exclude/merge behavior:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">my_raw_log_index</span>
+<span class="go">{10: [7724, 8116, 8428, 9716],</span>
+<span class="go"> 11: [3572, 4468, 6900],</span>
+<span class="go"> 20: [144, 336, 528, 720, 912, 1104, 1296, 1488],</span>
+<span class="go"> 21: [10743, 11091]}</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">log_index</span> <span class="o">=</span> <span class="n">filter_log_index</span><span class="p">(</span><span class="n">my_raw_log_index</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">log_index</span>
+<span class="go">{RX_OFDM:     [7724, 8116, 8428, 9716],</span>
+<span class="go"> RX_DSSS:     [3572, 4468, 6900],</span>
+<span class="go"> TX_HIGH:     [144, 336, 528, 720, 912, 1104, 1296, 1488]}</span>
+<span class="go"> TX_HIGH_LTG: [10743, 11091]}</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">log_index</span> <span class="o">=</span> <span class="n">filter_log_index</span><span class="p">(</span><span class="n">my_raw_log_index</span><span class="p">,</span> <span class="n">include_only</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;TX_HIGH&#39;</span><span class="p">,</span> <span class="s">&#39;RX_OFDM&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">log_index</span>
+<span class="go">{RX_OFDM: [7724, 8116, 8428, 9716],</span>
+<span class="go"> TX_HIGH: [144, 336, 528, 720, 912, 1104, 1296, 1488]}</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">log_index</span> <span class="o">=</span> <span class="n">filter_log_index</span><span class="p">(</span><span class="n">my_raw_log_index</span><span class="p">,</span> <span class="n">exclude</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;TX_HIGH&#39;</span><span class="p">,</span> <span class="s">&#39;TX_HIGH_LTG&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">log_index</span>
+<span class="go">{RX_OFDM: [7724, 8116, 8428, 9716],</span>
+<span class="go"> RX_DSSS: [3572, 4468, 6900]}</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">log_index</span> <span class="o">=</span> <span class="n">filter_log_index</span><span class="p">(</span><span class="n">my_raw_log_index</span><span class="p">,</span> <span class="n">include_only</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;TX_HIGH&#39;</span><span class="p">,</span> <span class="s">&#39;RX_OFDM&#39;</span><span class="p">,</span> <span class="s">&#39;NODE_INFO&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">log_index</span>
+<span class="go">{RX_OFDM: [7724, 8116, 8428, 9716],</span>
+<span class="go"> TX_HIGH: [144, 336, 528, 720, 912, 1104, 1296, 1488],</span>
+<span class="go"> NODE_INFO: []}</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">log_index</span> <span class="o">=</span> <span class="n">filter_log_index</span><span class="p">(</span><span class="n">my_raw_log_index</span><span class="p">,</span> <span class="n">include_only</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;TX_HIGH&#39;</span><span class="p">],</span> <span class="n">merge</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;TX_HIGH&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;TX_HIGH&#39;</span><span class="p">,</span> <span class="s">&#39;TX_HIGH_LTG&#39;</span><span class="p">]})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">log_index</span>
+<span class="go">{TX_HIGH: [144, 336, 528, 720, 912, 1104, 1296, 1488, 10743, 11091]}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="processing-log-data">
+<h2>Processing Log Data<a class="headerlink" href="#processing-log-data" title="Permalink to this headline">¶</a></h2>
+<p>After log data is retrieved and the log index is generated, there are many
+possible tool flows to parse and process the log entries. A few recommended
+processing flows are described below and implemented in our examples. This is
+not an exhaustive or static list- this list will evolve as we and our users
+find new ways to use data produced by the 802.11 Reference Design logging
+framework.</p>
+<div class="section" id="numpy-structured-arrays">
+<h3>NumPy Structured Arrays<a class="headerlink" href="#numpy-structured-arrays" title="Permalink to this headline">¶</a></h3>
+<p>The <a class="reference external" href="http://www.numpy.org/">NumPy package</a> provides many tools for
+processing large datasets. One very useful NumPy resource is
+<a class="reference external" href="http://docs.scipy.org/doc/numpy/user/basics.rec.html#structured-arrays-and-record-arrays">structured arrays</a>.</p>
+<p>The <code class="docutils literal"><span class="pre">wlan_exp.log.util.log_data_to_np_arrays(log_data,</span> <span class="pre">log_index)</span></code> method
+will process a log data array with its corresponding index and return a
+dictionary of NumPy structured arrays. The dictionary will have one key-value
+pair per log entry type in the <code class="docutils literal"><span class="pre">log_index</span></code> dictionary. Each dictionary value
+will be a NumPy structured array.</p>
+<p>The names and data types of each field for a log entry type are defined by
+that type&#8217;s WlanExpLogEntryType instance. The formats for log entry types
+implemented in the 802.11 Reference Design are defined in the
+<code class="docutils literal"><span class="pre">wlan_exp.log.entry_types</span></code> module.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="log_entry_types.html" class="btn btn-neutral float-right" title="Log Entry">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="wlan_exp_log.html" class="btn btn-neutral" title="Event Log"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Mango Communications, Inc..
+    </p>
+  </div>
+
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'wlan_exp v1.5.2  ',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

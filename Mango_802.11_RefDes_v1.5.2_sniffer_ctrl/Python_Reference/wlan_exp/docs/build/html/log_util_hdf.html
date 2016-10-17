@@ -1,0 +1,644 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>HDF5 Utilities &mdash; mango_wlan_exp wlan_exp v1.5.2   documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/rtd_overrides.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="mango_wlan_exp wlan_exp v1.5.2   documentation" href="index.html"/>
+        <link rel="up" title="Event Log" href="wlan_exp_log.html"/>
+        <link rel="prev" title="Event Log Utilities" href="log_util.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="index.html" class="fa fa-home"> mango_wlan_exp</a>
+        
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="wlan_exp.html">Framework</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="node.html">Node Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wlan_exp_util.html">WLAN Exp Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ltg.html">LTG Flow Configurations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="device.html">WLAN Device</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="wlan_exp_log.html">Event Log</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="log_overview.html">Event Log Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="log_entry_types.html">Log Entry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="log_util.html">Event Log Utilities</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">HDF5 Utilities</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">mango_wlan_exp</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="wlan_exp_log.html">Event Log</a> &raquo;</li>
+      
+    <li>HDF5 Utilities</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="_sources/log_util_hdf.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="hdf5-utilities">
+<span id="log-util-hdf"></span><h1>HDF5 Utilities<a class="headerlink" href="#hdf5-utilities" title="Permalink to this headline">¶</a></h1>
+<p>The logging framework uses the HDF5 standard to store log information.  You can find more documentation on HDF5 at
+<a class="reference external" href="http://www.h5py.org/">http://www.h5py.org/</a></p>
+<div class="section" id="hdf5-container-class">
+<h2>HDF5 Container Class<a class="headerlink" href="#hdf5-container-class" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="wlan_exp.log.util_hdf.HDF5LogContainer">
+<em class="property">class </em><code class="descname">HDF5LogContainer</code><span class="sig-paren">(</span><em>file_handle</em>, <em>name=None</em>, <em>compression=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/log/util_hdf.html#HDF5LogContainer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.log.util_hdf.HDF5LogContainer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class to define an HDF5 log container.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>file_handle</strong> (<em>h5py.File()</em>) &#8211;
+Handle of the HDF5 file</li>
+<li><strong>name</strong> (<em>str, optional</em>) &#8211;
+Name of the HDF5 group of the log container</li>
+<li><strong>compression</strong> (<em>bool, optional</em>) &#8211;
+HDF5 compression setting on the log container</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>When an HDF5LogContainer is created, the underlying HDF5 file will not be
+modified unless one of the write_* methods are called.</p>
+<dl class="method">
+<dt id="wlan_exp.log.util_hdf.HDF5LogContainer.is_valid">
+<code class="descname">is_valid</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/log/util_hdf.html#HDF5LogContainer.is_valid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.log.util_hdf.HDF5LogContainer.is_valid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check that the HDF5 Log Container is valid.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>is_valid</strong> &#8211;<ul class="simple">
+<li>True &#8211;&gt; This is a valid HDF5 log file</li>
+<li>False &#8211;&gt; This is NOT a valid HDF5 log file</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.log.util_hdf.HDF5LogContainer.write_log_data">
+<code class="descname">write_log_data</code><span class="sig-paren">(</span><em>log_data</em>, <em>append=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/log/util_hdf.html#HDF5LogContainer.write_log_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.log.util_hdf.HDF5LogContainer.write_log_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write the log data to the log container.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>log_data</strong> (<em>bytes</em>) &#8211;
+Binary data from a WlanExpNode log</li>
+<li><strong>append</strong> (<em>bool, optional</em>) &#8211;
+Append to (True) or Overwrite (False) the current log data</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.log.util_hdf.HDF5LogContainer.write_log_index">
+<code class="descname">write_log_index</code><span class="sig-paren">(</span><em>log_index=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/log/util_hdf.html#HDF5LogContainer.write_log_index"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.log.util_hdf.HDF5LogContainer.write_log_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write the log index to the log container.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>log_index</strong> (<em>dict</em>) &#8211;
+Log index generated from wlan_exp log data</td>
+</tr>
+</tbody>
+</table>
+<p>If the log index currently exists in the HDF5 file, that log index
+will be replaced with this new log index.  If log_index is provided
+then that log index will be written to the log container.  Otherwise,
+a raw log index will be generated and added to the log container.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.log.util_hdf.HDF5LogContainer.write_attr_dict">
+<code class="descname">write_attr_dict</code><span class="sig-paren">(</span><em>attr_dict</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/log/util_hdf.html#HDF5LogContainer.write_attr_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.log.util_hdf.HDF5LogContainer.write_attr_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add the given attribute dictionary to the opened log container.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>attr_dict</strong> (<em>dict</em>) &#8211;
+A dictionary of user provided attributes that will be added to the HDF5 group.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.log.util_hdf.HDF5LogContainer.get_log_data_size">
+<code class="descname">get_log_data_size</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/log/util_hdf.html#HDF5LogContainer.get_log_data_size"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.log.util_hdf.HDF5LogContainer.get_log_data_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the current size of the log data in the log container.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>size</strong> &#8211;
+Number of bytes of log data in the log container</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.log.util_hdf.HDF5LogContainer.get_log_data">
+<code class="descname">get_log_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/log/util_hdf.html#HDF5LogContainer.get_log_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.log.util_hdf.HDF5LogContainer.get_log_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the log data from the log container.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>log_data</strong> &#8211;
+Bytes object of the log data in the container</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">bytes</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.log.util_hdf.HDF5LogContainer.get_log_index">
+<code class="descname">get_log_index</code><span class="sig-paren">(</span><em>gen_index=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/log/util_hdf.html#HDF5LogContainer.get_log_index"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.log.util_hdf.HDF5LogContainer.get_log_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the raw log index from the log container.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>gen_index</strong> (<em>bool, optional</em>) &#8211;
+Generate the raw log index if the log index does not
+exist in the log container.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>log_index</strong> &#8211;
+Log index from the log container</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.log.util_hdf.HDF5LogContainer.get_attr_dict">
+<code class="descname">get_attr_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/log/util_hdf.html#HDF5LogContainer.get_attr_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.log.util_hdf.HDF5LogContainer.get_attr_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the attribute dictionary from the log container.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>attr_dict</strong> &#8211;
+The dictionary of user provided attributes in the log container.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="hdf5-utility-functions">
+<h2>HDF5 Utility Functions<a class="headerlink" href="#hdf5-utility-functions" title="Permalink to this headline">¶</a></h2>
+<p>These utility functions wrap the interactions with the HDF5 Container class.</p>
+<dl class="function">
+<dt id="wlan_exp.log.util_hdf.hdf5_open_file">
+<code class="descname">hdf5_open_file</code><span class="sig-paren">(</span><em>filename</em>, <em>readonly=False</em>, <em>append=False</em>, <em>print_warnings=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/log/util_hdf.html#hdf5_open_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.log.util_hdf.hdf5_open_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Open an HDF5 file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>filename</strong> (<em>str</em>) &#8211;
+Filename of the HDF5 file to open</li>
+<li><strong>readonly</strong> (<em>bool, optional</em>) &#8211;
+Open the file in read-only mode</li>
+<li><strong>append</strong> (<em>bool, optional</em>) &#8211;
+Append to the data in the current file</li>
+<li><strong>print_warnings</strong> (<em>bool, optional</em>) &#8211;
+Print warning messages</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>file_handle</strong> &#8211;
+Handle for the HDF5 file</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">h5py.File</p>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>Behavior of input attributes:</dt>
+<dd><table border="1" class="first last docutils">
+<colgroup>
+<col width="15%" />
+<col width="15%" />
+<col width="71%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">readonly</th>
+<th class="head">append</th>
+<th class="head">Behavior</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>True</td>
+<td>T/F</td>
+<td>File opened in read-only mode</td>
+</tr>
+<tr class="row-odd"><td>False</td>
+<td>True</td>
+<td>File opened in append mode; created if it does not exist</td>
+</tr>
+<tr class="row-even"><td>False</td>
+<td>False</td>
+<td>If file with filename exists, then a new filename is
+generated using the log utilities.  The new file is then
+created by the h5py File method (DEFAULT)</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="wlan_exp.log.util_hdf.hdf5_close_file">
+<code class="descname">hdf5_close_file</code><span class="sig-paren">(</span><em>file_handle</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/log/util_hdf.html#hdf5_close_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.log.util_hdf.hdf5_close_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Close an HDF5 file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>file_handle</strong> (<em>h5py.File</em>) &#8211;
+Handle for the HDF5 file</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="wlan_exp.log.util_hdf.log_data_to_hdf5">
+<code class="descname">log_data_to_hdf5</code><span class="sig-paren">(</span><em>log_data</em>, <em>filename</em>, <em>attr_dict=None</em>, <em>gen_index=True</em>, <em>overwrite=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/log/util_hdf.html#log_data_to_hdf5"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.log.util_hdf.log_data_to_hdf5" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create an HDF5 file that contains the log_data, a raw_log_index, and any
+user attributes.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>log_data</strong> (<em>bytes</em>) &#8211;
+Binary data from a WlanExpNode log</li>
+<li><strong>filename</strong> (<em>str</em>) &#8211;
+Filename of the HDF5 file to appear on disk</li>
+<li><strong>attr_dict</strong> (<em>dict, optional</em>) &#8211;
+A dictionary of user provided attributes that will be added to the HDF5 group.</li>
+<li><strong>gen_index</strong> (<em>bool, optional</em>) &#8211;
+Generate the <code class="docutils literal"><span class="pre">raw_log_index</span></code> from the <code class="docutils literal"><span class="pre">log_data</span></code> and store it in the file.</li>
+<li><strong>overwrite</strong> (<em>bool, optional</em>) &#8211;
+If True method will overwrite existing file with filename</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>If the requested filename already exists and <code class="docutils literal"><span class="pre">overwrite==True</span></code> this
+method will replace the existing file, destroying any data in the original file.</p>
+<p>If the filename already exists and <code class="docutils literal"><span class="pre">overwrite==False</span></code> this method will print a warning,
+then create a new filename with a unique date-time suffix.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="wlan_exp.log.util_hdf.hdf5_to_log_data">
+<code class="descname">hdf5_to_log_data</code><span class="sig-paren">(</span><em>filename</em>, <em>group_name=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/log/util_hdf.html#hdf5_to_log_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.log.util_hdf.hdf5_to_log_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract the log_data from an HDF5 Log Container</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>filename</strong> (<em>str</em>) &#8211;
+Name of HDF5 file to open</li>
+<li><strong>group_name</strong> (<em>str, optional</em>) &#8211;
+Name of Group within the HDF5 file object
+(defaults to &#8220;&#8221;)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>log_data</strong> &#8211;
+Log data in the HDF5 file</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">bytes</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="wlan_exp.log.util_hdf.hdf5_to_log_index">
+<code class="descname">hdf5_to_log_index</code><span class="sig-paren">(</span><em>filename</em>, <em>group_name=None</em>, <em>gen_index=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/log/util_hdf.html#hdf5_to_log_index"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.log.util_hdf.hdf5_to_log_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract the log_index from an HDF5 Log Container</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>filename</strong> (<em>str</em>) &#8211;
+Name of HDF5 file to open</li>
+<li><strong>group_name</strong> (<em>str, optional</em>) &#8211;
+Name of Group within the HDF5 file object
+(defaults to &#8220;&#8221;)</li>
+<li><strong>gen_index</strong> (<em>bool, optional</em>) &#8211;
+Generate the <code class="docutils literal"><span class="pre">raw_log_index</span></code> from the <code class="docutils literal"><span class="pre">log_data</span></code> and
+store it in the file if the <code class="docutils literal"><span class="pre">log_index</span></code> is not in the file.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>log_index</strong> &#8211;
+Either the <code class="docutils literal"><span class="pre">log_index</span></code> from HDF5 file or a generated  <code class="docutils literal"><span class="pre">raw_log_index</span></code>
+from <code class="docutils literal"><span class="pre">log_data</span></code> in HDF5 file</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">dict</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="wlan_exp.log.util_hdf.hdf5_to_attr_dict">
+<code class="descname">hdf5_to_attr_dict</code><span class="sig-paren">(</span><em>filename=None</em>, <em>group_name=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/log/util_hdf.html#hdf5_to_attr_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.log.util_hdf.hdf5_to_attr_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract the attribute dictionary from an HDF5 Log Container.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>filename</strong> (<em>str</em>) &#8211;
+Name of HDF5 file to open</li>
+<li><strong>group_name</strong> (<em>str, optional</em>) &#8211;
+Name of Group within the HDF5 file object
+(defaults to &#8220;&#8221;)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>attr_dict</strong> &#8211;
+The dictionary of user provided attributes in the HDF5 file</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">dict</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="wlan_exp.log.util_hdf.np_arrays_to_hdf5">
+<code class="descname">np_arrays_to_hdf5</code><span class="sig-paren">(</span><em>filename</em>, <em>np_log_dict</em>, <em>attr_dict=None</em>, <em>compression=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/log/util_hdf.html#np_arrays_to_hdf5"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.log.util_hdf.np_arrays_to_hdf5" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate an HDF5 file from numpy arrays.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>filename</strong> (<em>str</em>) &#8211;
+Name of HDF5 file to open</li>
+<li><strong>np_log_dict</strong> (<em>Numpy Array</em>) &#8211;
+Numpy array to add to the HDF5 file</li>
+<li><strong>attr_dict</strong> (<em>dict, optional</em>) &#8211;
+A dictionary of user provided attributes that will be added to the HDF5 file.</li>
+<li><strong>compression</strong> (<em>bool, optional</em>) &#8211;
+HDF5 compression setting on the log container</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>The np_log_dict input must be either:</dt>
+<dd><ol class="first last arabic simple">
+<li>A dictionary with numpy record arrays as values; each array will be a dataset in
+the HDF5 file root group</li>
+<li>A dictionary of dictionaries like (1); each top-level value will be a group in the
+root HDF5 group, each numpy array will be a dataset in the group.</li>
+</ol>
+</dd>
+</dl>
+<p><strong>attr_dict</strong> is optional. If provied, values in attr_dict will be copied to HDF5
+group and dataset attributes. attr_dict values with keys matching np_log_dict keys
+will be used as dataset attributes named <code class="docutils literal"><span class="pre">'&lt;the_key&gt;_INFO'</span></code>.  Attribute dictionary
+entries may have an extra value with key <code class="docutils literal"><span class="pre">'/'</span></code>, which will be used as the value for a
+group attribute named <code class="docutils literal"><span class="pre">'INFO'</span></code>.</p>
+<p>Examples:</p>
+<div class="highlight-python"><div class="highlight"><pre># No groups - all datasets in root group
+np_log_dict = {
+    &#39;RX_OFDM&#39;:  np_array_of_rx_etries,
+    &#39;TX_HIGH&#39;:  np_array_of_tx_entries
+}
+
+attr_dict = {
+    &#39;/&#39;:        &#39;Data from some_log_file.bin, node serial number W3-a-00001, written on 2014-03-18&#39;,
+    &#39;RX_OFDM&#39;:  &#39;Filtered Rx OFDM events, only good FCS receptions&#39;,
+    &#39;TX_HIGH&#39;:  &#39;Filtered Tx events, only DATA packets&#39;
+}
+
+# Two groups, with two datasets in each group
+np_log_dict = {
+    &#39;Log_Node_A&#39;: {
+        &#39;RX_OFDM&#39;:  np_array_of_rx_etries_A,
+        &#39;TX_HIGH&#39;:  np_array_of_tx_entries_A
+    },
+    &#39;Log_Node_B&#39;: {
+        &#39;RX_OFDM&#39;:  np_array_of_rx_etries_B,
+        &#39;TX_HIGH&#39;:  np_array_of_tx_entries_B
+    }
+}
+
+attr_dict = {
+    &#39;/&#39;:        &#39;Written on 2014-03-18&#39;,
+    &#39;Log_Node_A&#39;: {
+        &#39;/&#39;:        &#39;Data from node_A_log_file.bin, node serial number W3-a-00001&#39;,
+        &#39;RX_OFDM&#39;:  &#39;Filtered Rx OFDM events, only good FCS receptions&#39;,
+        &#39;TX_HIGH&#39;:  &#39;Filtered Tx events, only DATA packets&#39;
+    }
+    &#39;Log_Node_B&#39;: {
+        &#39;/&#39;:        &#39;Data from node_B_log_file.bin, node serial number W3-a-00002&#39;,
+        &#39;RX_OFDM&#39;:  &#39;Filtered Rx OFDM events, only good FCS receptions&#39;,
+        &#39;TX_HIGH&#39;:  &#39;Filtered Tx events, only DATA packets&#39;
+    }
+}
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="log_util.html" class="btn btn-neutral" title="Event Log Utilities"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Mango Communications, Inc..
+    </p>
+  </div>
+
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'wlan_exp v1.5.2  ',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,506 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>wlan_exp.node_sta &mdash; mango_wlan_exp wlan_exp v1.5.2   documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../_static/rtd_overrides.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="mango_wlan_exp wlan_exp v1.5.2   documentation" href="../../index.html"/>
+        <link rel="up" title="Module code" href="../index.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="../../index.html" class="fa fa-home"> mango_wlan_exp</a>
+        
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../wlan_exp.html">Framework</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../node.html">Node Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../wlan_exp_util.html">WLAN Exp Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ltg.html">LTG Flow Configurations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../device.html">WLAN Device</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../wlan_exp_log.html">Event Log</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../log_overview.html">Event Log Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../log_entry_types.html">Log Entry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../log_util.html">Event Log Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../log_util_hdf.html">HDF5 Utilities</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../index.html">mango_wlan_exp</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+      
+    <li>wlan_exp.node_sta</li>
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <h1>Source code for wlan_exp.node_sta</h1><div class="highlight"><pre>
+<span class="c"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">------------------------------------------------------------------------------</span>
+<span class="sd">Mango 802.11 Reference Design Experiments Framework - Client (STA) Node</span>
+<span class="sd">------------------------------------------------------------------------------</span>
+<span class="sd">Authors:   Chris Hunter (chunter [at] mangocomm.com)</span>
+<span class="sd">           Patrick Murphy (murphpo [at] mangocomm.com)</span>
+<span class="sd">           Erik Welsh (welsh [at] mangocomm.com)</span>
+<span class="sd">License:   Copyright 2014-2016, Mango Communications. All rights reserved.</span>
+<span class="sd">           Distributed under the WARP license (http://warpproject.org/license)</span>
+<span class="sd">------------------------------------------------------------------------------</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">wlan_exp.node</span> <span class="kn">as</span> <span class="nn">node</span>
+<span class="kn">import</span> <span class="nn">wlan_exp.cmds</span> <span class="kn">as</span> <span class="nn">cmds</span>
+
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;WlanExpNodeSta&#39;</span><span class="p">]</span>
+
+
+<span class="k">class</span> <span class="nc">WlanExpNodeSta</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">WlanExpNode</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;wlan_exp Node class for the 802.11 Reference Design STA MAC project</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        network_config (transport.NetworkConfiguration) : Network configuration of the node</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="c">#-------------------------------------------------------------------------</span>
+    <span class="c"># Node Commands </span>
+    <span class="c">#-------------------------------------------------------------------------</span>
+<div class="viewcode-block" id="WlanExpNodeSta.configure_bss"><a class="viewcode-back" href="../../node_sta.html#wlan_exp.node_sta.WlanExpNodeSta.configure_bss">[docs]</a>    <span class="k">def</span> <span class="nf">configure_bss</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bssid</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">ssid</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">channel</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">beacon_interval</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">ht_capable</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Configure the BSS information of the node</span>
+<span class="sd">        </span>
+<span class="sd">        Each node is either a member of no BSS (colloquially &quot;unassociated&quot;)</span>
+<span class="sd">        or a member of one BSS.  A node requires a minimum valid set of BSS </span>
+<span class="sd">        information to be a member of a BSS. The minimum valid set of BSS </span>
+<span class="sd">        information for an STA is:</span>
+
+<span class="sd">            #. BSSID: 48-bit MAC address</span>
+<span class="sd">            #. Channel: Logical channel for Tx/Rx by BSS members</span>
+<span class="sd">            #. SSID: Variable length string (ie the name of the network)</span>
+
+<span class="sd">        If a node is not a member of a BSS (i.e. ``n.get_bss_info()`` returns</span>
+<span class="sd">        ``None``), then the node requires all parameters of a minimum valid </span>
+<span class="sd">        set of BSS information be specified (i.e. BSSID, Channel, and SSID).  </span>
+<span class="sd">        </span>
+<span class="sd">        See https://warpproject.org/trac/wiki/802.11/wlan_exp/bss</span>
+<span class="sd">        for more documentation on BSS information / configuration.</span>
+
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            bssid (int, str):  48-bit ID of the BSS either as a integer or </span>
+<span class="sd">                colon delimited string of the form ``&#39;01:23:45:67:89:ab&#39;``</span>
+<span class="sd">            ssid (str):  SSID string (Must be 32 characters or less)</span>
+<span class="sd">            channel (int): Channel number on which the BSS operates</span>
+<span class="sd">            beacon_interval (int): Integer number of beacon Time Units in [10, 65534]</span>
+<span class="sd">                (http://en.wikipedia.org/wiki/TU_(Time_Unit); a TU is 1024 microseconds);</span>
+<span class="sd">                A value of None will disable beacons;  A value of False will not </span>
+<span class="sd">                update the current beacon interval.</span>
+<span class="sd">            ht_capable (bool):  Is the PHY mode HTMF (True) or NONHT (False)?</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">resp_args</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">send_cmd</span><span class="p">(</span><span class="n">cmds</span><span class="o">.</span><span class="n">NodeConfigBSS</span><span class="p">(</span><span class="n">bssid</span><span class="o">=</span><span class="n">bssid</span><span class="p">,</span> <span class="n">ssid</span><span class="o">=</span><span class="n">ssid</span><span class="p">,</span> <span class="n">channel</span><span class="o">=</span><span class="n">channel</span><span class="p">,</span>
+                                                     <span class="n">beacon_interval</span><span class="o">=</span><span class="n">beacon_interval</span><span class="p">,</span> <span class="n">ht_capable</span><span class="o">=</span><span class="n">ht_capable</span><span class="p">))</span>
+        
+        <span class="c"># Process response arguments</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">resp_args</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">False</span><span class="p">):</span>
+            <span class="n">status</span>  <span class="o">=</span> <span class="n">resp_args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">msg</span>     <span class="o">=</span> <span class="s">&quot;ERROR:  Invalid response from node:</span><span class="se">\n</span><span class="s">&quot;</span>
+            <span class="n">ret_val</span> <span class="o">=</span> <span class="bp">True</span>
+            
+            <span class="c"># Check status</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">status</span> <span class="o">&amp;</span> <span class="n">cmds</span><span class="o">.</span><span class="n">ERROR_CONFIG_BSS_BSSID_INVALID</span><span class="p">):</span>
+                <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bssid</span><span class="p">)</span> <span class="ow">in</span> <span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">long</span><span class="p">]:</span>
+                    <span class="kn">import</span> <span class="nn">wlan_exp.util</span> <span class="kn">as</span> <span class="nn">util</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">bssid</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">mac_addr_to_str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bssid</span><span class="p">)</span>
+                <span class="n">msg</span>    <span class="o">+=</span> <span class="s">&quot;    BSSID {0} was invalid.</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bssid</span><span class="p">)</span>
+                <span class="n">ret_val</span> <span class="o">=</span> <span class="bp">False</span>
+            
+            <span class="k">if</span> <span class="p">(</span><span class="n">status</span> <span class="o">&amp;</span> <span class="n">cmds</span><span class="o">.</span><span class="n">ERROR_CONFIG_BSS_BSSID_INSUFFICIENT_ARGUMENTS</span><span class="p">):</span>
+                <span class="n">msg</span>    <span class="o">+=</span> <span class="s">&quot;    Insufficient arguments to create BSS.  Must provide:</span><span class="se">\n</span><span class="s">&quot;</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">bssid</span> <span class="ow">is</span> <span class="bp">False</span><span class="p">):</span> 
+                    <span class="n">msg</span>    <span class="o">+=</span> <span class="s">&quot;        BSSID</span><span class="se">\n</span><span class="s">&quot;</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">ssid</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">):</span>
+                    <span class="n">msg</span>    <span class="o">+=</span> <span class="s">&quot;        SSID</span><span class="se">\n</span><span class="s">&quot;</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">channel</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">):</span>
+                    <span class="n">msg</span>    <span class="o">+=</span> <span class="s">&quot;        CHANNEL</span><span class="se">\n</span><span class="s">&quot;</span>
+                <span class="n">ret_val</span> <span class="o">=</span> <span class="bp">False</span>
+            
+            <span class="k">if</span> <span class="p">(</span><span class="n">status</span> <span class="o">&amp;</span> <span class="n">cmds</span><span class="o">.</span><span class="n">ERROR_CONFIG_BSS_CHANNEL_INVALID</span><span class="p">):</span>
+                <span class="n">msg</span>    <span class="o">+=</span> <span class="s">&quot;    Channel {0} was invalid.</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">channel</span><span class="p">)</span>
+                <span class="n">ret_val</span> <span class="o">=</span> <span class="bp">False</span>
+            
+            <span class="k">if</span> <span class="p">(</span><span class="n">status</span> <span class="o">&amp;</span> <span class="n">cmds</span><span class="o">.</span><span class="n">ERROR_CONFIG_BSS_BEACON_INTERVAL_INVALID</span><span class="p">):</span>
+                <span class="n">msg</span>    <span class="o">+=</span> <span class="s">&quot;    Beacon interval {0} was invalid.</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">beacon_interval</span><span class="p">)</span>
+                <span class="n">ret_val</span> <span class="o">=</span> <span class="bp">False</span>
+            
+            <span class="k">if</span> <span class="p">(</span><span class="n">status</span> <span class="o">&amp;</span> <span class="n">cmds</span><span class="o">.</span><span class="n">ERROR_CONFIG_BSS_HT_CAPABLE_INVALID</span><span class="p">):</span>
+                <span class="n">msg</span>    <span class="o">+=</span> <span class="s">&quot;    HT capable {0} was invalid.</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ht_capable</span><span class="p">)</span>
+                <span class="n">ret_val</span> <span class="o">=</span> <span class="bp">False</span>
+            
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">ret_val</span><span class="p">:</span>
+                <span class="k">print</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="WlanExpNodeSta.disassociate"><a class="viewcode-back" href="../../node_sta.html#wlan_exp.node_sta.WlanExpNodeSta.disassociate">[docs]</a>    <span class="k">def</span> <span class="nf">disassociate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Causes the STA node to transmit a de-authenticate packet and to reset</span>
+<span class="sd">        its BSS status to null. After this method the STA will be disassociated from</span>
+<span class="sd">        its former BSS.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">send_cmd</span><span class="p">(</span><span class="n">cmds</span><span class="o">.</span><span class="n">NodeDisassociate</span><span class="p">())</span>
+
+</div>
+<div class="viewcode-block" id="WlanExpNodeSta.is_associated"><a class="viewcode-back" href="../../node_sta.html#wlan_exp.node_sta.WlanExpNodeSta.is_associated">[docs]</a>    <span class="k">def</span> <span class="nf">is_associated</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ap</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Is the AP in the STA&#39;s association table?</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            ap (WlanDevice):  WLAN Device</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            associated (bool):  Boolean describing whether the STA is associated with the AP</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ret_val</span>  <span class="o">=</span> <span class="bp">False</span>
+
+        <span class="k">if</span> <span class="n">ap</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">my_station_info</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_station_info</span><span class="p">(</span><span class="n">ap</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">my_station_info</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">ret_val</span> <span class="o">=</span> <span class="bp">True</span>
+
+        <span class="k">return</span> <span class="n">ret_val</span>
+
+
+
+    <span class="c">#-------------------------------------------------------------------------</span>
+    <span class="c"># STA specific Commands </span>
+    <span class="c">#-------------------------------------------------------------------------</span></div>
+    <span class="k">def</span> <span class="nf">_check_allowed_rate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mcs</span><span class="p">,</span> <span class="n">phy_mode</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Check that rate parameters are allowed</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            mcs (int):           Modulation and coding scheme (MCS) index</span>
+<span class="sd">            phy_mode (str, int): PHY mode (from util.phy_modes)</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            valid (bool):  Are all parameters valid?</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c"># TODO: implement STA-specific rate checking here</span>
+        <span class="c">#  Allow all supported rates for now</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_supported_rate</span><span class="p">(</span><span class="n">mcs</span><span class="p">,</span> <span class="n">phy_mode</span><span class="p">,</span> <span class="n">verbose</span><span class="p">)</span>
+
+
+
+<div class="viewcode-block" id="WlanExpNodeSta.set_aid"><a class="viewcode-back" href="../../node_sta.html#wlan_exp.node_sta.WlanExpNodeSta.set_aid">[docs]</a>    <span class="k">def</span> <span class="nf">set_aid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">aid</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set the Association ID (AID) of the STA.</span>
+
+<span class="sd">        Normally the AID is assigned by the AP during the probe/authentication/association</span>
+<span class="sd">        handshake. However if the BSS configuration of the STA is set via the</span>
+<span class="sd">        configure_bss() method there is no AP-assigned AID. Thankfully this is only a</span>
+<span class="sd">        cosmetic problem. The reference code does not use the AID for any MAC processing.</span>
+<span class="sd">        By default the AID is only used to set the hex display at the STA node. This</span>
+<span class="sd">        method will have the same affect.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            aid (int): Association ID (must be in [1, 255])</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">send_cmd</span><span class="p">(</span><span class="n">cmds</span><span class="o">.</span><span class="n">NodeSTASetAID</span><span class="p">(</span><span class="n">aid</span><span class="p">))</span>
+    
+</div>
+<div class="viewcode-block" id="WlanExpNodeSta.join_network"><a class="viewcode-back" href="../../node_sta.html#wlan_exp.node_sta.WlanExpNodeSta.join_network">[docs]</a>    <span class="k">def</span> <span class="nf">join_network</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ssid</span><span class="p">,</span> <span class="n">bssid</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">channel</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mf">5.0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Join the specified network (BSS).</span>
+
+<span class="sd">        By specifying the SSID, the STA will try to join the given network.  If</span>
+<span class="sd">        the bssid and channel of the network are also known, they can be </span>
+<span class="sd">        provided.  Otherwise, the STA will scan for the given SSID to find the </span>
+<span class="sd">        corresponding bssid and channel.  If the SSID is None, then any </span>
+<span class="sd">        on-going join process will be halted.  </span>
+<span class="sd">        </span>
+<span class="sd">        If the node is currently associated with the given BSS, then the node</span>
+<span class="sd">        state is not changed and this method will return &quot;success&quot; immediately.</span>
+<span class="sd">        </span>
+<span class="sd">        By default, the join process has a timeout that will automatically</span>
+<span class="sd">        halt the join process once the timeout is exceeded.  Depending on the </span>
+<span class="sd">        scan parameters, this timeout value may need to be adjusted to allow</span>
+<span class="sd">        the STA to scan all channels before the timeout period is exceeded.  </span>
+<span class="sd">        If the timeout is None, then the method will return immediately and</span>
+<span class="sd">        the methods is_joining() and get_bss_info() can be used to determine </span>
+<span class="sd">        if the STA has joined the BSS.</span>
+<span class="sd">        </span>
+<span class="sd">        If this method starts an active scan, the scan will use the parameters</span>
+<span class="sd">        previously configured with node.set_scan_parameters().</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            ssid (str):  SSID string (Must be 32 characters or less); a value</span>
+<span class="sd">                of None will stop any current join process.</span>
+<span class="sd">            bssid (int, str):  48-bit ID of the BSS either as a integer or </span>
+<span class="sd">                colon delimited string of the form:  XX:XX:XX:XX:XX:XX</span>
+<span class="sd">            channel (int): Channel number on which the BSS operates</span>
+<span class="sd">            timeout (float):  Time to complete the join process; a value of </span>
+<span class="sd">                None will cause the method to return immediately and allow </span>
+<span class="sd">                the join process to continue forever until the node has joined</span>
+<span class="sd">                the network or the join has failed.</span>
+<span class="sd">                </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">status</span> <span class="o">=</span> <span class="bp">True</span>
+        
+        <span class="c"># Check if node is currently associated with ssid / bssid</span>
+        <span class="c">#     - _check_associated_node() returns True if ssid is None</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_associated_node</span><span class="p">(</span><span class="n">ssid</span><span class="p">,</span> <span class="n">bssid</span><span class="p">):</span>
+            <span class="c"># Still need to send the Join command to stop join process</span>
+            <span class="k">if</span> <span class="n">ssid</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">send_cmd</span><span class="p">(</span><span class="n">cmds</span><span class="o">.</span><span class="n">NodeSTAJoin</span><span class="p">(</span><span class="n">ssid</span><span class="o">=</span><span class="bp">None</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c"># Perform the join process</span>
+
+            <span class="c"># Send the join command</span>
+            <span class="n">status</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">send_cmd</span><span class="p">(</span><span class="n">cmds</span><span class="o">.</span><span class="n">NodeSTAJoin</span><span class="p">(</span><span class="n">ssid</span><span class="o">=</span><span class="n">ssid</span><span class="p">,</span> <span class="n">bssid</span><span class="o">=</span><span class="n">bssid</span><span class="p">,</span> <span class="n">channel</span><span class="o">=</span><span class="n">channel</span><span class="p">))</span>
+            
+            <span class="k">if</span> <span class="n">timeout</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="kn">import</span> <span class="nn">time</span>
+                
+                <span class="c"># Get the start time so that the timeout can be enforced</span>
+                <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+                <span class="c"># Check when join process completes that STA has joined BSS                </span>
+                <span class="k">while</span> <span class="p">((</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">timeout</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_joining</span><span class="p">():</span>
+                        <span class="c"># Sleep for 0.1 seconds to not flood the node</span>
+                        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">status</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_associated_node</span><span class="p">(</span><span class="n">ssid</span><span class="p">,</span> <span class="n">bssid</span><span class="p">)</span>
+                        <span class="k">break</span>
+        
+        <span class="k">return</span> <span class="n">status</span>        
+
+</div>
+<div class="viewcode-block" id="WlanExpNodeSta.is_joining"><a class="viewcode-back" href="../../node_sta.html#wlan_exp.node_sta.WlanExpNodeSta.is_joining">[docs]</a>    <span class="k">def</span> <span class="nf">is_joining</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Queries if the STA is currently attempting to join a network. The join</span>
+<span class="sd">        state machine runs until the target network is successfully joined or</span>
+<span class="sd">        the joing process is terminated by the user. This method tests whether</span>
+<span class="sd">        the join process is still running. To check success or failure of the</span>
+<span class="sd">        join process, use node.get_bss_info().</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            status (bool):</span>
+
+<span class="sd">                * True      -- Inidcates node is currently in the join process</span>
+<span class="sd">                * False     -- Indicates node is not currently in the join process</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">send_cmd</span><span class="p">(</span><span class="n">cmds</span><span class="o">.</span><span class="n">NodeSTAJoinStatus</span><span class="p">())</span>
+
+
+
+    <span class="c">#-------------------------------------------------------------------------</span>
+    <span class="c"># Internal STA methods</span>
+    <span class="c">#-------------------------------------------------------------------------</span></div>
+    <span class="k">def</span> <span class="nf">_check_associated_node</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ssid</span><span class="p">,</span> <span class="n">bssid</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Check if node is currently associated to the given BSS</span>
+<span class="sd">        </span>
+<span class="sd">        This method only checks that the bss_info of the node matches the</span>
+<span class="sd">        provided ssid / bssid and is not a substitute for is_associated().</span>
+<span class="sd">        </span>
+<span class="sd">        This method will only check the bssid after it matches the SSID.  If</span>
+<span class="sd">        either argument is None, then it will not be checked.  If SSID is </span>
+<span class="sd">        None, then the method will return True.</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            ssid  (str):  SSID of the BSS</span>
+<span class="sd">            bssid (str):  BSSID of the BSS</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            associated (bool): Do the SSID / BSSID matche the BSS of the node?</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">ssid</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">bss_info</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_bss_info</span><span class="p">()</span>
+        
+            <span class="k">if</span> <span class="n">bss_info</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">False</span>
+            
+            <span class="k">if</span> <span class="p">(</span><span class="n">bss_info</span><span class="p">[</span><span class="s">&#39;ssid&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="n">ssid</span><span class="p">):</span>
+                <span class="k">return</span> <span class="bp">False</span>
+        
+            <span class="k">if</span> <span class="n">bssid</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">bss_info</span><span class="p">[</span><span class="s">&#39;bssid&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="n">bssid</span><span class="p">):</span>
+                    <span class="k">return</span> <span class="bp">False</span>
+        
+        <span class="k">return</span> <span class="bp">True</span>
+
+
+
+    <span class="c">#-------------------------------------------------------------------------</span>
+    <span class="c"># Misc methods for the Node</span>
+    <span class="c">#-------------------------------------------------------------------------</span>
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Pretty print WlanExpNodeSta object&quot;&quot;&quot;</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">serial_number</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">wlan_exp.util</span> <span class="kn">import</span> <span class="n">mac_addr_to_str</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="s">&quot;STA Node:</span><span class="se">\n</span><span class="s">&quot;</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="s">&quot;    WLAN MAC addr :  {0}</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mac_addr_to_str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">wlan_mac_address</span><span class="p">))</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="s">&quot;    Node ID       :  {0}</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">node_id</span><span class="p">)</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="s">&quot;    Serial #      :  {0}</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sn_str</span><span class="p">)</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="s">&quot;    HW version    :  WARP v{0}</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hw_ver</span><span class="p">)</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="kn">import</span> <span class="nn">wlan_exp.defaults</span> <span class="kn">as</span> <span class="nn">defaults</span>
+                <span class="n">cpu_low_type</span> <span class="o">=</span> <span class="n">defaults</span><span class="o">.</span><span class="n">WLAN_EXP_LOW_TYPES</span><span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">node_type</span> <span class="o">&amp;</span> <span class="n">defaults</span><span class="o">.</span><span class="n">WLAN_EXP_LOW_MASK</span><span class="p">)]</span>
+                <span class="n">msg</span> <span class="o">+=</span> <span class="s">&quot;    CPU Low Type  :  {0}</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cpu_low_type</span><span class="p">)</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="k">pass</span>            
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="s">&quot;Node not initialized.&quot;</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">transport</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="s">&quot;wlan_exp &quot;</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">transport</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">msg</span>
+
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return node name and description&quot;&quot;&quot;</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">WlanExpNodeSta</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__repr__</span><span class="p">()</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s">&quot;STA  &quot;</span> <span class="o">+</span> <span class="n">msg</span>
+        <span class="k">return</span> <span class="n">msg</span>
+
+<span class="c"># End class </span>
+</pre></div>
+
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Mango Communications, Inc..
+    </p>
+  </div>
+
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'wlan_exp v1.5.2  ',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

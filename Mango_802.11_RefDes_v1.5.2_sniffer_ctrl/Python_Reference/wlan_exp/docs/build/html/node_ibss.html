@@ -1,0 +1,365 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Ad hoc (IBSS) Node &mdash; mango_wlan_exp wlan_exp v1.5.2   documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/rtd_overrides.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="mango_wlan_exp wlan_exp v1.5.2   documentation" href="index.html"/>
+        <link rel="up" title="Node Classes" href="node.html"/>
+        <link rel="next" title="WLAN Exp Utilities" href="wlan_exp_util.html"/>
+        <link rel="prev" title="Station (STA) Node" href="node_sta.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="index.html" class="fa fa-home"> mango_wlan_exp</a>
+        
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="wlan_exp.html">Framework</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="node.html">Node Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wlan_exp_util.html">WLAN Exp Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ltg.html">LTG Flow Configurations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="device.html">WLAN Device</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="wlan_exp_log.html">Event Log</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="log_overview.html">Event Log Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="log_entry_types.html">Log Entry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="log_util.html">Event Log Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="log_util_hdf.html">HDF5 Utilities</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">mango_wlan_exp</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="wlan_exp.html">Framework</a> &raquo;</li>
+      
+          <li><a href="node.html">Node Classes</a> &raquo;</li>
+      
+    <li>Ad hoc (IBSS) Node</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="_sources/node_ibss.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="ad-hoc-ibss-node">
+<span id="wlan-exp-node-ibss"></span><h1>Ad hoc (IBSS) Node<a class="headerlink" href="#ad-hoc-ibss-node" title="Permalink to this headline">¶</a></h1>
+<p>Subclass of WlanExpNode that interfaces to an 802.11 Reference Design node running the
+Access Point (AP) application in CPU High. An AP node supports all the <a class="reference internal" href="node.html"><em>common node</em></a>
+methods plus the AP-specific methods described below.</p>
+<div class="section" id="ibss-node-methods">
+<h2>IBSS Node Methods<a class="headerlink" href="#ibss-node-methods" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="wlan_exp.node_ibss.WlanExpNodeIBSS.configure_bss">
+<code class="descclassname">WlanExpNodeIBSS.</code><code class="descname">configure_bss</code><span class="sig-paren">(</span><em>bssid=False</em>, <em>ssid=None</em>, <em>channel=None</em>, <em>beacon_interval=False</em>, <em>ht_capable=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node_ibss.html#WlanExpNodeIBSS.configure_bss"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node_ibss.WlanExpNodeIBSS.configure_bss" title="Permalink to this definition">¶</a></dt>
+<dd><p>Configure the BSS information of the node</p>
+<p>Each node is either a member of no BSS (colloquially &#8220;unassociated&#8221;)
+or a member of one BSS.  A node requires a minimum valid set of BSS
+information to be a member of a BSS. The minimum valid set of BSS
+information for an IBSS node is:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>BSSID: 48-bit MAC address</li>
+<li>Channel: Logical channel for Tx/Rx by BSS members</li>
+<li>SSID: Variable length string (ie the name of the network)</li>
+<li>Beacon Interval:  Interval (in TUs) for beacons</li>
+</ol>
+</div></blockquote>
+<p>If a node is not a member of a BSS (i.e. <code class="docutils literal"><span class="pre">n.get_bss_info()</span></code> returns
+<code class="docutils literal"><span class="pre">None</span></code>), then the node requires all parameters of a minimum valid
+set of BSS information be specified (i.e. BSSID, Channel, SSID, and
+Beacon Interval).</p>
+<p>For an IBSS node, the BSSID must be locally administered.  To create a
+locally administered BSSID, a utility method is provided in util.py:</p>
+<blockquote>
+<div><code class="docutils literal"><span class="pre">bssid</span> <span class="pre">=</span> <span class="pre">util.create_locally_administered_bssid(node.wlan_mac_address)</span></code></div></blockquote>
+<p>See <a class="reference external" href="https://warpproject.org/trac/wiki/802.11/wlan_exp/bss">https://warpproject.org/trac/wiki/802.11/wlan_exp/bss</a>
+for more documentation on BSS information / configuration.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>bssid</strong> (<em>int, str</em>) &#8211;
+48-bit ID of the BSS either as a integer or
+colon delimited string of the form <code class="docutils literal"><span class="pre">'01:23:45:67:89:ab'</span></code>. The
+<code class="docutils literal"><span class="pre">bssid</span></code> must be a valid locally administered BSSID. Use
+wlan_exp.util.create_locally_administered_bssid() to generate a valid
+locally administered BSSID based on the node&#8217;s MAC address.</li>
+<li><strong>ssid</strong> (<em>str</em>) &#8211;
+SSID string (Must be 32 characters or less)</li>
+<li><strong>channel</strong> (<em>int</em>) &#8211;
+Channel number on which the BSS operates</li>
+<li><strong>beacon_interval</strong> (<em>int</em>) &#8211;
+Integer number of beacon Time Units in [10, 65534]
+(<a class="reference external" href="http://en.wikipedia.org/wiki/TU_(Time_Unit">http://en.wikipedia.org/wiki/TU_(Time_Unit</a>); a TU is 1024 microseconds);
+A value of None will disable beacons;  A value of False will not
+update the current beacon interval.</li>
+<li><strong>ht_capable</strong> (<em>bool</em>) &#8211;
+Is the PHY mode HTMF (True) or NONHT (False)?</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.node_ibss.WlanExpNodeIBSS.get_txrx_counts">
+<code class="descclassname">WlanExpNodeIBSS.</code><code class="descname">get_txrx_counts</code><span class="sig-paren">(</span><em>device_list=None</em>, <em>return_zeroed_counts_if_none=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node_ibss.html#WlanExpNodeIBSS.get_txrx_counts"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node_ibss.WlanExpNodeIBSS.get_txrx_counts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the counts from the node.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This function has the same implementation as WlanExpNode but
+different default values.</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>device_list</strong> (<em>list of WlanExpNode, WlanExpNode, WlanDevice, optional</em>) &#8211;
+List of devices
+for which to get counts.  See note below for more information.</li>
+<li><strong>return_zeroed_counts_if_none</strong> (<em>bool, optional</em>) &#8211;
+If no counts exist on the node for
+the specified device(s), return a zeroed counts dictionary with proper timestamps
+instead of None.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>counts_dictionary</strong> &#8211;
+Counts for the device(s) specified.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list of dictionaries, dictionary</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>The dictionaries returned by this method have the following fields:</p>
+<blockquote>
+<div><table border="1" class="docutils">
+<colgroup>
+<col width="22%" />
+<col width="78%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Field</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>retrieval_timestamp</td>
+<td>Value of System Time in microseconds when structure retrieved from the node</td>
+</tr>
+<tr class="row-odd"><td>mac_addr</td>
+<td>MAC address of remote node whose statics are recorded here</td>
+</tr>
+<tr class="row-even"><td>associated</td>
+<td>Boolean indicating whether remote node is currently associated with this node</td>
+</tr>
+<tr class="row-odd"><td>data_num_rx_bytes</td>
+<td>Total number of bytes received in DATA packets from remote node</td>
+</tr>
+<tr class="row-even"><td>data_num_tx_bytes_success</td>
+<td>Total number of bytes successfully transmitted in DATA packets to remote node</td>
+</tr>
+<tr class="row-odd"><td>data_num_tx_bytes_total</td>
+<td>Total number of bytes transmitted (successfully or not) in DATA packets to remote node</td>
+</tr>
+<tr class="row-even"><td>data_num_rx_packets</td>
+<td>Total number of DATA packets received from remote node</td>
+</tr>
+<tr class="row-odd"><td>data_num_tx_packets_success</td>
+<td>Total number of DATA packets successfully transmitted to remote node</td>
+</tr>
+<tr class="row-even"><td>data_num_tx_packets_total</td>
+<td>Total number of DATA packets transmitted (successfully or not) to remote node</td>
+</tr>
+<tr class="row-odd"><td>data_num_tx_attempts</td>
+<td>Total number of low-level attempts of DATA packets to remote node (includes re-transmissions)</td>
+</tr>
+<tr class="row-even"><td>mgmt_num_rx_bytes</td>
+<td>Total number of bytes received in management packets from remote node</td>
+</tr>
+<tr class="row-odd"><td>mgmt_num_tx_bytes_success</td>
+<td>Total number of bytes successfully transmitted in management packets to remote node</td>
+</tr>
+<tr class="row-even"><td>mgmt_num_tx_bytes_total</td>
+<td>Total number of bytes transmitted (successfully or not) in management packets to remote node</td>
+</tr>
+<tr class="row-odd"><td>mgmt_num_rx_packets</td>
+<td>Total number of management packets received from remote node</td>
+</tr>
+<tr class="row-even"><td>mgmt_num_tx_packets_success</td>
+<td>Total number of management packets successfully transmitted to remote node</td>
+</tr>
+<tr class="row-odd"><td>mgmt_num_tx_packets_total</td>
+<td>Total number of management packets transmitted (successfully or not) to remote node</td>
+</tr>
+<tr class="row-even"><td>mgmt_num_tx_attempts</td>
+<td>Total number of low-level attempts of management packets to remote node (includes re-transmissions)</td>
+</tr>
+<tr class="row-odd"><td>latest_txrx_timestamp</td>
+<td>System Time value of last transmission / reception</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p>If the device_list is a single device, then a single dictionary or
+None is returned.  If the device_list is a list of devices, then a
+list of dictionaries will be returned in the same order as the devices
+in the list.  If any of the staistics are not there, None will be
+inserted in the list.  If the device_list is not specified, then all
+the counts on the node will be returned.</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="wlan_exp_util.html" class="btn btn-neutral float-right" title="WLAN Exp Utilities">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="node_sta.html" class="btn btn-neutral" title="Station (STA) Node"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Mango Communications, Inc..
+    </p>
+  </div>
+
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'wlan_exp v1.5.2  ',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

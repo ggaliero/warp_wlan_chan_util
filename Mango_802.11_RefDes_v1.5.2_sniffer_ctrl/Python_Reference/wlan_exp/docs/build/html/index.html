@@ -1,0 +1,296 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Mango 802.11 Reference Design Experiments Framework Documentation &mdash; mango_wlan_exp wlan_exp v1.5.2   documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/rtd_overrides.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="mango_wlan_exp wlan_exp v1.5.2   documentation" href="#"/>
+        <link rel="next" title="Framework" href="wlan_exp.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="#" class="fa fa-home"> mango_wlan_exp</a>
+        
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="wlan_exp.html">Framework</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="node.html">Node Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wlan_exp_util.html">WLAN Exp Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ltg.html">LTG Flow Configurations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="device.html">WLAN Device</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="wlan_exp_log.html">Event Log</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="log_overview.html">Event Log Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="log_entry_types.html">Log Entry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="log_util.html">Event Log Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="log_util_hdf.html">HDF5 Utilities</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="#">mango_wlan_exp</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="#">Docs</a> &raquo;</li>
+      
+    <li>Mango 802.11 Reference Design Experiments Framework Documentation</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="_sources/index.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="mango-802-11-reference-design-experiments-framework-documentation">
+<h1>Mango 802.11 Reference Design Experiments Framework Documentation<a class="headerlink" href="#mango-802-11-reference-design-experiments-framework-documentation" title="Permalink to this headline">¶</a></h1>
+<p>The Mango 802.11 Reference Design implements a framework for running experiments
+with multiple nodes. This framework enables low-level visibility and control of
+MAC and PHY behaviors in real time. The experiments framework is implemented as
+a Python packaged named wlan_exp.</p>
+<p>This documentation is generated from the Python code and describes the various
+classes and methods in wlan_exp. Additional details on how the experiments
+framework integrates with the reference C code are in the reference design
+user guide: <a class="reference external" href="https://warpproject.org/trac/wiki/802.11/wlan_exp">https://warpproject.org/trac/wiki/802.11/wlan_exp</a>.</p>
+<p>The wlan_exp code is Copyright (c)2016 Mango Communications, Inc. and is
+distributed under the Mango Reference Design License
+(<a class="reference external" href="http://mangocomm.com/802.11/license">http://mangocomm.com/802.11/license</a>).</p>
+<p>Contents:</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="wlan_exp.html">Framework</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="node.html">Node Classes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="node.html#base-node-class">Base Node Class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="node.html#node-sub-classes">Node Sub-Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="node_ap.html">Access Point (AP) Node</a></li>
+<li class="toctree-l4"><a class="reference internal" href="node_sta.html">Station (STA) Node</a></li>
+<li class="toctree-l4"><a class="reference internal" href="node_ibss.html">Ad hoc (IBSS) Node</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="node.html#common-node-methods">Common Node Methods</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="node.html#node">Node</a></li>
+<li class="toctree-l4"><a class="reference internal" href="node.html#tx-power-and-rate">Tx Power and Rate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="node.html#antenna-modes">Antenna Modes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="node.html#association-state">Association State</a></li>
+<li class="toctree-l4"><a class="reference internal" href="node.html#tx-rx-packet-counts">Tx/Rx Packet Counts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="node.html#local-traffic-generator-ltg">Local Traffic Generator (LTG)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="node.html#log">Log</a></li>
+<li class="toctree-l4"><a class="reference internal" href="node.html#network-scan">Network Scan</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="wlan_exp_util.html">WLAN Exp Utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="wlan_exp_util.html#uart-print-levels">UART Print Levels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wlan_exp_util.html#transmit-receive-rate-definitions">Transmit / Receive Rate Definitions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wlan_exp_util.html#channel-definitions">Channel Definitions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wlan_exp_util.html#antenna-mode-definitions">Antenna Mode Definitions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wlan_exp_util.html#mac-address-definitions">MAC Address Definitions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wlan_exp_util.html#node-utility-functions">Node Utility Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wlan_exp_util.html#misc-utility-functions">Misc Utility Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ltg.html">LTG Flow Configurations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ltg.html#flow-config">Flow Config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ltg.html#schedule">Schedule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ltg.html#payload">Payload</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="device.html">WLAN Device</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="device.html#class">Class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="device.html#example">Example</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="wlan_exp_log.html">Event Log</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="log_overview.html">Event Log Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="log_overview.html#components">Components</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="log_overview.html#log-data">Log Data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="log_overview.html#raw-log-index">Raw Log Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="log_overview.html#tools">Tools</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="log_overview.html#archiving-log-data">Archiving Log Data</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="log_overview.html#hdf5-log-data-format">HDF5 Log Data Format</a></li>
+<li class="toctree-l4"><a class="reference internal" href="log_overview.html#writing-log-data-files">Writing Log Data Files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="log_overview.html#reading-log-data-files">Reading Log Data Files</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="log_overview.html#filtered-log-indexes">Filtered Log Indexes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="log_overview.html#entry-type-translation">Entry Type Translation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="log_overview.html#entry-type-filtering">Entry Type Filtering</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="log_overview.html#processing-log-data">Processing Log Data</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="log_overview.html#numpy-structured-arrays">NumPy Structured Arrays</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="log_entry_types.html">Log Entry</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="log_entry_types.html#log-entry-class">Log Entry Class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="log_entry_types.html#log-entry-functions">Log Entry Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="log_util.html">Event Log Utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="log_util.html#log-utility-functions">Log Utility Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="log_util.html#misc-utility-functions">Misc Utility Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="log_util_hdf.html">HDF5 Utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="log_util_hdf.html#hdf5-container-class">HDF5 Container Class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="log_util_hdf.html#hdf5-utility-functions">HDF5 Utility Functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><a class="reference internal" href="genindex.html"><span>Index</span></a></li>
+<li><a class="reference internal" href="py-modindex.html"><span>Module Index</span></a></li>
+<li><a class="reference internal" href="search.html"><span>Search Page</span></a></li>
+</ul>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="wlan_exp.html" class="btn btn-neutral float-right" title="Framework">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Mango Communications, Inc..
+    </p>
+  </div>
+
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'wlan_exp v1.5.2  ',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

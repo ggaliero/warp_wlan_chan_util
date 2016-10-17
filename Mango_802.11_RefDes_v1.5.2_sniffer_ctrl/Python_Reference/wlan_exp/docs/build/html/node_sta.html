@@ -1,0 +1,363 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Station (STA) Node &mdash; mango_wlan_exp wlan_exp v1.5.2   documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/rtd_overrides.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="mango_wlan_exp wlan_exp v1.5.2   documentation" href="index.html"/>
+        <link rel="up" title="Node Classes" href="node.html"/>
+        <link rel="next" title="Ad hoc (IBSS) Node" href="node_ibss.html"/>
+        <link rel="prev" title="Access Point (AP) Node" href="node_ap.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="index.html" class="fa fa-home"> mango_wlan_exp</a>
+        
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="wlan_exp.html">Framework</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="node.html">Node Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wlan_exp_util.html">WLAN Exp Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ltg.html">LTG Flow Configurations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="device.html">WLAN Device</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="wlan_exp_log.html">Event Log</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="log_overview.html">Event Log Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="log_entry_types.html">Log Entry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="log_util.html">Event Log Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="log_util_hdf.html">HDF5 Utilities</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">mango_wlan_exp</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="wlan_exp.html">Framework</a> &raquo;</li>
+      
+          <li><a href="node.html">Node Classes</a> &raquo;</li>
+      
+    <li>Station (STA) Node</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="_sources/node_sta.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="station-sta-node">
+<span id="wlan-exp-node-sta"></span><h1>Station (STA) Node<a class="headerlink" href="#station-sta-node" title="Permalink to this headline">¶</a></h1>
+<p>Subclass of WlanExpNode that interfaces to an 802.11 Reference Design node running the
+station (STA) application in CPU High. A STA node supports all the <a class="reference internal" href="node.html"><em>common node</em></a>
+methods plus the STA-specific methods described below.</p>
+<div class="section" id="sta-node-methods">
+<h2>STA Node Methods<a class="headerlink" href="#sta-node-methods" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="wlan_exp.node_sta.WlanExpNodeSta.configure_bss">
+<code class="descclassname">WlanExpNodeSta.</code><code class="descname">configure_bss</code><span class="sig-paren">(</span><em>bssid=False</em>, <em>ssid=None</em>, <em>channel=None</em>, <em>beacon_interval=False</em>, <em>ht_capable=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node_sta.html#WlanExpNodeSta.configure_bss"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node_sta.WlanExpNodeSta.configure_bss" title="Permalink to this definition">¶</a></dt>
+<dd><p>Configure the BSS information of the node</p>
+<p>Each node is either a member of no BSS (colloquially &#8220;unassociated&#8221;)
+or a member of one BSS.  A node requires a minimum valid set of BSS
+information to be a member of a BSS. The minimum valid set of BSS
+information for an STA is:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>BSSID: 48-bit MAC address</li>
+<li>Channel: Logical channel for Tx/Rx by BSS members</li>
+<li>SSID: Variable length string (ie the name of the network)</li>
+</ol>
+</div></blockquote>
+<p>If a node is not a member of a BSS (i.e. <code class="docutils literal"><span class="pre">n.get_bss_info()</span></code> returns
+<code class="docutils literal"><span class="pre">None</span></code>), then the node requires all parameters of a minimum valid
+set of BSS information be specified (i.e. BSSID, Channel, and SSID).</p>
+<p>See <a class="reference external" href="https://warpproject.org/trac/wiki/802.11/wlan_exp/bss">https://warpproject.org/trac/wiki/802.11/wlan_exp/bss</a>
+for more documentation on BSS information / configuration.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>bssid</strong> (<em>int, str</em>) &#8211;
+48-bit ID of the BSS either as a integer or
+colon delimited string of the form <code class="docutils literal"><span class="pre">'01:23:45:67:89:ab'</span></code></li>
+<li><strong>ssid</strong> (<em>str</em>) &#8211;
+SSID string (Must be 32 characters or less)</li>
+<li><strong>channel</strong> (<em>int</em>) &#8211;
+Channel number on which the BSS operates</li>
+<li><strong>beacon_interval</strong> (<em>int</em>) &#8211;
+Integer number of beacon Time Units in [10, 65534]
+(<a class="reference external" href="http://en.wikipedia.org/wiki/TU_(Time_Unit">http://en.wikipedia.org/wiki/TU_(Time_Unit</a>); a TU is 1024 microseconds);
+A value of None will disable beacons;  A value of False will not
+update the current beacon interval.</li>
+<li><strong>ht_capable</strong> (<em>bool</em>) &#8211;
+Is the PHY mode HTMF (True) or NONHT (False)?</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.node_sta.WlanExpNodeSta.is_associated">
+<code class="descclassname">WlanExpNodeSta.</code><code class="descname">is_associated</code><span class="sig-paren">(</span><em>ap</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node_sta.html#WlanExpNodeSta.is_associated"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node_sta.WlanExpNodeSta.is_associated" title="Permalink to this definition">¶</a></dt>
+<dd><p>Is the AP in the STA&#8217;s association table?</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>ap</strong> (<em>WlanDevice</em>) &#8211;
+WLAN Device</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>associated</strong> &#8211;
+Boolean describing whether the STA is associated with the AP</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.node_sta.WlanExpNodeSta.disassociate">
+<code class="descclassname">WlanExpNodeSta.</code><code class="descname">disassociate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node_sta.html#WlanExpNodeSta.disassociate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node_sta.WlanExpNodeSta.disassociate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Causes the STA node to transmit a de-authenticate packet and to reset
+its BSS status to null. After this method the STA will be disassociated from
+its former BSS.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.node_sta.WlanExpNodeSta.set_aid">
+<code class="descclassname">WlanExpNodeSta.</code><code class="descname">set_aid</code><span class="sig-paren">(</span><em>aid</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node_sta.html#WlanExpNodeSta.set_aid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node_sta.WlanExpNodeSta.set_aid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the Association ID (AID) of the STA.</p>
+<p>Normally the AID is assigned by the AP during the probe/authentication/association
+handshake. However if the BSS configuration of the STA is set via the
+configure_bss() method there is no AP-assigned AID. Thankfully this is only a
+cosmetic problem. The reference code does not use the AID for any MAC processing.
+By default the AID is only used to set the hex display at the STA node. This
+method will have the same affect.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>aid</strong> (<em>int</em>) &#8211;
+Association ID (must be in [1, 255])</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.node_sta.WlanExpNodeSta.join_network">
+<code class="descclassname">WlanExpNodeSta.</code><code class="descname">join_network</code><span class="sig-paren">(</span><em>ssid</em>, <em>bssid=None</em>, <em>channel=None</em>, <em>timeout=5.0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node_sta.html#WlanExpNodeSta.join_network"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node_sta.WlanExpNodeSta.join_network" title="Permalink to this definition">¶</a></dt>
+<dd><p>Join the specified network (BSS).</p>
+<p>By specifying the SSID, the STA will try to join the given network.  If
+the bssid and channel of the network are also known, they can be
+provided.  Otherwise, the STA will scan for the given SSID to find the
+corresponding bssid and channel.  If the SSID is None, then any
+on-going join process will be halted.</p>
+<p>If the node is currently associated with the given BSS, then the node
+state is not changed and this method will return &#8220;success&#8221; immediately.</p>
+<p>By default, the join process has a timeout that will automatically
+halt the join process once the timeout is exceeded.  Depending on the
+scan parameters, this timeout value may need to be adjusted to allow
+the STA to scan all channels before the timeout period is exceeded.
+If the timeout is None, then the method will return immediately and
+the methods is_joining() and get_bss_info() can be used to determine
+if the STA has joined the BSS.</p>
+<p>If this method starts an active scan, the scan will use the parameters
+previously configured with node.set_scan_parameters().</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>ssid</strong> (<em>str</em>) &#8211;
+SSID string (Must be 32 characters or less); a value
+of None will stop any current join process.</li>
+<li><strong>bssid</strong> (<em>int, str</em>) &#8211;
+48-bit ID of the BSS either as a integer or
+colon delimited string of the form:  XX:XX:XX:XX:XX:XX</li>
+<li><strong>channel</strong> (<em>int</em>) &#8211;
+Channel number on which the BSS operates</li>
+<li><strong>timeout</strong> (<em>float</em>) &#8211;
+Time to complete the join process; a value of
+None will cause the method to return immediately and allow
+the join process to continue forever until the node has joined
+the network or the join has failed.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.node_sta.WlanExpNodeSta.is_joining">
+<code class="descclassname">WlanExpNodeSta.</code><code class="descname">is_joining</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node_sta.html#WlanExpNodeSta.is_joining"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node_sta.WlanExpNodeSta.is_joining" title="Permalink to this definition">¶</a></dt>
+<dd><p>Queries if the STA is currently attempting to join a network. The join
+state machine runs until the target network is successfully joined or
+the joing process is terminated by the user. This method tests whether
+the join process is still running. To check success or failure of the
+join process, use node.get_bss_info().</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>status</strong> &#8211;<ul class="simple">
+<li>True      &#8211; Inidcates node is currently in the join process</li>
+<li>False     &#8211; Indicates node is not currently in the join process</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="node_ibss.html" class="btn btn-neutral float-right" title="Ad hoc (IBSS) Node">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="node_ap.html" class="btn btn-neutral" title="Access Point (AP) Node"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Mango Communications, Inc..
+    </p>
+  </div>
+
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'wlan_exp v1.5.2  ',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
