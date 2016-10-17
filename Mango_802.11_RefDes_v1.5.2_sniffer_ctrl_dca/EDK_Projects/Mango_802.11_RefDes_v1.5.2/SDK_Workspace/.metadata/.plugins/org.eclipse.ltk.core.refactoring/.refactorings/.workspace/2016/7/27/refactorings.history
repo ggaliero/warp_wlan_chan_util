@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Delete 2 resources" deleteContents="false" description="Delete 2 resources" element1="/wlan_mac_high_ap/src/include/wlan_mac_chan_util.h" element2="/wlan_mac_high_ap/src/wlan_mac_chan_util.c" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="2" stamp="1467907029655"/>
+</session>

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move 1 resources to &apos;include&apos;" description="Move 1 resources to &apos;include&apos;" destination="src/include" element1="src/wlan_mac_chan_util.h" flags="7" id="org.eclipse.ltk.core.refactoring.move.resources" resources="1" stamp="1467907231832" updateReferences="true"/>
+</session>

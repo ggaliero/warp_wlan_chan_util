@@ -1,0 +1,6 @@
+11:05:41 **** Clean-only build of project wlan_bsp_cpu_low ****
+make -k clean 
+rm -rf mb_low
+
+11:05:41 Build Finished (took 531ms)
+

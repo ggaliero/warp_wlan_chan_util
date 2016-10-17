@@ -1,0 +1,7 @@
+11:05:40 **** Clean-only build of configuration Debug for project wlan_mac_low_nomac ****
+make clean 
+rm -rf  ./wlan_mac_low_framework/wlan_mac_low.o ./wlan_mac_low_framework/wlan_phy_util.o  ./wlan_mac_common/wlan_mac_common.o ./wlan_mac_common/wlan_mac_mailbox_util.o ./wlan_mac_common/wlan_mac_pkt_buf_util.o ./wlan_mac_common/wlan_mac_sysmon_util.o ./wlan_mac_common/wlan_mac_time_util.o ./wlan_mac_common/wlan_mac_userio_util.o  ./src/wlan_mac_nomac.o  ./wlan_mac_low_framework/wlan_mac_low.d ./wlan_mac_low_framework/wlan_phy_util.d  ./wlan_mac_common/wlan_mac_common.d ./wlan_mac_common/wlan_mac_mailbox_util.d ./wlan_mac_common/wlan_mac_pkt_buf_util.d ./wlan_mac_common/wlan_mac_sysmon_util.d ./wlan_mac_common/wlan_mac_time_util.d ./wlan_mac_common/wlan_mac_userio_util.d  ./src/wlan_mac_nomac.d  wlan_mac_low_nomac.elf.size  wlan_mac_low_nomac.elf.elfcheck  wlan_mac_low_nomac.elf
+' '
+
+11:05:41 Build Finished (took 952ms)
+

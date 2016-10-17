@@ -1,0 +1,1008 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>wlan_exp.transport.node &mdash; mango_wlan_exp wlan_exp v1.5.2   documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../../_static/rtd_overrides.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="mango_wlan_exp wlan_exp v1.5.2   documentation" href="../../../index.html"/>
+        <link rel="up" title="Module code" href="../../index.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="../../../index.html" class="fa fa-home"> mango_wlan_exp</a>
+        
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../wlan_exp.html">Framework</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../node.html">Node Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../wlan_exp_util.html">WLAN Exp Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ltg.html">LTG Flow Configurations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../device.html">WLAN Device</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../wlan_exp_log.html">Event Log</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../log_overview.html">Event Log Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../log_entry_types.html">Log Entry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../log_util.html">Event Log Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../log_util_hdf.html">HDF5 Utilities</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../index.html">mango_wlan_exp</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      
+    <li>wlan_exp.transport.node</li>
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <h1>Source code for wlan_exp.transport.node</h1><div class="highlight"><pre>
+<span class="c"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">------------------------------------------------------------------------------</span>
+<span class="sd">Mango 802.11 Reference Design Experiments Framework - WARP Node</span>
+<span class="sd">------------------------------------------------------------------------------</span>
+<span class="sd">Authors:   Chris Hunter (chunter [at] mangocomm.com)</span>
+<span class="sd">           Patrick Murphy (murphpo [at] mangocomm.com)</span>
+<span class="sd">           Erik Welsh (welsh [at] mangocomm.com)</span>
+<span class="sd">License:   Copyright 2014-2016, Mango Communications. All rights reserved.</span>
+<span class="sd">           Distributed under the WARP license (http://warpproject.org/license)</span>
+<span class="sd">------------------------------------------------------------------------------</span>
+
+<span class="sd">This module provides class definition for WARP Node.</span>
+
+<span class="sd">Functions (see below for more information):</span>
+<span class="sd">    WarpNode()        -- Base class for WARP nodes</span>
+<span class="sd">    WarpNodeFactory() -- Base class for creating a WarpNode</span>
+
+<span class="sd">Integer constants:</span>
+<span class="sd">    NODE_TYPE, NODE_ID, NODE_HW_GEN, NODE_SERIAL_NUM, </span>
+<span class="sd">      NODE_FPGA_DNA -- Node hardware parameter constants </span>
+
+<span class="sd">If additional hardware parameters are needed for sub-classes of WarpNode, </span>
+<span class="sd">please make sure that the values of these hardware parameters are not reused.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">cmds</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">exception</span> <span class="k">as</span> <span class="n">ex</span>
+
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;WarpNode&#39;</span><span class="p">,</span> <span class="s">&#39;WarpNodeFactory&#39;</span><span class="p">]</span>
+
+
+<span class="c"># Node Parameter Identifiers</span>
+<span class="c">#     - The C counterparts are found in *_node.h</span>
+<span class="n">NODE_TYPE</span>               <span class="o">=</span> <span class="mi">0</span>
+<span class="n">NODE_ID</span>                 <span class="o">=</span> <span class="mi">1</span>
+<span class="n">NODE_HW_GEN</span>             <span class="o">=</span> <span class="mi">2</span>
+<span class="n">NODE_SERIAL_NUM</span>         <span class="o">=</span> <span class="mi">3</span>
+<span class="n">NODE_FPGA_DNA</span>           <span class="o">=</span> <span class="mi">4</span>
+
+
+
+<span class="k">class</span> <span class="nc">WarpNode</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Base Class for WARP node.</span>
+<span class="sd">    </span>
+<span class="sd">    The WARP node represents one node in a network.  This class is the </span>
+<span class="sd">    primary interface for interacting with nodes by providing methods for </span>
+<span class="sd">    sending commands and checking status of nodes.</span>
+<span class="sd">    </span>
+<span class="sd">    By default, the base WARP node provides many useful node attributes</span>
+<span class="sd">    as well as a transport component.</span>
+<span class="sd">    </span>
+<span class="sd">    Attributes:</span>
+<span class="sd">        node_type            -- Unique type of the WARP node</span>
+<span class="sd">        node_id              -- Unique identification for this node</span>
+<span class="sd">        name                 -- User specified name for this node (supplied by user scripts)</span>
+<span class="sd">        description          -- String description of this node (auto-generated)</span>
+<span class="sd">        serial_number        -- Node&#39;s serial number, read from EEPROM on hardware</span>
+<span class="sd">        fpga_dna             -- Node&#39;s FPGA&#39;a unique identification (on select hardware)</span>
+<span class="sd">        hw_ver               -- WARP hardware version of this node</span>
+
+<span class="sd">        transport            -- Node&#39;s transport object</span>
+<span class="sd">        transport_broadcast  -- Node&#39;s broadcast transport object</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">network_config</span>           <span class="o">=</span> <span class="bp">None</span>
+
+    <span class="n">node_type</span>                <span class="o">=</span> <span class="bp">None</span>
+    <span class="n">node_id</span>                  <span class="o">=</span> <span class="bp">None</span>
+    <span class="n">name</span>                     <span class="o">=</span> <span class="bp">None</span>
+    <span class="n">description</span>              <span class="o">=</span> <span class="bp">None</span>
+    <span class="n">serial_number</span>            <span class="o">=</span> <span class="bp">None</span>
+    <span class="n">sn_str</span>                   <span class="o">=</span> <span class="bp">None</span>
+    <span class="n">fpga_dna</span>                 <span class="o">=</span> <span class="bp">None</span>
+    <span class="n">hw_ver</span>                   <span class="o">=</span> <span class="bp">None</span>
+
+    <span class="n">transport</span>                <span class="o">=</span> <span class="bp">None</span>
+    <span class="n">transport_broadcast</span>      <span class="o">=</span> <span class="bp">None</span>
+    <span class="n">transport_tracker</span>        <span class="o">=</span> <span class="bp">None</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">network_config</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">network_config</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">network_config</span> <span class="o">=</span> <span class="n">network_config</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">config</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">network_config</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">NetworkConfiguration</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">transport_tracker</span> <span class="o">=</span> <span class="mi">0</span>
+
+
+    <span class="k">def</span> <span class="nf">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Clear the transport object to close any open socket connections</span>
+<span class="sd">        in the event the node is deleted&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">transport</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">transport_close</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">transport</span> <span class="o">=</span> <span class="bp">None</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">transport_broadcast</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">transport_broadcast</span><span class="o">.</span><span class="n">transport_close</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">transport_broadcast</span> <span class="o">=</span> <span class="bp">None</span>
+
+
+    <span class="k">def</span> <span class="nf">set_init_configuration</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">serial_number</span><span class="p">,</span> <span class="n">node_id</span><span class="p">,</span> <span class="n">node_name</span><span class="p">,</span> 
+                               <span class="n">ip_address</span><span class="p">,</span> <span class="n">unicast_port</span><span class="p">,</span> <span class="n">broadcast_port</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set the initial configuration of the node.&quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">util</span>
+
+        <span class="n">host_id</span>      <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">network_config</span><span class="o">.</span><span class="n">get_param</span><span class="p">(</span><span class="s">&#39;host_id&#39;</span><span class="p">)</span>
+        <span class="n">tx_buf_size</span>  <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">network_config</span><span class="o">.</span><span class="n">get_param</span><span class="p">(</span><span class="s">&#39;tx_buffer_size&#39;</span><span class="p">)</span>
+        <span class="n">rx_buf_size</span>  <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">network_config</span><span class="o">.</span><span class="n">get_param</span><span class="p">(</span><span class="s">&#39;rx_buffer_size&#39;</span><span class="p">)</span>
+        <span class="n">tport_type</span>   <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">network_config</span><span class="o">.</span><span class="n">get_param</span><span class="p">(</span><span class="s">&#39;transport_type&#39;</span><span class="p">)</span>
+
+        <span class="p">(</span><span class="n">sn</span><span class="p">,</span> <span class="n">sn_str</span><span class="p">)</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">get_serial_number</span><span class="p">(</span><span class="n">serial_number</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="p">(</span><span class="n">tport_type</span> <span class="o">==</span> <span class="s">&#39;python&#39;</span><span class="p">):</span>
+            <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">transport_eth_ip_udp_py</span> <span class="k">as</span> <span class="n">unicast_tp</span>
+            <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">transport_eth_ip_udp_py_broadcast</span> <span class="k">as</span> <span class="n">broadcast_tp</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">transport</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">transport</span> <span class="o">=</span> <span class="n">unicast_tp</span><span class="o">.</span><span class="n">TransportEthIpUdpPy</span><span class="p">()</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">transport_broadcast</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">transport_broadcast</span> <span class="o">=</span> <span class="n">broadcast_tp</span><span class="o">.</span><span class="n">TransportEthIpUdpPyBroadcast</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">network_config</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">&quot;Transport not defined</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
+        
+        <span class="c"># Set Node information        </span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">node_id</span>       <span class="o">=</span> <span class="n">node_id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span>          <span class="o">=</span> <span class="n">node_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">serial_number</span> <span class="o">=</span> <span class="n">sn</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sn_str</span>        <span class="o">=</span> <span class="n">sn_str</span>
+
+        <span class="c"># Set Node Unicast Transport information</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">transport_open</span><span class="p">(</span><span class="n">tx_buf_size</span><span class="p">,</span> <span class="n">rx_buf_size</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">set_ip_address</span><span class="p">(</span><span class="n">ip_address</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">set_unicast_port</span><span class="p">(</span><span class="n">unicast_port</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">set_broadcast_port</span><span class="p">(</span><span class="n">broadcast_port</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">set_src_id</span><span class="p">(</span><span class="n">host_id</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">set_dest_id</span><span class="p">(</span><span class="n">node_id</span><span class="p">)</span>
+
+        <span class="c"># Set Node Broadcast Transport information</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">transport_broadcast</span><span class="o">.</span><span class="n">transport_open</span><span class="p">(</span><span class="n">tx_buf_size</span><span class="p">,</span> <span class="n">rx_buf_size</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">transport_broadcast</span><span class="o">.</span><span class="n">set_ip_address</span><span class="p">(</span><span class="n">ip_address</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">transport_broadcast</span><span class="o">.</span><span class="n">set_unicast_port</span><span class="p">(</span><span class="n">unicast_port</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">transport_broadcast</span><span class="o">.</span><span class="n">set_broadcast_port</span><span class="p">(</span><span class="n">broadcast_port</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">transport_broadcast</span><span class="o">.</span><span class="n">set_src_id</span><span class="p">(</span><span class="n">host_id</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">transport_broadcast</span><span class="o">.</span><span class="n">set_dest_id</span><span class="p">(</span><span class="mh">0xFFFF</span><span class="p">)</span>
+        
+
+    <span class="k">def</span> <span class="nf">configure_node</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">jumbo_frame_support</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get remaining information from the node and set remaining parameters.&quot;&quot;&quot;</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">ping</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">test_payload_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">jumbo_frame_support</span><span class="p">)</span>        
+
+        <span class="n">resp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_info</span><span class="p">()</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">process_parameters</span><span class="p">(</span><span class="n">resp</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">ex</span><span class="o">.</span><span class="n">ParameterError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="n">ex</span><span class="o">.</span><span class="n">NodeError</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s">&quot;Configuration Error&quot;</span><span class="p">)</span>
+
+        <span class="c"># Set description</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__repr__</span><span class="p">()</span>
+
+
+    <span class="k">def</span> <span class="nf">set_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set the name of the node.</span>
+<span class="sd">        </span>
+<span class="sd">        The name provided will affect the Python environment only </span>
+<span class="sd">        (ie it will update strings in child classes but will not be </span>
+<span class="sd">        transmitted to the node.)</span>
+<span class="sd">            </span>
+<span class="sd">        Args:</span>
+<span class="sd">            name (str):  User provided name of the node.        </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span>        <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__repr__</span><span class="p">()</span>
+
+
+
+    <span class="c"># -------------------------------------------------------------------------</span>
+    <span class="c"># Commands for the Node</span>
+    <span class="c"># -------------------------------------------------------------------------</span>
+    <span class="k">def</span> <span class="nf">identify</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Identify the node</span>
+<span class="sd">        </span>
+<span class="sd">        The node will physically identify itself by:</span>
+<span class="sd">        </span>
+<span class="sd">          * Blinking the Hex Display (for approx 10 seconds)</span>
+<span class="sd">          * Output Node ID and IP adress to UART output</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">send_cmd</span><span class="p">(</span><span class="n">cmds</span><span class="o">.</span><span class="n">NodeIdentify</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">serial_number</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">ping</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;&#39;Ping&#39; the node </span>
+<span class="sd">        </span>
+<span class="sd">        Send an empty packet to the node via the transport to test connectivity</span>
+<span class="sd">        between the host and the node.  This is the simplest command that can</span>
+<span class="sd">        be processed by the node and is similar to the &quot;ping&quot; command used</span>
+<span class="sd">        check network connectivity.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">ping</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get the type of the node.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">node_type</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">send_cmd</span><span class="p">(</span><span class="n">cmds</span><span class="o">.</span><span class="n">NodeGetType</span><span class="p">())</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">node_type</span>
+
+    <span class="k">def</span> <span class="nf">get_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get the Hardware Information from the node.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">send_cmd</span><span class="p">(</span><span class="n">cmds</span><span class="o">.</span><span class="n">NodeGetHwInfo</span><span class="p">())</span>
+
+    <span class="k">def</span> <span class="nf">get_temp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get the temperature of the node.&quot;&quot;&quot;</span>
+        <span class="p">(</span><span class="n">curr_temp</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">)</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">send_cmd</span><span class="p">(</span><span class="n">cmds</span><span class="o">.</span><span class="n">NodeGetTemperature</span><span class="p">())</span> <span class="c"># Min / Max temp not used</span>
+        <span class="k">return</span> <span class="n">curr_temp</span>
+
+    <span class="k">def</span> <span class="nf">setup_network_inf</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Setup the transport network information for the node.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">send_cmd_broadcast</span><span class="p">(</span><span class="n">cmds</span><span class="o">.</span><span class="n">NodeSetupNetwork</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+        
+    <span class="k">def</span> <span class="nf">reset_network_inf</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Reset the transport network information for the node.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">send_cmd_broadcast</span><span class="p">(</span><span class="n">cmds</span><span class="o">.</span><span class="n">NodeResetNetwork</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">serial_number</span><span class="p">))</span>
+
+    <span class="c"># -------------------------------------------------------------------------</span>
+    <span class="c"># Parameter Framework</span>
+    <span class="c">#   Allows for processing of hardware parameters</span>
+    <span class="c"># -------------------------------------------------------------------------</span>
+    <span class="k">def</span> <span class="nf">process_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Process all parameters.</span>
+<span class="sd">        </span>
+<span class="sd">        Each parameter is of the form::</span>
+<span class="sd">                   | 31 ... 24 | 23 ... 16 | 15 ... 8 | 7 ... 0 |</span>
+<span class="sd">            Word 0 | Reserved  | Group     | Length             |</span>
+<span class="sd">            Word 1 | Parameter Identifier                       |</span>
+<span class="sd">            Word 2 | Value 0 of Parameter                       |</span>
+<span class="sd">            ...</span>
+<span class="sd">            Word N | Value M of Parameter                       |</span>
+<span class="sd">            </span>
+<span class="sd">        where the number of parameters, M, is equal to the Length field</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="n">param_start</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">param_end</span>   <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span>
+        
+        <span class="k">while</span> <span class="p">(</span><span class="n">param_start</span> <span class="o">&lt;</span> <span class="n">param_end</span><span class="p">):</span>
+            <span class="n">param_group</span> <span class="o">=</span> <span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="n">param_start</span><span class="p">]</span> <span class="o">&amp;</span> <span class="mh">0x00FF0000</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="mi">16</span>
+            <span class="n">param_length</span> <span class="o">=</span> <span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="n">param_start</span><span class="p">]</span> <span class="o">&amp;</span> <span class="mh">0x0000FFFF</span><span class="p">)</span>
+            <span class="n">param_identifier</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="n">param_start</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+
+            <span class="n">value_start</span> <span class="o">=</span> <span class="n">param_start</span> <span class="o">+</span> <span class="mi">2</span>
+            <span class="n">value_end</span> <span class="o">=</span> <span class="n">value_start</span> <span class="o">+</span> <span class="n">param_length</span>
+            
+            <span class="n">param_values</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="n">value_start</span><span class="p">:</span><span class="n">value_end</span><span class="p">]</span>
+            
+            <span class="c"># print(str(&quot;Param Start = &quot; + str(param_start) + &quot;\n&quot; +</span>
+            <span class="c">#           &quot;    param_group  = &quot; + str(param_group) + &quot;\n&quot; + </span>
+            <span class="c">#           &quot;    param_length = &quot; + str(param_length) + &quot;\n&quot; + </span>
+            <span class="c">#           &quot;    param_id     = &quot; + str(param_identifier) + &quot;\n&quot;))</span>
+            
+            <span class="bp">self</span><span class="o">.</span><span class="n">process_parameter_group</span><span class="p">(</span><span class="n">param_group</span><span class="p">,</span> <span class="n">param_identifier</span><span class="p">,</span> 
+                                         <span class="n">param_length</span><span class="p">,</span> <span class="n">param_values</span><span class="p">)</span>
+            
+            <span class="n">param_start</span> <span class="o">=</span> <span class="n">value_end</span>
+
+
+    <span class="k">def</span> <span class="nf">process_parameter_group</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">group</span><span class="p">,</span> <span class="n">identifier</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Process the Parameter Group&quot;&quot;&quot;</span>
+        <span class="k">if</span>   <span class="p">(</span><span class="n">group</span> <span class="o">==</span> <span class="n">cmds</span><span class="o">.</span><span class="n">GROUP_NODE</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">process_parameter</span><span class="p">(</span><span class="n">identifier</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="n">values</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="n">group</span> <span class="o">==</span> <span class="n">cmds</span><span class="o">.</span><span class="n">GROUP_TRANSPORT</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">process_parameter</span><span class="p">(</span><span class="n">identifier</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="n">values</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ex</span><span class="o">.</span><span class="n">ParameterError</span><span class="p">(</span><span class="s">&quot;Group&quot;</span><span class="p">,</span> <span class="s">&quot;Unknown Group: {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">group</span><span class="p">))</span>
+
+
+    <span class="k">def</span> <span class="nf">process_parameter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">identifier</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Extract values from the parameters&quot;&quot;&quot;</span>
+        <span class="k">if</span>   <span class="p">(</span><span class="n">identifier</span> <span class="o">==</span> <span class="n">NODE_TYPE</span><span class="p">):</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">length</span> <span class="o">==</span> <span class="mi">1</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_set_node_type</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">ex</span><span class="o">.</span><span class="n">ParameterError</span><span class="p">(</span><span class="s">&quot;NODE_TYPE&quot;</span><span class="p">,</span> <span class="s">&quot;Incorrect length&quot;</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="p">(</span><span class="n">identifier</span> <span class="o">==</span> <span class="n">NODE_ID</span><span class="p">):</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">length</span> <span class="o">==</span> <span class="mi">1</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">node_id</span> <span class="o">=</span> <span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">ex</span><span class="o">.</span><span class="n">ParameterError</span><span class="p">(</span><span class="s">&quot;NODE_ID&quot;</span><span class="p">,</span> <span class="s">&quot;Incorrect length&quot;</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="p">(</span><span class="n">identifier</span> <span class="o">==</span> <span class="n">NODE_HW_GEN</span><span class="p">):</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">length</span> <span class="o">==</span> <span class="mi">1</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">hw_ver</span> <span class="o">=</span> <span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&amp;</span> <span class="mh">0xFF</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">ex</span><span class="o">.</span><span class="n">ParameterError</span><span class="p">(</span><span class="s">&quot;NODE_HW_GEN&quot;</span><span class="p">,</span> <span class="s">&quot;Incorrect length&quot;</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="p">(</span><span class="n">identifier</span> <span class="o">==</span> <span class="n">NODE_SERIAL_NUM</span><span class="p">):</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">length</span> <span class="o">==</span> <span class="mi">1</span><span class="p">):</span>
+                <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">util</span>
+
+                <span class="p">(</span><span class="n">sn</span><span class="p">,</span> <span class="n">sn_str</span><span class="p">)</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">get_serial_number</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">output</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">serial_number</span> <span class="o">=</span> <span class="n">sn</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">sn_str</span>        <span class="o">=</span> <span class="n">sn_str</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">ex</span><span class="o">.</span><span class="n">ParameterError</span><span class="p">(</span><span class="s">&quot;NODE_SERIAL_NUM&quot;</span><span class="p">,</span> <span class="s">&quot;Incorrect length&quot;</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="p">(</span><span class="n">identifier</span> <span class="o">==</span> <span class="n">NODE_FPGA_DNA</span><span class="p">):</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">length</span> <span class="o">==</span> <span class="mi">2</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">fpga_dna</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="mi">32</span> <span class="o">*</span> <span class="n">values</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">ex</span><span class="o">.</span><span class="n">ParameterError</span><span class="p">(</span><span class="s">&quot;NODE_FPGA_DNA&quot;</span><span class="p">,</span> <span class="s">&quot;Incorrect length&quot;</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ex</span><span class="o">.</span><span class="n">ParameterError</span><span class="p">(</span><span class="n">identifier</span><span class="p">,</span> <span class="s">&quot;Unknown node parameter&quot;</span><span class="p">)</span>
+
+
+    <span class="c"># -------------------------------------------------------------------------</span>
+    <span class="c"># Transmit / Receive methods for the Node</span>
+    <span class="c"># -------------------------------------------------------------------------</span>
+    <span class="k">def</span> <span class="nf">send_cmd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cmd</span><span class="p">,</span> <span class="n">max_attempts</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">max_req_size</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Send the provided command.</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            cmd          -- Class of command to send</span>
+<span class="sd">            max_attempts -- Maximum number of attempts to send a given command</span>
+<span class="sd">            max_req_size -- Maximum request size (applys only to Buffer Commands)</span>
+<span class="sd">            timeout      -- Maximum time to wait for a response from the node</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">transport</span>
+
+        <span class="n">resp_type</span> <span class="o">=</span> <span class="n">cmd</span><span class="o">.</span><span class="n">get_resp_type</span><span class="p">()</span>
+        
+        <span class="k">if</span>  <span class="p">(</span><span class="n">resp_type</span> <span class="o">==</span> <span class="n">transport</span><span class="o">.</span><span class="n">TRANSPORT_NO_RESP</span><span class="p">):</span>
+            <span class="n">payload</span> <span class="o">=</span> <span class="n">cmd</span><span class="o">.</span><span class="n">serialize</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span> <span class="n">robust</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="p">(</span><span class="n">resp_type</span> <span class="o">==</span> <span class="n">transport</span><span class="o">.</span><span class="n">TRANSPORT_RESP</span><span class="p">):</span>
+            <span class="n">resp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_receive_resp</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">max_attempts</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">cmd</span><span class="o">.</span><span class="n">process_resp</span><span class="p">(</span><span class="n">resp</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="p">(</span><span class="n">resp_type</span> <span class="o">==</span> <span class="n">transport</span><span class="o">.</span><span class="n">TRANSPORT_BUFFER</span><span class="p">):</span>
+            <span class="n">resp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_receive_buffer</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">max_attempts</span><span class="p">,</span> <span class="n">max_req_size</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">cmd</span><span class="o">.</span><span class="n">process_resp</span><span class="p">(</span><span class="n">resp</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ex</span><span class="o">.</span><span class="n">TransportError</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">transport</span><span class="p">,</span> 
+                                    <span class="s">&quot;Unknown response type for command&quot;</span><span class="p">)</span>
+
+
+    <span class="k">def</span> <span class="nf">_receive_resp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cmd</span><span class="p">,</span> <span class="n">max_attempts</span><span class="p">,</span> <span class="n">timeout</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Internal method to receive a response for a given command payload&quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">message</span>
+
+        <span class="n">reply</span> <span class="o">=</span> <span class="n">b</span><span class="s">&#39;&#39;</span>
+        <span class="n">done</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="n">resp</span> <span class="o">=</span> <span class="n">message</span><span class="o">.</span><span class="n">Resp</span><span class="p">()</span>
+
+        <span class="n">payload</span> <span class="o">=</span> <span class="n">cmd</span><span class="o">.</span><span class="n">serialize</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+
+        <span class="k">while</span> <span class="ow">not</span> <span class="n">done</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">reply</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">receive</span><span class="p">(</span><span class="n">timeout</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_receive_success</span><span class="p">()</span>
+            <span class="k">except</span> <span class="n">ex</span><span class="o">.</span><span class="n">TransportError</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_receive_failure</span><span class="p">()</span>
+
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_receive_failure_exceeded</span><span class="p">(</span><span class="n">max_attempts</span><span class="p">):</span>
+                    <span class="k">raise</span> <span class="n">ex</span><span class="o">.</span><span class="n">TransportError</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">transport</span><span class="p">,</span> 
+                              <span class="s">&quot;Max retransmissions without reply from node&quot;</span><span class="p">)</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">resp</span><span class="o">.</span><span class="n">deserialize</span><span class="p">(</span><span class="n">reply</span><span class="p">)</span>
+                <span class="n">done</span> <span class="o">=</span> <span class="bp">True</span>
+                
+        <span class="k">return</span> <span class="n">resp</span>
+
+
+    <span class="k">def</span> <span class="nf">_receive_buffer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cmd</span><span class="p">,</span> <span class="n">max_attempts</span><span class="p">,</span> <span class="n">max_req_size</span><span class="p">,</span> <span class="n">timeout</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Internal method to receive a buffer for a given command payload.</span>
+<span class="sd">        </span>
+<span class="sd">        Depending on the size of the buffer, the framework will split a</span>
+<span class="sd">        single large request into multiple smaller requests based on the </span>
+<span class="sd">        max_req_size.  This is to:</span>
+<span class="sd">          1) Minimize the probability that the OS drops a packet</span>
+<span class="sd">          2) Minimize the time that the Ethernet interface on the node is busy </span>
+<span class="sd">             and cannot service other requests</span>
+
+<span class="sd">        To see performance data, set the &#39;display_perf&#39; flag to True.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">message</span>
+
+        <span class="n">display_perf</span>    <span class="o">=</span> <span class="bp">False</span>
+        <span class="n">print_warnings</span>  <span class="o">=</span> <span class="bp">True</span>
+        <span class="n">print_debug_msg</span> <span class="o">=</span> <span class="bp">False</span>
+        
+        <span class="n">reply</span>           <span class="o">=</span> <span class="n">b</span><span class="s">&#39;&#39;</span>
+
+        <span class="n">buffer_id</span>       <span class="o">=</span> <span class="n">cmd</span><span class="o">.</span><span class="n">get_buffer_id</span><span class="p">()</span>
+        <span class="n">flags</span>           <span class="o">=</span> <span class="n">cmd</span><span class="o">.</span><span class="n">get_buffer_flags</span><span class="p">()</span>
+        <span class="n">start_byte</span>      <span class="o">=</span> <span class="n">cmd</span><span class="o">.</span><span class="n">get_buffer_start_byte</span><span class="p">()</span>
+        <span class="n">total_size</span>      <span class="o">=</span> <span class="n">cmd</span><span class="o">.</span><span class="n">get_buffer_size</span><span class="p">()</span>
+
+        <span class="n">tmp_resp</span>        <span class="o">=</span> <span class="bp">None</span>
+        <span class="n">resp</span>            <span class="o">=</span> <span class="bp">None</span>
+
+        <span class="k">if</span> <span class="n">max_req_size</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">fragment_size</span> <span class="o">=</span> <span class="n">max_req_size</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">fragment_size</span> <span class="o">=</span> <span class="n">total_size</span>
+
+        <span class="c"># To not hurt the performance of the transport, do not request more </span>
+        <span class="c"># data than can fit in the RX buffer</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">fragment_size</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">rx_buffer_size</span><span class="p">):</span>
+            <span class="n">fragment_size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">rx_buffer_size</span>
+        
+        <span class="c"># Allocate a complete response buffer        </span>
+        <span class="n">resp</span> <span class="o">=</span> <span class="n">message</span><span class="o">.</span><span class="n">Buffer</span><span class="p">(</span><span class="n">buffer_id</span><span class="p">,</span> <span class="n">flags</span><span class="p">,</span> <span class="n">start_byte</span><span class="p">,</span> <span class="n">total_size</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">display_perf</span><span class="p">:</span>
+            <span class="kn">import</span> <span class="nn">time</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">&quot;Receive buffer&quot;</span><span class="p">)</span>
+            <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+        <span class="c"># If the transfer is more than the fragment size, then split the transaction</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">total_size</span> <span class="o">&gt;</span> <span class="n">fragment_size</span><span class="p">):</span>
+            <span class="n">size</span>      <span class="o">=</span> <span class="n">fragment_size</span>
+            <span class="n">start_idx</span> <span class="o">=</span> <span class="n">start_byte</span>
+            <span class="n">num_bytes</span> <span class="o">=</span> <span class="mi">0</span>
+
+            <span class="k">while</span> <span class="p">(</span><span class="n">num_bytes</span> <span class="o">&lt;</span> <span class="n">total_size</span><span class="p">):</span>
+                <span class="c"># Create fragmented command</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">print_debug_msg</span><span class="p">):</span>
+                    <span class="k">print</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">FRAGMENT:  {0:10d}/{1:10d}</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">num_bytes</span><span class="p">,</span> <span class="n">total_size</span><span class="p">))</span>    
+    
+                <span class="c"># Handle the case of the last fragment</span>
+                <span class="k">if</span> <span class="p">((</span><span class="n">num_bytes</span> <span class="o">+</span> <span class="n">size</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">total_size</span><span class="p">):</span>
+                    <span class="n">size</span> <span class="o">=</span> <span class="n">total_size</span> <span class="o">-</span> <span class="n">num_bytes</span>
+
+                <span class="c"># Update the command with the location and size of fragment</span>
+                <span class="n">cmd</span><span class="o">.</span><span class="n">update_start_byte</span><span class="p">(</span><span class="n">start_idx</span><span class="p">)</span>
+                <span class="n">cmd</span><span class="o">.</span><span class="n">update_size</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
+                
+                <span class="c"># Send the updated command</span>
+                <span class="n">tmp_resp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">send_cmd</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+                <span class="n">tmp_size</span> <span class="o">=</span> <span class="n">tmp_resp</span><span class="o">.</span><span class="n">get_buffer_size</span><span class="p">()</span>
+                
+                <span class="k">if</span> <span class="p">(</span><span class="n">tmp_size</span> <span class="o">==</span> <span class="n">size</span><span class="p">):</span>
+                    <span class="c"># Add the response to the buffer and increment loop variables</span>
+                    <span class="n">resp</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">tmp_resp</span><span class="p">)</span>
+                    <span class="n">num_bytes</span> <span class="o">+=</span> <span class="n">size</span>
+                    <span class="n">start_idx</span> <span class="o">+=</span> <span class="n">size</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="c"># Exit the loop because communication has totally failed for </span>
+                    <span class="c"># the fragment and there is no point to request the next </span>
+                    <span class="c"># fragment.  Only return the truncated buffer.</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="n">print_warnings</span><span class="p">):</span>
+                        <span class="n">msg</span>  <span class="o">=</span> <span class="s">&quot;WARNING:  Command did not return a complete fragment.</span><span class="se">\n</span><span class="s">&quot;</span>
+                        <span class="n">msg</span> <span class="o">+=</span> <span class="s">&quot;  Requested : {0:10d}</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
+                        <span class="n">msg</span> <span class="o">+=</span> <span class="s">&quot;  Received  : {0:10d}</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">tmp_size</span><span class="p">)</span>
+                        <span class="n">msg</span> <span class="o">+=</span> <span class="s">&quot;Returning truncated buffer.&quot;</span>
+                        <span class="k">print</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+                    <span class="k">break</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c"># Normal buffer receive flow</span>
+            <span class="n">payload</span> <span class="o">=</span> <span class="n">cmd</span><span class="o">.</span><span class="n">serialize</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+    
+            <span class="k">while</span> <span class="ow">not</span> <span class="n">resp</span><span class="o">.</span><span class="n">is_buffer_complete</span><span class="p">():</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">reply</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">receive</span><span class="p">(</span><span class="n">timeout</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_receive_success</span><span class="p">()</span>
+                <span class="k">except</span> <span class="n">ex</span><span class="o">.</span><span class="n">TransportError</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_receive_failure</span><span class="p">()</span>
+                    <span class="k">if</span> <span class="n">print_warnings</span><span class="p">:</span>
+                        <span class="k">print</span><span class="p">(</span><span class="s">&quot;WARNING:  Transport timeout.  Requesting missing data.&quot;</span><span class="p">)</span>
+                    
+                    <span class="c"># If there is a timeout, then request missing part of the buffer</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_receive_failure_exceeded</span><span class="p">(</span><span class="n">max_attempts</span><span class="p">):</span>
+                        <span class="k">if</span> <span class="n">print_warnings</span><span class="p">:</span>
+                            <span class="k">print</span><span class="p">(</span><span class="s">&quot;ERROR:  Max re-transmissions without reply from node.&quot;</span><span class="p">)</span>
+                        <span class="k">raise</span> <span class="n">ex</span><span class="o">.</span><span class="n">TransportError</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">transport</span><span class="p">,</span> 
+                                  <span class="s">&quot;Max retransmissions without reply from node&quot;</span><span class="p">)</span>
+    
+                    <span class="c"># Get the missing locations</span>
+                    <span class="n">locations</span> <span class="o">=</span> <span class="n">resp</span><span class="o">.</span><span class="n">get_missing_byte_locations</span><span class="p">()</span>
+
+                    <span class="k">if</span> <span class="n">print_debug_msg</span><span class="p">:</span>
+                        <span class="k">print</span><span class="p">(</span><span class="n">resp</span><span class="p">)</span>
+                        <span class="k">print</span><span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">tracker</span><span class="p">)</span>
+                        <span class="k">print</span><span class="p">(</span><span class="s">&quot;Missing Locations in Buffer:&quot;</span><span class="p">)</span>
+                        <span class="k">print</span><span class="p">(</span><span class="n">locations</span><span class="p">)</span>
+
+                    <span class="c"># Send commands to fill in the buffer</span>
+                    <span class="k">for</span> <span class="n">location</span> <span class="ow">in</span> <span class="n">locations</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="p">(</span><span class="n">print_debug_msg</span><span class="p">):</span>
+                            <span class="k">print</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">LOCATION: {0:10d}    {1:10d}</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">location</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">location</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
+
+                        <span class="c"># Update the command with the new location</span>
+                        <span class="n">cmd</span><span class="o">.</span><span class="n">update_start_byte</span><span class="p">(</span><span class="n">location</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                        <span class="n">cmd</span><span class="o">.</span><span class="n">update_size</span><span class="p">(</span><span class="n">location</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+                        
+                        <span class="k">if</span> <span class="p">(</span><span class="n">location</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">):</span>
+                            <span class="k">print</span><span class="p">(</span><span class="s">&quot;ERROR:  Issue with finding missing bytes in response:&quot;</span><span class="p">)</span>
+                            <span class="k">print</span><span class="p">(</span><span class="s">&quot;Response Tracker:&quot;</span><span class="p">)</span>
+                            <span class="k">print</span><span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">tracker</span><span class="p">)</span>
+                            <span class="k">print</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">Missing Locations:&quot;</span><span class="p">)</span>
+                            <span class="k">print</span><span class="p">(</span><span class="n">locations</span><span class="p">)</span>
+                            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">()</span>
+                        
+                        <span class="c"># Use the standard send to get a Buffer with missing data. </span>
+                        <span class="c"># This avoids any race conditions when requesting </span>
+                        <span class="c"># multiple missing locations.  Make sure that max_attempts</span>
+                        <span class="c"># are set to 1 for the re-request to not get in to an </span>
+                        <span class="c"># infinite loop</span>
+                        <span class="k">try</span><span class="p">:</span>
+                            <span class="n">location_resp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">send_cmd</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">max_attempts</span><span class="o">=</span><span class="n">max_attempts</span><span class="p">)</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">_receive_success</span><span class="p">()</span>
+                        <span class="k">except</span> <span class="n">ex</span><span class="o">.</span><span class="n">TransportError</span><span class="p">:</span>
+                            <span class="c"># Timed out on a re-request.  There is an error so</span>
+                            <span class="c"># just clean up the response and get out of the loop.</span>
+                            <span class="k">if</span> <span class="n">print_warnings</span><span class="p">:</span>
+                                <span class="k">print</span><span class="p">(</span><span class="s">&quot;WARNING:  Transport timeout.  Returning truncated buffer.&quot;</span><span class="p">)</span>
+                                <span class="k">print</span><span class="p">(</span><span class="s">&quot;  Timeout requesting missing location: {1} bytes @ {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">location</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">location</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
+                                
+                            <span class="bp">self</span><span class="o">.</span><span class="n">_receive_failure</span><span class="p">()</span>
+                            <span class="n">resp</span><span class="o">.</span><span class="n">trim</span><span class="p">()</span>
+                            <span class="k">return</span> <span class="n">resp</span>
+                        
+                        <span class="k">if</span> <span class="n">print_debug_msg</span><span class="p">:</span>
+                            <span class="k">print</span><span class="p">(</span><span class="s">&quot;Adding Response:&quot;</span><span class="p">)</span>
+                            <span class="k">print</span><span class="p">(</span><span class="n">location_resp</span><span class="p">)</span>
+                            <span class="k">print</span><span class="p">(</span><span class="n">resp</span><span class="p">)</span>                            
+                        
+                        <span class="c"># Add the response to the buffer</span>
+                        <span class="n">resp</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">location_resp</span><span class="p">)</span>
+
+                        <span class="k">if</span> <span class="n">print_debug_msg</span><span class="p">:</span>
+                            <span class="k">print</span><span class="p">(</span><span class="s">&quot;Buffer after merge:&quot;</span><span class="p">)</span>
+                            <span class="k">print</span><span class="p">(</span><span class="n">resp</span><span class="p">)</span>
+                            <span class="k">print</span><span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">tracker</span><span class="p">)</span>
+                        
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">resp</span><span class="o">.</span><span class="n">add_data_to_buffer</span><span class="p">(</span><span class="n">reply</span><span class="p">)</span>
+
+        <span class="c"># Trim the final buffer in case there were missing fragments</span>
+        <span class="n">resp</span><span class="o">.</span><span class="n">trim</span><span class="p">()</span>
+        
+        <span class="k">if</span> <span class="n">display_perf</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">&quot;    Receive time: {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span><span class="p">))</span>
+        
+        <span class="k">return</span> <span class="n">resp</span>
+        
+    
+    <span class="k">def</span> <span class="nf">send_cmd_broadcast</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cmd</span><span class="p">,</span> <span class="n">pkt_type</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Send the provided command over the broadcast transport.</span>
+
+<span class="sd">        Currently, broadcast commands cannot have a response.</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            cmd -- Class of command to send</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">transport_broadcast</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">payload</span><span class="o">=</span><span class="n">cmd</span><span class="o">.</span><span class="n">serialize</span><span class="p">(),</span> <span class="n">pkt_type</span><span class="o">=</span><span class="n">pkt_type</span><span class="p">)</span>
+
+
+    <span class="k">def</span> <span class="nf">receive_resp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return a list of responses that are sitting in the host&#39;s </span>
+<span class="sd">        receive queue.  It will empty the queue and return them all the </span>
+<span class="sd">        calling method.&quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">message</span>
+
+        <span class="n">output</span> <span class="o">=</span> <span class="p">[]</span>
+        
+        <span class="n">resp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">receive</span><span class="p">(</span><span class="n">timeout</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="n">resp</span><span class="p">:</span>
+            <span class="c"># Create a list of response object if the list of bytes is a </span>
+            <span class="c"># concatenation of many responses</span>
+            <span class="n">done</span> <span class="o">=</span> <span class="bp">False</span>
+            
+            <span class="k">while</span> <span class="ow">not</span> <span class="n">done</span><span class="p">:</span>
+                <span class="n">msg</span> <span class="o">=</span> <span class="n">message</span><span class="o">.</span><span class="n">Resp</span><span class="p">()</span>
+                <span class="n">msg</span><span class="o">.</span><span class="n">deserialize</span><span class="p">(</span><span class="n">resp</span><span class="p">)</span>
+                <span class="n">resp_len</span> <span class="o">=</span> <span class="n">msg</span><span class="o">.</span><span class="n">sizeof</span><span class="p">()</span>
+
+                <span class="k">if</span> <span class="n">resp_len</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">resp</span><span class="p">):</span>
+                    <span class="n">resp</span> <span class="o">=</span> <span class="n">resp</span><span class="p">[(</span><span class="n">resp_len</span><span class="p">):]</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">done</span> <span class="o">=</span> <span class="bp">True</span>
+                    
+                <span class="n">output</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">output</span>
+
+
+
+    <span class="c"># -------------------------------------------------------------------------</span>
+    <span class="c"># Transport Tracker</span>
+    <span class="c"># -------------------------------------------------------------------------</span>
+    <span class="k">def</span> <span class="nf">_receive_success</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Internal method - Successfully received a packet.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">transport_tracker</span> <span class="o">=</span> <span class="mi">0</span>
+
+    
+    <span class="k">def</span> <span class="nf">_receive_failure</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Internal method - Had a receive failure.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">transport_tracker</span> <span class="o">+=</span> <span class="mi">1</span>
+
+
+    <span class="k">def</span> <span class="nf">_receive_failure_exceeded</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">max_attempts</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Internal method - More recieve failures than max_attempts.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">transport_tracker</span> <span class="o">&lt;</span> <span class="n">max_attempts</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">True</span>
+
+
+
+    <span class="c"># -------------------------------------------------------------------------</span>
+    <span class="c"># Misc methods for the Node</span>
+    <span class="c"># -------------------------------------------------------------------------</span>
+    <span class="k">def</span> <span class="nf">_set_node_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node_type</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set the node_type &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">node_type</span> <span class="o">=</span> <span class="n">node_type</span>
+
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Pretty print WarpNode object&quot;&quot;&quot;</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">serial_number</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="s">&quot;Node:</span><span class="se">\n</span><span class="s">&quot;</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="s">&quot;    Node ID       :  {0}</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">node_id</span><span class="p">)</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="s">&quot;    Serial #      :  {0}</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sn_str</span><span class="p">)</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="s">&quot;    HW version    :  WARP v{0}</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hw_ver</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="s">&quot;Node not initialized.&quot;</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">transport</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">transport</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">msg</span>
+
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return node name and description&quot;&quot;&quot;</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">serial_number</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">msg</span>  <span class="o">=</span> <span class="s">&quot;{0}: &quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sn_str</span><span class="p">)</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="s">&quot;ID {0:5d}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">node_id</span><span class="p">)</span>
+            
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">msg</span> <span class="o">+=</span> <span class="s">&quot; ({0})&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="s">&quot;Node not initialized.&quot;</span>
+        
+        <span class="k">return</span> <span class="n">msg</span>
+
+<span class="c"># End Class</span>
+
+
+
+<span class="k">class</span> <span class="nc">WarpNodeFactory</span><span class="p">(</span><span class="n">WarpNode</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Sub-class of WARP node used to help with node configuration and setup.</span>
+<span class="sd">    </span>
+<span class="sd">    This class will maintian the dictionary of Node Types.  The dictionary</span>
+<span class="sd">    contains the 32-bit Node Type as a key and the corresponding class name </span>
+<span class="sd">    as a value.</span>
+<span class="sd">    </span>
+<span class="sd">    To add new Node Types, you can sub-class WarpNodeFactory and add your own </span>
+<span class="sd">    Node Types.</span>
+<span class="sd">    </span>
+<span class="sd">    Attributes:</span>
+<span class="sd">        type_dict -- Dictionary of Node Types to class names</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">type_dict</span>           <span class="o">=</span> <span class="bp">None</span>
+
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">network_config</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">defaults</span>
+
+        <span class="nb">super</span><span class="p">(</span><span class="n">WarpNodeFactory</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">network_config</span><span class="p">)</span>
+ 
+        <span class="bp">self</span><span class="o">.</span><span class="n">type_dict</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="c"># Add default classes to the factory</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">node_add_class</span><span class="p">(</span><span class="n">defaults</span><span class="o">.</span><span class="n">DEFAULT_NODE_TYPE</span><span class="p">,</span> 
+                            <span class="n">defaults</span><span class="o">.</span><span class="n">DEFAULT_NODE_CLASS</span><span class="p">,</span>
+                            <span class="n">defaults</span><span class="o">.</span><span class="n">DEFAULT_NODE_DESCRIPTION</span><span class="p">)</span>
+        
+    
+    <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node_dict</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_init_configuration</span><span class="p">(</span><span class="n">serial_number</span><span class="o">=</span><span class="n">node_dict</span><span class="p">[</span><span class="s">&#39;serial_number&#39;</span><span class="p">],</span>
+                                    <span class="n">node_id</span><span class="o">=</span><span class="n">node_dict</span><span class="p">[</span><span class="s">&#39;node_id&#39;</span><span class="p">],</span> 
+                                    <span class="n">node_name</span><span class="o">=</span><span class="n">node_dict</span><span class="p">[</span><span class="s">&#39;node_name&#39;</span><span class="p">],</span> 
+                                    <span class="n">ip_address</span><span class="o">=</span><span class="n">node_dict</span><span class="p">[</span><span class="s">&#39;ip_address&#39;</span><span class="p">],</span> 
+                                    <span class="n">unicast_port</span><span class="o">=</span><span class="n">node_dict</span><span class="p">[</span><span class="s">&#39;unicast_port&#39;</span><span class="p">],</span> 
+                                    <span class="n">broadcast_port</span><span class="o">=</span><span class="n">node_dict</span><span class="p">[</span><span class="s">&#39;broadcast_port&#39;</span><span class="p">])</span>
+
+
+    <span class="k">def</span> <span class="nf">create_node</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">network_config</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">network_reset</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Based on the Node Type, dynamically create and return the correct node.&quot;&quot;&quot;</span>
+        
+        <span class="n">node</span> <span class="o">=</span> <span class="bp">None</span>
+
+        <span class="c"># Initialize the node network interface</span>
+        <span class="k">if</span> <span class="n">network_reset</span><span class="p">:</span>
+            <span class="c"># Send broadcast command to reset the node network interface</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">reset_network_inf</span><span class="p">()</span>
+    
+            <span class="c"># Send broadcast command to initialize the node network interface</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">setup_network_inf</span><span class="p">()</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c"># Send unicast command to get the node type</span>
+            <span class="n">node_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_type</span><span class="p">()</span>
+            
+            <span class="c"># Get the node class from the Factory dictionary</span>
+            <span class="n">node_class</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">node_get_class</span><span class="p">(</span><span class="n">node_type</span><span class="p">)</span>
+        
+            <span class="k">if</span> <span class="n">node_class</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">node</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">node_eval_class</span><span class="p">(</span><span class="n">node_class</span><span class="p">,</span> <span class="n">network_config</span><span class="p">)</span>
+                <span class="n">node</span><span class="o">.</span><span class="n">set_init_configuration</span><span class="p">(</span><span class="n">serial_number</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">serial_number</span><span class="p">,</span>
+                                            <span class="n">node_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">node_id</span><span class="p">,</span>
+                                            <span class="n">node_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+                                            <span class="n">ip_address</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">ip_address</span><span class="p">,</span>
+                                            <span class="n">unicast_port</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">unicast_port</span><span class="p">,</span>
+                                            <span class="n">broadcast_port</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">broadcast_port</span><span class="p">)</span>
+
+                <span class="n">msg</span>  <span class="o">=</span> <span class="s">&quot;Initializing {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">sn_str</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                    <span class="n">msg</span> <span class="o">+=</span> <span class="s">&quot; as {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+                <span class="k">print</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">print_node_types</span><span class="p">()</span>
+                <span class="n">msg</span>  <span class="o">=</span> <span class="s">&quot;ERROR:  Node {0}</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sn_str</span><span class="p">)</span>
+                <span class="n">msg</span> <span class="o">+=</span> <span class="s">&quot;    Unknown node type: 0x{0:8x}</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">node_type</span><span class="p">)</span>
+                <span class="k">print</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+        <span class="k">except</span> <span class="n">ex</span><span class="o">.</span><span class="n">TransportError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+            <span class="n">msg</span>  <span class="o">=</span> <span class="s">&quot;ERROR:  Node {0}</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sn_str</span><span class="p">)</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="s">&quot;    Node is not responding.  Please ensure that the </span><span class="se">\n</span><span class="s">&quot;</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="s">&quot;    node is powered on and is properly configured.</span><span class="se">\n</span><span class="s">&quot;</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">node</span>
+        
+
+    <span class="k">def</span> <span class="nf">node_eval_class</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node_class</span><span class="p">,</span> <span class="n">network_config</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Evaluate the node_class string to create a node.  </span>
+<span class="sd">        </span>
+<span class="sd">        This method should be overridden in each sub-class with the same</span>
+<span class="sd">        overall structure but a different import.  Please call the super</span>
+<span class="sd">        class function instead of returning an error so that the calls </span>
+<span class="sd">        will propagate to catch all node types.</span>
+<span class="sd">        </span>
+<span class="sd">        The network_config is used as part of the node_class string to </span>
+<span class="sd">        initialize the node.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c"># IDEs might think that the following imports are not necessary.</span>
+        <span class="c"># However, they are required for the eval() that is performed for </span>
+        <span class="c"># the node class.  This will be similar for all sub-classes of</span>
+        <span class="c"># WarpNodeFactory.</span>
+        <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">defaults</span>
+        <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">node</span>
+        
+        <span class="n">tmp_node</span> <span class="o">=</span> <span class="bp">None</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">tmp_node</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">node_class</span><span class="p">,</span> <span class="nb">globals</span><span class="p">(),</span> <span class="nb">locals</span><span class="p">())</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="c"># Catch all errors that might occur when trying to create the node.</span>
+            <span class="c"># Since this is the parent class of all nodes, raise a ConfigError </span>
+            <span class="c"># if the node cannot be created here. </span>
+            <span class="k">pass</span>
+        
+        <span class="k">if</span> <span class="n">tmp_node</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">print_node_types</span><span class="p">()</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s">&quot;Cannot create node of class: {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">node_class</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="n">ex</span><span class="o">.</span><span class="n">ConfigError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">tmp_node</span>
+
+
+    <span class="k">def</span> <span class="nf">node_add_class</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node_type</span><span class="p">,</span> <span class="n">class_name</span><span class="p">,</span> <span class="n">description</span><span class="p">):</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">node_type</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">type_dict</span><span class="p">):</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">&quot;WARNING: Changing definition of {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">node_type</span><span class="p">))</span>
+            
+        <span class="bp">self</span><span class="o">.</span><span class="n">type_dict</span><span class="p">[</span><span class="n">node_type</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">type_dict</span><span class="p">[</span><span class="n">node_type</span><span class="p">][</span><span class="s">&#39;class&#39;</span><span class="p">]</span>        <span class="o">=</span> <span class="n">class_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">type_dict</span><span class="p">[</span><span class="n">node_type</span><span class="p">][</span><span class="s">&#39;description&#39;</span><span class="p">]</span>  <span class="o">=</span> <span class="n">description</span>
+ 
+
+    <span class="k">def</span> <span class="nf">node_get_class</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node_type</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get the class string of the node from the type.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">node_type</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">type_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">type_dict</span><span class="p">[</span><span class="n">node_type</span><span class="p">][</span><span class="s">&#39;class&#39;</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">None</span>
+
+
+    <span class="k">def</span> <span class="nf">node_get_description</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node_type</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get the description of the node from the type.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">node_type</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">type_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">type_dict</span><span class="p">[</span><span class="n">node_type</span><span class="p">][</span><span class="s">&#39;description&#39;</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">None</span>
+
+
+    <span class="k">def</span> <span class="nf">get_type_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get the type dictonary.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">type_dict</span>
+
+
+    <span class="k">def</span> <span class="nf">print_node_types</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s">&quot;Node Types: </span><span class="se">\n</span><span class="s">&quot;</span>
+        <span class="k">for</span> <span class="n">node_type</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">type_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="s">&quot;    0x{0:08x} = &quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">node_type</span><span class="p">)</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="s">&quot;&#39;{0}&#39;</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">type_dict</span><span class="p">[</span><span class="n">node_type</span><span class="p">])</span> 
+        <span class="k">print</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+
+<span class="c"># End Class</span>
+</pre></div>
+
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Mango Communications, Inc..
+    </p>
+  </div>
+
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'wlan_exp v1.5.2  ',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,2194 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Node Classes &mdash; mango_wlan_exp wlan_exp v1.5.2   documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/rtd_overrides.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="mango_wlan_exp wlan_exp v1.5.2   documentation" href="index.html"/>
+        <link rel="up" title="Framework" href="wlan_exp.html"/>
+        <link rel="next" title="Access Point (AP) Node" href="node_ap.html"/>
+        <link rel="prev" title="Framework" href="wlan_exp.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="index.html" class="fa fa-home"> mango_wlan_exp</a>
+        
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="wlan_exp.html">Framework</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="">Node Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wlan_exp_util.html">WLAN Exp Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ltg.html">LTG Flow Configurations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="device.html">WLAN Device</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="wlan_exp_log.html">Event Log</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="log_overview.html">Event Log Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="log_entry_types.html">Log Entry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="log_util.html">Event Log Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="log_util_hdf.html">HDF5 Utilities</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">mango_wlan_exp</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="wlan_exp.html">Framework</a> &raquo;</li>
+      
+    <li>Node Classes</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="_sources/node.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="node-classes">
+<span id="wlan-exp-node"></span><h1>Node Classes<a class="headerlink" href="#node-classes" title="Permalink to this headline">¶</a></h1>
+<p>The <code class="docutils literal"><span class="pre">WlanExpNode</span></code> class represents one node in a network of nodes running the 802.11 Reference Design. This class
+is the primary interface for interacting with nodes by providing methods to send commands and read status
+of the node. This is the base class for all node types and provides the common functionality for all nodes.</p>
+<div class="section" id="base-node-class">
+<h2>Base Node Class<a class="headerlink" href="#base-node-class" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal"><span class="pre">WlanExpNode</span></code> class implements the interface to an 802.11 Reference Design node. The <code class="docutils literal"><span class="pre">WlanExpNode</span></code> class should
+<strong>not</strong> be instantiated directly. Refer to the <code class="docutils literal"><span class="pre">wlan_exp</span></code> examples (<a class="reference external" href="http://warpproject.org/trac/wiki/802.11/wlan_exp/examples">http://warpproject.org/trac/wiki/802.11/wlan_exp/examples</a>)
+for the recommend node initialization flow which returns a properly initialized <code class="docutils literal"><span class="pre">WlanExpNode</span></code> instance.</p>
+<p>The class attributes listed below should be considered read-only. The relevant attributes are given values during
+the initialization process. These values represent the identity and state of the node running the 802.11 Reference
+Design. Changing an attribute value does not change the corresponding state of the node, a mismatch that will distrupt
+normal operation of <code class="docutils literal"><span class="pre">wlan_exp</span></code> tools.</p>
+<dl class="class">
+<dt id="wlan_exp.node.WlanExpNode">
+<em class="property">class </em><code class="descname">WlanExpNode</code><span class="sig-paren">(</span><em>network_config=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node.html#WlanExpNode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node.WlanExpNode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class for 802.11 Reference Design Experiments Framwork node.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>network_config</strong> (<em>transport.NetworkConfiguration</em>) &#8211;
+Network configuration of the node</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Variables:</th><td class="field-body"><ul class="first last simple">
+<li><strong>node_type</strong> (<em>int</em>) &#8211; Unique type of the node</li>
+<li><strong>node_id</strong> (<em>int</em>) &#8211; Unique identification for this node</li>
+<li><strong>name</strong> (<em>str</em>) &#8211; User specified name for this node (supplied by user scripts)</li>
+<li><strong>description</strong> (<em>str</em>) &#8211; String description of this node (auto-generated)</li>
+<li><strong>serial_number</strong> (<em>int</em>) &#8211; Node&#8217;s serial number, read from EEPROM on hardware</li>
+<li><strong>fpga_dna</strong> (<em>int</em>) &#8211; Node&#8217;s FPGA&#8217;a unique identification (on select hardware)</li>
+<li><strong>hw_ver</strong> (<em>int</em>) &#8211; WARP hardware version of this node</li>
+<li><strong>transport</strong> (<em>transport.Transport</em>) &#8211; Node&#8217;s transport object</li>
+<li><strong>transport_broadcast</strong> (<em>transport.Transport</em>) &#8211; Node&#8217;s broadcast transport object</li>
+<li><strong>device_type</strong> (<em>int</em>) &#8211; Unique type of the <code class="docutils literal"><span class="pre">WlanDevice</span></code> (inherited from <code class="docutils literal"><span class="pre">WlanDevice</span></code>)</li>
+<li><strong>wlan_mac_address</strong> (<em>int</em>) &#8211; Wireless MAC address of the node (inherited from <code class="docutils literal"><span class="pre">WlanDevice</span></code>)</li>
+<li><strong>ht_capable</strong> (<em>bool</em>) &#8211; Indicates if device has PHY capable of HT (802.11n) rates
+(inherited from <code class="docutils literal"><span class="pre">WlanDevice</span></code>)</li>
+<li><strong>scheduler_resolution</strong> (<em>int</em>) &#8211; Minimum resolution (in us) of the scheduler.  This
+is also the minimum time between LTGs.</li>
+<li><strong>log_max_size</strong> (<em>int</em>) &#8211; Maximum size of event log (in bytes)</li>
+<li><strong>log_total_bytes_read</strong> (<em>int</em>) &#8211; Number of bytes read from the event log</li>
+<li><strong>log_num_wraps</strong> (<em>int</em>) &#8211; Number of times the event log has wrapped</li>
+<li><strong>log_next_read_index</strong> (<em>int</em>) &#8211; Index in to event log of next read</li>
+<li><strong>wlan_exp_ver_major</strong> (<em>int</em>) &#8211; <code class="docutils literal"><span class="pre">wlan_exp</span></code> Major version running on this node</li>
+<li><strong>wlan_exp_ver_minor</strong> (<em>int</em>) &#8211; <code class="docutils literal"><span class="pre">wlan_exp</span></code> Minor version running on this node</li>
+<li><strong>wlan_exp_ver_revision</strong> (<em>int</em>) &#8211; <code class="docutils literal"><span class="pre">wlan_exp</span></code> Revision version running on this node</li>
+<li><strong>max_tx_power_dbm</strong> (<em>int</em>) &#8211; Maximum transmit power of the node (in dBm)</li>
+<li><strong>min_tx_power_dbm</strong> (<em>int</em>) &#8211; Minimum transmit power of the node (in dBm)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="node-sub-classes">
+<h2>Node Sub-Classes<a class="headerlink" href="#node-sub-classes" title="Permalink to this headline">¶</a></h2>
+<p>The AP, STA and IBSS node types are represented by dedicated subclasses of <code class="docutils literal"><span class="pre">WlanExpNode</span></code>. The node objects in <code class="docutils literal"><span class="pre">wlan_exp</span></code>
+scripts will be instances of these subclasses. Each subclass implements methods that are specific to a given node type.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="node_ap.html">Access Point (AP) Node</a></li>
+<li class="toctree-l1"><a class="reference internal" href="node_sta.html">Station (STA) Node</a></li>
+<li class="toctree-l1"><a class="reference internal" href="node_ibss.html">Ad hoc (IBSS) Node</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="common-node-methods">
+<h2>Common Node Methods<a class="headerlink" href="#common-node-methods" title="Permalink to this headline">¶</a></h2>
+<p>The list below documents each node method implemented by the <code class="docutils literal"><span class="pre">WlanExpNode</span></code> class. These methods can be used with any
+<code class="docutils literal"><span class="pre">wlan_exp</span></code> node type (AP, STA, IBSS).</p>
+<div class="section" id="node">
+<h3>Node<a class="headerlink" href="#node" title="Permalink to this headline">¶</a></h3>
+<p>These <code class="docutils literal"><span class="pre">WlanExpNode</span></code> commands are used to interact with the node and control parameters associated with the node operation.</p>
+<dl class="method">
+<dt id="wlan_exp.node.WlanExpNode.reset_all">
+<code class="descclassname">WlanExpNode.</code><code class="descname">reset_all</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node.html#WlanExpNode.reset_all"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node.WlanExpNode.reset_all" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resets all portions of a node.</p>
+<p>This includes:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Log</li>
+<li>Counts</li>
+<li>Local Traffic Generators (LTGs)</li>
+<li>Queues</li>
+<li>BSS (i.e. all network state)</li>
+<li>Observed Networks</li>
+</ul>
+</div></blockquote>
+<p>See the reset() command for a list of all portions of the node that
+will be reset.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.node.WlanExpNode.reset">
+<code class="descclassname">WlanExpNode.</code><code class="descname">reset</code><span class="sig-paren">(</span><em>log=False</em>, <em>txrx_counts=False</em>, <em>ltg=False</em>, <em>queue_data=False</em>, <em>bss=False</em>, <em>network_list=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node.html#WlanExpNode.reset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node.WlanExpNode.reset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resets the state of node depending on the attributes.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last">
+<li><p class="first"><strong>log</strong> (<em>bool</em>) &#8211;
+Reset the log data.  This will reset both the
+log data on the node as well as the local variables used to
+track log reads for <code class="docutils literal"><span class="pre">log_get_all_new()</span></code>.  This will
+not alter any log settings set by <code class="docutils literal"><span class="pre">log_configure()</span></code>.</p>
+</li>
+<li><p class="first"><strong>txrx_counts</strong> (<em>bool</em>) &#8211;
+Reset the TX/RX Counts.  This will zero out
+all of the packet / byte counts as well as the
+<code class="docutils literal"><span class="pre">latest_txrx_timestamp</span></code> for all nodes in the station info
+list.  It will also remove all promiscuous counts.</p>
+</li>
+<li><p class="first"><strong>ltg</strong> (<em>bool</em>) &#8211;
+Remove all LTGs.  This will stop and remove
+any LTGs that are on the node.</p>
+</li>
+<li><p class="first"><strong>queue_data</strong> (<em>bool</em>) &#8211;
+Purge all TX queue data.  This will discard
+all currently enqueued packets awaiting transmission at the
+time the command is received.  This will not discard packets
+already submitted to the lower-level MAC for transmission.
+Also, this will not stop additional packets from sources
+such as LTGs from being enqueued.</p>
+</li>
+<li><p class="first"><strong>bss</strong> (<em>bool</em>) &#8211;
+Reset network state.  This will nullify
+the node&#8217;s active BSS and removes all entries from the
+station info list.  However, it will not remove the BSS from
+the network list.  This will produce the following OTA
+transmissions:</p>
+<blockquote>
+<div><ul class="simple">
+<li>For AP, a deauthentication frame to each associated station</li>
+<li>For STA, a disassociation frame to its AP</li>
+<li>For IBSS, nothing.</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first"><strong>network_list</strong> (<em>bool</em>) &#8211;
+Remove all BSS entries from the network list,
+excluding the BSS entry for the node&#8217;s current network (if any)</p>
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.node.WlanExpNode.get_wlan_mac_address">
+<code class="descclassname">WlanExpNode.</code><code class="descname">get_wlan_mac_address</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node.html#WlanExpNode.get_wlan_mac_address"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node.WlanExpNode.get_wlan_mac_address" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the WLAN MAC Address of the node.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>MAC Address</strong> &#8211;<p>Wireless Medium Access Control (MAC) address of the node.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.node.WlanExpNode.set_mac_time">
+<code class="descclassname">WlanExpNode.</code><code class="descname">set_mac_time</code><span class="sig-paren">(</span><em>time</em>, <em>time_id=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node.html#WlanExpNode.set_mac_time"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node.WlanExpNode.set_mac_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the MAC time on the node.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>time</strong> (<em>int</em>) &#8211;
+Time to which the node&#8217;s MAC time will
+be set (int in microseconds)</li>
+<li><strong>time_id</strong> (<em>int, optional</em>) &#8211;
+Identifier used as part of the TIME_INFO
+log entry created by this command.  If not specified, then a
+random number will be used.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.node.WlanExpNode.get_mac_time">
+<code class="descclassname">WlanExpNode.</code><code class="descname">get_mac_time</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node.html#WlanExpNode.get_mac_time"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node.WlanExpNode.get_mac_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the MAC time from the node.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>time</strong> &#8211;
+Timestamp of the MAC time of the node in int microseconds</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.node.WlanExpNode.get_system_time">
+<code class="descclassname">WlanExpNode.</code><code class="descname">get_system_time</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node.html#WlanExpNode.get_system_time"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node.WlanExpNode.get_system_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the system time from the node.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>Time</strong> &#8211;
+Timestamp of the System time of the node in int microseconds</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.node.WlanExpNode.enable_beacon_mac_time_update">
+<code class="descclassname">WlanExpNode.</code><code class="descname">enable_beacon_mac_time_update</code><span class="sig-paren">(</span><em>enable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node.html#WlanExpNode.enable_beacon_mac_time_update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node.WlanExpNode.enable_beacon_mac_time_update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Enable / Disable MAC time update from beacons</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>enable</strong> (<em>bool</em>) &#8211;
+<code class="docutils literal"><span class="pre">True</span></code> enables and <code class="docutils literal"><span class="pre">False</span></code> disables MAC time
+updates from received beacons</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.node.WlanExpNode.set_radio_channel">
+<code class="descclassname">WlanExpNode.</code><code class="descname">set_radio_channel</code><span class="sig-paren">(</span><em>channel</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node.html#WlanExpNode.set_radio_channel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node.WlanExpNode.set_radio_channel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Re-tune the node&#8217;s RF interfaces to a new center frequency.</p>
+<p>This method directly controls the RF hardware. This can be disruptive
+to MAC operation if the node is currently associated with other nodes
+in a BSS which manages its own channel state.</p>
+<p>This method will immediately change the center frequency of the node&#8217;s
+RF interfaces.  As a result this method can only be safely used on a
+node which is not currently a member of a BSS. To change the center
+frequency of nodes participating in a BSS use the
+<code class="docutils literal"><span class="pre">node.configure_bss(channel=N)</span></code> method on every node in the BSS.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>channel</strong> (<em>int</em>) &#8211;
+Channel index for new center frequency. Must be a
+valid channel index.  See <code class="docutils literal"><span class="pre">wlan_channels</span></code> in util.py for the
+list of supported channel indexes.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.node.WlanExpNode.set_low_to_high_rx_filter">
+<code class="descclassname">WlanExpNode.</code><code class="descname">set_low_to_high_rx_filter</code><span class="sig-paren">(</span><em>mac_header=None</em>, <em>fcs=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node.html#WlanExpNode.set_low_to_high_rx_filter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node.WlanExpNode.set_low_to_high_rx_filter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Configures the filter that controls which received packets are
+passed from CPU Low to CPU High.</p>
+<p>The filter will always pass received packets where the destination
+address matches the node&#8217;s MAC address. The filter can be configured
+to drop or pass other packets. This filter effectively controls which
+packets are written to the node&#8217;s log.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>mac_header</strong> (<em>str, optional</em>) &#8211;
+MAC header filter.  Values can be:<ul>
+<li><code class="docutils literal"><span class="pre">'MPDU_TO_ME'</span></code> &#8211; Pass all unicast-to-me or multicast data or management packet</li>
+<li><code class="docutils literal"><span class="pre">'ALL_MPDU'</span></code>   &#8211; Pass all data and management packets; no destination address filter</li>
+<li><code class="docutils literal"><span class="pre">'ALL'</span></code>        &#8211; Pass all packets; no packet type or address filters</li>
+</ul>
+</li>
+<li><strong>fcs</strong> (<em>str, optional</em>) &#8211;
+FCS status filter.  Values can be:<ul>
+<li><code class="docutils literal"><span class="pre">'GOOD'</span></code>       &#8211; Pass only packets with good checksum result</li>
+<li><code class="docutils literal"><span class="pre">'ALL'</span></code>        &#8211; Pass packets with any checksum result</li>
+</ul>
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>At boot the filter defaults to <code class="docutils literal"><span class="pre">mac_header='ALL'</span></code> and <code class="docutils literal"><span class="pre">fcs='ALL'</span></code>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.node.WlanExpNode.set_low_param">
+<code class="descclassname">WlanExpNode.</code><code class="descname">set_low_param</code><span class="sig-paren">(</span><em>param_id</em>, <em>param_values</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node.html#WlanExpNode.set_low_param"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node.WlanExpNode.set_low_param" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set a CPU Low parameter</p>
+<p>This command provides a generic data pipe to set parameters in CPU Low.
+Currently supported parameters are defined in cmds.py and use the
+naming convention:  CMD_PARAM_LOW_PARAM_*   In some cases, additional
+commands have been added to the node that utilize <code class="docutils literal"><span class="pre">set_low_param()</span></code>
+in order to add error checking.</p>
+<p>See <a class="reference external" href="http://warpproject.org/trac/wiki/802.11/wlan_exp/Extending">http://warpproject.org/trac/wiki/802.11/wlan_exp/Extending</a>
+for more information about how to extend <code class="docutils literal"><span class="pre">set_low_param()</span></code> to
+control additional parameters.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>param_id</strong> (<em>int</em>) &#8211;
+ID of parameter to be set</li>
+<li><strong>param_values</strong> (<em>list of int</em>) &#8211;
+Value(s) to set the parameter</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.node.WlanExpNode.set_dcf_param">
+<code class="descclassname">WlanExpNode.</code><code class="descname">set_dcf_param</code><span class="sig-paren">(</span><em>param_name</em>, <em>param_val</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node.html#WlanExpNode.set_dcf_param"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node.WlanExpNode.set_dcf_param" title="Permalink to this definition">¶</a></dt>
+<dd><p>Configures parameters of the DCF MAC in CPU Low.</p>
+<p>These parameters are write-only. These parameters only affect nodes
+running the DCF in CPU Low. Other MAC implementations should ignore
+these parameter updates.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>param_name</strong> (<em>str</em>) &#8211;
+Name of the param to change (see table below)</li>
+<li><strong>param_val</strong> (<em>int</em>) &#8211;
+Value to set for param_name (see table below)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>This method currently implements the following parameters:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="21%" />
+<col width="63%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Valid Values</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">'rts_thresh'</span></code></td>
+<td>[0 .. 65535]</td>
+<td>Threshold in bytes for maximum length
+packet which will not trigger RTS handshake</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">'short_retry_limit'</span></code> and
+<code class="docutils literal"><span class="pre">'long_retry_limit'</span></code></td>
+<td>[0 .. 10]</td>
+<td>DCF retry limits, controls maximum number of retransmissions for short and long packets
+See <a class="reference external" href="http://warpproject.org/trac/wiki/802.11/MAC/Lower/Retransmissions">retransmissions</a>.
+for more details.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">'phy_cs_thresh'</span></code></td>
+<td>[0 .. 1023]</td>
+<td>Physical carrier sensing threshold, in units of digital RSSI. Set to max (1023)
+to effectively disable physical carrier sensing</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">'cw_exp_min'</span></code> and
+<code class="docutils literal"><span class="pre">'cw_exp_max'</span></code></td>
+<td>[1 .. 16]</td>
+<td>Contention window exponent bounds. Contention window is set to random number in [0, (2^CW - 1)],
+where CW is bounded by [cw_exp_min, cw_exp_max]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.node.WlanExpNode.configure_pkt_det_min_power">
+<code class="descclassname">WlanExpNode.</code><code class="descname">configure_pkt_det_min_power</code><span class="sig-paren">(</span><em>enable</em>, <em>power_level=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node.html#WlanExpNode.configure_pkt_det_min_power"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node.WlanExpNode.configure_pkt_det_min_power" title="Permalink to this definition">¶</a></dt>
+<dd><p>Configure Minimum Power Requirement of Packet Detector.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>enable</strong> (<em>bool</em>) &#8211;
+True/False</li>
+<li><strong>power_level</strong> (<em>int</em>) &#8211;
+[-90,-30] dBm</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.node.WlanExpNode.set_phy_samp_rate">
+<code class="descclassname">WlanExpNode.</code><code class="descname">set_phy_samp_rate</code><span class="sig-paren">(</span><em>phy_samp_rate</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node.html#WlanExpNode.set_phy_samp_rate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node.WlanExpNode.set_phy_samp_rate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the PHY sample rate (in MSps)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>phy_samp_rate</strong> (<em>int</em>) &#8211;</p>
+<p class="last">PHY sample rate in MSps (10, 20, 40).  Default is 20 MSps.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.node.WlanExpNode.set_random_seed">
+<code class="descclassname">WlanExpNode.</code><code class="descname">set_random_seed</code><span class="sig-paren">(</span><em>high_seed=None</em>, <em>low_seed=None</em>, <em>gen_random=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node.html#WlanExpNode.set_random_seed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node.WlanExpNode.set_random_seed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the random number generator seed on the node.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>high_seed</strong> (<em>int, optional</em>) &#8211;
+Set the random number generator seed
+on CPU high</li>
+<li><strong>low_seed</strong> (<em>int, optional</em>) &#8211;
+Set the random number generator seed
+on CPU low</li>
+<li><strong>gen_random</strong> (<em>bool, optional</em>) &#8211;
+If high_seed or low_seed is not
+provided, then generate a random seed for the generator.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.node.WlanExpNode.enable_dsss">
+<code class="descclassname">WlanExpNode.</code><code class="descname">enable_dsss</code><span class="sig-paren">(</span><em>enable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node.html#WlanExpNode.enable_dsss"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node.WlanExpNode.enable_dsss" title="Permalink to this definition">¶</a></dt>
+<dd><p>Enable / Disable DSSS receptions on the node</p>
+<p>By default DSSS receptions are enabled on the node when possible
+(ie PHY sample rate is 20 MHz and Channel is in 2.4 GHz band)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>enable</strong> (<em>bool</em>) &#8211;</p>
+<ul class="last simple">
+<li>True - enable DSSS receptions on the node</li>
+<li>False - disable DSSS receptions on the node</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.node.WlanExpNode.set_print_level">
+<code class="descclassname">WlanExpNode.</code><code class="descname">set_print_level</code><span class="sig-paren">(</span><em>level</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node.html#WlanExpNode.set_print_level"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node.WlanExpNode.set_print_level" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the verbosity of the wlan_exp output to the node&#8217;s UART.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>level</strong> (<em>int</em>) &#8211;
+Printing level (defaults to <code class="docutils literal"><span class="pre">WARNING</span></code>)</td>
+</tr>
+</tbody>
+</table>
+<p>Valid print levels can be found in <code class="docutils literal"><span class="pre">wlan_exp.util.uart_print_levels</span></code>:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal"><span class="pre">NONE</span></code>    - Do not print messages</li>
+<li><code class="docutils literal"><span class="pre">ERROR</span></code>   - Only print error messages</li>
+<li><code class="docutils literal"><span class="pre">WARNING</span></code> - Print error and warning messages</li>
+<li><code class="docutils literal"><span class="pre">INFO</span></code>    - Print error, warning and info messages</li>
+<li><code class="docutils literal"><span class="pre">DEBUG</span></code>   - Print error, warning, info and debug messages</li>
+</ul>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.node.WlanExpNode.queue_tx_data_purge_all">
+<code class="descclassname">WlanExpNode.</code><code class="descname">queue_tx_data_purge_all</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node.html#WlanExpNode.queue_tx_data_purge_all"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node.WlanExpNode.queue_tx_data_purge_all" title="Permalink to this definition">¶</a></dt>
+<dd><p>Purges all data transmit queues on the node.</p>
+<p>This will discard all currently enqueued packets awaiting transmission
+at the time the command is received.  This will not discard packets
+already submitted to the lower-level MAC for transmission.  Also, this
+will not stop additional packets from sources such as LTGs from being
+enqueued.</p>
+<p>This command is equivalent to <code class="docutils literal"><span class="pre">reset(queue_data=True)</span></code>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.node.WlanExpNode.send_user_command">
+<code class="descclassname">WlanExpNode.</code><code class="descname">send_user_command</code><span class="sig-paren">(</span><em>cmd_id</em>, <em>args=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node.html#WlanExpNode.send_user_command"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node.WlanExpNode.send_user_command" title="Permalink to this definition">¶</a></dt>
+<dd><p>Send User defined command to the node</p>
+<p>See documentation on how-to extend wlan_exp:
+<a class="reference external" href="http://warpproject.org/trac/wiki/802.11/wlan_exp/Extending">http://warpproject.org/trac/wiki/802.11/wlan_exp/Extending</a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>cmd_id</strong> (<em>u32</em>) &#8211;
+User-defined Command ID</li>
+<li><strong>args</strong> (<em>u32, list of u32</em>) &#8211;
+Scalar or list of u32 command arguments
+to send to the node</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><p><strong>resp_args</strong> &#8211;</p>
+<p>List of u32 response arguments received from the node</p>
+</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list of u32</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.node.WlanExpNode.identify">
+<code class="descclassname">WlanExpNode.</code><code class="descname">identify</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#wlan_exp.node.WlanExpNode.identify" title="Permalink to this definition">¶</a></dt>
+<dd><p>Identify the node</p>
+<p>The node will physically identify itself by:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Blinking the Hex Display (for approx 10 seconds)</li>
+<li>Output Node ID and IP adress to UART output</li>
+</ul>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.node.WlanExpNode.ping">
+<code class="descclassname">WlanExpNode.</code><code class="descname">ping</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#wlan_exp.node.WlanExpNode.ping" title="Permalink to this definition">¶</a></dt>
+<dd><p>&#8216;Ping&#8217; the node</p>
+<p>Send an empty packet to the node via the transport to test connectivity
+between the host and the node.  This is the simplest command that can
+be processed by the node and is similar to the &#8220;ping&#8221; command used
+check network connectivity.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="tx-power-and-rate">
+<h3>Tx Power and Rate<a class="headerlink" href="#tx-power-and-rate" title="Permalink to this headline">¶</a></h3>
+<p>These commands configure the transmit power and rate selections at the node. Powers and rates are
+configured individually for various packet types. For unicast packets, Tx powers and rates can be
+configured for specific destination addresses as well.</p>
+<dl class="method">
+<dt id="wlan_exp.node.WlanExpNode.get_tx_power">
+<code class="descclassname">WlanExpNode.</code><code class="descname">get_tx_power</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node.html#WlanExpNode.get_tx_power"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node.WlanExpNode.get_tx_power" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the current default unicast data transmit power of the node
+for new station infos.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>tx_power</strong> &#8211;
+Current unicast data transmit power in dBm.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.node.WlanExpNode.set_tx_power">
+<code class="descclassname">WlanExpNode.</code><code class="descname">set_tx_power</code><span class="sig-paren">(</span><em>power</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node.html#WlanExpNode.set_tx_power"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node.WlanExpNode.set_tx_power" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the transmit power of the node.</p>
+<p>This command will set all transmit power fields on the node to the same
+value:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Default Unicast Management Packet Tx Power for new station infos</li>
+<li>Default Unicast Data Packet Tx Power for new station infos</li>
+<li>Default Multicast Management Packet Tx Power for new station infos</li>
+<li>Default Multicast Data Packet Tx Power for new station infos</li>
+<li>Control Packet Tx Power</li>
+</ul>
+</div></blockquote>
+<p>It will also update the transmit power of all current station infos
+that are part of the BSS on the node.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>power</strong> (<em>int</em>) &#8211;
+Transmit power in dBm (a value between
+<code class="docutils literal"><span class="pre">node.max_tx_power_dbm</span></code> and <code class="docutils literal"><span class="pre">node.min_tx_power_dbm</span></code>)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.node.WlanExpNode.set_tx_power_ctrl">
+<code class="descclassname">WlanExpNode.</code><code class="descname">set_tx_power_ctrl</code><span class="sig-paren">(</span><em>power</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node.html#WlanExpNode.set_tx_power_ctrl"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node.WlanExpNode.set_tx_power_ctrl" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the control packet transmit power of the node.</p>
+<p>Only the Tx power of the control packets can be set via wlan_exp.  The
+rate of control packets is determined by the 802.11 standard and
+control packets will be sent on whatever antenna that cause the control
+packet to be generated (ie an ack for a reception will go out on the
+same antenna on which the reception occurred).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>power</strong> (<em>int</em>) &#8211;
+Transmit power in dBm (a value between
+<code class="docutils literal"><span class="pre">node.max_tx_power_dbm</span></code> and <code class="docutils literal"><span class="pre">node.min_tx_power_dbm</span></code>)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.node.WlanExpNode.set_tx_rate_unicast">
+<code class="descclassname">WlanExpNode.</code><code class="descname">set_tx_rate_unicast</code><span class="sig-paren">(</span><em>mcs</em>, <em>phy_mode</em>, <em>device_list=None</em>, <em>curr_assoc=False</em>, <em>new_assoc=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node.html#WlanExpNode.set_tx_rate_unicast"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node.WlanExpNode.set_tx_rate_unicast" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the unicast packet transmit rate (mcs, phy_mode) of the node.</p>
+<p>When using <code class="docutils literal"><span class="pre">device_list</span></code> or <code class="docutils literal"><span class="pre">curr_assoc</span></code>, this method will set the
+unicast data packet tx rate since only unicast data transmit parameters
+are maintained for a given station info.  However, when using
+<code class="docutils literal"><span class="pre">new_assoc</span></code>, this method will set both the default unicast data and
+unicast management packet tx rate.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>mcs</strong> (<em>int</em>) &#8211;
+Modulation and coding scheme (MCS) index (in [0 .. 7])</li>
+<li><strong>phy_mode</strong> (<em>str, int</em>) &#8211;
+PHY mode.  Must be one of:<ul>
+<li><code class="docutils literal"><span class="pre">'NONHT'</span></code>: Use 802.11 (a/g) rates</li>
+<li><code class="docutils literal"><span class="pre">'HTMF'</span></code>: Use 802.11 (n) rates</li>
+</ul>
+</li>
+<li><strong>device_list</strong> (<em>list of WlanExpNode / WlanDevice, optional</em>) &#8211;
+List of
+802.11 devices or single 802.11 device for which to set the
+unicast packet Tx rate to the rate (mcs, phy_mdoe)</li>
+<li><strong>curr_assoc</strong> (<em>bool</em>) &#8211;
+All current station infos will have the unicast
+packet Tx rate set to the rate (mcs, phy_mode)</li>
+<li><strong>new_assoc</strong> (<em>bool</em>) &#8211;
+All new station infos will have the unicast
+packet Tx rate set to the rate (mcs, phy_mode)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>One of <code class="docutils literal"><span class="pre">device_list</span></code>, <code class="docutils literal"><span class="pre">curr_assoc</span></code> or <code class="docutils literal"><span class="pre">new_assoc</span></code> must be set.
+The <code class="docutils literal"><span class="pre">device_list</span></code> and <code class="docutils literal"><span class="pre">curr_assoc</span></code> are mutually exclusive with
+<code class="docutils literal"><span class="pre">curr_assoc</span></code> having precedence (ie if <code class="docutils literal"><span class="pre">curr_assoc</span></code> is True, then
+<code class="docutils literal"><span class="pre">device_list</span></code> will be ignored).</p>
+<p>The MAC code does not differentiate between unicast management tx
+parameters and unicast data tx parameters since unicast management
+packets only occur when they will not materially affect an experiment
+(ie they are only sent during deauthentication)</p>
+<p>This will not affect the transmit antenna mode for control frames like
+ACKs that will be transmitted. The rate of control packets is
+determined by the 802.11 standard.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.node.WlanExpNode.get_tx_rate_unicast">
+<code class="descclassname">WlanExpNode.</code><code class="descname">get_tx_rate_unicast</code><span class="sig-paren">(</span><em>device_list=None</em>, <em>new_assoc=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node.html#WlanExpNode.get_tx_rate_unicast"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node.WlanExpNode.get_tx_rate_unicast" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the unicast packet transmit rate of the node for the given
+device(s).</p>
+<p>This will get the unicast data packet tx rate (unicast managment
+packet tx rate is the same).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>device_list</strong> (<em>list of WlanExpNode / WlanDevice, optional</em>) &#8211;
+List of
+802.11 devices or single 802.11 device for which to get the
+unicast packet Tx rate</li>
+<li><strong>new_assoc</strong> (<em>bool</em>) &#8211;
+Get the unicast packet Tx rate for all new
+station infos</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><p><strong>rates</strong> &#8211;</p>
+<p>List of unicast packet Tx rate tuples, (mcs, phy_mode), for
+the given devices.</p>
+</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">List of tuple</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>If both <code class="docutils literal"><span class="pre">new_assoc</span></code> and <code class="docutils literal"><span class="pre">device_list</span></code> are specified, the return
+list will always have the unicast packet Tx rate for all new
+station infos as the first item in the list.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.node.WlanExpNode.set_tx_rate_multicast_data">
+<code class="descclassname">WlanExpNode.</code><code class="descname">set_tx_rate_multicast_data</code><span class="sig-paren">(</span><em>mcs</em>, <em>phy_mode</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node.html#WlanExpNode.set_tx_rate_multicast_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node.WlanExpNode.set_tx_rate_multicast_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the multicast data packet transmit rate for a node.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>mcs</strong> (<em>int</em>) &#8211;
+Modulation and coding scheme (MCS) index (in [0 .. 7])</li>
+<li><strong>phy_mode</strong> (<em>str, int</em>) &#8211;
+PHY mode.  Must be one of:<ul>
+<li><code class="docutils literal"><span class="pre">'NONHT'</span></code>: Use 802.11 (a/g) rates</li>
+<li><code class="docutils literal"><span class="pre">'HTMF'</span></code>: Use 802.11 (n) rates</li>
+</ul>
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.node.WlanExpNode.get_tx_rate_multicast_data">
+<code class="descclassname">WlanExpNode.</code><code class="descname">get_tx_rate_multicast_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node.html#WlanExpNode.get_tx_rate_multicast_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node.WlanExpNode.get_tx_rate_multicast_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the current multicast data packet transmit rate for a node.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>rate</strong> &#8211;<p>Multicast data packet transmit rate tuple, (mcs, phy_mode),
+for the node</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">tuple</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.node.WlanExpNode.set_tx_rate_multicast_mgmt">
+<code class="descclassname">WlanExpNode.</code><code class="descname">set_tx_rate_multicast_mgmt</code><span class="sig-paren">(</span><em>mcs</em>, <em>phy_mode</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node.html#WlanExpNode.set_tx_rate_multicast_mgmt"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node.WlanExpNode.set_tx_rate_multicast_mgmt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the multicast management packet transmit rate for a node.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>mcs</strong> (<em>int</em>) &#8211;
+Modulation and coding scheme (MCS) index (in [0 .. 7])</li>
+<li><strong>phy_mode</strong> (<em>str, int</em>) &#8211;
+PHY mode.  Must be one of:<ul>
+<li><code class="docutils literal"><span class="pre">'NONHT'</span></code>: Use 802.11 (a/g) rates</li>
+<li><code class="docutils literal"><span class="pre">'HTMF'</span></code>: Use 802.11 (n) rates</li>
+</ul>
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.node.WlanExpNode.get_tx_rate_multicast_mgmt">
+<code class="descclassname">WlanExpNode.</code><code class="descname">get_tx_rate_multicast_mgmt</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node.html#WlanExpNode.get_tx_rate_multicast_mgmt"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node.WlanExpNode.get_tx_rate_multicast_mgmt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the current multicast transmit rate for a node.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>rate</strong> &#8211;<p>Multicast management packet transmit rate tuple, (mcs,
+phy_mode), for the node</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">tuple</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.node.WlanExpNode.set_tx_power_unicast">
+<code class="descclassname">WlanExpNode.</code><code class="descname">set_tx_power_unicast</code><span class="sig-paren">(</span><em>power</em>, <em>device_list=None</em>, <em>curr_assoc=False</em>, <em>new_assoc=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node.html#WlanExpNode.set_tx_power_unicast"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node.WlanExpNode.set_tx_power_unicast" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the unicast packet transmit power of the node.</p>
+<p>When using <code class="docutils literal"><span class="pre">device_list</span></code> or <code class="docutils literal"><span class="pre">curr_assoc</span></code>, this method will set the
+unicast data packet tx power since only unicast data transmit
+parameters are maintained for a given station info.  However, when
+using <code class="docutils literal"><span class="pre">new_assoc</span></code>, this method will set both the default unicast
+data and unicast management packet tx power.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>power</strong> (<em>int</em>) &#8211;
+Transmit power in dBm (a value between
+<code class="docutils literal"><span class="pre">node.max_tx_power_dbm</span></code> and <code class="docutils literal"><span class="pre">node.min_tx_power_dbm</span></code>)</li>
+<li><strong>device_list</strong> (<em>list of WlanExpNode / WlanDevice, optional</em>) &#8211;
+List of
+802.11 devices or single 802.11 device for which to set the
+unicast packet Tx power to &#8216;power&#8217;</li>
+<li><strong>curr_assoc</strong> (<em>bool</em>) &#8211;
+All current station infos will have the unicast
+packet Tx power set to &#8216;power&#8217;</li>
+<li><strong>new_assoc</strong> (<em>bool</em>) &#8211;
+All new station infos will have the unicast
+packet Tx power set to &#8216;power&#8217;</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>One of <code class="docutils literal"><span class="pre">device_list</span></code>, <code class="docutils literal"><span class="pre">curr_assoc</span></code> or <code class="docutils literal"><span class="pre">new_assoc</span></code> must be set.
+The <code class="docutils literal"><span class="pre">device_list</span></code> and <code class="docutils literal"><span class="pre">curr_assoc</span></code> are mutually exclusive with
+<code class="docutils literal"><span class="pre">curr_assoc</span></code> having precedence (ie if <code class="docutils literal"><span class="pre">curr_assoc</span></code> is True, then
+<code class="docutils literal"><span class="pre">device_list</span></code> will be ignored).</p>
+<p>The MAC code does not differentiate between unicast management tx
+parameters and unicast data tx parameters since unicast management
+packets only occur when they will not materially affect an experiment
+(ie they are only sent during deauthentication)</p>
+<p>This will not affect the transmit power for control frames like ACKs
+that will be transmitted. To adjust this power, use the
+<code class="docutils literal"><span class="pre">set_tx_power_ctrl</span></code> command</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.node.WlanExpNode.get_tx_power_unicast">
+<code class="descclassname">WlanExpNode.</code><code class="descname">get_tx_power_unicast</code><span class="sig-paren">(</span><em>device_list=None</em>, <em>new_assoc=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node.html#WlanExpNode.get_tx_power_unicast"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node.WlanExpNode.get_tx_power_unicast" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the unicast packet transmit power of the node for the given
+device(s).</p>
+<p>This will get the unicast data packet Tx power (unicast managment
+packet Tx power is the same).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>device_list</strong> (<em>list of WlanExpNode / WlanDevice, optional</em>) &#8211;
+List of
+802.11 devices or single 802.11 device for which to get the
+unicast packet Tx power</li>
+<li><strong>new_assoc</strong> (<em>bool</em>) &#8211;
+Get the unicast packet Tx power for all new
+station infos</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><p><strong>tx_powers</strong> &#8211;</p>
+<p>List of unicast packet Tx power for the given devices.</p>
+</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">List of int</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>If both <code class="docutils literal"><span class="pre">new_assoc</span></code> and <code class="docutils literal"><span class="pre">device_list</span></code> are specified, the return
+list will always have the unicast packet Tx power for all new
+station infos as the first item in the list.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.node.WlanExpNode.set_tx_power_multicast_data">
+<code class="descclassname">WlanExpNode.</code><code class="descname">set_tx_power_multicast_data</code><span class="sig-paren">(</span><em>power</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node.html#WlanExpNode.set_tx_power_multicast_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node.WlanExpNode.set_tx_power_multicast_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the multicast data packet transmit power.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>power</strong> (<em>int</em>) &#8211;
+Transmit power in dBm (a value between
+<code class="docutils literal"><span class="pre">node.max_tx_power_dbm</span></code> and <code class="docutils literal"><span class="pre">node.min_tx_power_dbm</span></code>)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.node.WlanExpNode.get_tx_power_multicast_data">
+<code class="descclassname">WlanExpNode.</code><code class="descname">get_tx_power_multicast_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node.html#WlanExpNode.get_tx_power_multicast_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node.WlanExpNode.get_tx_power_multicast_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the current multicast data packet transmit power for a node.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>tx_power</strong> &#8211;<p>Multicast data packet transmit power for the node in dBm</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.node.WlanExpNode.set_tx_power_multicast_mgmt">
+<code class="descclassname">WlanExpNode.</code><code class="descname">set_tx_power_multicast_mgmt</code><span class="sig-paren">(</span><em>power</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node.html#WlanExpNode.set_tx_power_multicast_mgmt"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node.WlanExpNode.set_tx_power_multicast_mgmt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the multicast management packet transmit power.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>power</strong> (<em>int</em>) &#8211;
+Transmit power in dBm (a value between
+<code class="docutils literal"><span class="pre">node.max_tx_power_dbm</span></code> and <code class="docutils literal"><span class="pre">node.min_tx_power_dbm</span></code>)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.node.WlanExpNode.get_tx_power_multicast_mgmt">
+<code class="descclassname">WlanExpNode.</code><code class="descname">get_tx_power_multicast_mgmt</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node.html#WlanExpNode.get_tx_power_multicast_mgmt"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node.WlanExpNode.get_tx_power_multicast_mgmt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the current multicast management packet transmit power for a node.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>tx_power</strong> &#8211;<p>Multicast management packet transmit power for the node in dBm</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="antenna-modes">
+<h3>Antenna Modes<a class="headerlink" href="#antenna-modes" title="Permalink to this headline">¶</a></h3>
+<p>The WARP v3 hardware integrates two RF interfaces. These commands control which RF interface
+is used for Tx and Rx of individual packet types.</p>
+<dl class="method">
+<dt id="wlan_exp.node.WlanExpNode.set_rx_ant_mode">
+<code class="descclassname">WlanExpNode.</code><code class="descname">set_rx_ant_mode</code><span class="sig-paren">(</span><em>ant_mode</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node.html#WlanExpNode.set_rx_ant_mode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node.WlanExpNode.set_rx_ant_mode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the receive antenna mode for a node.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>ant_mode</strong> (<em>str</em>) &#8211;
+Antenna mode; must be one of:</p>
+<ul class="last simple">
+<li><code class="docutils literal"><span class="pre">'RF_A'</span></code>: receive on RF A interface</li>
+<li><code class="docutils literal"><span class="pre">'RF_B'</span></code>: receive on RF B interface</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.node.WlanExpNode.get_rx_ant_mode">
+<code class="descclassname">WlanExpNode.</code><code class="descname">get_rx_ant_mode</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node.html#WlanExpNode.get_rx_ant_mode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node.WlanExpNode.get_rx_ant_mode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the current receive antenna mode for a node.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>ant_mode</strong> &#8211;<p>Rx Antenna mode; must be one of:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal"><span class="pre">'RF_A'</span></code>: receive on RF A interface</li>
+<li><code class="docutils literal"><span class="pre">'RF_B'</span></code>: receive on RF B interface</li>
+</ul>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.node.WlanExpNode.set_tx_ant_mode_unicast">
+<code class="descclassname">WlanExpNode.</code><code class="descname">set_tx_ant_mode_unicast</code><span class="sig-paren">(</span><em>ant_mode</em>, <em>device_list=None</em>, <em>curr_assoc=False</em>, <em>new_assoc=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node.html#WlanExpNode.set_tx_ant_mode_unicast"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node.WlanExpNode.set_tx_ant_mode_unicast" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the unicast packet transmit antenna mode of the node.</p>
+<p>When using <code class="docutils literal"><span class="pre">device_list</span></code> or <code class="docutils literal"><span class="pre">curr_assoc</span></code>, this method will set the
+unicast data packet tx antenna mode since only unicast data transmit
+parameters are maintained for a given staion info.  However, when
+using <code class="docutils literal"><span class="pre">new_assoc</span></code>, this method will set both the default unicast data
+and unicast management packet tx antenna mode.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>ant_mode</strong> (<em>str</em>) &#8211;
+Antenna mode; must be one of:<ul>
+<li><code class="docutils literal"><span class="pre">'RF_A'</span></code>: transmit on RF A interface</li>
+<li><code class="docutils literal"><span class="pre">'RF_B'</span></code>: transmit on RF B interface</li>
+</ul>
+</li>
+<li><strong>device_list</strong> (<em>list of WlanExpNode / WlanDevice, optional</em>) &#8211;
+List of
+802.11 devices or single 802.11 device for which to set the
+unicast packet Tx antenna mode to &#8216;ant_mode&#8217;</li>
+<li><strong>curr_assoc</strong> (<em>bool</em>) &#8211;
+All current statoin infos will have the unicast
+packet Tx antenna mode set to &#8216;ant_mode&#8217;</li>
+<li><strong>new_assoc</strong> (<em>bool</em>) &#8211;
+All new station infos will have the unicast
+packet Tx antenna mode set to &#8216;ant_mode&#8217;</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>One of <code class="docutils literal"><span class="pre">device_list</span></code>, <code class="docutils literal"><span class="pre">curr_assoc</span></code> or <code class="docutils literal"><span class="pre">new_assoc</span></code> must be set.
+The <code class="docutils literal"><span class="pre">device_list</span></code> and <code class="docutils literal"><span class="pre">curr_assoc</span></code> are mutually exclusive with
+<code class="docutils literal"><span class="pre">curr_assoc</span></code> having precedence. If <code class="docutils literal"><span class="pre">curr_assoc</span></code> is provided
+<code class="docutils literal"><span class="pre">device_list</span></code> will be ignored.</p>
+<p>The MAC code does not differentiate between unicast management tx
+parameters and unicast data tx parameters since unicast management
+packets only occur when they will not materially affect an experiment
+(ie they are only sent during deauthentication)</p>
+<p>This will not affect the transmit antenna mode for control frames like
+ACKs that will be transmitted. Control packets will be sent on whatever
+antenna that cause the control packet to be generated (ie an ack for a
+reception will go out on the same antenna on which the reception
+occurred).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.node.WlanExpNode.get_tx_ant_mode_unicast">
+<code class="descclassname">WlanExpNode.</code><code class="descname">get_tx_ant_mode_unicast</code><span class="sig-paren">(</span><em>device_list=None</em>, <em>new_assoc=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node.html#WlanExpNode.get_tx_ant_mode_unicast"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node.WlanExpNode.get_tx_ant_mode_unicast" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the unicast packet transmit antenna mode of the node for the
+given device(s).</p>
+<p>This will get the unicast data packet Tx antenna mode (unicast
+managment packet Tx antenna mode is the same).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>device_list</strong> (<em>list of WlanExpNode / WlanDevice, optional</em>) &#8211;
+List of
+802.11 devices or single 802.11 device for which to get the
+unicast packet Tx antenna mode</li>
+<li><strong>new_assoc</strong> (<em>bool</em>) &#8211;
+Get the unicast packet Tx antenna mode for all
+new station infos</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><p><strong>ant_modes</strong> &#8211;</p>
+<p>List of unicast packet Tx antenna mode for the given devices;
+each antenna mode must be one of:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal"><span class="pre">'RF_A'</span></code>: transmit on RF A interface</li>
+<li><code class="docutils literal"><span class="pre">'RF_B'</span></code>: transmit on RF B interface</li>
+</ul>
+</div></blockquote>
+</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">List of str</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>If both <code class="docutils literal"><span class="pre">new_assoc</span></code> and <code class="docutils literal"><span class="pre">device_list</span></code> are specified, the return
+list will always have the unicast packet Tx antenna mode for all new
+station infos as the first item in the list.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.node.WlanExpNode.set_tx_ant_mode_multicast_data">
+<code class="descclassname">WlanExpNode.</code><code class="descname">set_tx_ant_mode_multicast_data</code><span class="sig-paren">(</span><em>ant_mode</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node.html#WlanExpNode.set_tx_ant_mode_multicast_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node.WlanExpNode.set_tx_ant_mode_multicast_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the multicast data packet transmit antenna mode.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>ant_mode</strong> (<em>str</em>) &#8211;
+Antenna mode; must be one of:</p>
+<ul class="last simple">
+<li><code class="docutils literal"><span class="pre">'RF_A'</span></code>: transmit on RF A interface</li>
+<li><code class="docutils literal"><span class="pre">'RF_B'</span></code>: transmit on RF B interface</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.node.WlanExpNode.get_tx_ant_mode_multicast_data">
+<code class="descclassname">WlanExpNode.</code><code class="descname">get_tx_ant_mode_multicast_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node.html#WlanExpNode.get_tx_ant_mode_multicast_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node.WlanExpNode.get_tx_ant_mode_multicast_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the current multicast data packet transmit antenna mode for
+a node.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>ant_mode</strong> &#8211;<p>Multicast data packet transmit antenna mode for the node;
+must be one of:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal"><span class="pre">'RF_A'</span></code>: transmit on RF A interface</li>
+<li><code class="docutils literal"><span class="pre">'RF_B'</span></code>: transmit on RF B interface</li>
+</ul>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.node.WlanExpNode.set_tx_ant_mode_multicast_mgmt">
+<code class="descclassname">WlanExpNode.</code><code class="descname">set_tx_ant_mode_multicast_mgmt</code><span class="sig-paren">(</span><em>ant_mode</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node.html#WlanExpNode.set_tx_ant_mode_multicast_mgmt"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node.WlanExpNode.set_tx_ant_mode_multicast_mgmt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the multicast management packet transmit antenna mode.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>ant_mode</strong> (<em>str</em>) &#8211;
+Antenna mode; must be one of:</p>
+<ul class="last simple">
+<li><code class="docutils literal"><span class="pre">'RF_A'</span></code>: transmit on RF A interface</li>
+<li><code class="docutils literal"><span class="pre">'RF_B'</span></code>: transmit on RF B interface</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.node.WlanExpNode.get_tx_ant_mode_multicast_mgmt">
+<code class="descclassname">WlanExpNode.</code><code class="descname">get_tx_ant_mode_multicast_mgmt</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node.html#WlanExpNode.get_tx_ant_mode_multicast_mgmt"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node.WlanExpNode.get_tx_ant_mode_multicast_mgmt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the current multicast management packet transmit antenna mode for a node.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>ant_mode</strong> &#8211;<p>Multicast management packet transmit antenna mode for the node;
+must be one of:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal"><span class="pre">'RF_A'</span></code>: transmit on RF A interface</li>
+<li><code class="docutils literal"><span class="pre">'RF_B'</span></code>: transmit on RF B interface</li>
+</ul>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="association-state">
+<h3>Association State<a class="headerlink" href="#association-state" title="Permalink to this headline">¶</a></h3>
+<p>These <code class="docutils literal"><span class="pre">WlanExpNode</span></code> commands are used to modify / query the association state of the node.</p>
+<dl class="method">
+<dt id="wlan_exp.node.WlanExpNode.configure_bss">
+<code class="descclassname">WlanExpNode.</code><code class="descname">configure_bss</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node.html#WlanExpNode.configure_bss"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node.WlanExpNode.configure_bss" title="Permalink to this definition">¶</a></dt>
+<dd><p>Configure the Basic Service Set (BSS) information of the node</p>
+<p>Each node is either a member of no BSS (colloquially &#8220;unassociated&#8221;)
+or a member of one BSS.  A node requires a minimum valid bss_info to
+be a member of a BSS.  Based on the node type, there is a minimum
+set of fields needed for a valid bss_info.</p>
+<p>This method must be overloaded by sub-classes.</p>
+<p>See <a class="reference external" href="http://warpproject.org/trac/wiki/802.11/wlan_exp/bss">http://warpproject.org/trac/wiki/802.11/wlan_exp/bss</a> for more
+information about BSSes.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.node.WlanExpNode.get_station_info">
+<code class="descclassname">WlanExpNode.</code><code class="descname">get_station_info</code><span class="sig-paren">(</span><em>device_list=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node.html#WlanExpNode.get_station_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node.WlanExpNode.get_station_info" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.node.WlanExpNode.get_bss_info">
+<code class="descclassname">WlanExpNode.</code><code class="descname">get_bss_info</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node.html#WlanExpNode.get_bss_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node.WlanExpNode.get_bss_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the node&#8217;s BSS info</p>
+<p>The BSSInfo() returned by this method can be accessed like a
+dictionary and has the following fields:</p>
+<blockquote>
+<div><table border="1" class="docutils">
+<colgroup>
+<col width="22%" />
+<col width="78%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Field</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>bssid</td>
+<td>BSS ID: 48-bit MAC address</td>
+</tr>
+<tr class="row-odd"><td>ssid</td>
+<td>SSID (32 chars max)</td>
+</tr>
+<tr class="row-even"><td>channel</td>
+<td>Primary channel.  In util.wlan_channels = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 36, 40, 44, 48]</td>
+</tr>
+<tr class="row-odd"><td>channel_type</td>
+<td><p class="first">Channel Type.  Value is one of:</p>
+<blockquote class="last">
+<div><ul class="simple">
+<li>0x00 - &#8216;BW20&#8217;</li>
+<li>0x01 - &#8216;BW40_SEC_BELOW&#8217;</li>
+<li>0x02 - &#8216;BW40_SEC_ABOVE&#8217;</li>
+</ul>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td>latest_beacon_rx_time</td>
+<td>Value of System Time in microseconds of last beacon Rx</td>
+</tr>
+<tr class="row-odd"><td>latest_beacon_rx_power</td>
+<td>Last observed beacon Rx Power (dBm)</td>
+</tr>
+<tr class="row-even"><td>capabilities</td>
+<td><p class="first">Supported capabilities of the BSS.  Value contains 1 bit fields:</p>
+<blockquote class="last">
+<div><ul class="simple">
+<li>0x0001 - &#8216;ESS&#8217;</li>
+<li>0x0002 - &#8216;IBSS&#8217;</li>
+<li>0x0004 - &#8216;HT_CAPABLE&#8217;</li>
+<li>0x0010 - &#8216;PRIVACY&#8217;</li>
+</ul>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td>beacon_interval</td>
+<td>Beacon interval - In time units of 1024 us&#8217;</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>bss_info</strong> &#8211;<p>BSS Info of node (can be None if unassociated)</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">BSSInfo</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.node.WlanExpNode.get_network_list">
+<code class="descclassname">WlanExpNode.</code><code class="descname">get_network_list</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node.html#WlanExpNode.get_network_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node.WlanExpNode.get_network_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a list of known networks (BSSInfo()s) on the node</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>networks</strong> &#8211;<p>List of BSSInfo() that are known to the node</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list of BSSInfo</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="tx-rx-packet-counts">
+<h3>Tx/Rx Packet Counts<a class="headerlink" href="#tx-rx-packet-counts" title="Permalink to this headline">¶</a></h3>
+<p>These <code class="docutils literal"><span class="pre">WlanExpNode</span></code> commands are used to to interact with the counts framework.
+Counts are kept for for each node in the station info list.  If promiscuous
+counts are enabled, then the node will keep counts for every MAC address
+overheard (whether the node is in the station info list or not).  In order to
+keep the maximum number of counts recorded on the node to a reasonable amount,
+there is a maximum number of counts implemented in the C code.  When that
+maximum is reached, then the oldest counts structure of an unassociated node
+will be overwritten.</p>
+<dl class="method">
+<dt id="wlan_exp.node.WlanExpNode.get_txrx_counts">
+<code class="descclassname">WlanExpNode.</code><code class="descname">get_txrx_counts</code><span class="sig-paren">(</span><em>device_list=None</em>, <em>return_zeroed_counts_if_none=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node.html#WlanExpNode.get_txrx_counts"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node.WlanExpNode.get_txrx_counts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the Tx/Rx counts data structurs from the node.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first">
+<li><p class="first"><strong>device_list</strong> (<em>list of WlanExpNode, WlanExpNode, WlanDevice, optional</em>) &#8211;</p>
+<p>List of devices for which to get counts.  See note below for
+more information.</p>
+</li>
+<li><p class="first"><strong>return_zeroed_counts_if_none</strong> (<em>bool, optional</em>) &#8211;
+If no counts exist
+on the node for the specified device(s), return a zeroed counts
+dictionary with proper timestamps instead of None.</p>
+</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><p><strong>counts_dictionary</strong> &#8211;</p>
+<p>TxRxCounts() for the device(s) specified.</p>
+</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list of TxRxCounts, TxRxCounts</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>The TxRxCounts() structure returned by this method can be accessed like
+a dictionary and has the following fields:</p>
+<blockquote>
+<div><table border="1" class="docutils">
+<colgroup>
+<col width="22%" />
+<col width="78%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Field</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>retrieval_timestamp</td>
+<td>Value of System Time in microseconds when structure retrieved from the node</td>
+</tr>
+<tr class="row-odd"><td>mac_addr</td>
+<td>MAC address of remote node whose statics are recorded here</td>
+</tr>
+<tr class="row-even"><td>data_num_rx_bytes</td>
+<td>Total number of bytes received in DATA packets from remote node (only non-duplicates)</td>
+</tr>
+<tr class="row-odd"><td>data_num_rx_bytes_total</td>
+<td>Total number of bytes received in DATA packets from remote node (including duplicates)</td>
+</tr>
+<tr class="row-even"><td>data_num_tx_bytes_success</td>
+<td>Total number of bytes successfully transmitted in DATA packets to remote node</td>
+</tr>
+<tr class="row-odd"><td>data_num_tx_bytes_total</td>
+<td>Total number of bytes transmitted (successfully or not) in DATA packets to remote node</td>
+</tr>
+<tr class="row-even"><td>data_num_rx_packets</td>
+<td>Total number of DATA packets received from remote node</td>
+</tr>
+<tr class="row-odd"><td>data_num_tx_packets_success</td>
+<td>Total number of DATA packets successfully transmitted to remote node</td>
+</tr>
+<tr class="row-even"><td>data_num_tx_packets_total</td>
+<td>Total number of DATA packets transmitted (successfully or not) to remote node</td>
+</tr>
+<tr class="row-odd"><td>data_num_tx_attempts</td>
+<td>Total number of low-level attempts of DATA packets to remote node (includes re-transmissions)</td>
+</tr>
+<tr class="row-even"><td>mgmt_num_rx_bytes</td>
+<td>Total number of bytes received in management packets from remote node (only non-duplicates)</td>
+</tr>
+<tr class="row-odd"><td>mgmt_num_rx_bytes_total</td>
+<td>Total number of bytes received in management packets from remote node (including duplicates)</td>
+</tr>
+<tr class="row-even"><td>mgmt_num_tx_bytes_success</td>
+<td>Total number of bytes successfully transmitted in management packets to remote node</td>
+</tr>
+<tr class="row-odd"><td>mgmt_num_tx_bytes_total</td>
+<td>Total number of bytes transmitted (successfully or not) in management packets to remote node</td>
+</tr>
+<tr class="row-even"><td>mgmt_num_rx_packets</td>
+<td>Total number of management packets received from remote node (only non-duplicates)</td>
+</tr>
+<tr class="row-odd"><td>mgmt_num_rx_packets_total</td>
+<td>Total number of management packets received from remote node (including duplicates)</td>
+</tr>
+<tr class="row-even"><td>mgmt_num_tx_packets_success</td>
+<td>Total number of management packets successfully transmitted to remote node</td>
+</tr>
+<tr class="row-odd"><td>mgmt_num_tx_packets_total</td>
+<td>Total number of management packets transmitted (successfully or not) to remote node</td>
+</tr>
+<tr class="row-even"><td>mgmt_num_tx_attempts</td>
+<td>Total number of low-level attempts of management packets to remote node (includes re-transmissions)</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p>If the <code class="docutils literal"><span class="pre">device_list</span></code> is a single device, then a single dictionary or
+None is returned.  If the <code class="docutils literal"><span class="pre">device_list</span></code> is a list of devices, then a
+list of dictionaries will be returned in the same order as the devices
+in the list.  If any of the counts are not there, None will be inserted
+in the list.  If the <code class="docutils literal"><span class="pre">device_list</span></code> is not specified, then all the
+counts on the node will be returned.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="local-traffic-generator-ltg">
+<h3>Local Traffic Generator (LTG)<a class="headerlink" href="#local-traffic-generator-ltg" title="Permalink to this headline">¶</a></h3>
+<p>These <code class="docutils literal"><span class="pre">WlanExpNode</span></code> commands interact with the node&#8217;s LTG framework. LTGs provides local traffic sources with configurable
+destimations, payloads, and traffic loads. These traffic sources are ideal for running experiments without external
+traffic sources connected via Ethernet.</p>
+<p>Creating an LTG consumes memory in the node&#8217;s heap. LTG creation can fail if the node&#8217;s heap is full. Always
+remove LTGs you no longer need using the <code class="docutils literal"><span class="pre">ltg_remove</span></code> or <code class="docutils literal"><span class="pre">ltg_remove_all</span></code> methods.</p>
+<p>LTG traffic flows are configured with dedicated classes. See <a class="reference internal" href="ltg.html"><em>LTG Flow Configurations</em></a> for more information on how the payloads
+and timing of LTG flows are controlled.</p>
+<dl class="method">
+<dt id="wlan_exp.node.WlanExpNode.ltg_configure">
+<code class="descclassname">WlanExpNode.</code><code class="descname">ltg_configure</code><span class="sig-paren">(</span><em>traffic_flow</em>, <em>auto_start=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node.html#WlanExpNode.ltg_configure"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node.WlanExpNode.ltg_configure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Configure the node for the given traffic flow.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>traffic_flow</strong> (<em>ltg.FlowConfig</em>) &#8211;
+FlowConfig (or subclass of
+FlowConfig) that describes the parameters of the LTG.</li>
+<li><strong>auto_start</strong> (<em>bool, optional</em>) &#8211;
+Automatically start the LTG or wait
+until it is explictly started.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>ID</strong> &#8211;
+Identifier for the LTG flow</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">int</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>The <code class="docutils literal"><span class="pre">trafic_flow</span></code> argument configures the behavior of the LTG,
+including the traffic&#8217;s destination, packet payloads, and packet
+generation timing. The reference code implements three flow
+configurations by default:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal"><span class="pre">FlowConfigCBR()</span></code>: a constant bit rate (CBR) source targeted to a
+specifc destination address. Packet lengths and the packet
+creation interval are constant.</li>
+<li><code class="docutils literal"><span class="pre">FlowConfigAllAssocCBR()</span></code>: a CBR source that targets traffic to
+all nodes in the station info list.</li>
+<li><code class="docutils literal"><span class="pre">FlowConfigRandomRandom()</span></code>: a source that targets traffic to a
+specific destination address, where each packet has a random
+length and packets are created at random intervals.</li>
+</ul>
+</div></blockquote>
+<p>Refer to the <a class="reference internal" href="ltg.html"><em>LTG Flow Configurations</em></a> documentation for details on these flow configs
+and the underlying classes that can be used to build custom flow
+configurations.</p>
+<p class="rubric">Examples</p>
+<p>The code below illustrates a few LTG configuration examples. <code class="docutils literal"><span class="pre">n1</span></code>
+and <code class="docutils literal"><span class="pre">n2</span></code> here are a wlan_exp node objects and the LTG traffic in
+each flow will go from <code class="docutils literal"><span class="pre">n1</span></code> to <code class="docutils literal"><span class="pre">n2</span></code>.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">wlan_exp.ltg</span> <span class="kn">as</span> <span class="nn">ltg</span>
+
+<span class="c"># Configure a CBR LTG addressed to a single node</span>
+<span class="n">ltg_id</span> <span class="o">=</span> <span class="n">n1</span><span class="o">.</span><span class="n">ltg_configure</span><span class="p">(</span><span class="n">ltg</span><span class="o">.</span><span class="n">FlowConfigCBR</span><span class="p">(</span><span class="n">dest_addr</span><span class="o">=</span><span class="n">n2</span><span class="o">.</span><span class="n">wlan_mac_address</span><span class="p">,</span> <span class="n">payload_length</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="mf">0.01</span><span class="p">),</span> <span class="n">auto_start</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="c"># Configure a backlogged traffic source with constant packet size</span>
+<span class="n">ltg_id</span> <span class="o">=</span> <span class="n">n1</span><span class="o">.</span><span class="n">ltg_configure</span><span class="p">(</span><span class="n">ltg</span><span class="o">.</span><span class="n">FlowConfigCBR</span><span class="p">(</span><span class="n">dest_addr</span><span class="o">=</span><span class="n">n2</span><span class="o">.</span><span class="n">wlan_mac_address</span><span class="p">,</span> <span class="n">payload_length</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span> <span class="n">auto_start</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="c"># Configure a random traffic source</span>
+<span class="n">ltg_id</span> <span class="o">=</span> <span class="n">n1</span><span class="o">.</span><span class="n">ltg_configure</span><span class="p">(</span><span class="n">ltg</span><span class="o">.</span><span class="n">FlowConfigRandomRandom</span><span class="p">(</span><span class="n">dest_addr</span><span class="o">=</span><span class="n">n2</span><span class="o">.</span><span class="n">wlan_mac_address</span><span class="p">,</span>
+                               <span class="n">min_payload_length</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+                               <span class="n">max_payload_length</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>
+                               <span class="n">min_interval</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                               <span class="n">max_interval</span><span class="o">=</span><span class="mf">0.1</span><span class="p">),</span>
+                            <span class="n">auto_start</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.node.WlanExpNode.ltg_get_status">
+<code class="descclassname">WlanExpNode.</code><code class="descname">ltg_get_status</code><span class="sig-paren">(</span><em>ltg_id_list</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node.html#WlanExpNode.ltg_get_status"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node.WlanExpNode.ltg_get_status" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the status of the LTG flows.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>ltg_id_list</strong> (<em>list of int, int</em>) &#8211;
+List of LTG flow identifiers or
+single LTG flow identifier</td>
+</tr>
+</tbody>
+</table>
+<p>If the ltg_id_list is a single ID, then a single status tuple is
+returned.  If the ltg_id_list is a list of IDs, then a list of status
+tuples will be returned in the same order as the IDs in the list.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>status</strong> &#8211;<ol class="arabic simple">
+<li>valid (bool): Is the LTG ID valid? (True/False)</li>
+<li>running (bool): Is the LTG currently running? (True/False)</li>
+<li>start_timestamp (int): Timestamp when the LTG started</li>
+<li>stop_timestamp (int): Timestamp when the LTG stopped</li>
+</ol>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">tuple</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.node.WlanExpNode.ltg_remove">
+<code class="descclassname">WlanExpNode.</code><code class="descname">ltg_remove</code><span class="sig-paren">(</span><em>ltg_id_list</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node.html#WlanExpNode.ltg_remove"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node.WlanExpNode.ltg_remove" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove the LTG flows.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>ltg_id_list</strong> (<em>list of int, int</em>) &#8211;
+List of LTG flow identifiers or
+single LTG flow identifier</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.node.WlanExpNode.ltg_start">
+<code class="descclassname">WlanExpNode.</code><code class="descname">ltg_start</code><span class="sig-paren">(</span><em>ltg_id_list</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node.html#WlanExpNode.ltg_start"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node.WlanExpNode.ltg_start" title="Permalink to this definition">¶</a></dt>
+<dd><p>Start the LTG flow.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>ltg_id_list</strong> (<em>list of int, int</em>) &#8211;
+List of LTG flow identifiers or
+single LTG flow identifier</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.node.WlanExpNode.ltg_stop">
+<code class="descclassname">WlanExpNode.</code><code class="descname">ltg_stop</code><span class="sig-paren">(</span><em>ltg_id_list</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node.html#WlanExpNode.ltg_stop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node.WlanExpNode.ltg_stop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stop the LTG flow to the given nodes.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>ltg_id_list</strong> (<em>list of int, int</em>) &#8211;
+List of LTG flow identifiers or
+single LTG flow identifier</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.node.WlanExpNode.ltg_remove_all">
+<code class="descclassname">WlanExpNode.</code><code class="descname">ltg_remove_all</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node.html#WlanExpNode.ltg_remove_all"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node.WlanExpNode.ltg_remove_all" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stops and removes all LTG flows on the node.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.node.WlanExpNode.ltg_start_all">
+<code class="descclassname">WlanExpNode.</code><code class="descname">ltg_start_all</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node.html#WlanExpNode.ltg_start_all"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node.WlanExpNode.ltg_start_all" title="Permalink to this definition">¶</a></dt>
+<dd><p>Start all LTG flows on the node.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.node.WlanExpNode.ltg_stop_all">
+<code class="descclassname">WlanExpNode.</code><code class="descname">ltg_stop_all</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node.html#WlanExpNode.ltg_stop_all"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node.WlanExpNode.ltg_stop_all" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stop all LTG flows on the node.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="log">
+<h3>Log<a class="headerlink" href="#log" title="Permalink to this headline">¶</a></h3>
+<p>These <code class="docutils literal"><span class="pre">WlanExpNode</span></code> commands are used to interact with the logging framework.
+The log occupies a large portion of DRAM which is set in C code during runtime
+(see <a class="reference external" href="http://warpproject.org/trac/browser/ReferenceDesigns/w3_802.11/c/wlan_mac_high_framework/include/wlan_mac_high.h">wlan_mac_high.h</a>
+for more information on the memory map; Use <code class="docutils literal"><span class="pre">log_get_capacity()</span></code> to see the
+number of bytes allocated for the log).</p>
+<p>The log has the ability to wrap to enable longer experiments.  By enabling
+wrapping and periodically pulling the logs, you can effectively log an
+experiment for an indefinite amount of time.  Also, the log can record the
+entire payload of the wireless packets.  Both the log wrapping and logging of
+full payloads is off by default and can be modified with the
+<code class="docutils literal"><span class="pre">log_configure()</span></code> command.</p>
+<dl class="method">
+<dt id="wlan_exp.node.WlanExpNode.log_configure">
+<code class="descclassname">WlanExpNode.</code><code class="descname">log_configure</code><span class="sig-paren">(</span><em>log_enable=None</em>, <em>log_wrap_enable=None</em>, <em>log_full_payloads=None</em>, <em>log_txrx_mpdu=None</em>, <em>log_txrx_ctrl=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node.html#WlanExpNode.log_configure"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node.WlanExpNode.log_configure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Configure log with the given flags.</p>
+<p>By default all attributes are set to None.  Only attributes that
+are given values will be updated on the node.  If an attribute is
+not specified, then that attribute will retain the same value on
+the node.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>log_enable</strong> (<em>bool</em>) &#8211;
+Enable the event log
+(Default value on Node: TRUE)</li>
+<li><strong>log_wrap_enable</strong> (<em>bool</em>) &#8211;
+Enable event log wrapping
+(Default value on Node: FALSE)</li>
+<li><strong>log_full_payloads</strong> (<em>bool</em>) &#8211;
+Record full Tx/Rx payloads in event log
+(Default value on Node: FALSE)</li>
+<li><strong>log_txrx_mpdu</strong> (<em>bool</em>) &#8211;
+Enable Tx/Rx log entries for MPDU frames
+(Default value on Node: TRUE)</li>
+<li><strong>log_txrx_ctrl</strong> (<em>bool</em>) &#8211;
+Enable Tx/Rx log entries for CTRL frames
+(Default value on Node: TRUE)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.node.WlanExpNode.log_get">
+<code class="descclassname">WlanExpNode.</code><code class="descname">log_get</code><span class="sig-paren">(</span><em>size</em>, <em>offset=0</em>, <em>max_req_size=8388608</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node.html#WlanExpNode.log_get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node.WlanExpNode.log_get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Low level method to retrieve log data from a wlan_exp node.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>size</strong> (<em>int</em>) &#8211;
+Number of bytes to read from the log</li>
+<li><strong>offset</strong> (<em>int, optional</em>) &#8211;
+Starting byte to read from the log</li>
+<li><strong>max_req_size</strong> (<em>int, optional</em>) &#8211;
+Max request size that the transport
+will fragment the request into.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><p><strong>buffer</strong> &#8211;</p>
+<p>Data from the log corresponding to the input parameters</p>
+</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">transport.Buffer</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>There is no guarentee that this will return data aligned to event
+boundaries.  Use <code class="docutils literal"><span class="pre">log_get_indexes()</span></code> to get event aligned boundaries.</p>
+<p>Log reads are not destructive. Log entries will only be destroyed by a
+log reset or if the log wraps.</p>
+<p>During a given <code class="docutils literal"><span class="pre">log_get()</span></code> command, the ETH_B Ethernet interface of
+the node will not be able to respond to any other Ethernet packets
+that are sent to the node.  This could cause the node to drop
+incoming wlan_exp packets from other wlan_exp instances accessing
+the node. Therefore, for large requests, having a smaller
+<code class="docutils literal"><span class="pre">max_req_size</span></code> will allow the transport to fragement the command and
+allow the node to be responsive to multiple hosts.</p>
+<p>Some basic analysis shows that fragment sizes of 2**23 (8 MB)
+add about 2% overhead to the receive time and each command takes less
+than 1 second (~0.9 sec), which is the default transport timeout.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.node.WlanExpNode.log_get_all_new">
+<code class="descclassname">WlanExpNode.</code><code class="descname">log_get_all_new</code><span class="sig-paren">(</span><em>log_tail_pad=500</em>, <em>max_req_size=8388608</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node.html#WlanExpNode.log_get_all_new"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node.WlanExpNode.log_get_all_new" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get all &#8220;new&#8221; entries in the log.</p>
+<p>In order to make reading log data easier, the <code class="docutils literal"><span class="pre">log_get_all_new()</span></code>
+command was created.  It utilizes the <code class="docutils literal"><span class="pre">log_get_indexex()</span></code> and
+<code class="docutils literal"><span class="pre">log_get()</span></code> commmands to understand the state of the log and to
+retrieve data from the log.  The Python node object also maintains
+internal state about what log data has been read from the node to
+determine if there is &#8220;new&#8221; data in the log.  Since this state data is
+maintained in Python and not on the node itself, it is possible for
+multiple host scripts to read log data using <code class="docutils literal"><span class="pre">log_get_all_new()</span></code>. The
+internal state maintained for <code class="docutils literal"><span class="pre">log_get_all_new()</span></code> is only reset when
+using the node reset method (i.e. <code class="docutils literal"><span class="pre">node.reset(log=True)</span></code>).</p>
+<p>When a node is adding entries to its log, it will allocate the
+memory for an entry from the log and then fill in the contents.  This
+means at any given time, the last log entry may have incomplete
+information.  Currently, the log maintains the index where the next
+log entry will be recorded (i.e. the <code class="docutils literal"><span class="pre">next_index</span></code>), which does not
+provide any state about whether the last log entry has been completed.
+Therefore, in order to not retrieve incomplete information,
+<code class="docutils literal"><span class="pre">log_get_all_new()</span></code> has an argument <code class="docutils literal"><span class="pre">log_tail_pad=N</span></code> to not read
+the last N &#8220;new&#8221; bytes of log data.</p>
+<p>Unfortunately, this means that using a <code class="docutils literal"><span class="pre">log_tail_pad</span></code> other than
+zero will result in return data that is not aligned to a log entry
+boundary.  This should not be an issue if the goal is to periodically
+read the log data from the node and store it in a file (as seen in
+the <code class="docutils literal"><span class="pre">log_capture_continuous.py</span></code> example).  However, this can be an
+issue if trying to periodically read the log and process the log data
+directly.  In this case, <code class="docutils literal"><span class="pre">log_tail_pad</span></code> must be zero and the code
+has to assume the last entry is invalid.  This has not come up very
+much, but please let us know if this is an issue via the forums.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>log_tail_pad</strong> (<em>int, optional</em>) &#8211;
+Number of bytes from the current end
+of the &#8220;new&#8221; entries that will not be read during the call.
+This is to deal with the case where the node is in the process
+of modifying the last log entry so it my contain incomplete
+data and should not be read.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>buffer</strong> &#8211;<p>Data from the log that contains all entries since the last
+time the log was read.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">transport.Buffer</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.node.WlanExpNode.log_get_size">
+<code class="descclassname">WlanExpNode.</code><code class="descname">log_get_size</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node.html#WlanExpNode.log_get_size"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node.WlanExpNode.log_get_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the size of the node&#8217;s current log (in bytes).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>num_bytes</strong> &#8211;
+Number of bytes in the log</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.node.WlanExpNode.log_get_capacity">
+<code class="descclassname">WlanExpNode.</code><code class="descname">log_get_capacity</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node.html#WlanExpNode.log_get_capacity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node.WlanExpNode.log_get_capacity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the total capacity of the node&#8217;s log memory allocation (in bytes).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>capacity</strong> &#8211;
+Number of byte allocated for the log.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.node.WlanExpNode.log_get_indexes">
+<code class="descclassname">WlanExpNode.</code><code class="descname">log_get_indexes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node.html#WlanExpNode.log_get_indexes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node.WlanExpNode.log_get_indexes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the indexes that describe the state of the event log.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>indexes</strong> &#8211;<ol class="arabic simple">
+<li>oldest_index (int): Log index of the oldest event in the log</li>
+<li>next_index (int):   Log index where the next event will be recorded</li>
+<li>num_wraps (int):    Number of times the log has wrapped</li>
+</ol>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">tuple</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.node.WlanExpNode.log_get_flags">
+<code class="descclassname">WlanExpNode.</code><code class="descname">log_get_flags</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node.html#WlanExpNode.log_get_flags"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node.WlanExpNode.log_get_flags" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the flags that describe the event log configuration.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>flags</strong> &#8211;
+Integer describing the configuration of the event log.<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal"><span class="pre">0x0001</span></code> - Logging enabled</li>
+<li><code class="docutils literal"><span class="pre">0x0002</span></code> - Log wrapping enabled</li>
+<li><code class="docutils literal"><span class="pre">0x0004</span></code> - Full payload logging enabled</li>
+<li><code class="docutils literal"><span class="pre">0x0008</span></code> - Tx/Rx log entries for MPDU frames enabled</li>
+<li><code class="docutils literal"><span class="pre">0x0010</span></code> - Tx/Rx log entries for CTRL frames enabled</li>
+</ul>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.node.WlanExpNode.log_is_full">
+<code class="descclassname">WlanExpNode.</code><code class="descname">log_is_full</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node.html#WlanExpNode.log_is_full"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node.WlanExpNode.log_is_full" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return whether the log is full or not.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>status</strong> &#8211;
+True if the log is full; False if the log is not full.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.node.WlanExpNode.log_write_exp_info">
+<code class="descclassname">WlanExpNode.</code><code class="descname">log_write_exp_info</code><span class="sig-paren">(</span><em>info_type</em>, <em>message=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node.html#WlanExpNode.log_write_exp_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node.WlanExpNode.log_write_exp_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write the experiment information provided to the log.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>info_type</strong> (<em>int</em>) &#8211;
+Type of the experiment info.  This is an arbitrary
+16 bit number chosen by the experimentor</li>
+<li><strong>message</strong> (<em>int, str, bytes, optional</em>) &#8211;
+Information to be placed in
+the event log.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Message must be able to be converted to bytearray with &#8216;UTF-8&#8217; format.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.node.WlanExpNode.log_write_time">
+<code class="descclassname">WlanExpNode.</code><code class="descname">log_write_time</code><span class="sig-paren">(</span><em>time_id=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node.html#WlanExpNode.log_write_time"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node.WlanExpNode.log_write_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds the current time in microseconds to the log.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>time_id</strong> (<em>int, optional</em>) &#8211;
+User providied identifier to be used for
+the TIME_INFO log entry.  If none is provided, a random number
+will be inserted.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="network-scan">
+<h3>Network Scan<a class="headerlink" href="#network-scan" title="Permalink to this headline">¶</a></h3>
+<p>These <code class="docutils literal"><span class="pre">WlanExpNode</span></code> commands are used to to scan the node&#8217;s environment.</p>
+<dl class="method">
+<dt id="wlan_exp.node.WlanExpNode.set_scan_parameters">
+<code class="descclassname">WlanExpNode.</code><code class="descname">set_scan_parameters</code><span class="sig-paren">(</span><em>time_per_channel=None</em>, <em>num_probe_tx_per_channel=None</em>, <em>channel_list=None</em>, <em>ssid=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node.html#WlanExpNode.set_scan_parameters"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node.WlanExpNode.set_scan_parameters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the paramters of the wireless network scan state machine.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>time_per_channel</strong> (<em>float, optional</em>) &#8211;
+Time (in float sec) to spend
+on each channel.  A value of None will not modify the current
+time per channel</li>
+<li><strong>num_probe_tx_per_channel</strong> (<em>int, optional</em>) &#8211;
+Number of probe requests
+transmitted while on each channel.  A value of None will not
+modify the current number of probe requests per channel.</li>
+<li><strong>channel_list</strong> (<em>list of int optional</em>) &#8211;
+Channel(s) to scan; A value
+of None will not modify the current channel list.</li>
+<li><strong>ssid</strong> (<em>str, optional</em>) &#8211;
+SSID to scan for (as part of probe request);
+A value of None will not modify the current SSID.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Setting <code class="docutils literal"><span class="pre">num_probe_tx_per_chan</span></code> to a non-zero value will enable
+active scanning. The node will transmit broadcast Probe Request packets
+on every channel and will gather network information from received
+Probe Response and Beacon packets. Setting <code class="docutils literal"><span class="pre">num_probe_tx_per_chan=0</span></code>
+will enable passive scanning. In this mode the node will not transmit
+any Probe Request packets and network information will be gathered only
+from received Beacon packets.</p>
+<p>The blank SSID (<code class="docutils literal"><span class="pre">ssid=&quot;&quot;</span></code>) is interpretted as a wildcard and will
+solicit Probe Response packets from networks with any SSID. &#8220;Closed&#8221;
+networks do not respond to the wildcard SSID. These networks will still
+be discovered via Beacon receptions.</p>
+<p>If the channel list / SSID is not specified, then it will not be
+updated on the node (ie it will use the current channel list / SSID)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.node.WlanExpNode.start_network_scan">
+<code class="descclassname">WlanExpNode.</code><code class="descname">start_network_scan</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node.html#WlanExpNode.start_network_scan"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node.WlanExpNode.start_network_scan" title="Permalink to this definition">¶</a></dt>
+<dd><p>Starts the wireless network scan state machine at the node.</p>
+<p>During a scan, the node cycles through a set of channels and transmits
+periodic Probe Request frames on each channel.  Information about
+available wireless networks is extracted from received Probe Responses
+and Beacon frames. The network scan results can be queried any time
+using the <code class="docutils literal"><span class="pre">node.get_network_list()</span></code> method.</p>
+<p>Network scans can only be run by unassociated nodes. An associated
+node must first reset its BSS state before starting a scan.</p>
+<p>The network scan state machine can be stopped with
+<code class="docutils literal"><span class="pre">node.stop_network_scan()</span></code>. The scan state machine will also be
+stopped automatically if the node is configured with a new non-null
+BSS state.</p>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># Ensure node has null BSS state</span>
+<span class="n">n</span><span class="o">.</span><span class="n">configure_bss</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
+
+<span class="c"># Start the scan state machine; scan will use default scan params</span>
+<span class="c">#  Use n.set_scan_parameters() to customize scan behavior</span>
+<span class="n">n</span><span class="o">.</span><span class="n">start_network_scan</span><span class="p">()</span>
+
+<span class="c"># Wait 5 seconds, retrieve the list of discovered networks</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">networks</span> <span class="o">=</span> <span class="n">n</span><span class="o">.</span><span class="n">get_network_list</span><span class="p">()</span>
+
+<span class="c"># Stop the scan state machine</span>
+<span class="n">n</span><span class="o">.</span><span class="n">stop_network_scan</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.node.WlanExpNode.stop_network_scan">
+<code class="descclassname">WlanExpNode.</code><code class="descname">stop_network_scan</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node.html#WlanExpNode.stop_network_scan"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node.WlanExpNode.stop_network_scan" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stops the wireless network scan state machine.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.node.WlanExpNode.is_scanning">
+<code class="descclassname">WlanExpNode.</code><code class="descname">is_scanning</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node.html#WlanExpNode.is_scanning"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node.WlanExpNode.is_scanning" title="Permalink to this definition">¶</a></dt>
+<dd><p>Queries if the node&#8217;s wireless network scanning state machine is
+currently running.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>status</strong> &#8211;<ul class="simple">
+<li>True      &#8211; Scan state machine is running</li>
+<li>False     &#8211; Scan state machine is not running</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="node_ap.html" class="btn btn-neutral float-right" title="Access Point (AP) Node">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="wlan_exp.html" class="btn btn-neutral" title="Framework"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Mango Communications, Inc..
+    </p>
+  </div>
+
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'wlan_exp v1.5.2  ',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

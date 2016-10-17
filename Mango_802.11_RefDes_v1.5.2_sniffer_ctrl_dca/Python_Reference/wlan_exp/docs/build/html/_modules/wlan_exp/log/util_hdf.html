@@ -1,0 +1,1057 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>wlan_exp.log.util_hdf &mdash; mango_wlan_exp wlan_exp v1.5.2   documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../../_static/rtd_overrides.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="mango_wlan_exp wlan_exp v1.5.2   documentation" href="../../../index.html"/>
+        <link rel="up" title="Module code" href="../../index.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="../../../index.html" class="fa fa-home"> mango_wlan_exp</a>
+        
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../wlan_exp.html">Framework</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../node.html">Node Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../wlan_exp_util.html">WLAN Exp Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ltg.html">LTG Flow Configurations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../device.html">WLAN Device</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../wlan_exp_log.html">Event Log</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../log_overview.html">Event Log Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../log_entry_types.html">Log Entry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../log_util.html">Event Log Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../log_util_hdf.html">HDF5 Utilities</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../index.html">mango_wlan_exp</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      
+    <li>wlan_exp.log.util_hdf</li>
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <h1>Source code for wlan_exp.log.util_hdf</h1><div class="highlight"><pre>
+<span class="c"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">------------------------------------------------------------------------------</span>
+<span class="sd">Mango 802.11 Reference Design Experiments Framework - HDF5 Log File Utilities</span>
+<span class="sd">------------------------------------------------------------------------------</span>
+<span class="sd">Authors:   Chris Hunter (chunter [at] mangocomm.com)</span>
+<span class="sd">           Patrick Murphy (murphpo [at] mangocomm.com)</span>
+<span class="sd">           Erik Welsh (welsh [at] mangocomm.com)</span>
+<span class="sd">License:   Copyright 2014-2016, Mango Communications. All rights reserved.</span>
+<span class="sd">           Distributed under the WARP license (http://warpproject.org/license)</span>
+<span class="sd">------------------------------------------------------------------------------</span>
+
+<span class="sd">This module provides utility functions for HDF to handle wlan_exp log data.</span>
+
+<span class="sd">For wlan_exp log data manipulation, it is necessary to define a common file </span>
+<span class="sd">format so that it is easy for multiple consumers, both in python and other </span>
+<span class="sd">languages, to access the data.  To do this, HDF5 is used as the container </span>
+<span class="sd">format with a couple of additional conventions to hold the log data as well as </span>
+<span class="sd">other pieces of information.  Below are the rules to create an HDF5 file that </span>
+<span class="sd">will contain wlan_exp log data:</span>
+
+<span class="sd">wlan_exp_log_data_container (equivalent to a HDF5 group):</span>
+<span class="sd">/: Root Group in HDF5 file</span>
+<span class="sd">|- Attributes:</span>
+<span class="sd">|      |- &#39;wlan_exp_log&#39;         (1,)      bool</span>
+<span class="sd">|      |- &#39;wlan_exp_ver&#39;         (3,)      uint32</span>
+<span class="sd">|      |- &lt;user provided attributes in attr_dict&gt;</span>
+<span class="sd">|- Datasets:</span>
+<span class="sd">|      |- &#39;log_data&#39;             (1,)      voidN  (where N is the size of the data)</span>
+<span class="sd">|- Groups (created if gen_index==True):</span>
+<span class="sd">|- &#39;raw_log_index&#39;</span>
+<span class="sd">|- Datasets:</span>
+<span class="sd">(dtype depends if largest offset in raw_log_index is &lt; 2^32)</span>
+<span class="sd">|- &lt;int&gt;    (N1,)     uint32/uint64</span>
+<span class="sd">|- &lt;int&gt;    (N2,)     uint32/uint64</span>
+<span class="sd">|- ...</span>
+
+<span class="sd">Naming convention:</span>
+
+<span class="sd">log_data       -- The binary data from a wlan_exp node&#39;s log.</span>
+
+<span class="sd">raw_log_index  -- This is an index that has not been interpreted / filtered</span>
+<span class="sd">and corresponds 1-to-1 with what is in given log_data.</span>
+<span class="sd">The defining characteristic of a raw_log_index is that</span>
+<span class="sd">the dictionary keys are all integers (entry type IDs):</span>
+<span class="sd">{ &lt;int&gt; : [&lt;offsets&gt;] }</span>
+
+<span class="sd">log_index      -- A log_index is any index that is not a raw_log_index.  In</span>
+<span class="sd">general, this will be a interpreted / filtered version of</span>
+<span class="sd">a raw_log_index.</span>
+
+<span class="sd">hdf5           -- A data container format used to store log_data,</span>
+<span class="sd">raw_log_index, and other user defined attributes.  You can</span>
+<span class="sd">find more documentation on HDF / HDF5 at:</span>
+<span class="sd">http://www.hdfgroup.org/</span>
+<span class="sd">http://www.h5py.org/</span>
+
+<span class="sd">numpy          -- A python package that allows easy and fast manipulation of</span>
+<span class="sd">large data sets.  You can find more documentaiton on numpy at:</span>
+<span class="sd">http://www.numpy.org/</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;np_arrays_to_hdf5&#39;</span><span class="p">,</span>
+           <span class="s">&#39;HDF5LogContainer&#39;</span><span class="p">,</span>
+           <span class="s">&#39;hdf5_open_file&#39;</span><span class="p">,</span>
+           <span class="s">&#39;hdf5_close_file&#39;</span><span class="p">,</span>
+           <span class="s">&#39;log_data_to_hdf5&#39;</span><span class="p">,</span>
+           <span class="s">&#39;hdf5_to_log_data&#39;</span><span class="p">,</span>
+           <span class="s">&#39;hdf5_to_log_index&#39;</span><span class="p">,</span>
+           <span class="s">&#39;hdf5_to_attr_dict&#39;</span><span class="p">]</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">util</span> <span class="k">as</span> <span class="n">log_util</span>
+
+
+<span class="c"># Fix to support Python 2.x and 3.x</span>
+<span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="s">&quot;3&quot;</span><span class="p">:</span> <span class="nb">unicode</span><span class="o">=</span><span class="nb">str</span>
+
+<span class="c"># -----------------------------------------------------------------------------</span>
+<span class="c"># HDF5 Log Container Class</span>
+<span class="c"># -----------------------------------------------------------------------------</span>
+<div class="viewcode-block" id="HDF5LogContainer"><a class="viewcode-back" href="../../../log_util_hdf.html#wlan_exp.log.util_hdf.HDF5LogContainer">[docs]</a><span class="k">class</span> <span class="nc">HDF5LogContainer</span><span class="p">(</span><span class="n">log_util</span><span class="o">.</span><span class="n">LogContainer</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Class to define an HDF5 log container.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        file_handle (h5py.File()):     Handle of the HDF5 file</span>
+<span class="sd">        name (str, optional):          Name of the HDF5 group of the log container</span>
+<span class="sd">        compression (bool, optional):  HDF5 compression setting on the log container</span>
+
+<span class="sd">    When an HDF5LogContainer is created, the underlying HDF5 file will not be </span>
+<span class="sd">    modified unless one of the write_* methods are called.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">hdf5_group_name</span>          <span class="o">=</span> <span class="bp">None</span>
+    <span class="n">compression</span>              <span class="o">=</span> <span class="bp">None</span>
+
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_handle</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">compression</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">HDF5LogContainer</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">file_handle</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">compression</span> <span class="o">=</span> <span class="n">compression</span>
+
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">hdf5_group_name</span> <span class="o">=</span> <span class="s">&quot;/&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">hdf5_group_name</span> <span class="o">=</span> <span class="n">name</span>
+
+
+<div class="viewcode-block" id="HDF5LogContainer.is_valid"><a class="viewcode-back" href="../../../log_util_hdf.html#wlan_exp.log.util_hdf.HDF5LogContainer.is_valid">[docs]</a>    <span class="k">def</span> <span class="nf">is_valid</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Check that the HDF5 Log Container is valid.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            is_valid (bool):</span>
+<span class="sd">                * True --&gt; This is a valid HDF5 log file</span>
+<span class="sd">                * False --&gt; This is NOT a valid HDF5 log file</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+        <span class="kn">import</span> <span class="nn">wlan_exp.version</span> <span class="kn">as</span> <span class="nn">version</span>
+
+        <span class="c"># Check the group handle but do not create one</span>
+        <span class="n">group_handle</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_group_handle</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">group_handle</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">msg</span>  <span class="o">=</span> <span class="s">&quot;WARNING: Log container is not valid.</span><span class="se">\n</span><span class="s">&quot;</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="s">&quot;    Could not find {0} in file.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hdf5_group_name</span><span class="p">)</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">False</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">group_handle</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s">&#39;wlan_exp_log&#39;</span><span class="p">]:</span>
+                <span class="c"># Require two attributes named &#39;wlan_exp_log&#39; and &#39;wlan_exp_ver&#39;</span>
+                <span class="n">ver</span> <span class="o">=</span> <span class="n">group_handle</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s">&#39;wlan_exp_ver&#39;</span><span class="p">]</span>
+
+                <span class="n">ver_str</span>            <span class="o">=</span> <span class="n">version</span><span class="o">.</span><span class="n">wlan_exp_ver_str</span><span class="p">(</span><span class="n">ver</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ver</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">ver</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+                <span class="n">ver_older_than_093</span> <span class="o">=</span> <span class="p">(</span><span class="n">ver</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ver</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">ver</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="o">&lt;</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+                <span class="n">caller_desc</span> <span class="o">=</span> <span class="s">&quot;HDF5 file &#39;{0}&#39; was written using version {1}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file_handle</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span> <span class="n">ver_str</span><span class="p">)</span>
+
+                <span class="n">status</span> <span class="o">=</span> <span class="n">version</span><span class="o">.</span><span class="n">wlan_exp_ver_check</span><span class="p">(</span><span class="n">major</span><span class="o">=</span><span class="n">ver</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">minor</span><span class="o">=</span><span class="n">ver</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">revision</span><span class="o">=</span><span class="n">ver</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+                                                    <span class="n">caller_desc</span><span class="o">=</span><span class="n">caller_desc</span><span class="p">)</span>
+                
+
+                <span class="k">if</span> <span class="p">(</span><span class="n">status</span> <span class="o">==</span> <span class="n">version</span><span class="o">.</span><span class="n">WLAN_EXP_VERSION_NEWER</span> <span class="ow">and</span> 
+                        <span class="p">(</span><span class="n">version</span><span class="o">.</span><span class="n">wlan_exp_ver</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span> <span class="ow">and</span> <span class="n">ver_older_than_093</span><span class="p">):</span>
+                    <span class="n">msg</span>  <span class="o">=</span> <span class="s">&quot;The HDF5 file uses a version older than 0.93, please convert using </span><span class="se">\n</span><span class="s">&quot;</span>
+                    <span class="n">msg</span> <span class="o">+=</span> <span class="s">&quot;the log_util_hdf5convert.py utility found the example directory in </span><span class="se">\n</span><span class="s">&quot;</span>
+                    <span class="n">msg</span> <span class="o">+=</span> <span class="s">&quot;releases prior to 1.0.&quot;</span>
+                    <span class="k">print</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+                
+                <span class="k">if</span> <span class="p">(</span><span class="n">status</span> <span class="o">==</span> <span class="n">version</span><span class="o">.</span><span class="n">WLAN_EXP_VERSION_OLDER</span><span class="p">):</span>
+                    <span class="k">print</span><span class="p">(</span><span class="s">&quot;Please update the wlan_exp installation to match the version on the HDF5 file.&quot;</span><span class="p">)</span>
+                            
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">msg</span>  <span class="o">=</span> <span class="s">&quot;WARNING: Log container is not valid.</span><span class="se">\n</span><span class="s">&quot;</span>
+                <span class="n">msg</span> <span class="o">+=</span> <span class="s">&quot;    &#39;wlan_exp_log&#39; attribute indicates log container is not valid.&quot;</span>
+                <span class="k">print</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+                <span class="k">return</span> <span class="bp">False</span>
+
+            <span class="k">if</span> <span class="n">group_handle</span><span class="p">[</span><span class="s">&#39;log_data&#39;</span><span class="p">]:</span>
+                <span class="c"># Require a dataset named &#39;log_data&#39;</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">group_handle</span><span class="p">[</span><span class="s">&#39;log_data&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">kind</span> <span class="o">!=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">void</span><span class="p">)</span><span class="o">.</span><span class="n">kind</span><span class="p">):</span>
+                    <span class="c"># Require the &#39;log_data&#39; dataset to be HDF5 opaque type (numpy void type)</span>
+                    <span class="n">msg</span>  <span class="o">=</span> <span class="s">&quot;WARNING: Log container is not valid.</span><span class="se">\n</span><span class="s">&quot;</span>
+                    <span class="n">msg</span> <span class="o">+=</span> <span class="s">&quot;    Log Data is not valid type.  Must be an HDF5 opaque type.&quot;</span>
+                    <span class="k">print</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+                    <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+            <span class="n">msg</span>  <span class="o">=</span> <span class="s">&quot;WARNING: Log container is not valid.  The following error occurred:</span><span class="se">\n</span><span class="s">&quot;</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="s">&quot;    {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">False</span>
+
+        <span class="k">return</span> <span class="bp">True</span>
+
+</div>
+<div class="viewcode-block" id="HDF5LogContainer.write_log_data"><a class="viewcode-back" href="../../../log_util_hdf.html#wlan_exp.log.util_hdf.HDF5LogContainer.write_log_data">[docs]</a>    <span class="k">def</span> <span class="nf">write_log_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">log_data</span><span class="p">,</span> <span class="n">append</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Write the log data to the log container.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            log_data (bytes):         Binary data from a WlanExpNode log</span>
+<span class="sd">            append (bool, optional):  Append to (True) or Overwrite (False) the current log data</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_file_writeable</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s">&quot;File {0} is not writeable.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file_handle</span><span class="p">))</span>
+
+        <span class="n">group_handle</span>    <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_valid_group_handle</span><span class="p">()</span>
+
+        <span class="n">np_dt</span>           <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s">&#39;V1&#39;</span><span class="p">)</span>
+        <span class="n">log_data_length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">log_data</span><span class="p">)</span>
+
+        <span class="c"># Raise an exception if the log data length is zero</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">log_data_length</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s">&quot;Did not provide any log data.&quot;</span><span class="p">)</span>
+
+        <span class="c"># Get the log_data from the group data set</span>
+        <span class="n">ds</span> <span class="o">=</span> <span class="n">group_handle</span><span class="p">[</span><span class="s">&#39;log_data&#39;</span><span class="p">]</span>
+
+        <span class="c"># Set length of current data</span>
+        <span class="k">if</span> <span class="n">append</span><span class="p">:</span>
+            <span class="n">curr_length</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">curr_length</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="c"># Get total length of data</span>
+        <span class="n">length</span> <span class="o">=</span> <span class="n">curr_length</span> <span class="o">+</span> <span class="n">log_data_length</span>
+
+        <span class="c"># Create empyt numpy container</span>
+        <span class="n">np_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">log_data_length</span><span class="p">,),</span> <span class="n">np_dt</span><span class="p">)</span>
+
+        <span class="c"># Redirect numpy array data pointer to the existing buffer object passed in by user</span>
+        <span class="n">np_data</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">log_data</span>
+
+        <span class="n">ds</span><span class="o">.</span><span class="n">resize</span><span class="p">((</span><span class="n">length</span><span class="p">,))</span>
+        <span class="n">ds</span><span class="p">[</span><span class="n">curr_length</span><span class="p">:</span><span class="n">length</span><span class="p">,]</span> <span class="o">=</span> <span class="n">np_data</span>
+
+</div>
+<div class="viewcode-block" id="HDF5LogContainer.write_log_index"><a class="viewcode-back" href="../../../log_util_hdf.html#wlan_exp.log.util_hdf.HDF5LogContainer.write_log_index">[docs]</a>    <span class="k">def</span> <span class="nf">write_log_index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">log_index</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Write the log index to the log container.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            log_index (dict):  Log index generated from wlan_exp log data</span>
+
+<span class="sd">        If the log index currently exists in the HDF5 file, that log index</span>
+<span class="sd">        will be replaced with this new log index.  If log_index is provided</span>
+<span class="sd">        then that log index will be written to the log container.  Otherwise,</span>
+<span class="sd">        a raw log index will be generated and added to the log container.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_file_writeable</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s">&quot;File {0} is not writeable.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file_handle</span><span class="p">))</span>
+
+        <span class="n">index_name</span>   <span class="o">=</span> <span class="s">&quot;log_index&quot;</span>
+        <span class="n">group_handle</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_valid_group_handle</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">log_index</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">log_index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_raw_log_index</span><span class="p">()</span>
+
+            <span class="k">if</span> <span class="n">log_index</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s">&quot;Unable to create raw log index for group: {0}</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">group_handle</span><span class="p">))</span>
+
+        <span class="c"># Delete any existing &#39;log_index&#39; in the group</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c"># Normally the try-catch would handle this error but in HDF5 1.8.9</span>
+            <span class="c"># exceptions are not properly thrown when using h5py, so the check</span>
+            <span class="c"># needs to be coded this way to not get a lot of garbage output.</span>
+            <span class="c">#</span>
+            <span class="k">for</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">group_handle</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">group</span> <span class="o">==</span> <span class="n">index_name</span><span class="p">):</span>
+                    <span class="k">del</span> <span class="n">group_handle</span><span class="p">[</span><span class="n">index_name</span><span class="p">]</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="k">pass</span>
+
+        <span class="c"># Write the log index to the group</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">index_grp</span> <span class="o">=</span> <span class="n">group_handle</span><span class="o">.</span><span class="n">create_group</span><span class="p">(</span><span class="n">index_name</span><span class="p">)</span>
+
+            <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">log_index</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="c"># Check if highest-valued entry index can be represented as uint32 or requires uint64</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="o">**</span><span class="mi">32</span><span class="p">):</span>
+                    <span class="n">dtype</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">uint32</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">dtype</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">uint64</span>
+
+                <span class="c"># Group names must be strings - keys here are known to be integers (entry_type_id values)</span>
+                <span class="n">index_grp</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">k</span><span class="p">),</span> <span class="n">data</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">),</span> <span class="n">maxshape</span><span class="o">=</span><span class="p">(</span><span class="bp">None</span><span class="p">,),</span> <span class="n">compression</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">compression</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">&quot;ERROR:</span><span class="se">\n</span><span class="s">    {0}</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">err</span><span class="p">))</span>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s">&quot;Unable to add log_index to log container: {0}</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">group_handle</span><span class="p">))</span>
+
+</div>
+<div class="viewcode-block" id="HDF5LogContainer.write_attr_dict"><a class="viewcode-back" href="../../../log_util_hdf.html#wlan_exp.log.util_hdf.HDF5LogContainer.write_attr_dict">[docs]</a>    <span class="k">def</span> <span class="nf">write_attr_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attr_dict</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Add the given attribute dictionary to the opened log container.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            attr_dict (dict):  A dictionary of user provided attributes that will be added to the HDF5 group.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_file_writeable</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s">&quot;File {0} is not writeable.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file_handle</span><span class="p">))</span>
+
+        <span class="n">default_attrs</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;wlan_exp_log&#39;</span><span class="p">,</span> <span class="s">&#39;wlan_exp_ver&#39;</span><span class="p">]</span>
+        <span class="n">group_handle</span>  <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_valid_group_handle</span><span class="p">()</span>
+
+        <span class="c"># Remove all current attributes, except default attributes</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">group_handle</span><span class="o">.</span><span class="n">attrs</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">default_attrs</span><span class="p">:</span>
+                <span class="k">del</span> <span class="n">group_handle</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+
+        <span class="c"># Write the attribute dictionary to the group</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">attr_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">default_attrs</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">str</span><span class="p">):</span>
+                        <span class="k">if</span> <span class="p">((</span><span class="nb">type</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">unicode</span><span class="p">)):</span>
+                            <span class="n">group_handle</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">string_</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">group_handle</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="k">print</span><span class="p">(</span><span class="s">&quot;WARNING: Converting &#39;{0}&#39; to string to add attribute.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">k</span><span class="p">))</span>
+                        <span class="n">group_handle</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">k</span><span class="p">)]</span> <span class="o">=</span> <span class="n">v</span>
+            <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+                <span class="k">print</span><span class="p">(</span><span class="s">&quot;WARNING: Could not add attribute &#39;{0}&#39; to group {1}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">group_handle</span><span class="p">))</span>
+
+</div>
+<div class="viewcode-block" id="HDF5LogContainer.get_log_data_size"><a class="viewcode-back" href="../../../log_util_hdf.html#wlan_exp.log.util_hdf.HDF5LogContainer.get_log_data_size">[docs]</a>    <span class="k">def</span> <span class="nf">get_log_data_size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get the current size of the log data in the log container.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            size (int):  Number of bytes of log data in the log container</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">group_handle</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_valid_group_handle</span><span class="p">()</span>
+
+        <span class="c"># Get the log_data from the group data set</span>
+        <span class="n">ds</span> <span class="o">=</span> <span class="n">group_handle</span><span class="p">[</span><span class="s">&#39;log_data&#39;</span><span class="p">]</span>
+
+        <span class="c"># Return the length of the data</span>
+        <span class="k">return</span> <span class="n">ds</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+</div>
+<div class="viewcode-block" id="HDF5LogContainer.get_log_data"><a class="viewcode-back" href="../../../log_util_hdf.html#wlan_exp.log.util_hdf.HDF5LogContainer.get_log_data">[docs]</a>    <span class="k">def</span> <span class="nf">get_log_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get the log data from the log container.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            log_data (bytes):  Bytes object of the log data in the container</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+        <span class="n">group_handle</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_valid_group_handle</span><span class="p">()</span>
+
+        <span class="c"># Get the log_data from the group data set</span>
+        <span class="n">ds</span>           <span class="o">=</span> <span class="n">group_handle</span><span class="p">[</span><span class="s">&#39;log_data&#39;</span><span class="p">]</span>
+        <span class="n">log_data_np</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="n">ds</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">ds</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+
+        <span class="c"># Use the h5py library&#39;s HDF5 -&gt; numpy hooks to preserve the log_data size and void type</span>
+        <span class="n">ds</span><span class="o">.</span><span class="n">read_direct</span><span class="p">(</span><span class="n">log_data_np</span><span class="p">)</span>
+
+        <span class="c"># Point to the numpy array&#39;s underlying buffer to find the raw log_data to return</span>
+        <span class="n">log_data</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">(</span><span class="n">log_data_np</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">log_data</span>
+
+</div>
+<div class="viewcode-block" id="HDF5LogContainer.get_log_index"><a class="viewcode-back" href="../../../log_util_hdf.html#wlan_exp.log.util_hdf.HDF5LogContainer.get_log_index">[docs]</a>    <span class="k">def</span> <span class="nf">get_log_index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gen_index</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get the raw log index from the log container.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            gen_index (bool, optional):  Generate the raw log index if the log index does not</span>
+<span class="sd">                exist in the log container.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            log_index (dict):  Log index from the log container</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">error</span>        <span class="o">=</span> <span class="bp">False</span>
+        <span class="n">log_index</span>    <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">group_handle</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_valid_group_handle</span><span class="p">()</span>
+
+        <span class="c"># Get the raw_log_index group from the specified group</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">index_group</span>   <span class="o">=</span> <span class="n">group_handle</span><span class="p">[</span><span class="s">&quot;log_index&quot;</span><span class="p">]</span>
+
+            <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">index_group</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="c"># Re-construct the raw_log_index dictionary, using integers</span>
+                <span class="c">#   (really entry_type IDs) as the keys and Python lists as values</span>
+                <span class="c">#   the [:] slice here is important - flattening the returned numpy array before</span>
+                <span class="c">#   listifying is *way* faster (&gt;10x) than just v.toList()</span>
+
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">log_index</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">k</span><span class="p">)]</span> <span class="o">=</span> <span class="n">v</span><span class="p">[:]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+                <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                    <span class="n">log_index</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>      <span class="o">=</span> <span class="n">v</span><span class="p">[:]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+
+                <span class="c"># Alternative to [:].toList() above - adds safetly in assuring dictionary value is</span>
+                <span class="c">#   Python list of ints, an requirement of downstream methods</span>
+                <span class="c">#   raw_log_index[int(k)] = map(int, v[:]) #fastish</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="n">error</span> <span class="o">=</span> <span class="bp">True</span>
+
+        <span class="c"># If there was an error getting the raw_log_index from the file and</span>
+        <span class="c">#   gen_index=True, then generate the raw_log_index from the log_data</span>
+        <span class="c">#   in the file</span>
+        <span class="k">if</span> <span class="n">error</span> <span class="ow">and</span> <span class="n">gen_index</span><span class="p">:</span>
+            <span class="n">log_index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_raw_log_index</span><span class="p">()</span>
+
+        <span class="c"># If the log index is empty or None, then raise an exception</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">log_index</span><span class="p">:</span>
+            <span class="n">msg</span>  <span class="o">=</span> <span class="s">&quot;Unable to get log index from &quot;</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="s">&quot;group {0} of {1}.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hdf5_group_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_handle</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">log_index</span>
+
+</div>
+<div class="viewcode-block" id="HDF5LogContainer.get_attr_dict"><a class="viewcode-back" href="../../../log_util_hdf.html#wlan_exp.log.util_hdf.HDF5LogContainer.get_attr_dict">[docs]</a>    <span class="k">def</span> <span class="nf">get_attr_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get the attribute dictionary from the log container.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            attr_dict (dict):  The dictionary of user provided attributes in the log container.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+        <span class="n">attr_dict</span>    <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">group_handle</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_valid_group_handle</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">group_handle</span><span class="o">.</span><span class="n">attrs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">if</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">bytes_</span><span class="p">):</span>
+                    <span class="n">attr_dict</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">attr_dict</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+            <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+                <span class="k">print</span><span class="p">(</span><span class="s">&quot;WARNING: Could not retreive attribute &#39;{0}&#39; from group {1}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">group_handle</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">attr_dict</span>
+
+</div>
+    <span class="k">def</span> <span class="nf">trim_log_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Trim the log data so that it has ends on a entry boundary.&quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+
+    <span class="c"># -------------------------------------------------------------------------</span>
+    <span class="c"># Internal methods for the container</span>
+    <span class="c"># -------------------------------------------------------------------------</span>
+    <span class="k">def</span> <span class="nf">_get_valid_group_handle</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Internal method to get a valid handle to the HDF5 group or raise an exception.&quot;&quot;&quot;</span>
+        <span class="n">group_handle</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_group_handle</span><span class="p">()</span>
+
+        <span class="c"># Create container if group is empty</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">group_handle</span><span class="o">.</span><span class="n">attrs</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_create_container</span><span class="p">(</span><span class="n">group_handle</span><span class="p">)</span>
+
+        <span class="c"># Raise exception if group is not valid</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s">&quot;Log container not valid: {0}</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">group_handle</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">group_handle</span>
+
+
+    <span class="k">def</span> <span class="nf">_get_group_handle</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Internal method to get a handle to the HDF5 group.&quot;&quot;&quot;</span>
+        <span class="n">group_name</span>   <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hdf5_group_name</span>
+        <span class="n">file_handle</span>  <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_handle</span>
+
+        <span class="c"># Using the root group?</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">group_name</span> <span class="o">==</span> <span class="s">&quot;/&quot;</span><span class="p">):</span>
+            <span class="c"># Use the root group</span>
+            <span class="k">return</span> <span class="n">file_handle</span>
+
+        <span class="c"># Check group exists in the file</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">file_handle</span><span class="p">[</span><span class="n">group_name</span><span class="p">]</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="c"># Try to create the group</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">file_handle</span><span class="o">.</span><span class="n">create_group</span><span class="p">(</span><span class="n">group_name</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                <span class="n">msg</span>  <span class="o">=</span> <span class="s">&quot;Cannot create group {0} &quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hdf5_group_name</span><span class="p">)</span>
+                <span class="n">msg</span> <span class="o">+=</span> <span class="s">&quot;in {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file_handle</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+        <span class="c"># Could not get the group handle, return None</span>
+        <span class="k">return</span> <span class="bp">None</span>
+
+
+    <span class="k">def</span> <span class="nf">_create_container</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">group</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Internal method to create a valid log data container.&quot;&quot;&quot;</span>
+        <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+        <span class="kn">import</span> <span class="nn">wlan_exp.version</span> <span class="kn">as</span> <span class="nn">version</span>
+
+        <span class="c"># Add default attributes to the group</span>
+        <span class="n">group</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s">&#39;wlan_exp_log&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+        <span class="n">group</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s">&#39;wlan_exp_ver&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">version</span><span class="o">.</span><span class="n">wlan_exp_ver</span><span class="p">(),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint32</span><span class="p">)</span>
+
+        <span class="c"># Create an empty numpy array of type &#39;V1&#39; (ie one byte void)</span>
+        <span class="n">np_dt</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s">&#39;V1&#39;</span><span class="p">)</span>
+        <span class="n">np_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="mi">0</span><span class="p">,),</span> <span class="n">np_dt</span><span class="p">)</span>
+
+        <span class="c"># Create an empty re-sizeable data set for the numpy-formatted data</span>
+        <span class="n">group</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="s">&quot;log_data&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">np_data</span><span class="p">,</span> <span class="n">maxshape</span><span class="o">=</span><span class="p">(</span><span class="bp">None</span><span class="p">,),</span> <span class="n">compression</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">compression</span><span class="p">)</span>
+
+
+    <span class="k">def</span> <span class="nf">_create_raw_log_index</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Internal method to create a raw log index pulling data from the HDF5 file.&quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">log_data</span>       <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_log_data</span><span class="p">()</span>
+            <span class="n">raw_log_index</span>  <span class="o">=</span> <span class="n">log_util</span><span class="o">.</span><span class="n">gen_raw_log_index</span><span class="p">(</span><span class="n">log_data</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+            <span class="n">raw_log_index</span> <span class="o">=</span> <span class="bp">None</span>
+
+        <span class="k">return</span> <span class="n">raw_log_index</span>
+
+
+    <span class="k">def</span> <span class="nf">_file_writeable</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Internal method to check if the HDF5 file is writeable.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file_handle</span><span class="o">.</span><span class="n">mode</span> <span class="o">==</span> <span class="s">&#39;r&#39;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">True</span>
+
+<span class="c"># End class()</span>
+
+
+
+
+<span class="c"># -----------------------------------------------------------------------------</span>
+<span class="c"># Log HDF5 file Utilities</span>
+<span class="c"># -----------------------------------------------------------------------------</span></div>
+<div class="viewcode-block" id="hdf5_open_file"><a class="viewcode-back" href="../../../log_util_hdf.html#wlan_exp.log.util_hdf.hdf5_open_file">[docs]</a><span class="k">def</span> <span class="nf">hdf5_open_file</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">readonly</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">append</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">print_warnings</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Open an HDF5 file.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        filename (str):                   Filename of the HDF5 file to open</span>
+<span class="sd">        readonly (bool, optional):        Open the file in read-only mode</span>
+<span class="sd">        append (bool, optional):          Append to the data in the current file</span>
+<span class="sd">        print_warnings (bool, optional):  Print warning messages</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        file_handle (h5py.File):  Handle for the HDF5 file</span>
+
+
+<span class="sd">    Behavior of input attributes:</span>
+<span class="sd">        +------------+------------+----------------------------------------------------------+ </span>
+<span class="sd">        | readonly   | append     | Behavior                                                 | </span>
+<span class="sd">        +============+============+==========================================================+ </span>
+<span class="sd">        | True       | T/F        | File opened in read-only mode                            | </span>
+<span class="sd">        +------------+------------+----------------------------------------------------------+ </span>
+<span class="sd">        | False      | True       | File opened in append mode; created if it does not exist | </span>
+<span class="sd">        +------------+------------+----------------------------------------------------------+ </span>
+<span class="sd">        | False      | False      | If file with filename exists, then a new filename is     |</span>
+<span class="sd">        |            |            | generated using the log utilities.  The new file is then |</span>
+<span class="sd">        |            |            | created by the h5py File method (DEFAULT)                |</span>
+<span class="sd">        +------------+------------+----------------------------------------------------------+</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="kn">import</span> <span class="nn">os</span>
+    <span class="kn">import</span> <span class="nn">h5py</span>
+
+    <span class="n">file_handle</span> <span class="o">=</span> <span class="bp">None</span>
+
+    <span class="c"># Get a file handle the log container file</span>
+    <span class="k">if</span> <span class="n">readonly</span><span class="p">:</span>
+        <span class="c"># Open a HDF5 File Object in &#39;r&#39; (Readonly) mode</span>
+        <span class="n">file_handle</span> <span class="o">=</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s">&#39;r&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c"># Determine a safe filename for the output HDF5 file</span>
+        <span class="k">if</span> <span class="n">append</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">print_warnings</span><span class="p">:</span>
+                    <span class="k">print</span><span class="p">(</span><span class="s">&quot;WARNING: Opening existing file {0} in append mode&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">filename</span><span class="p">))</span>
+
+            <span class="n">h5_filename</span> <span class="o">=</span> <span class="n">filename</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">h5_filename</span> <span class="o">=</span> <span class="n">log_util</span><span class="o">.</span><span class="n">_get_safe_filename</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">print_warnings</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">h5_filename</span><span class="p">):</span>
+            <span class="c"># Open an HDF5 File Object in &#39;a&#39; (Read/Write if exists, create otherwise) mode</span>
+            <span class="n">file_handle</span> <span class="o">=</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">h5_filename</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s">&#39;a&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c"># Open an HDF5 File Object in &#39;w&#39; (Create file, truncate if exists) mode</span>
+            <span class="c">#</span>
+            <span class="c"># This is due to a bug in Anaconda where it does not throu the appropriate</span>
+            <span class="c"># IOError to be caught to create a file with the &#39;a&#39; mode</span>
+            <span class="n">file_handle</span> <span class="o">=</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">h5_filename</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s">&#39;w&#39;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">file_handle</span>
+
+<span class="c"># End def</span>
+
+
+</div>
+<div class="viewcode-block" id="hdf5_close_file"><a class="viewcode-back" href="../../../log_util_hdf.html#wlan_exp.log.util_hdf.hdf5_close_file">[docs]</a><span class="k">def</span> <span class="nf">hdf5_close_file</span><span class="p">(</span><span class="n">file_handle</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Close an HDF5 file.</span>
+<span class="sd"> </span>
+<span class="sd">    Args:</span>
+<span class="sd">        file_handle (h5py.File):  Handle for the HDF5 file    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">file_handle</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="c"># End def</span>
+
+
+</div>
+<div class="viewcode-block" id="log_data_to_hdf5"><a class="viewcode-back" href="../../../log_util_hdf.html#wlan_exp.log.util_hdf.log_data_to_hdf5">[docs]</a><span class="k">def</span> <span class="nf">log_data_to_hdf5</span><span class="p">(</span><span class="n">log_data</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">attr_dict</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">gen_index</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Create an HDF5 file that contains the log_data, a raw_log_index, and any</span>
+<span class="sd">    user attributes.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        log_data (bytes):            Binary data from a WlanExpNode log</span>
+<span class="sd">        filename (str):              Filename of the HDF5 file to appear on disk</span>
+<span class="sd">        attr_dict (dict, optional):  A dictionary of user provided attributes that will be added to the HDF5 group.</span>
+<span class="sd">        gen_index (bool, optional):  Generate the ``raw_log_index`` from the ``log_data`` and store it in the file.</span>
+<span class="sd">        overwrite (bool, optional):  If True method will overwrite existing file with filename</span>
+
+<span class="sd">    If the requested filename already exists and ``overwrite==True`` this</span>
+<span class="sd">    method will replace the existing file, destroying any data in the original file.</span>
+
+<span class="sd">    If the filename already exists and ``overwrite==False`` this method will print a warning,</span>
+<span class="sd">    then create a new filename with a unique date-time suffix.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c"># Need to not print warnings if overwrite is True</span>
+    <span class="n">print_warnings</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">overwrite</span>
+
+    <span class="c"># Open the file</span>
+    <span class="n">file_handle</span>   <span class="o">=</span> <span class="n">hdf5_open_file</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">print_warnings</span><span class="o">=</span><span class="n">print_warnings</span><span class="p">)</span>
+
+    <span class="c"># Actual filename (See HDF5 File docs)</span>
+    <span class="n">real_filename</span> <span class="o">=</span> <span class="n">file_handle</span><span class="o">.</span><span class="n">filename</span>
+
+    <span class="c"># Create an HDF5 Log Container</span>
+    <span class="n">container</span>     <span class="o">=</span> <span class="n">HDF5LogContainer</span><span class="p">(</span><span class="n">file_handle</span><span class="p">)</span>
+
+    <span class="c"># Try to write the file components</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c"># Add the log data</span>
+        <span class="n">container</span><span class="o">.</span><span class="n">write_log_data</span><span class="p">(</span><span class="n">log_data</span><span class="p">)</span>
+
+        <span class="c"># Add the raw log index to the group</span>
+        <span class="c">#     - Done this way to save processing time.  log_data is already</span>
+        <span class="c">#       in memory.  Therefore, the default write_log_index which</span>
+        <span class="c">#       pulls the log data out of the HDF5 file to create the raw log </span>
+        <span class="c">#       index is not needed.</span>
+        <span class="k">if</span> <span class="n">gen_index</span><span class="p">:</span>
+            <span class="n">raw_log_index</span> <span class="o">=</span> <span class="n">log_util</span><span class="o">.</span><span class="n">gen_raw_log_index</span><span class="p">(</span><span class="n">log_data</span><span class="p">)</span>
+            <span class="n">container</span><span class="o">.</span><span class="n">write_log_index</span><span class="p">(</span><span class="n">raw_log_index</span><span class="p">)</span>
+
+        <span class="c"># Add the attribute dictionary to the group</span>
+        <span class="k">if</span> <span class="n">attr_dict</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">container</span><span class="o">.</span><span class="n">write_attr_dict</span><span class="p">(</span><span class="n">attr_dict</span><span class="p">)</span>
+
+    <span class="k">except</span> <span class="ne">AttributeError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">&quot;Error writing log file: {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">err</span><span class="p">))</span>
+
+    <span class="c"># Close the file</span>
+    <span class="n">hdf5_close_file</span><span class="p">(</span><span class="n">file_handle</span><span class="p">)</span>
+
+    <span class="c"># If overwrite use the os to move the temp file to a new file</span>
+    <span class="k">if</span> <span class="n">overwrite</span> <span class="ow">and</span> <span class="p">(</span><span class="n">real_filename</span> <span class="o">!=</span> <span class="n">filename</span><span class="p">):</span>
+        <span class="kn">import</span> <span class="nn">os</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">real_filename</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+
+<span class="c"># End log_data_to_hdf5()</span>
+
+
+</div>
+<div class="viewcode-block" id="hdf5_to_log_data"><a class="viewcode-back" href="../../../log_util_hdf.html#wlan_exp.log.util_hdf.hdf5_to_log_data">[docs]</a><span class="k">def</span> <span class="nf">hdf5_to_log_data</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">group_name</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Extract the log_data from an HDF5 Log Container</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        filename (str):              Name of HDF5 file to open</span>
+<span class="sd">        group_name (str, optional):  Name of Group within the HDF5 file object </span>
+<span class="sd">            (defaults to &quot;\&quot;)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        log_data (bytes):  Log data in the HDF5 file</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">log_data</span>    <span class="o">=</span> <span class="bp">None</span>
+
+    <span class="c"># Open the file</span>
+    <span class="n">file_handle</span> <span class="o">=</span> <span class="n">hdf5_open_file</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">readonly</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="c"># Create an HDF5 Log Container</span>
+    <span class="n">container</span>   <span class="o">=</span> <span class="n">HDF5LogContainer</span><span class="p">(</span><span class="n">file_handle</span><span class="p">,</span> <span class="n">group_name</span><span class="p">)</span>
+
+    <span class="c"># Try to read the file components</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c"># Extract the attribute dictionary</span>
+        <span class="n">log_data</span>    <span class="o">=</span> <span class="n">container</span><span class="o">.</span><span class="n">get_log_data</span><span class="p">()</span>
+
+    <span class="k">except</span> <span class="ne">AttributeError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">&quot;Error reading log file: {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">err</span><span class="p">))</span>
+
+    <span class="c"># Close the file</span>
+    <span class="n">hdf5_close_file</span><span class="p">(</span><span class="n">file_handle</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">log_data</span>
+
+<span class="c"># End log_data_to_hdf5()</span>
+
+
+</div>
+<div class="viewcode-block" id="hdf5_to_log_index"><a class="viewcode-back" href="../../../log_util_hdf.html#wlan_exp.log.util_hdf.hdf5_to_log_index">[docs]</a><span class="k">def</span> <span class="nf">hdf5_to_log_index</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">group_name</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">gen_index</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Extract the log_index from an HDF5 Log Container</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        filename (str):              Name of HDF5 file to open</span>
+<span class="sd">        group_name (str, optional):  Name of Group within the HDF5 file object </span>
+<span class="sd">            (defaults to &quot;\&quot;)</span>
+<span class="sd">        gen_index (bool, optional):  Generate the ``raw_log_index`` from the ``log_data`` and </span>
+<span class="sd">            store it in the file if the ``log_index`` is not in the file.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        log_index (dict):  Either the ``log_index`` from HDF5 file or a generated  ``raw_log_index`` </span>
+<span class="sd">        from ``log_data`` in HDF5 file</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">log_index</span>   <span class="o">=</span> <span class="bp">None</span>
+
+    <span class="c"># Open the file</span>
+    <span class="n">file_handle</span> <span class="o">=</span> <span class="n">hdf5_open_file</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">readonly</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="c"># Create an HDF5 Log Container</span>
+    <span class="n">container</span>   <span class="o">=</span> <span class="n">HDF5LogContainer</span><span class="p">(</span><span class="n">file_handle</span><span class="p">,</span> <span class="n">group_name</span><span class="p">)</span>
+
+    <span class="c"># Try to read the file components</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c"># Extract the log index</span>
+        <span class="n">log_index</span>   <span class="o">=</span> <span class="n">container</span><span class="o">.</span><span class="n">get_log_index</span><span class="p">(</span><span class="n">gen_index</span><span class="p">)</span>
+
+    <span class="k">except</span> <span class="ne">AttributeError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">&quot;Error reading log file: {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">err</span><span class="p">))</span>
+
+    <span class="c"># Close the file</span>
+    <span class="n">hdf5_close_file</span><span class="p">(</span><span class="n">file_handle</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">log_index</span>
+
+<span class="c"># End hdf5_to_log_index()</span>
+
+
+</div>
+<div class="viewcode-block" id="hdf5_to_attr_dict"><a class="viewcode-back" href="../../../log_util_hdf.html#wlan_exp.log.util_hdf.hdf5_to_attr_dict">[docs]</a><span class="k">def</span> <span class="nf">hdf5_to_attr_dict</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">group_name</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Extract the attribute dictionary from an HDF5 Log Container.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        filename (str):              Name of HDF5 file to open</span>
+<span class="sd">        group_name (str, optional):  Name of Group within the HDF5 file object </span>
+<span class="sd">            (defaults to &quot;\&quot;)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        attr_dict (dict):  The dictionary of user provided attributes in the HDF5 file</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">attr_dict</span>   <span class="o">=</span> <span class="bp">None</span>
+
+    <span class="c"># Open the file</span>
+    <span class="n">file_handle</span> <span class="o">=</span> <span class="n">hdf5_open_file</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">readonly</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="c"># Create an HDF5 Log Container</span>
+    <span class="n">container</span>   <span class="o">=</span> <span class="n">HDF5LogContainer</span><span class="p">(</span><span class="n">file_handle</span><span class="p">,</span> <span class="n">group_name</span><span class="p">)</span>
+
+    <span class="c"># Try to read the file components</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c"># Extract the attribute dictionary</span>
+        <span class="n">attr_dict</span>   <span class="o">=</span> <span class="n">container</span><span class="o">.</span><span class="n">get_attr_dict</span><span class="p">()</span>
+
+    <span class="k">except</span> <span class="ne">AttributeError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">&quot;Error reading log file: {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">err</span><span class="p">))</span>
+
+    <span class="c"># Close the file</span>
+    <span class="n">hdf5_close_file</span><span class="p">(</span><span class="n">file_handle</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">attr_dict</span>
+
+<span class="c"># End hdf5_to_attr_dict()</span>
+
+
+
+</div>
+<div class="viewcode-block" id="np_arrays_to_hdf5"><a class="viewcode-back" href="../../../log_util_hdf.html#wlan_exp.log.util_hdf.np_arrays_to_hdf5">[docs]</a><span class="k">def</span> <span class="nf">np_arrays_to_hdf5</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">np_log_dict</span><span class="p">,</span> <span class="n">attr_dict</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">compression</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Generate an HDF5 file from numpy arrays. </span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        filename (str):                Name of HDF5 file to open</span>
+<span class="sd">        np_log_dict (Numpy Array):     Numpy array to add to the HDF5 file    </span>
+<span class="sd">        attr_dict (dict, optional):    A dictionary of user provided attributes that will be added to the HDF5 file.</span>
+<span class="sd">        compression (bool, optional):  HDF5 compression setting on the log container</span>
+<span class="sd">    </span>
+<span class="sd">    The np_log_dict input must be either:</span>
+<span class="sd">        #. A dictionary with numpy record arrays as values; each array will be a dataset in </span>
+<span class="sd">           the HDF5 file root group</span>
+<span class="sd">        #. A dictionary of dictionaries like (1); each top-level value will be a group in the </span>
+<span class="sd">           root HDF5 group, each numpy array will be a dataset in the group.</span>
+<span class="sd">    </span>
+<span class="sd">    **attr_dict** is optional. If provied, values in attr_dict will be copied to HDF5</span>
+<span class="sd">    group and dataset attributes. attr_dict values with keys matching np_log_dict keys</span>
+<span class="sd">    will be used as dataset attributes named ``&#39;&lt;the_key&gt;_INFO&#39;``.  Attribute dictionary</span>
+<span class="sd">    entries may have an extra value with key ``&#39;/&#39;``, which will be used as the value for a </span>
+<span class="sd">    group attribute named ``&#39;INFO&#39;``.</span>
+<span class="sd">    </span>
+<span class="sd">    Examples:</span>
+<span class="sd">    ::</span>
+
+<span class="sd">        # No groups - all datasets in root group</span>
+<span class="sd">        np_log_dict = {</span>
+<span class="sd">            &#39;RX_OFDM&#39;:  np_array_of_rx_etries,</span>
+<span class="sd">            &#39;TX_HIGH&#39;:  np_array_of_tx_entries</span>
+<span class="sd">        }</span>
+
+<span class="sd">        attr_dict = {</span>
+<span class="sd">            &#39;/&#39;:        &#39;Data from some_log_file.bin, node serial number W3-a-00001, written on 2014-03-18&#39;,</span>
+<span class="sd">            &#39;RX_OFDM&#39;:  &#39;Filtered Rx OFDM events, only good FCS receptions&#39;,</span>
+<span class="sd">            &#39;TX_HIGH&#39;:  &#39;Filtered Tx events, only DATA packets&#39;</span>
+<span class="sd">        }</span>
+<span class="sd">    </span>
+<span class="sd">        # Two groups, with two datasets in each group</span>
+<span class="sd">        np_log_dict = {</span>
+<span class="sd">            &#39;Log_Node_A&#39;: {</span>
+<span class="sd">                &#39;RX_OFDM&#39;:  np_array_of_rx_etries_A,</span>
+<span class="sd">                &#39;TX_HIGH&#39;:  np_array_of_tx_entries_A</span>
+<span class="sd">            },</span>
+<span class="sd">            &#39;Log_Node_B&#39;: {</span>
+<span class="sd">                &#39;RX_OFDM&#39;:  np_array_of_rx_etries_B,</span>
+<span class="sd">                &#39;TX_HIGH&#39;:  np_array_of_tx_entries_B</span>
+<span class="sd">            }</span>
+<span class="sd">        }</span>
+
+<span class="sd">        attr_dict = {</span>
+<span class="sd">            &#39;/&#39;:        &#39;Written on 2014-03-18&#39;,</span>
+<span class="sd">            &#39;Log_Node_A&#39;: {</span>
+<span class="sd">                &#39;/&#39;:        &#39;Data from node_A_log_file.bin, node serial number W3-a-00001&#39;,</span>
+<span class="sd">                &#39;RX_OFDM&#39;:  &#39;Filtered Rx OFDM events, only good FCS receptions&#39;,</span>
+<span class="sd">                &#39;TX_HIGH&#39;:  &#39;Filtered Tx events, only DATA packets&#39;</span>
+<span class="sd">            }</span>
+<span class="sd">            &#39;Log_Node_B&#39;: {</span>
+<span class="sd">                &#39;/&#39;:        &#39;Data from node_B_log_file.bin, node serial number W3-a-00002&#39;,</span>
+<span class="sd">                &#39;RX_OFDM&#39;:  &#39;Filtered Rx OFDM events, only good FCS receptions&#39;,</span>
+<span class="sd">                &#39;TX_HIGH&#39;:  &#39;Filtered Tx events, only DATA packets&#39;</span>
+<span class="sd">            }</span>
+<span class="sd">        }</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">h5py</span>
+
+    <span class="n">dk</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">np_log_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+
+    <span class="n">h5_filename</span> <span class="o">=</span> <span class="n">log_util</span><span class="o">.</span><span class="n">_get_safe_filename</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+    <span class="n">hf</span> <span class="o">=</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">h5_filename</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s">&#39;w&#39;</span><span class="p">)</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c"># Copy any user-supplied attributes to root group</span>
+        <span class="c">#   h5py uses the h5py.File handle to access the file itself and the root group</span>
+        <span class="n">hf</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s">&#39;INFO&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">attr_dict</span><span class="p">[</span><span class="s">&#39;/&#39;</span><span class="p">]</span>
+    <span class="k">except</span> <span class="p">(</span><span class="ne">KeyError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">):</span>
+        <span class="c"># TypeError - attrs dictionary does not exist</span>
+        <span class="c"># KeyError - attrs dictionary exists but key does not</span>
+        <span class="k">pass</span>
+
+    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">np_log_dict</span><span class="p">[</span><span class="n">dk</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span> <span class="ow">is</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="c"># np_log_dict is dictionary-of-dictionaries</span>
+        <span class="c"># Create an HDF5 file with one group per value in np_log_dict</span>
+        <span class="c">#   with one dataset per value in np_log_dict[each key]</span>
+        <span class="c"># This is a good structure for one dictionary containing one key-value</span>
+        <span class="c">#   per parsed log file, where the key is the log file name and the</span>
+        <span class="c">#   value is another dictionary containing the log entry arrays</span>
+
+        <span class="k">for</span> <span class="n">grp_k</span> <span class="ow">in</span> <span class="n">np_log_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="c"># Create one group per log file, using log file name as group name</span>
+            <span class="n">grp</span> <span class="o">=</span> <span class="n">hf</span><span class="o">.</span><span class="n">create_group</span><span class="p">(</span><span class="n">grp_k</span><span class="p">)</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">grp</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s">&#39;INFO&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">attr_dict</span><span class="p">[</span><span class="n">grp_k</span><span class="p">][</span><span class="s">&#39;/&#39;</span><span class="p">]</span>
+            <span class="k">except</span> <span class="p">(</span><span class="ne">KeyError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">):</span>
+                <span class="k">pass</span>
+
+            <span class="k">for</span> <span class="n">arr_k</span> <span class="ow">in</span> <span class="n">np_log_dict</span><span class="p">[</span><span class="n">grp_k</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="c"># Create one dataset per numpy array of log data</span>
+                <span class="n">ds</span> <span class="o">=</span> <span class="n">grp</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="n">arr_k</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">np_log_dict</span><span class="p">[</span><span class="n">grp_k</span><span class="p">][</span><span class="n">arr_k</span><span class="p">],</span> <span class="n">compression</span><span class="o">=</span><span class="n">compression</span><span class="p">)</span>
+
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">ds</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="n">arr_k</span> <span class="o">+</span> <span class="s">&#39;_INFO&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">attr_dict</span><span class="p">[</span><span class="n">grp_k</span><span class="p">][</span><span class="n">arr_k</span><span class="p">]</span>
+                <span class="k">except</span> <span class="p">(</span><span class="ne">KeyError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">):</span>
+                    <span class="k">pass</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c"># np_log_dict is dictionary-of-arrays</span>
+        <span class="c">#   Create HDF5 file with datasets in root, one per np_log_dict[each key]</span>
+
+        <span class="k">for</span> <span class="n">arr_k</span> <span class="ow">in</span> <span class="n">np_log_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="c"># Create one dataset per numpy array of log data</span>
+            <span class="n">ds</span> <span class="o">=</span> <span class="n">hf</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="n">arr_k</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">np_log_dict</span><span class="p">[</span><span class="n">arr_k</span><span class="p">],</span> <span class="n">compression</span><span class="o">=</span><span class="n">compression</span><span class="p">)</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">ds</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="n">arr_k</span> <span class="o">+</span> <span class="s">&#39;_INFO&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">attr_dict</span><span class="p">[</span><span class="n">arr_k</span><span class="p">]</span>
+            <span class="k">except</span> <span class="p">(</span><span class="ne">KeyError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">):</span>
+                <span class="k">pass</span>
+    <span class="n">hf</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">return</span>
+
+<span class="c"># End np_arrays_to_hdf5()</span>
+</pre></div></div>
+
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Mango Communications, Inc..
+    </p>
+  </div>
+
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'wlan_exp v1.5.2  ',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

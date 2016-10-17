@@ -1,0 +1,3 @@
+PROCESSOR=mb_high
+REPOSITORIES=-lp C:/Users/egagali/software/Mango_802.11_RefDes_v1.5.2_sniffer_dca/EDK_Projects/Mango_802.11_RefDes_v1.5.2 -lp C:/WARP_Repository_v1.5.2/edk_user_repository
+HWSPEC=../Mango_802.11_RefDes_v1.5.2_hw_platform/system.xml
