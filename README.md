@@ -151,8 +151,65 @@ This is a description for all functionalities that were developed during the res
 - Mango_802.11_RefDes_v1.5.2
   It is a newer version of the Reference Design 802.11 by Mango Communications. It includes the same functionalities added
   into the software Mango_802.11_RefDes_v1.3.0, adapted to the new software architecture.
-  In addition, a new funtionality is included into STA subproject.
+  
+  AP Reference Design Modification:
+  
+  A new functionality is included in the AP UART menu
+  
+                    ********************** AP Menu **********************
+                    [1]   - Interactive AP Status
+                    [2]   - Print Queue Status
+                    [3]   - Print all Observed Statistics
 
+                    [a]   - Display Network List
+                    [c/C] - Change radio channel
+                    [t]   - Toggle radio channel 36/48
+                    *****************************************************
+  
+  [t] - Toggle radio channel 36/48. The AP changes its operation channel from CH 36 to CH 48 and vice versa. If the 
+  operation is neither CH 36 nor CH 48, when pushing 't' in the keyboard, the AP will change to CH 36.
+  This is implemented because we will have a preferred channel (CH 36) to which allocate all clients, but we will
+  move the AP to CH 48, in certain situations. This is only used for demonstration purposes.
+  
+  STA Reference Design Modification:
+  
+  In addition, a new funtionality is included into the STA subproject. In case the AP changes its operation channel, the 
+  commercial STAs, previously associated, will automatically re-associate to the same AP at the new channel. This may be 
+  done following two different approaches:
+  
+      - Channel Switch Assignment (CSA) protocol, defined by the standard IEEE802.11
+      - Establishing a preferred SSID to associate with
+      
+   For the purpose of this study, the easiest solution was to establish a preferred SSID or BSSID to associate with.
+   The WARP STA always tries a startup association with a default SSID defined into the code. If this association is
+   successful, then it will retrieve also the AP BSSID.
+   
+   The STA UART menu can be seen below:
+   
+                    ********************** Station Menu **********************
+                    [1] - Interactive Station Status
+                    [2] - Print all Observed Statistics
+                    [3] - Enable/Disable automatic association
+
+                    [a] - Display network list
+                    [j] - Join a network
+                    [s] - Toggle active scan
+                    **********************************************************
+                    
+    [3] - Enable/Disable automatic association was added. This schedules a function to check every two seconds that STA is
+    associated with an AP. In case that STA is not associated to any AP, it will perform different tasks based on different
+    situations:
+    
+        - If there was a startup association, the AP BSSID was retrieved. With the SSID, BSSID and the WiFi channel of
+          the AP the STA perform a passive scan to re-associate with the AP.
+          
+        - If there was a startup association, but we do not know to what WiFi channel the AP switched to, therefore the STA 
+          performs an active scan to re-associate with the AP.
+    
+    The demonstration of this functionality with traffic flows can be seen at the link below:
+    https://www.youtube.com/watch?v=ZKTEMk8PVzA
+    
+    
  
 The main goal of this project was to:
 - Develop a sniffer which is able to calculate the channel occupancy in terms of percentage over a measurement time period.
