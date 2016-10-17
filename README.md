@@ -209,19 +209,71 @@ This is a description for all functionalities that were developed during the res
     The demonstration of this functionality with traffic flows can be seen at the link below:
     https://www.youtube.com/watch?v=ZKTEMk8PVzA
     
-    
- 
-The main goal of this project was to:
-- Develop a sniffer which is able to calculate the channel occupancy in terms of percentage over a measurement time period.
-- Characterize the wireless channel state based on the aforementioned metric:
+- Mango_802.11_RefDes_v1.5.2_sniffer
+  This software implements exactly the same as Mango_802.11_RefDes_v1.3.0_sniffer adapted to the new software architecture.
+  It also extends the user for amendment 802.11n.
+  
+- Mango_802.11_RefDes_v1.5.2_sniffer_dca
+  This software integrates a simplified version of the sniffer at Mango_802.11_RefDes_v1.5.2_sniffer, within the AP. So 
+  that, the AP is able to run in the background measurements and CH_UTIL assesment. There is not user distinction.
+  
+  The AP UART menu is depicted below:
+  
+                    ****************** AP/Sniffer Menu ******************
+                    [1]   - Interactive AP Status
+                    [2]   - Print Queue Status
+                    [3]   - Print all Observed Statistics
+                    [4]   - Scan channel traffic
+                    [5]   - Channel Utilization
+                    [6]   - Enable/Disable channel allocation
+                    
+                    [a]   - Display Network List
+                    [c/C] - Change radio channel
+                    [t]   - Toggle radio channel 36/48
+                    *****************************************************
+                    
+  [5] - Channel Utilization. This will activate the sniffer mode, so in addition to serve as AP, the device will analyze
+  the channel traffic conditions, each 1 second. Next it is a capture of a real measurement when option [5] is pushed.
+  
+                    ----------------------------------------
+                    Time elapsed:               1000056 us
+                    Channel utilization:        40.24 %
+                    Channel:                    36
+                    ----------------------------------------
+                    CH UTIL: 40, 40, 40
+                    Channel Status: CH_TRAFFIC_LIGHT
+                    
+   For each three Channel Utilization calculations, the wireless channel state is assigned based on the following   
+   thresholds:
+  
       - IDLE: CH_UTIL < 5%
       - LIGHT TRAFFIC: 5% < CH_UTIL < 60%
-      - HEAVY TRAFFIC: CH_UTIL > 60%
-- Perform dynamic channel allocation for APs, based on the wireless channel state. Specifically, if the channel state is HEAVY
-  TRAFFIC over at least 3 seconds, the AP automatically migrates to another WiFi channel where the traffic is less. Previously
-  associated STAs will perform automatic reassociation to the AP at the new channel.
+      - HEAVY TRAFFIC: CH_UTIL > 60% 
+        In this case the AP will automatically migrate to another channel that we know it does not have traffic congestion,
+        for this solution, from CH 36 to CH 48 or vice versa.
+      
+  The channel state does not change unless the traffic is stable during at least 3 seconds. This is to avoid that the AP 
+  migrates to another channel in the presence of traffic peaks along short periods of time.
+  
+- Mango_802.11_RefDes_v1.5.2_sniffer_ctrl
+  This software implements exactly the same as Mango_802.11_RefDes_v1.5.2_sniffer, but it has a difference with respect to 
+  it.
+  
+  This sniffer includes also captures of control frames into the channel utilization calculation (ACKs). In the previous 
+  design the calculations of this metric always assumed that whenever a DATA frame was captured, the 
+  transmission time of an ACK was added to the total time for that the channel is occuppied. On the contrary, this design 
+  takes into account the channel occupancy time of a control frame only if it is captured.
+  
+- Mango_802.11_RefDes_v1.5.2_sniffer_dca_ctrl
+  This software is the same as the one defined in Mango_802.11_RefDes_v1.5.2_sniffer_dca, but it also takes into account the
+  channel occupancy time of a control frame only if it is captured.
   
   
+The main purpose of this project was to build up a WiFi prototype device compatible with 802.11n/a/g which is able to measure the percentage of a WiFi channel being used at a certain time instant. Then the next step was to find an application
+to this metric. 
+
+
+
 The basic scenario to use the sniffer capabilities is depicted below:
 
 
