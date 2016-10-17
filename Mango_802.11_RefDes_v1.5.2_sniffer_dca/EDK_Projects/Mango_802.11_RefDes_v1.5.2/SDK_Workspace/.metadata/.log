@@ -1,0 +1,683 @@
+!SESSION 2016-07-06 17:48:44.939 -----------------------------------------------
+eclipse.buildId=Release 14.4 Build SDK_P.49d
+java.version=1.6.0_21
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=sv_SE
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY org.eclipse.cdt.core 1 0 2016-07-06 17:50:58.426
+!MESSAGE Indexed 'wlan_bsp_cpu_high' (0 sources, 8 headers) in 0,26 sec: 0 declarations; 0 references; 8 unresolved inclusions; 0 syntax errors; 0 unresolved names (0,00 %)
+
+!ENTRY org.eclipse.cdt.core 1 0 2016-07-06 17:51:03.501
+!MESSAGE Indexed 'wlan_mac_high_ap' (26 sources, 63 headers) in 4,46 sec: 5 448 declarations; 20 398 references; 96 unresolved inclusions; 0 syntax errors; 2 537 unresolved names (8,94 %)
+
+!ENTRY org.eclipse.cdt.core 1 0 2016-07-06 17:51:05.245
+!MESSAGE Indexed 'wlan_mac_high_sta' (27 sources, 64 headers) in 1,70 sec: 5 401 declarations; 19 298 references; 98 unresolved inclusions; 0 syntax errors; 2 483 unresolved names (9,13 %)
+
+!ENTRY org.eclipse.cdt.core 1 0 2016-07-06 17:51:05.345
+!MESSAGE Indexed 'wlan_bsp_cpu_low' (0 sources, 8 headers) in 0,08 sec: 0 declarations; 0 references; 8 unresolved inclusions; 0 syntax errors; 0 unresolved names (0,00 %)
+
+!ENTRY org.eclipse.cdt.core 1 0 2016-07-06 17:51:05.840
+!MESSAGE Indexed 'wlan_mac_low_nomac' (9 sources, 41 headers) in 0,48 sec: 2 751 declarations; 4 430 references; 43 unresolved inclusions; 0 syntax errors; 1 077 unresolved names (13,04 %)
+
+!ENTRY org.eclipse.cdt.core 1 0 2016-07-06 17:51:07.393
+!MESSAGE Indexed 'wlan_mac_high_ibss' (26 sources, 63 headers) in 1,53 sec: 5 332 declarations; 19 108 references; 95 unresolved inclusions; 0 syntax errors; 2 464 unresolved names (9,16 %)
+
+!ENTRY org.eclipse.cdt.core 1 0 2016-07-06 17:51:07.892
+!MESSAGE Indexed 'wlan_mac_low_dcf' (9 sources, 41 headers) in 0,48 sec: 2 928 declarations; 6 230 references; 43 unresolved inclusions; 0 syntax errors; 1 290 unresolved names (12,35 %)
+!SESSION 2016-07-06 18:08:40.421 -----------------------------------------------
+eclipse.buildId=Release 14.4 Build SDK_P.49d
+java.version=1.6.0_21
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=sv_SE
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY org.eclipse.debug.ui 4 0 2016-07-06 19:12:25.930
+!MESSAGE Launch shortcut 'com.xilinx.sdk.debug.ui.launchShortcut' enablement expression caused exception. Shortcut was removed.
+!STACK 1
+org.eclipse.core.runtime.CoreException: No property tester contributes a property com.xilinx.sdk.tools.namespace.propertytester.XCProject to type class org.eclipse.core.internal.resources.File
+	at org.eclipse.core.internal.expressions.TypeExtensionManager.getProperty(TypeExtensionManager.java:123)
+	at org.eclipse.core.internal.expressions.TestExpression.evaluate(TestExpression.java:96)
+	at org.eclipse.core.internal.expressions.CompositeExpression.evaluateOr(CompositeExpression.java:68)
+	at org.eclipse.core.internal.expressions.OrExpression.evaluate(OrExpression.java:21)
+	at org.eclipse.core.internal.expressions.CompositeExpression.evaluateAnd(CompositeExpression.java:53)
+	at org.eclipse.core.internal.expressions.IterateExpression.evaluate(IterateExpression.java:150)
+	at org.eclipse.core.internal.expressions.CompositeExpression.evaluateAnd(CompositeExpression.java:53)
+	at org.eclipse.core.internal.expressions.WithExpression.evaluate(WithExpression.java:72)
+	at org.eclipse.core.internal.expressions.CompositeExpression.evaluateAnd(CompositeExpression.java:53)
+	at org.eclipse.core.internal.expressions.EnablementExpression.evaluate(EnablementExpression.java:53)
+	at org.eclipse.debug.internal.ui.launchConfigurations.LaunchShortcutExtension.evalEnablementExpression(LaunchShortcutExtension.java:287)
+	at org.eclipse.debug.internal.ui.launchConfigurations.LaunchConfigurationManager.getApplicableConfigurationTypes(LaunchConfigurationManager.java:744)
+	at org.eclipse.debug.internal.ui.launchConfigurations.LaunchConfigurationManager.getApplicableLaunchConfigurations(LaunchConfigurationManager.java:780)
+	at org.eclipse.debug.internal.ui.contextlaunching.LaunchingResourceManager.getParticipatingLaunchConfigurations(LaunchingResourceManager.java:506)
+	at org.eclipse.debug.internal.ui.contextlaunching.LaunchingResourceManager.getLabel(LaunchingResourceManager.java:320)
+	at org.eclipse.debug.internal.ui.contextlaunching.LaunchingResourceManager.computeLabels(LaunchingResourceManager.java:241)
+	at org.eclipse.debug.internal.ui.contextlaunching.LaunchingResourceManager$2.run(LaunchingResourceManager.java:138)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+!SUBENTRY 1 org.eclipse.core.expressions 4 201 2016-07-06 19:12:25.932
+!MESSAGE No property tester contributes a property com.xilinx.sdk.tools.namespace.propertytester.XCProject to type class org.eclipse.core.internal.resources.File
+!SESSION 2016-07-07 10:42:36.096 -----------------------------------------------
+eclipse.buildId=Release 14.4 Build SDK_P.49d
+java.version=1.6.0_21
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=sv_SE
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY org.eclipse.debug.ui 4 0 2016-07-07 11:38:42.251
+!MESSAGE Launch shortcut 'com.xilinx.sdk.debug.ui.launchShortcut' enablement expression caused exception. Shortcut was removed.
+!STACK 1
+org.eclipse.core.runtime.CoreException: No property tester contributes a property com.xilinx.sdk.tools.namespace.propertytester.XCProject to type class org.eclipse.core.internal.resources.File
+	at org.eclipse.core.internal.expressions.TypeExtensionManager.getProperty(TypeExtensionManager.java:123)
+	at org.eclipse.core.internal.expressions.TestExpression.evaluate(TestExpression.java:96)
+	at org.eclipse.core.internal.expressions.CompositeExpression.evaluateOr(CompositeExpression.java:68)
+	at org.eclipse.core.internal.expressions.OrExpression.evaluate(OrExpression.java:21)
+	at org.eclipse.core.internal.expressions.CompositeExpression.evaluateAnd(CompositeExpression.java:53)
+	at org.eclipse.core.internal.expressions.IterateExpression.evaluate(IterateExpression.java:150)
+	at org.eclipse.core.internal.expressions.CompositeExpression.evaluateAnd(CompositeExpression.java:53)
+	at org.eclipse.core.internal.expressions.WithExpression.evaluate(WithExpression.java:72)
+	at org.eclipse.core.internal.expressions.CompositeExpression.evaluateAnd(CompositeExpression.java:53)
+	at org.eclipse.core.internal.expressions.EnablementExpression.evaluate(EnablementExpression.java:53)
+	at org.eclipse.debug.internal.ui.launchConfigurations.LaunchShortcutExtension.evalEnablementExpression(LaunchShortcutExtension.java:287)
+	at org.eclipse.debug.internal.ui.launchConfigurations.LaunchConfigurationManager.getApplicableConfigurationTypes(LaunchConfigurationManager.java:744)
+	at org.eclipse.debug.internal.ui.launchConfigurations.LaunchConfigurationManager.getApplicableLaunchConfigurations(LaunchConfigurationManager.java:780)
+	at org.eclipse.debug.internal.ui.contextlaunching.LaunchingResourceManager.getParticipatingLaunchConfigurations(LaunchingResourceManager.java:506)
+	at org.eclipse.debug.internal.ui.contextlaunching.LaunchingResourceManager.getLabel(LaunchingResourceManager.java:320)
+	at org.eclipse.debug.internal.ui.contextlaunching.LaunchingResourceManager.computeLabels(LaunchingResourceManager.java:241)
+	at org.eclipse.debug.internal.ui.contextlaunching.LaunchingResourceManager$2.run(LaunchingResourceManager.java:138)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+!SUBENTRY 1 org.eclipse.core.expressions 4 201 2016-07-07 11:38:42.251
+!MESSAGE No property tester contributes a property com.xilinx.sdk.tools.namespace.propertytester.XCProject to type class org.eclipse.core.internal.resources.File
+!SESSION 2016-07-07 14:47:37.013 -----------------------------------------------
+eclipse.buildId=Release 14.4 Build SDK_P.49d
+java.version=1.6.0_21
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=sv_SE
+Command-line arguments:  -data C:\Users\egagali\src\Mango_802.11_RefDes_v1.5.2_sniffer\EDK_Projects\Mango_802.11_RefDes_v1.5.2\SDK_Workspace -os win32 -ws win32 -arch x86_64
+
+!ENTRY org.eclipse.core.resources 2 10035 2016-07-07 14:47:38.057
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.eclipse.debug.ui 4 0 2016-07-07 15:41:36.016
+!MESSAGE Launch shortcut 'com.xilinx.sdk.debug.ui.launchShortcut' enablement expression caused exception. Shortcut was removed.
+!STACK 1
+org.eclipse.core.runtime.CoreException: No property tester contributes a property com.xilinx.sdk.tools.namespace.propertytester.XCProject to type class org.eclipse.core.internal.resources.File
+	at org.eclipse.core.internal.expressions.TypeExtensionManager.getProperty(TypeExtensionManager.java:123)
+	at org.eclipse.core.internal.expressions.TestExpression.evaluate(TestExpression.java:96)
+	at org.eclipse.core.internal.expressions.CompositeExpression.evaluateOr(CompositeExpression.java:68)
+	at org.eclipse.core.internal.expressions.OrExpression.evaluate(OrExpression.java:21)
+	at org.eclipse.core.internal.expressions.CompositeExpression.evaluateAnd(CompositeExpression.java:53)
+	at org.eclipse.core.internal.expressions.IterateExpression.evaluate(IterateExpression.java:150)
+	at org.eclipse.core.internal.expressions.CompositeExpression.evaluateAnd(CompositeExpression.java:53)
+	at org.eclipse.core.internal.expressions.WithExpression.evaluate(WithExpression.java:72)
+	at org.eclipse.core.internal.expressions.CompositeExpression.evaluateAnd(CompositeExpression.java:53)
+	at org.eclipse.core.internal.expressions.EnablementExpression.evaluate(EnablementExpression.java:53)
+	at org.eclipse.debug.internal.ui.launchConfigurations.LaunchShortcutExtension.evalEnablementExpression(LaunchShortcutExtension.java:287)
+	at org.eclipse.debug.internal.ui.launchConfigurations.LaunchConfigurationManager.getApplicableConfigurationTypes(LaunchConfigurationManager.java:744)
+	at org.eclipse.debug.internal.ui.launchConfigurations.LaunchConfigurationManager.getApplicableLaunchConfigurations(LaunchConfigurationManager.java:780)
+	at org.eclipse.debug.internal.ui.contextlaunching.LaunchingResourceManager.getParticipatingLaunchConfigurations(LaunchingResourceManager.java:506)
+	at org.eclipse.debug.internal.ui.contextlaunching.LaunchingResourceManager.getLabel(LaunchingResourceManager.java:320)
+	at org.eclipse.debug.internal.ui.contextlaunching.LaunchingResourceManager.computeLabels(LaunchingResourceManager.java:241)
+	at org.eclipse.debug.internal.ui.contextlaunching.LaunchingResourceManager$2.run(LaunchingResourceManager.java:138)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+!SUBENTRY 1 org.eclipse.core.expressions 4 201 2016-07-07 15:41:36.016
+!MESSAGE No property tester contributes a property com.xilinx.sdk.tools.namespace.propertytester.XCProject to type class org.eclipse.core.internal.resources.File
+!SESSION 2016-07-08 13:38:24.596 -----------------------------------------------
+eclipse.buildId=Release 14.4 Build SDK_P.49d
+java.version=1.6.0_21
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=sv_SE
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY org.eclipse.debug.ui 4 0 2016-07-08 14:54:21.308
+!MESSAGE Launch shortcut 'com.xilinx.sdk.debug.ui.launchShortcut' enablement expression caused exception. Shortcut was removed.
+!STACK 1
+org.eclipse.core.runtime.CoreException: No property tester contributes a property com.xilinx.sdk.tools.namespace.propertytester.XCProject to type class org.eclipse.core.internal.resources.File
+	at org.eclipse.core.internal.expressions.TypeExtensionManager.getProperty(TypeExtensionManager.java:123)
+	at org.eclipse.core.internal.expressions.TestExpression.evaluate(TestExpression.java:96)
+	at org.eclipse.core.internal.expressions.CompositeExpression.evaluateOr(CompositeExpression.java:68)
+	at org.eclipse.core.internal.expressions.OrExpression.evaluate(OrExpression.java:21)
+	at org.eclipse.core.internal.expressions.CompositeExpression.evaluateAnd(CompositeExpression.java:53)
+	at org.eclipse.core.internal.expressions.IterateExpression.evaluate(IterateExpression.java:150)
+	at org.eclipse.core.internal.expressions.CompositeExpression.evaluateAnd(CompositeExpression.java:53)
+	at org.eclipse.core.internal.expressions.WithExpression.evaluate(WithExpression.java:72)
+	at org.eclipse.core.internal.expressions.CompositeExpression.evaluateAnd(CompositeExpression.java:53)
+	at org.eclipse.core.internal.expressions.EnablementExpression.evaluate(EnablementExpression.java:53)
+	at org.eclipse.debug.internal.ui.launchConfigurations.LaunchShortcutExtension.evalEnablementExpression(LaunchShortcutExtension.java:287)
+	at org.eclipse.debug.internal.ui.launchConfigurations.LaunchConfigurationManager.getApplicableConfigurationTypes(LaunchConfigurationManager.java:744)
+	at org.eclipse.debug.internal.ui.launchConfigurations.LaunchConfigurationManager.getApplicableLaunchConfigurations(LaunchConfigurationManager.java:780)
+	at org.eclipse.debug.internal.ui.contextlaunching.LaunchingResourceManager.getParticipatingLaunchConfigurations(LaunchingResourceManager.java:506)
+	at org.eclipse.debug.internal.ui.contextlaunching.LaunchingResourceManager.getLabel(LaunchingResourceManager.java:320)
+	at org.eclipse.debug.internal.ui.contextlaunching.LaunchingResourceManager.computeLabels(LaunchingResourceManager.java:241)
+	at org.eclipse.debug.internal.ui.contextlaunching.LaunchingResourceManager$2.run(LaunchingResourceManager.java:138)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+!SUBENTRY 1 org.eclipse.core.expressions 4 201 2016-07-08 14:54:21.309
+!MESSAGE No property tester contributes a property com.xilinx.sdk.tools.namespace.propertytester.XCProject to type class org.eclipse.core.internal.resources.File
+!SESSION 2016-07-12 16:44:44.420 -----------------------------------------------
+eclipse.buildId=Release 14.4 Build SDK_P.49d
+java.version=1.6.0_21
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=sv_SE
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY org.eclipse.ui.navigator 4 2 2016-07-12 16:48:35.365
+!MESSAGE Problems occurred when invoking code from plug-in: "org.eclipse.ui.navigator".
+!STACK 0
+java.lang.NullPointerException
+	at com.xilinx.sdk.sw.ui.navigator.DocRoot.getOs(Unknown Source)
+	at com.xilinx.sdk.sw.ui.navigator.DocRoot.getSwComponents(Unknown Source)
+	at com.xilinx.sdk.sw.ui.navigator.DocRoot.initialize(Unknown Source)
+	at com.xilinx.sdk.sw.ui.navigator.BSPDocContentProvider.getChildren(Unknown Source)
+	at org.eclipse.ui.internal.navigator.extensions.SafeDelegateTreeContentProvider.getChildren(SafeDelegateTreeContentProvider.java:96)
+	at org.eclipse.ui.internal.navigator.extensions.SafeDelegateTreeContentProvider.getChildren(SafeDelegateTreeContentProvider.java:275)
+	at org.eclipse.ui.internal.navigator.extensions.SafeDelegateTreeContentProvider.getChildren(SafeDelegateTreeContentProvider.java:94)
+	at org.eclipse.ui.internal.navigator.NavigatorContentServiceContentProvider$1.run(NavigatorContentServiceContentProvider.java:150)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.ui.internal.navigator.NavigatorContentServiceContentProvider.internalGetChildren(NavigatorContentServiceContentProvider.java:137)
+	at org.eclipse.ui.internal.navigator.NavigatorContentServiceContentProvider.getChildren(NavigatorContentServiceContentProvider.java:123)
+	at org.eclipse.jface.viewers.AbstractTreeViewer.getRawChildren(AbstractTreeViewer.java:1348)
+	at org.eclipse.jface.viewers.TreeViewer.getRawChildren(TreeViewer.java:391)
+	at org.eclipse.jface.viewers.StructuredViewer.getFilteredChildren(StructuredViewer.java:896)
+	at org.eclipse.jface.viewers.AbstractTreeViewer.getSortedChildren(AbstractTreeViewer.java:601)
+	at org.eclipse.jface.viewers.AbstractTreeViewer$1.run(AbstractTreeViewer.java:799)
+	at org.eclipse.swt.custom.BusyIndicator.showWhile(BusyIndicator.java:70)
+	at org.eclipse.jface.viewers.AbstractTreeViewer.createChildren(AbstractTreeViewer.java:778)
+	at org.eclipse.jface.viewers.TreeViewer.createChildren(TreeViewer.java:644)
+	at org.eclipse.jface.viewers.AbstractTreeViewer.createChildren(AbstractTreeViewer.java:749)
+	at org.eclipse.jface.viewers.AbstractTreeViewer.handleTreeExpand(AbstractTreeViewer.java:1444)
+	at org.eclipse.jface.viewers.TreeViewer.handleTreeExpand(TreeViewer.java:952)
+	at org.eclipse.jface.viewers.AbstractTreeViewer$4.treeExpanded(AbstractTreeViewer.java:1455)
+	at org.eclipse.swt.widgets.TypedListener.handleEvent(TypedListener.java:132)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:84)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1053)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1077)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1062)
+	at org.eclipse.swt.widgets.Tree.wmNotifyChild(Tree.java:7408)
+	at org.eclipse.swt.widgets.Control.wmNotify(Control.java:5098)
+	at org.eclipse.swt.widgets.Composite.wmNotify(Composite.java:1887)
+	at org.eclipse.swt.widgets.Control.WM_NOTIFY(Control.java:4728)
+	at org.eclipse.swt.widgets.Control.windowProc(Control.java:4217)
+	at org.eclipse.swt.widgets.Display.windowProc(Display.java:4873)
+	at org.eclipse.swt.internal.win32.OS.CallWindowProcW(Native Method)
+	at org.eclipse.swt.internal.win32.OS.CallWindowProc(OS.java:2362)
+	at org.eclipse.swt.widgets.Tree.callWindowProc(Tree.java:1536)
+	at org.eclipse.swt.widgets.Tree.WM_LBUTTONDOWN(Tree.java:6303)
+	at org.eclipse.swt.widgets.Control.windowProc(Control.java:4197)
+	at org.eclipse.swt.widgets.Tree.windowProc(Tree.java:5844)
+	at org.eclipse.swt.widgets.Display.windowProc(Display.java:4873)
+	at org.eclipse.swt.internal.win32.OS.DispatchMessageW(Native Method)
+	at org.eclipse.swt.internal.win32.OS.DispatchMessage(OS.java:2459)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3655)
+	at org.eclipse.ui.internal.Workbench.runEventLoop(Workbench.java:2640)
+	at org.eclipse.ui.internal.Workbench.runUI(Workbench.java:2604)
+	at org.eclipse.ui.internal.Workbench.access$4(Workbench.java:2438)
+	at org.eclipse.ui.internal.Workbench$7.run(Workbench.java:671)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:664)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:149)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:115)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:110)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:79)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:369)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:179)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:620)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:575)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1408)
+	at org.eclipse.equinox.launcher.Main.main(Main.java:1384)
+
+!ENTRY org.eclipse.ui.navigator 4 0 2016-07-12 16:48:35.381
+!MESSAGE An exception occurred invoking extension: com.xilinx.sdk.sw.ui.BSPDocContent for object P/wlan_bsp_cpu_high
+!STACK 0
+java.lang.NullPointerException
+	at com.xilinx.sdk.sw.ui.navigator.DocRoot.getOs(Unknown Source)
+	at com.xilinx.sdk.sw.ui.navigator.DocRoot.getSwComponents(Unknown Source)
+	at com.xilinx.sdk.sw.ui.navigator.DocRoot.initialize(Unknown Source)
+	at com.xilinx.sdk.sw.ui.navigator.BSPDocContentProvider.getChildren(Unknown Source)
+	at org.eclipse.ui.internal.navigator.extensions.SafeDelegateTreeContentProvider.getChildren(SafeDelegateTreeContentProvider.java:96)
+	at org.eclipse.ui.internal.navigator.extensions.SafeDelegateTreeContentProvider.getChildren(SafeDelegateTreeContentProvider.java:275)
+	at org.eclipse.ui.internal.navigator.extensions.SafeDelegateTreeContentProvider.getChildren(SafeDelegateTreeContentProvider.java:94)
+	at org.eclipse.ui.internal.navigator.NavigatorContentServiceContentProvider$1.run(NavigatorContentServiceContentProvider.java:150)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.ui.internal.navigator.NavigatorContentServiceContentProvider.internalGetChildren(NavigatorContentServiceContentProvider.java:137)
+	at org.eclipse.ui.internal.navigator.NavigatorContentServiceContentProvider.getChildren(NavigatorContentServiceContentProvider.java:123)
+	at org.eclipse.jface.viewers.AbstractTreeViewer.getRawChildren(AbstractTreeViewer.java:1348)
+	at org.eclipse.jface.viewers.TreeViewer.getRawChildren(TreeViewer.java:391)
+	at org.eclipse.jface.viewers.StructuredViewer.getFilteredChildren(StructuredViewer.java:896)
+	at org.eclipse.jface.viewers.AbstractTreeViewer.getSortedChildren(AbstractTreeViewer.java:601)
+	at org.eclipse.jface.viewers.AbstractTreeViewer$1.run(AbstractTreeViewer.java:799)
+	at org.eclipse.swt.custom.BusyIndicator.showWhile(BusyIndicator.java:70)
+	at org.eclipse.jface.viewers.AbstractTreeViewer.createChildren(AbstractTreeViewer.java:778)
+	at org.eclipse.jface.viewers.TreeViewer.createChildren(TreeViewer.java:644)
+	at org.eclipse.jface.viewers.AbstractTreeViewer.createChildren(AbstractTreeViewer.java:749)
+	at org.eclipse.jface.viewers.AbstractTreeViewer.handleTreeExpand(AbstractTreeViewer.java:1444)
+	at org.eclipse.jface.viewers.TreeViewer.handleTreeExpand(TreeViewer.java:952)
+	at org.eclipse.jface.viewers.AbstractTreeViewer$4.treeExpanded(AbstractTreeViewer.java:1455)
+	at org.eclipse.swt.widgets.TypedListener.handleEvent(TypedListener.java:132)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:84)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1053)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1077)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1062)
+	at org.eclipse.swt.widgets.Tree.wmNotifyChild(Tree.java:7408)
+	at org.eclipse.swt.widgets.Control.wmNotify(Control.java:5098)
+	at org.eclipse.swt.widgets.Composite.wmNotify(Composite.java:1887)
+	at org.eclipse.swt.widgets.Control.WM_NOTIFY(Control.java:4728)
+	at org.eclipse.swt.widgets.Control.windowProc(Control.java:4217)
+	at org.eclipse.swt.widgets.Display.windowProc(Display.java:4873)
+	at org.eclipse.swt.internal.win32.OS.CallWindowProcW(Native Method)
+	at org.eclipse.swt.internal.win32.OS.CallWindowProc(OS.java:2362)
+	at org.eclipse.swt.widgets.Tree.callWindowProc(Tree.java:1536)
+	at org.eclipse.swt.widgets.Tree.WM_LBUTTONDOWN(Tree.java:6303)
+	at org.eclipse.swt.widgets.Control.windowProc(Control.java:4197)
+	at org.eclipse.swt.widgets.Tree.windowProc(Tree.java:5844)
+	at org.eclipse.swt.widgets.Display.windowProc(Display.java:4873)
+	at org.eclipse.swt.internal.win32.OS.DispatchMessageW(Native Method)
+	at org.eclipse.swt.internal.win32.OS.DispatchMessage(OS.java:2459)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3655)
+	at org.eclipse.ui.internal.Workbench.runEventLoop(Workbench.java:2640)
+	at org.eclipse.ui.internal.Workbench.runUI(Workbench.java:2604)
+	at org.eclipse.ui.internal.Workbench.access$4(Workbench.java:2438)
+	at org.eclipse.ui.internal.Workbench$7.run(Workbench.java:671)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:664)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:149)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:115)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:110)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:79)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:369)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:179)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:620)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:575)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1408)
+	at org.eclipse.equinox.launcher.Main.main(Main.java:1384)
+
+!ENTRY org.eclipse.ui.navigator 4 2 2016-07-12 16:48:36.832
+!MESSAGE Problems occurred when invoking code from plug-in: "org.eclipse.ui.navigator".
+!STACK 0
+java.lang.NullPointerException
+	at com.xilinx.sdk.sw.ui.navigator.DocRoot.getOs(Unknown Source)
+	at com.xilinx.sdk.sw.ui.navigator.DocRoot.getSwComponents(Unknown Source)
+	at com.xilinx.sdk.sw.ui.navigator.DocRoot.initialize(Unknown Source)
+	at com.xilinx.sdk.sw.ui.navigator.BSPDocContentProvider.getChildren(Unknown Source)
+	at org.eclipse.ui.internal.navigator.extensions.SafeDelegateTreeContentProvider.getChildren(SafeDelegateTreeContentProvider.java:96)
+	at org.eclipse.ui.internal.navigator.extensions.SafeDelegateTreeContentProvider.getChildren(SafeDelegateTreeContentProvider.java:275)
+	at org.eclipse.ui.internal.navigator.extensions.SafeDelegateTreeContentProvider.getChildren(SafeDelegateTreeContentProvider.java:94)
+	at org.eclipse.ui.internal.navigator.NavigatorContentServiceContentProvider$1.run(NavigatorContentServiceContentProvider.java:150)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.ui.internal.navigator.NavigatorContentServiceContentProvider.internalGetChildren(NavigatorContentServiceContentProvider.java:137)
+	at org.eclipse.ui.internal.navigator.NavigatorContentServiceContentProvider.getChildren(NavigatorContentServiceContentProvider.java:123)
+	at org.eclipse.jface.viewers.AbstractTreeViewer.getRawChildren(AbstractTreeViewer.java:1348)
+	at org.eclipse.jface.viewers.TreeViewer.getRawChildren(TreeViewer.java:391)
+	at org.eclipse.jface.viewers.StructuredViewer.getFilteredChildren(StructuredViewer.java:896)
+	at org.eclipse.jface.viewers.AbstractTreeViewer.getSortedChildren(AbstractTreeViewer.java:601)
+	at org.eclipse.jface.viewers.AbstractTreeViewer$1.run(AbstractTreeViewer.java:799)
+	at org.eclipse.swt.custom.BusyIndicator.showWhile(BusyIndicator.java:70)
+	at org.eclipse.jface.viewers.AbstractTreeViewer.createChildren(AbstractTreeViewer.java:778)
+	at org.eclipse.jface.viewers.TreeViewer.createChildren(TreeViewer.java:644)
+	at org.eclipse.jface.viewers.AbstractTreeViewer.createChildren(AbstractTreeViewer.java:749)
+	at org.eclipse.jface.viewers.AbstractTreeViewer.handleTreeExpand(AbstractTreeViewer.java:1444)
+	at org.eclipse.jface.viewers.TreeViewer.handleTreeExpand(TreeViewer.java:952)
+	at org.eclipse.jface.viewers.AbstractTreeViewer$4.treeExpanded(AbstractTreeViewer.java:1455)
+	at org.eclipse.swt.widgets.TypedListener.handleEvent(TypedListener.java:132)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:84)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1053)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1077)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1062)
+	at org.eclipse.swt.widgets.Tree.wmNotifyChild(Tree.java:7408)
+	at org.eclipse.swt.widgets.Control.wmNotify(Control.java:5098)
+	at org.eclipse.swt.widgets.Composite.wmNotify(Composite.java:1887)
+	at org.eclipse.swt.widgets.Control.WM_NOTIFY(Control.java:4728)
+	at org.eclipse.swt.widgets.Control.windowProc(Control.java:4217)
+	at org.eclipse.swt.widgets.Display.windowProc(Display.java:4873)
+	at org.eclipse.swt.internal.win32.OS.CallWindowProcW(Native Method)
+	at org.eclipse.swt.internal.win32.OS.CallWindowProc(OS.java:2362)
+	at org.eclipse.swt.widgets.Tree.callWindowProc(Tree.java:1536)
+	at org.eclipse.swt.widgets.Tree.WM_LBUTTONDOWN(Tree.java:6303)
+	at org.eclipse.swt.widgets.Control.windowProc(Control.java:4197)
+	at org.eclipse.swt.widgets.Tree.windowProc(Tree.java:5844)
+	at org.eclipse.swt.widgets.Display.windowProc(Display.java:4873)
+	at org.eclipse.swt.internal.win32.OS.DispatchMessageW(Native Method)
+	at org.eclipse.swt.internal.win32.OS.DispatchMessage(OS.java:2459)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3655)
+	at org.eclipse.ui.internal.Workbench.runEventLoop(Workbench.java:2640)
+	at org.eclipse.ui.internal.Workbench.runUI(Workbench.java:2604)
+	at org.eclipse.ui.internal.Workbench.access$4(Workbench.java:2438)
+	at org.eclipse.ui.internal.Workbench$7.run(Workbench.java:671)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:664)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:149)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:115)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:110)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:79)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:369)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:179)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:620)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:575)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1408)
+	at org.eclipse.equinox.launcher.Main.main(Main.java:1384)
+
+!ENTRY org.eclipse.ui.navigator 4 0 2016-07-12 16:48:36.832
+!MESSAGE An exception occurred invoking extension: com.xilinx.sdk.sw.ui.BSPDocContent for object P/wlan_bsp_cpu_low
+!STACK 0
+java.lang.NullPointerException
+	at com.xilinx.sdk.sw.ui.navigator.DocRoot.getOs(Unknown Source)
+	at com.xilinx.sdk.sw.ui.navigator.DocRoot.getSwComponents(Unknown Source)
+	at com.xilinx.sdk.sw.ui.navigator.DocRoot.initialize(Unknown Source)
+	at com.xilinx.sdk.sw.ui.navigator.BSPDocContentProvider.getChildren(Unknown Source)
+	at org.eclipse.ui.internal.navigator.extensions.SafeDelegateTreeContentProvider.getChildren(SafeDelegateTreeContentProvider.java:96)
+	at org.eclipse.ui.internal.navigator.extensions.SafeDelegateTreeContentProvider.getChildren(SafeDelegateTreeContentProvider.java:275)
+	at org.eclipse.ui.internal.navigator.extensions.SafeDelegateTreeContentProvider.getChildren(SafeDelegateTreeContentProvider.java:94)
+	at org.eclipse.ui.internal.navigator.NavigatorContentServiceContentProvider$1.run(NavigatorContentServiceContentProvider.java:150)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.ui.internal.navigator.NavigatorContentServiceContentProvider.internalGetChildren(NavigatorContentServiceContentProvider.java:137)
+	at org.eclipse.ui.internal.navigator.NavigatorContentServiceContentProvider.getChildren(NavigatorContentServiceContentProvider.java:123)
+	at org.eclipse.jface.viewers.AbstractTreeViewer.getRawChildren(AbstractTreeViewer.java:1348)
+	at org.eclipse.jface.viewers.TreeViewer.getRawChildren(TreeViewer.java:391)
+	at org.eclipse.jface.viewers.StructuredViewer.getFilteredChildren(StructuredViewer.java:896)
+	at org.eclipse.jface.viewers.AbstractTreeViewer.getSortedChildren(AbstractTreeViewer.java:601)
+	at org.eclipse.jface.viewers.AbstractTreeViewer$1.run(AbstractTreeViewer.java:799)
+	at org.eclipse.swt.custom.BusyIndicator.showWhile(BusyIndicator.java:70)
+	at org.eclipse.jface.viewers.AbstractTreeViewer.createChildren(AbstractTreeViewer.java:778)
+	at org.eclipse.jface.viewers.TreeViewer.createChildren(TreeViewer.java:644)
+	at org.eclipse.jface.viewers.AbstractTreeViewer.createChildren(AbstractTreeViewer.java:749)
+	at org.eclipse.jface.viewers.AbstractTreeViewer.handleTreeExpand(AbstractTreeViewer.java:1444)
+	at org.eclipse.jface.viewers.TreeViewer.handleTreeExpand(TreeViewer.java:952)
+	at org.eclipse.jface.viewers.AbstractTreeViewer$4.treeExpanded(AbstractTreeViewer.java:1455)
+	at org.eclipse.swt.widgets.TypedListener.handleEvent(TypedListener.java:132)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:84)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1053)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1077)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1062)
+	at org.eclipse.swt.widgets.Tree.wmNotifyChild(Tree.java:7408)
+	at org.eclipse.swt.widgets.Control.wmNotify(Control.java:5098)
+	at org.eclipse.swt.widgets.Composite.wmNotify(Composite.java:1887)
+	at org.eclipse.swt.widgets.Control.WM_NOTIFY(Control.java:4728)
+	at org.eclipse.swt.widgets.Control.windowProc(Control.java:4217)
+	at org.eclipse.swt.widgets.Display.windowProc(Display.java:4873)
+	at org.eclipse.swt.internal.win32.OS.CallWindowProcW(Native Method)
+	at org.eclipse.swt.internal.win32.OS.CallWindowProc(OS.java:2362)
+	at org.eclipse.swt.widgets.Tree.callWindowProc(Tree.java:1536)
+	at org.eclipse.swt.widgets.Tree.WM_LBUTTONDOWN(Tree.java:6303)
+	at org.eclipse.swt.widgets.Control.windowProc(Control.java:4197)
+	at org.eclipse.swt.widgets.Tree.windowProc(Tree.java:5844)
+	at org.eclipse.swt.widgets.Display.windowProc(Display.java:4873)
+	at org.eclipse.swt.internal.win32.OS.DispatchMessageW(Native Method)
+	at org.eclipse.swt.internal.win32.OS.DispatchMessage(OS.java:2459)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3655)
+	at org.eclipse.ui.internal.Workbench.runEventLoop(Workbench.java:2640)
+	at org.eclipse.ui.internal.Workbench.runUI(Workbench.java:2604)
+	at org.eclipse.ui.internal.Workbench.access$4(Workbench.java:2438)
+	at org.eclipse.ui.internal.Workbench$7.run(Workbench.java:671)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:664)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:149)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:115)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:110)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:79)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:369)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:179)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:620)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:575)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1408)
+	at org.eclipse.equinox.launcher.Main.main(Main.java:1384)
+!SESSION 2016-07-14 00:01:00.931 -----------------------------------------------
+eclipse.buildId=Release 14.4 Build SDK_P.49d
+java.version=1.6.0_21
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=sv_SE
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY org.eclipse.debug.ui 4 0 2016-07-14 00:05:40.207
+!MESSAGE Launch shortcut 'com.xilinx.sdk.debug.ui.launchShortcut' enablement expression caused exception. Shortcut was removed.
+!STACK 1
+org.eclipse.core.runtime.CoreException: No property tester contributes a property com.xilinx.sdk.tools.namespace.propertytester.XCProject to type class org.eclipse.core.internal.resources.File
+	at org.eclipse.core.internal.expressions.TypeExtensionManager.getProperty(TypeExtensionManager.java:123)
+	at org.eclipse.core.internal.expressions.TestExpression.evaluate(TestExpression.java:96)
+	at org.eclipse.core.internal.expressions.CompositeExpression.evaluateOr(CompositeExpression.java:68)
+	at org.eclipse.core.internal.expressions.OrExpression.evaluate(OrExpression.java:21)
+	at org.eclipse.core.internal.expressions.CompositeExpression.evaluateAnd(CompositeExpression.java:53)
+	at org.eclipse.core.internal.expressions.IterateExpression.evaluate(IterateExpression.java:150)
+	at org.eclipse.core.internal.expressions.CompositeExpression.evaluateAnd(CompositeExpression.java:53)
+	at org.eclipse.core.internal.expressions.WithExpression.evaluate(WithExpression.java:72)
+	at org.eclipse.core.internal.expressions.CompositeExpression.evaluateAnd(CompositeExpression.java:53)
+	at org.eclipse.core.internal.expressions.EnablementExpression.evaluate(EnablementExpression.java:53)
+	at org.eclipse.debug.internal.ui.launchConfigurations.LaunchShortcutExtension.evalEnablementExpression(LaunchShortcutExtension.java:287)
+	at org.eclipse.debug.internal.ui.launchConfigurations.LaunchConfigurationManager.getApplicableConfigurationTypes(LaunchConfigurationManager.java:744)
+	at org.eclipse.debug.internal.ui.launchConfigurations.LaunchConfigurationManager.getApplicableLaunchConfigurations(LaunchConfigurationManager.java:780)
+	at org.eclipse.debug.internal.ui.contextlaunching.LaunchingResourceManager.getParticipatingLaunchConfigurations(LaunchingResourceManager.java:506)
+	at org.eclipse.debug.internal.ui.contextlaunching.LaunchingResourceManager.getLabel(LaunchingResourceManager.java:320)
+	at org.eclipse.debug.internal.ui.contextlaunching.LaunchingResourceManager.computeLabels(LaunchingResourceManager.java:241)
+	at org.eclipse.debug.internal.ui.contextlaunching.LaunchingResourceManager$2.run(LaunchingResourceManager.java:138)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+!SUBENTRY 1 org.eclipse.core.expressions 4 201 2016-07-14 00:05:40.207
+!MESSAGE No property tester contributes a property com.xilinx.sdk.tools.namespace.propertytester.XCProject to type class org.eclipse.core.internal.resources.File
+!SESSION 2016-07-14 16:15:44.625 -----------------------------------------------
+eclipse.buildId=Release 14.4 Build SDK_P.49d
+java.version=1.6.0_21
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=sv_SE
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY org.eclipse.debug.ui 4 0 2016-07-14 16:51:14.114
+!MESSAGE Launch shortcut 'com.xilinx.sdk.debug.ui.launchShortcut' enablement expression caused exception. Shortcut was removed.
+!STACK 1
+org.eclipse.core.runtime.CoreException: No property tester contributes a property com.xilinx.sdk.tools.namespace.propertytester.XCProject to type class org.eclipse.core.internal.resources.File
+	at org.eclipse.core.internal.expressions.TypeExtensionManager.getProperty(TypeExtensionManager.java:123)
+	at org.eclipse.core.internal.expressions.TestExpression.evaluate(TestExpression.java:96)
+	at org.eclipse.core.internal.expressions.CompositeExpression.evaluateOr(CompositeExpression.java:68)
+	at org.eclipse.core.internal.expressions.OrExpression.evaluate(OrExpression.java:21)
+	at org.eclipse.core.internal.expressions.CompositeExpression.evaluateAnd(CompositeExpression.java:53)
+	at org.eclipse.core.internal.expressions.IterateExpression.evaluate(IterateExpression.java:150)
+	at org.eclipse.core.internal.expressions.CompositeExpression.evaluateAnd(CompositeExpression.java:53)
+	at org.eclipse.core.internal.expressions.WithExpression.evaluate(WithExpression.java:72)
+	at org.eclipse.core.internal.expressions.CompositeExpression.evaluateAnd(CompositeExpression.java:53)
+	at org.eclipse.core.internal.expressions.EnablementExpression.evaluate(EnablementExpression.java:53)
+	at org.eclipse.debug.internal.ui.launchConfigurations.LaunchShortcutExtension.evalEnablementExpression(LaunchShortcutExtension.java:287)
+	at org.eclipse.debug.internal.ui.launchConfigurations.LaunchConfigurationManager.getApplicableConfigurationTypes(LaunchConfigurationManager.java:744)
+	at org.eclipse.debug.internal.ui.launchConfigurations.LaunchConfigurationManager.getApplicableLaunchConfigurations(LaunchConfigurationManager.java:780)
+	at org.eclipse.debug.internal.ui.contextlaunching.LaunchingResourceManager.getParticipatingLaunchConfigurations(LaunchingResourceManager.java:506)
+	at org.eclipse.debug.internal.ui.contextlaunching.LaunchingResourceManager.getLabel(LaunchingResourceManager.java:320)
+	at org.eclipse.debug.internal.ui.contextlaunching.LaunchingResourceManager.computeLabels(LaunchingResourceManager.java:241)
+	at org.eclipse.debug.internal.ui.contextlaunching.LaunchingResourceManager$2.run(LaunchingResourceManager.java:138)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+!SUBENTRY 1 org.eclipse.core.expressions 4 201 2016-07-14 16:51:14.114
+!MESSAGE No property tester contributes a property com.xilinx.sdk.tools.namespace.propertytester.XCProject to type class org.eclipse.core.internal.resources.File
+!SESSION 2016-07-15 14:02:51.398 -----------------------------------------------
+eclipse.buildId=Release 14.4 Build SDK_P.49d
+java.version=1.6.0_21
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=sv_SE
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY org.eclipse.debug.ui 4 0 2016-07-15 14:14:38.117
+!MESSAGE Launch shortcut 'com.xilinx.sdk.debug.ui.launchShortcut' enablement expression caused exception. Shortcut was removed.
+!STACK 1
+org.eclipse.core.runtime.CoreException: No property tester contributes a property com.xilinx.sdk.tools.namespace.propertytester.XCProject to type class org.eclipse.core.internal.resources.File
+	at org.eclipse.core.internal.expressions.TypeExtensionManager.getProperty(TypeExtensionManager.java:123)
+	at org.eclipse.core.internal.expressions.TestExpression.evaluate(TestExpression.java:96)
+	at org.eclipse.core.internal.expressions.CompositeExpression.evaluateOr(CompositeExpression.java:68)
+	at org.eclipse.core.internal.expressions.OrExpression.evaluate(OrExpression.java:21)
+	at org.eclipse.core.internal.expressions.CompositeExpression.evaluateAnd(CompositeExpression.java:53)
+	at org.eclipse.core.internal.expressions.IterateExpression.evaluate(IterateExpression.java:150)
+	at org.eclipse.core.internal.expressions.CompositeExpression.evaluateAnd(CompositeExpression.java:53)
+	at org.eclipse.core.internal.expressions.WithExpression.evaluate(WithExpression.java:72)
+	at org.eclipse.core.internal.expressions.CompositeExpression.evaluateAnd(CompositeExpression.java:53)
+	at org.eclipse.core.internal.expressions.EnablementExpression.evaluate(EnablementExpression.java:53)
+	at org.eclipse.debug.internal.ui.launchConfigurations.LaunchShortcutExtension.evalEnablementExpression(LaunchShortcutExtension.java:287)
+	at org.eclipse.debug.internal.ui.launchConfigurations.LaunchConfigurationManager.getApplicableConfigurationTypes(LaunchConfigurationManager.java:744)
+	at org.eclipse.debug.internal.ui.launchConfigurations.LaunchConfigurationManager.getApplicableLaunchConfigurations(LaunchConfigurationManager.java:780)
+	at org.eclipse.debug.internal.ui.contextlaunching.LaunchingResourceManager.getParticipatingLaunchConfigurations(LaunchingResourceManager.java:506)
+	at org.eclipse.debug.internal.ui.contextlaunching.LaunchingResourceManager.getLabel(LaunchingResourceManager.java:320)
+	at org.eclipse.debug.internal.ui.contextlaunching.LaunchingResourceManager.computeLabels(LaunchingResourceManager.java:241)
+	at org.eclipse.debug.internal.ui.contextlaunching.LaunchingResourceManager$2.run(LaunchingResourceManager.java:138)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+!SUBENTRY 1 org.eclipse.core.expressions 4 201 2016-07-15 14:14:38.117
+!MESSAGE No property tester contributes a property com.xilinx.sdk.tools.namespace.propertytester.XCProject to type class org.eclipse.core.internal.resources.File
+!SESSION 2016-07-17 20:50:43.909 -----------------------------------------------
+eclipse.buildId=Release 14.4 Build SDK_P.49d
+java.version=1.6.0_21
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=sv_SE
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY org.eclipse.debug.ui 4 0 2016-07-17 20:54:41.301
+!MESSAGE Launch shortcut 'com.xilinx.sdk.debug.ui.launchShortcut' enablement expression caused exception. Shortcut was removed.
+!STACK 1
+org.eclipse.core.runtime.CoreException: No property tester contributes a property com.xilinx.sdk.tools.namespace.propertytester.XCProject to type class org.eclipse.core.internal.resources.File
+	at org.eclipse.core.internal.expressions.TypeExtensionManager.getProperty(TypeExtensionManager.java:123)
+	at org.eclipse.core.internal.expressions.TestExpression.evaluate(TestExpression.java:96)
+	at org.eclipse.core.internal.expressions.CompositeExpression.evaluateOr(CompositeExpression.java:68)
+	at org.eclipse.core.internal.expressions.OrExpression.evaluate(OrExpression.java:21)
+	at org.eclipse.core.internal.expressions.CompositeExpression.evaluateAnd(CompositeExpression.java:53)
+	at org.eclipse.core.internal.expressions.IterateExpression.evaluate(IterateExpression.java:150)
+	at org.eclipse.core.internal.expressions.CompositeExpression.evaluateAnd(CompositeExpression.java:53)
+	at org.eclipse.core.internal.expressions.WithExpression.evaluate(WithExpression.java:72)
+	at org.eclipse.core.internal.expressions.CompositeExpression.evaluateAnd(CompositeExpression.java:53)
+	at org.eclipse.core.internal.expressions.EnablementExpression.evaluate(EnablementExpression.java:53)
+	at org.eclipse.debug.internal.ui.launchConfigurations.LaunchShortcutExtension.evalEnablementExpression(LaunchShortcutExtension.java:287)
+	at org.eclipse.debug.internal.ui.launchConfigurations.LaunchConfigurationManager.getApplicableConfigurationTypes(LaunchConfigurationManager.java:744)
+	at org.eclipse.debug.internal.ui.launchConfigurations.LaunchConfigurationManager.getApplicableLaunchConfigurations(LaunchConfigurationManager.java:780)
+	at org.eclipse.debug.internal.ui.contextlaunching.LaunchingResourceManager.getParticipatingLaunchConfigurations(LaunchingResourceManager.java:506)
+	at org.eclipse.debug.internal.ui.contextlaunching.LaunchingResourceManager.getLabel(LaunchingResourceManager.java:320)
+	at org.eclipse.debug.internal.ui.contextlaunching.LaunchingResourceManager.computeLabels(LaunchingResourceManager.java:241)
+	at org.eclipse.debug.internal.ui.contextlaunching.LaunchingResourceManager$2.run(LaunchingResourceManager.java:138)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+!SUBENTRY 1 org.eclipse.core.expressions 4 201 2016-07-17 20:54:41.303
+!MESSAGE No property tester contributes a property com.xilinx.sdk.tools.namespace.propertytester.XCProject to type class org.eclipse.core.internal.resources.File
+!SESSION 2016-07-25 19:43:20.270 -----------------------------------------------
+eclipse.buildId=Release 14.4 Build SDK_P.49d
+java.version=1.6.0_21
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=sv_SE
+Command-line arguments:  -data C:\Users\egagali\software\Mango_802.11_RefDes_v1.5.2_sniffer_dca\EDK_Projects\Mango_802.11_RefDes_v1.5.2\SDK_Workspace -os win32 -ws win32 -arch x86_64
+
+!ENTRY org.eclipse.debug.ui 4 0 2016-07-25 19:46:17.211
+!MESSAGE Launch shortcut 'com.xilinx.sdk.debug.ui.launchShortcut' enablement expression caused exception. Shortcut was removed.
+!STACK 1
+org.eclipse.core.runtime.CoreException: No property tester contributes a property com.xilinx.sdk.tools.namespace.propertytester.XCProject to type class org.eclipse.core.internal.resources.File
+	at org.eclipse.core.internal.expressions.TypeExtensionManager.getProperty(TypeExtensionManager.java:123)
+	at org.eclipse.core.internal.expressions.TestExpression.evaluate(TestExpression.java:96)
+	at org.eclipse.core.internal.expressions.CompositeExpression.evaluateOr(CompositeExpression.java:68)
+	at org.eclipse.core.internal.expressions.OrExpression.evaluate(OrExpression.java:21)
+	at org.eclipse.core.internal.expressions.CompositeExpression.evaluateAnd(CompositeExpression.java:53)
+	at org.eclipse.core.internal.expressions.IterateExpression.evaluate(IterateExpression.java:150)
+	at org.eclipse.core.internal.expressions.CompositeExpression.evaluateAnd(CompositeExpression.java:53)
+	at org.eclipse.core.internal.expressions.WithExpression.evaluate(WithExpression.java:72)
+	at org.eclipse.core.internal.expressions.CompositeExpression.evaluateAnd(CompositeExpression.java:53)
+	at org.eclipse.core.internal.expressions.EnablementExpression.evaluate(EnablementExpression.java:53)
+	at org.eclipse.debug.internal.ui.launchConfigurations.LaunchShortcutExtension.evalEnablementExpression(LaunchShortcutExtension.java:287)
+	at org.eclipse.debug.internal.ui.launchConfigurations.LaunchConfigurationManager.getApplicableConfigurationTypes(LaunchConfigurationManager.java:744)
+	at org.eclipse.debug.internal.ui.launchConfigurations.LaunchConfigurationManager.getApplicableLaunchConfigurations(LaunchConfigurationManager.java:780)
+	at org.eclipse.debug.internal.ui.contextlaunching.LaunchingResourceManager.getParticipatingLaunchConfigurations(LaunchingResourceManager.java:506)
+	at org.eclipse.debug.internal.ui.contextlaunching.LaunchingResourceManager.getLabel(LaunchingResourceManager.java:320)
+	at org.eclipse.debug.internal.ui.contextlaunching.LaunchingResourceManager.computeLabels(LaunchingResourceManager.java:241)
+	at org.eclipse.debug.internal.ui.contextlaunching.LaunchingResourceManager$2.run(LaunchingResourceManager.java:138)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+!SUBENTRY 1 org.eclipse.core.expressions 4 201 2016-07-25 19:46:17.211
+!MESSAGE No property tester contributes a property com.xilinx.sdk.tools.namespace.propertytester.XCProject to type class org.eclipse.core.internal.resources.File
+!SESSION 2016-10-17 11:06:57.233 -----------------------------------------------
+eclipse.buildId=2016.2
+java.version=1.8.0_66
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=es_ES
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -data C:\Users\Soledad\Desktop\software\Mango_802.11_RefDes_v1.5.2_sniffer_dca\EDK_Projects\Mango_802.11_RefDes_v1.5.2\SDK_Workspace
+
+!ENTRY org.eclipse.egit.ui 2 0 2016-10-17 11:07:19.027
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Soledad'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.cdt.core 1 0 2016-10-17 11:07:27.196
+!MESSAGE Indexed 'wlan_bsp_cpu_high' (98 sources, 160 headers) in 8,68 sec: 6.126 declarations; 25.583 references; 54 unresolved inclusions; 12 syntax errors; 266 unresolved names (0,83 %)
+
+!ENTRY com.xilinx.sdk.utils 0 0 2016-10-17 11:07:27.305
+!MESSAGE XSDB Command: [::hsi::utils::init_repo], Thread: Worker-6
+
+!ENTRY com.xilinx.sdk.utils 0 0 2016-10-17 11:07:28.476
+!MESSAGE XSDB command with result: [::hsi::utils::init_repo], Result: [null, ]. Thread: Worker-6
+
+!ENTRY com.xilinx.sdk.utils 0 0 2016-10-17 11:07:28.695
+!MESSAGE XSDB Command: [::hsi::utils::openhw C:/Users/Soledad/Desktop/software/Mango_802.11_RefDes_v1.5.2_sniffer_dca/EDK_Projects/Mango_802.11_RefDes_v1.5.2/SDK_Workspace/Mango_802.11_RefDes_v1.5.2_hw_platform/system.xml], Thread: Worker-10
+
+!ENTRY com.xilinx.sdk.utils 0 0 2016-10-17 11:07:30.832
+!MESSAGE XSDB command with result: [::hsi::utils::openhw C:/Users/Soledad/Desktop/software/Mango_802.11_RefDes_v1.5.2_sniffer_dca/EDK_Projects/Mango_802.11_RefDes_v1.5.2/SDK_Workspace/Mango_802.11_RefDes_v1.5.2_hw_platform/system.xml], Result: [null, ]. Thread: Worker-10
+
+!ENTRY org.eclipse.cdt.core 1 0 2016-10-17 11:07:32.158
+!MESSAGE Indexed 'wlan_bsp_cpu_low' (70 sources, 125 headers) in 4,88 sec: 4.581 declarations; 15.389 references; 43 unresolved inclusions; 12 syntax errors; 363 unresolved names (1,8 %)
+
+!ENTRY org.eclipse.cdt.core 1 0 2016-10-17 11:07:36.510
+!MESSAGE Indexed 'wlan_mac_high_ap' (27 sources, 88 headers) in 3,78 sec: 5.704 declarations; 23.948 references; 61 unresolved inclusions; 0 syntax errors; 3 unresolved names (0,01 %)
+
+!ENTRY org.eclipse.cdt.core 1 0 2016-10-17 11:07:39.459
+!MESSAGE Indexed 'wlan_mac_high_ibss' (26 sources, 87 headers) in 2,6 sec: 5.352 declarations; 21.787 references; 58 unresolved inclusions; 0 syntax errors; 3 unresolved names (0,011 %)
+
+!ENTRY org.eclipse.cdt.core 1 0 2016-10-17 11:07:42.204
+!MESSAGE Indexed 'wlan_mac_high_sta' (27 sources, 88 headers) in 2,25 sec: 5.446 declarations; 22.171 references; 61 unresolved inclusions; 0 syntax errors; 3 unresolved names (0,011 %)
+
+!ENTRY org.eclipse.cdt.core 1 0 2016-10-17 11:07:43.250
+!MESSAGE Indexed 'wlan_mac_low_dcf' (9 sources, 36 headers) in 0,718 sec: 1.290 declarations; 6.891 references; 15 unresolved inclusions; 0 syntax errors; 2 unresolved names (0,024 %)
+
+!ENTRY org.eclipse.cdt.core 1 0 2016-10-17 11:07:43.998
+!MESSAGE Indexed 'wlan_mac_low_nomac' (9 sources, 37 headers) in 0,624 sec: 1.113 declarations; 4.778 references; 15 unresolved inclusions; 0 syntax errors; 2 unresolved names (0,034 %)
+
+!ENTRY com.xilinx.sdk.utils 0 0 2016-10-17 11:07:48.273
+!MESSAGE XSDB Command: [ ::hsi::utils::set_current_hw_sw C:/Users/Soledad/Desktop/software/Mango_802.11_RefDes_v1.5.2_sniffer_dca/EDK_Projects/Mango_802.11_RefDes_v1.5.2/SDK_Workspace/Mango_802.11_RefDes_v1.5.2_hw_platform/system.xml C:/Users/Soledad/Desktop/software/Mango_802.11_RefDes_v1.5.2_sniffer_dca/EDK_Projects/Mango_802.11_RefDes_v1.5.2/SDK_Workspace/wlan_bsp_cpu_high/system.mss ], Thread: ModalContext
+
+!ENTRY com.xilinx.sdk.utils 0 0 2016-10-17 11:07:48.476
+!MESSAGE XSDB command with result: [ ::hsi::utils::set_current_hw_sw C:/Users/Soledad/Desktop/software/Mango_802.11_RefDes_v1.5.2_sniffer_dca/EDK_Projects/Mango_802.11_RefDes_v1.5.2/SDK_Workspace/Mango_802.11_RefDes_v1.5.2_hw_platform/system.xml C:/Users/Soledad/Desktop/software/Mango_802.11_RefDes_v1.5.2_sniffer_dca/EDK_Projects/Mango_802.11_RefDes_v1.5.2/SDK_Workspace/wlan_bsp_cpu_high/system.mss ], Result: [{Format=ERROR: [Common 17-39] 'hsi::open_sw_design' failed due to earlier errors.
+, Time=1476695268460, Code=1}, ]. Thread: ModalContext
+
+!ENTRY com.xilinx.sdk.utils 0 0 2016-10-17 11:07:48.476
+!MESSAGE XSDB Command: [::hsi::utils::get_hw_sw_details -json C:/Users/Soledad/Desktop/software/Mango_802.11_RefDes_v1.5.2_sniffer_dca/EDK_Projects/Mango_802.11_RefDes_v1.5.2/SDK_Workspace/Mango_802.11_RefDes_v1.5.2_hw_platform/system.xml C:/Users/Soledad/Desktop/software/Mango_802.11_RefDes_v1.5.2_sniffer_dca/EDK_Projects/Mango_802.11_RefDes_v1.5.2/SDK_Workspace/wlan_bsp_cpu_high/system.mss], Thread: ModalContext
+
+!ENTRY com.xilinx.sdk.utils 0 0 2016-10-17 11:07:48.491
+!MESSAGE XSDB command with result: [::hsi::utils::get_hw_sw_details -json C:/Users/Soledad/Desktop/software/Mango_802.11_RefDes_v1.5.2_sniffer_dca/EDK_Projects/Mango_802.11_RefDes_v1.5.2/SDK_Workspace/Mango_802.11_RefDes_v1.5.2_hw_platform/system.xml C:/Users/Soledad/Desktop/software/Mango_802.11_RefDes_v1.5.2_sniffer_dca/EDK_Projects/Mango_802.11_RefDes_v1.5.2/SDK_Workspace/wlan_bsp_cpu_high/system.mss], Result: [{Format=ERROR: [Common 17-39] 'hsi::open_sw_design' failed due to earlier errors.
+, Time=1476695268491, Code=1}, ]. Thread: ModalContext
+
+!ENTRY com.xilinx.sdk.utils 0 0 2016-10-17 11:07:48.555
+!MESSAGE XSDB Command: [::hsi::utils::generate_bsp_sources C:/Users/Soledad/Desktop/software/Mango_802.11_RefDes_v1.5.2_sniffer_dca/EDK_Projects/Mango_802.11_RefDes_v1.5.2/SDK_Workspace/Mango_802.11_RefDes_v1.5.2_hw_platform/system.xml C:/Users/Soledad/Desktop/software/Mango_802.11_RefDes_v1.5.2_sniffer_dca/EDK_Projects/Mango_802.11_RefDes_v1.5.2/SDK_Workspace/wlan_bsp_cpu_high/system.mss C:/Users/Soledad/Desktop/software/Mango_802.11_RefDes_v1.5.2_sniffer_dca/EDK_Projects/Mango_802.11_RefDes_v1.5.2/SDK_Workspace/wlan_bsp_cpu_high], Thread: ModalContext
+
+!ENTRY com.xilinx.sdk.utils 0 0 2016-10-17 11:07:48.633
+!MESSAGE XSDB command with result: [::hsi::utils::generate_bsp_sources C:/Users/Soledad/Desktop/software/Mango_802.11_RefDes_v1.5.2_sniffer_dca/EDK_Projects/Mango_802.11_RefDes_v1.5.2/SDK_Workspace/Mango_802.11_RefDes_v1.5.2_hw_platform/system.xml C:/Users/Soledad/Desktop/software/Mango_802.11_RefDes_v1.5.2_sniffer_dca/EDK_Projects/Mango_802.11_RefDes_v1.5.2/SDK_Workspace/wlan_bsp_cpu_high/system.mss C:/Users/Soledad/Desktop/software/Mango_802.11_RefDes_v1.5.2_sniffer_dca/EDK_Projects/Mango_802.11_RefDes_v1.5.2/SDK_Workspace/wlan_bsp_cpu_high], Result: [{Format=ERROR: [Common 17-39] 'hsi::open_sw_design' failed due to earlier errors.
+, Time=1476695268633, Code=1}, ]. Thread: ModalContext
+
+!ENTRY com.xilinx.sdk.utils 0 0 2016-10-17 11:07:48.648
+!MESSAGE XSDB Command: [ ::hsi::utils::set_current_hw_sw C:/Users/Soledad/Desktop/software/Mango_802.11_RefDes_v1.5.2_sniffer_dca/EDK_Projects/Mango_802.11_RefDes_v1.5.2/SDK_Workspace/Mango_802.11_RefDes_v1.5.2_hw_platform/system.xml C:/Users/Soledad/Desktop/software/Mango_802.11_RefDes_v1.5.2_sniffer_dca/EDK_Projects/Mango_802.11_RefDes_v1.5.2/SDK_Workspace/wlan_bsp_cpu_low/system.mss ], Thread: ModalContext
+
+!ENTRY com.xilinx.sdk.utils 0 0 2016-10-17 11:07:48.742
+!MESSAGE XSDB command with result: [ ::hsi::utils::set_current_hw_sw C:/Users/Soledad/Desktop/software/Mango_802.11_RefDes_v1.5.2_sniffer_dca/EDK_Projects/Mango_802.11_RefDes_v1.5.2/SDK_Workspace/Mango_802.11_RefDes_v1.5.2_hw_platform/system.xml C:/Users/Soledad/Desktop/software/Mango_802.11_RefDes_v1.5.2_sniffer_dca/EDK_Projects/Mango_802.11_RefDes_v1.5.2/SDK_Workspace/wlan_bsp_cpu_low/system.mss ], Result: [{Format=ERROR: [Common 17-39] 'hsi::open_sw_design' failed due to earlier errors.
+, Time=1476695268742, Code=1}, ]. Thread: ModalContext
+
+!ENTRY com.xilinx.sdk.utils 0 0 2016-10-17 11:07:48.742
+!MESSAGE XSDB Command: [::hsi::utils::get_hw_sw_details -json C:/Users/Soledad/Desktop/software/Mango_802.11_RefDes_v1.5.2_sniffer_dca/EDK_Projects/Mango_802.11_RefDes_v1.5.2/SDK_Workspace/Mango_802.11_RefDes_v1.5.2_hw_platform/system.xml C:/Users/Soledad/Desktop/software/Mango_802.11_RefDes_v1.5.2_sniffer_dca/EDK_Projects/Mango_802.11_RefDes_v1.5.2/SDK_Workspace/wlan_bsp_cpu_low/system.mss], Thread: ModalContext
+
+!ENTRY com.xilinx.sdk.utils 0 0 2016-10-17 11:07:48.773
+!MESSAGE XSDB command with result: [::hsi::utils::get_hw_sw_details -json C:/Users/Soledad/Desktop/software/Mango_802.11_RefDes_v1.5.2_sniffer_dca/EDK_Projects/Mango_802.11_RefDes_v1.5.2/SDK_Workspace/Mango_802.11_RefDes_v1.5.2_hw_platform/system.xml C:/Users/Soledad/Desktop/software/Mango_802.11_RefDes_v1.5.2_sniffer_dca/EDK_Projects/Mango_802.11_RefDes_v1.5.2/SDK_Workspace/wlan_bsp_cpu_low/system.mss], Result: [{Format=ERROR: [Common 17-39] 'hsi::open_sw_design' failed due to earlier errors.
+, Time=1476695268757, Code=1}, ]. Thread: ModalContext
+
+!ENTRY com.xilinx.sdk.utils 0 0 2016-10-17 11:07:48.773
+!MESSAGE XSDB Command: [::hsi::utils::generate_bsp_sources C:/Users/Soledad/Desktop/software/Mango_802.11_RefDes_v1.5.2_sniffer_dca/EDK_Projects/Mango_802.11_RefDes_v1.5.2/SDK_Workspace/Mango_802.11_RefDes_v1.5.2_hw_platform/system.xml C:/Users/Soledad/Desktop/software/Mango_802.11_RefDes_v1.5.2_sniffer_dca/EDK_Projects/Mango_802.11_RefDes_v1.5.2/SDK_Workspace/wlan_bsp_cpu_low/system.mss C:/Users/Soledad/Desktop/software/Mango_802.11_RefDes_v1.5.2_sniffer_dca/EDK_Projects/Mango_802.11_RefDes_v1.5.2/SDK_Workspace/wlan_bsp_cpu_low], Thread: ModalContext
+
+!ENTRY com.xilinx.sdk.utils 0 0 2016-10-17 11:07:48.812
+!MESSAGE XSDB command with result: [::hsi::utils::generate_bsp_sources C:/Users/Soledad/Desktop/software/Mango_802.11_RefDes_v1.5.2_sniffer_dca/EDK_Projects/Mango_802.11_RefDes_v1.5.2/SDK_Workspace/Mango_802.11_RefDes_v1.5.2_hw_platform/system.xml C:/Users/Soledad/Desktop/software/Mango_802.11_RefDes_v1.5.2_sniffer_dca/EDK_Projects/Mango_802.11_RefDes_v1.5.2/SDK_Workspace/wlan_bsp_cpu_low/system.mss C:/Users/Soledad/Desktop/software/Mango_802.11_RefDes_v1.5.2_sniffer_dca/EDK_Projects/Mango_802.11_RefDes_v1.5.2/SDK_Workspace/wlan_bsp_cpu_low], Result: [{Format=ERROR: [Common 17-39] 'hsi::open_sw_design' failed due to earlier errors.
+, Time=1476695268812, Code=1}, ]. Thread: ModalContext

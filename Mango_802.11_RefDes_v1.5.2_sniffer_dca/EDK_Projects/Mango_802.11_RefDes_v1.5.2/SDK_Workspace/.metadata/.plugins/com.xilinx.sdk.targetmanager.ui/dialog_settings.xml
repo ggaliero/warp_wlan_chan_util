@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<item value="C:\Users\egagali\software\Mango_802.11_RefDes_v1.5.2_sniffer_dca\EDK_Projects\Mango_802.11_RefDes_v1.5.2\SDK_Workspace\wlan_mac_high_ap\Debug\wlan_mac_high_ap.elf" key="Mango_802.11_RefDes_v1.5.2_hw_platform-mb_high-initElf"/>
+	<item value="C:\Users\egagali\software\Mango_802.11_RefDes_v1.5.2_sniffer_dca\EDK_Projects\Mango_802.11_RefDes_v1.5.2\SDK_Workspace\Mango_802.11_RefDes_v1.5.2_hw_platform\system.bit" key="Mango_802.11_RefDes_v1.5.2_hw_platform-bitFile"/>
+	<item value="C:\Users\egagali\software\Mango_802.11_RefDes_v1.5.2_sniffer_dca\EDK_Projects\Mango_802.11_RefDes_v1.5.2\SDK_Workspace\Mango_802.11_RefDes_v1.5.2_hw_platform\system_bd.bmm" key="Mango_802.11_RefDes_v1.5.2_hw_platform-bmmFile"/>
+	<item value="C:\Users\egagali\software\Mango_802.11_RefDes_v1.5.2_sniffer_dca\EDK_Projects\Mango_802.11_RefDes_v1.5.2\SDK_Workspace\wlan_mac_low_dcf\Debug\wlan_mac_low_dcf.elf" key="Mango_802.11_RefDes_v1.5.2_hw_platform-mb_low-initElf"/>
+</section>

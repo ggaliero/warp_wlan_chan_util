@@ -1,0 +1,659 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>wlan_exp.ltg &mdash; mango_wlan_exp wlan_exp v1.5.2   documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../_static/rtd_overrides.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="mango_wlan_exp wlan_exp v1.5.2   documentation" href="../../index.html"/>
+        <link rel="up" title="Module code" href="../index.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="../../index.html" class="fa fa-home"> mango_wlan_exp</a>
+        
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../wlan_exp.html">Framework</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../node.html">Node Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../wlan_exp_util.html">WLAN Exp Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ltg.html">LTG Flow Configurations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../device.html">WLAN Device</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../wlan_exp_log.html">Event Log</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../log_overview.html">Event Log Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../log_entry_types.html">Log Entry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../log_util.html">Event Log Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../log_util_hdf.html">HDF5 Utilities</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../index.html">mango_wlan_exp</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+      
+    <li>wlan_exp.ltg</li>
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <h1>Source code for wlan_exp.ltg</h1><div class="highlight"><pre>
+<span class="c"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">------------------------------------------------------------------------------</span>
+<span class="sd">Mango 802.11 Reference Design Experiments Framework </span>
+<span class="sd">    - Local Traffic Generation (LTG)</span>
+<span class="sd">------------------------------------------------------------------------------</span>
+<span class="sd">Authors:   Chris Hunter (chunter [at] mangocomm.com)</span>
+<span class="sd">           Patrick Murphy (murphpo [at] mangocomm.com)</span>
+<span class="sd">           Erik Welsh (welsh [at] mangocomm.com)</span>
+<span class="sd">License:   Copyright 2014-2016, Mango Communications. All rights reserved.</span>
+<span class="sd">           Distributed under the WARP license (http://warpproject.org/license)</span>
+<span class="sd">------------------------------------------------------------------------------</span>
+
+<span class="sd">This module provides definitions for Local Traffic Generation (LTG) on</span>
+<span class="sd">wlan_exp nodes.</span>
+
+<span class="sd">It is assumed that users will extend these classes to create their own</span>
+<span class="sd">LTG flow configurations.  When an LTG component is serialized, it follows</span>
+<span class="sd">the following structure:</span>
+
+<span class="sd">+------------+------------+---------------------------------+</span>
+<span class="sd">| Word       | Bits       | Function                        |</span>
+<span class="sd">+============+============+=================================+</span>
+<span class="sd">| [0]        |  [31:16]   | Type                            |</span>
+<span class="sd">+------------+------------+---------------------------------+</span>
+<span class="sd">| [0]        |  [15:0]    | Length (number of 32 bit words) |</span>
+<span class="sd">+------------+------------+---------------------------------+</span>
+<span class="sd">| [1:length]              | Parameters                      |</span>
+<span class="sd">+------------+------------+---------------------------------+</span>
+
+<span class="sd">When a LTG flow configuration is serialized, the schedule is serialized</span>
+<span class="sd">first and then the payload.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;Schedule&#39;</span><span class="p">,</span> <span class="s">&#39;SchedulePeriodic&#39;</span><span class="p">,</span> <span class="s">&#39;ScheduleUniformRandom&#39;</span><span class="p">,</span>
+           <span class="s">&#39;Payload&#39;</span><span class="p">,</span> <span class="s">&#39;PayloadFixed&#39;</span><span class="p">,</span> <span class="s">&#39;PayloadUniformRandom&#39;</span><span class="p">,</span>
+           <span class="s">&#39;FlowConfig&#39;</span><span class="p">,</span> <span class="s">&#39;FlowConfigCBR&#39;</span><span class="p">,</span> <span class="s">&#39;FlowConfigRandomRandom&#39;</span><span class="p">]</span>
+
+
+<span class="c"># LTG Schedule IDs - must match corresponding values in wlan_mac_ltg.h</span>
+<span class="n">LTG_SCHED_TYPE_PERIODIC</span>                <span class="o">=</span> <span class="mi">1</span>
+<span class="n">LTG_SCHED_TYPE_UNIFORM_RAND</span>            <span class="o">=</span> <span class="mi">2</span>
+
+
+<span class="c"># LTG Payload IDs - must match corresponding values in wlan_mac_ltg.h</span>
+<span class="n">LTG_PYLD_TYPE_FIXED</span>                    <span class="o">=</span> <span class="mi">1</span>
+<span class="n">LTG_PYLD_TYPE_UNIFORM_RAND</span>             <span class="o">=</span> <span class="mi">2</span>
+<span class="n">LTG_PYLD_TYPE_ALL_ASSOC_FIXED</span>          <span class="o">=</span> <span class="mi">3</span>
+
+<span class="c"># LTG Payload Min/Max</span>
+<span class="c">#</span>
+<span class="c">#   Currently, the minimum payload size is determined by the size of the LTG</span>
+<span class="c"># header in the payload (as of 0.96, the LTG header contains the LLC header,</span>
+<span class="c"># a 64-bit unique sequence number and a 32-bit LTG ID).  Currently, the maximum</span>
+<span class="c"># payload size is 1500 bytes.  This is a relatively arbitrary amount chosen</span>
+<span class="c"># because 1) in 0.96 the 802.11 phy cannot transmit more than 1600 bytes total</span>
+<span class="c"># per packet; 2) 1500 bytes is about the size of a standard Ethernet MTU.  If</span>
+<span class="c"># sizes outside the range are requested, the functions will print a warning and</span>
+<span class="c"># adjust the value to the appropriate boundary.</span>
+<span class="c">#</span>
+<span class="n">LTG_PYLD_MIN</span>                           <span class="o">=</span> <span class="mi">20</span>
+<span class="n">LTG_PYLD_MAX</span>                           <span class="o">=</span> <span class="mi">1500</span>
+
+
+<span class="c"># LTG action constants - must match corresponding values in wlan_mac_ltg.h</span>
+<span class="n">LTG_REMOVE_ALL</span>                         <span class="o">=</span> <span class="mh">0xFFFFFFFF</span>
+<span class="n">LTG_START_ALL</span>                          <span class="o">=</span> <span class="mh">0xFFFFFFFF</span>
+<span class="n">LTG_STOP_ALL</span>                           <span class="o">=</span> <span class="mh">0xFFFFFFFF</span>
+
+<span class="c">#-----------------------------------------------------------------------------</span>
+<span class="c"># LTG Schedules</span>
+<span class="c">#-----------------------------------------------------------------------------</span>
+<div class="viewcode-block" id="Schedule"><a class="viewcode-back" href="../../ltg.html#wlan_exp.ltg.Schedule">[docs]</a><span class="k">class</span> <span class="nc">Schedule</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Base class for LTG Schedules.&quot;&quot;&quot;</span>
+    <span class="n">ltg_type</span> <span class="o">=</span> <span class="bp">None</span>
+
+    <span class="k">def</span> <span class="nf">get_type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the type of the LTG Schedule.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            type (int):  Type of Schedule</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ltg_type</span>
+
+    <span class="k">def</span> <span class="nf">get_params</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns a list of parameters of the LTG Schedule.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            params (list of int):  Parameters of the Schedule</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+    <span class="k">def</span> <span class="nf">serialize</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns a list of 32 bit intergers that can be added as arguments to a Cmd.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            words (list of int):  List of 32-bit words representing the Schedule</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">args</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_params</span><span class="p">()</span>
+        <span class="n">args</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">ltg_type</span> <span class="o">&lt;&lt;</span> <span class="mi">16</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">params</span><span class="p">)))</span>
+        <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">params</span><span class="p">:</span>
+            <span class="n">args</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">param</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">args</span>
+
+    <span class="k">def</span> <span class="nf">enforce_min_resolution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resolution</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Enforce the minimum resolution on the Schedule.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            resolution (int):  Resolution of the schedule</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+<span class="c"># End Class WlanExpLTGSchedule</span>
+
+</div>
+<div class="viewcode-block" id="SchedulePeriodic"><a class="viewcode-back" href="../../ltg.html#wlan_exp.ltg.SchedulePeriodic">[docs]</a><span class="k">class</span> <span class="nc">SchedulePeriodic</span><span class="p">(</span><span class="n">Schedule</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;LTG Schedule that will generate a payload every &#39;interval&#39; microseconds.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        interval (float):              Interval between packets (in float seconds);</span>
+<span class="sd">                                       actual packet creation interval will be quantized </span>
+<span class="sd">                                       to the interval of the fast timer in CPU High.</span>
+<span class="sd">                                       Currently this interval is 64 usec.</span>
+<span class="sd">        duration (float, optional):    Duration of the traffic flow (in float seconds)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">time_factor</span> <span class="o">=</span> <span class="mi">6</span>                    <span class="c"># Time on node is in microseconds</span>
+    <span class="n">interval</span>    <span class="o">=</span> <span class="bp">None</span>
+    <span class="n">duration</span>    <span class="o">=</span> <span class="bp">None</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">interval</span><span class="p">,</span> <span class="n">duration</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ltg_type</span> <span class="o">=</span> <span class="n">LTG_SCHED_TYPE_PERIODIC</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">interval</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">interval</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">time_factor</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">time_factor</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">duration</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">duration</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">duration</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">duration</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">time_factor</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">time_factor</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">get_params</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns a list of parameters of the LTG Schedule.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            params (list of int):  Parameters of the Schedule</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">duration0</span> <span class="o">=</span> <span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">duration</span> <span class="o">&gt;&gt;</span> <span class="mi">32</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0xFFFFFFFF</span><span class="p">)</span>
+        <span class="n">duration1</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">duration</span> <span class="o">&amp;</span> <span class="mh">0xFFFFFFFF</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">interval</span><span class="p">,</span> <span class="n">duration0</span><span class="p">,</span> <span class="n">duration1</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">enforce_min_resolution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resolution</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Enforce the minimum resolution on the Schedule.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            resolution (int):  Resolution of the schedule</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">temp_interval</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">interval</span> <span class="o">//</span> <span class="n">resolution</span><span class="p">)</span> <span class="o">*</span> <span class="n">resolution</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">temp_interval</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">interval</span><span class="p">):</span>
+            <span class="c"># Set to True to print warning message when adjusting interval</span>
+            <span class="k">if</span> <span class="p">(</span><span class="bp">False</span><span class="p">):</span>
+                <span class="n">msg</span>  <span class="o">=</span> <span class="s">&quot;WARNING:  Cannot schedule LTG with interval: {0} us</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">interval</span><span class="p">)</span>
+                <span class="n">msg</span> <span class="o">+=</span> <span class="s">&quot;    Minimum LTG resolution is {0} us.</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">resolution</span><span class="p">)</span>
+                <span class="n">msg</span> <span class="o">+=</span> <span class="s">&quot;    Adjusting interval to {0} us&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">temp_interval</span><span class="p">)</span>
+                <span class="k">print</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">interval</span> <span class="o">=</span> <span class="n">temp_interval</span>
+
+<span class="c"># End Class WlanExpLTGSchedPeriodic</span>
+
+</div>
+<div class="viewcode-block" id="ScheduleUniformRandom"><a class="viewcode-back" href="../../ltg.html#wlan_exp.ltg.ScheduleUniformRandom">[docs]</a><span class="k">class</span> <span class="nc">ScheduleUniformRandom</span><span class="p">(</span><span class="n">Schedule</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;LTG Schedule that will generate a payload a uniformly random time</span>
+<span class="sd">    between min_interval and max_interval microseconds.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        min_interval (float):          Minimum interval between packets (in float seconds);</span>
+<span class="sd">                                       actual packet creation interval will be quantized </span>
+<span class="sd">                                       to the interval of the fast timer in CPU High.</span>
+<span class="sd">                                       Currently this interval is 64 usec.</span>
+<span class="sd">        max_interval (float):          Maximum interval between packets (in float seconds);</span>
+<span class="sd">                                       actual packet creation interval will be quantized </span>
+<span class="sd">                                       to the interval of the fast timer in CPU High.</span>
+<span class="sd">                                       Currently this interval is 64 usec.</span>
+<span class="sd">        duration (float, optional):    Duration of the traffic flow (in float seconds)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">time_factor</span>  <span class="o">=</span> <span class="mi">6</span>                   <span class="c"># Time on node is in microseconds</span>
+    <span class="n">min_interval</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="n">max_interval</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="n">duration</span>     <span class="o">=</span> <span class="bp">None</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">min_interval</span><span class="p">,</span> <span class="n">max_interval</span><span class="p">,</span> <span class="n">duration</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ltg_type</span>     <span class="o">=</span> <span class="n">LTG_PYLD_TYPE_UNIFORM_RAND</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">min_interval</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">min_interval</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">time_factor</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">time_factor</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_interval</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">max_interval</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">time_factor</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">time_factor</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">duration</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">duration</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">duration</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">duration</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">time_factor</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">time_factor</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">get_params</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns a list of parameters of the LTG Schedule.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            params (list of int):  Parameters of the Schedule</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">duration0</span> <span class="o">=</span> <span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">duration</span> <span class="o">&gt;&gt;</span> <span class="mi">32</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0xFFFFFFFF</span><span class="p">)</span>
+        <span class="n">duration1</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">duration</span> <span class="o">&amp;</span> <span class="mh">0xFFFFFFFF</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">min_interval</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_interval</span><span class="p">,</span> <span class="n">duration0</span><span class="p">,</span> <span class="n">duration1</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">enforce_min_resolution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resolution</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Enforce the minimum resolution on the Schedule.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            resolution (int):  Resolution of the schedule</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">temp_interval</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">min_interval</span> <span class="o">//</span> <span class="n">resolution</span><span class="p">)</span> <span class="o">*</span> <span class="n">resolution</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">temp_interval</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_interval</span><span class="p">):</span>
+            <span class="c"># Set to True to print warning message when adjusting interval</span>
+            <span class="k">if</span> <span class="p">(</span><span class="bp">False</span><span class="p">):</span>
+                <span class="n">msg</span>  <span class="o">=</span> <span class="s">&quot;WARNING:  Cannot schedule LTG with min interval: {0} us</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">min_interval</span><span class="p">)</span>
+                <span class="n">msg</span> <span class="o">+=</span> <span class="s">&quot;    Minimum LTG resolution is {0} us.</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">resolution</span><span class="p">)</span>
+                <span class="n">msg</span> <span class="o">+=</span> <span class="s">&quot;    Adjusting interval to {0} us&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">temp_interval</span><span class="p">)</span>
+                <span class="k">print</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">min_interval</span> <span class="o">=</span> <span class="n">temp_interval</span>
+
+        <span class="n">temp_interval</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_interval</span> <span class="o">//</span> <span class="n">resolution</span><span class="p">)</span> <span class="o">*</span> <span class="n">resolution</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">temp_interval</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_interval</span><span class="p">):</span>
+            <span class="c"># Set to True to print warning message when adjusting interval</span>
+            <span class="k">if</span> <span class="p">(</span><span class="bp">False</span><span class="p">):</span>
+                <span class="n">msg</span>  <span class="o">=</span> <span class="s">&quot;WARNING:  Cannot schedule LTG with interval: {0} us</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_interval</span><span class="p">)</span>
+                <span class="n">msg</span> <span class="o">+=</span> <span class="s">&quot;    Minimum LTG resolution is {0} us.</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">resolution</span><span class="p">)</span>
+                <span class="n">msg</span> <span class="o">+=</span> <span class="s">&quot;    Adjusting interval to {0} us&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">temp_interval</span><span class="p">)</span>
+                <span class="k">print</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">max_interval</span> <span class="o">=</span> <span class="n">temp_interval</span>
+
+<span class="c"># End Class WlanExpLTGSchedUniformRand</span>
+
+
+<span class="c">#-----------------------------------------------------------------------------</span>
+<span class="c"># LTG Payloads</span>
+<span class="c">#-----------------------------------------------------------------------------</span></div>
+<div class="viewcode-block" id="Payload"><a class="viewcode-back" href="../../ltg.html#wlan_exp.ltg.Payload">[docs]</a><span class="k">class</span> <span class="nc">Payload</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Base class for LTG Payloads.&quot;&quot;&quot;</span>
+    <span class="n">ltg_type</span> <span class="o">=</span> <span class="bp">None</span>
+
+    <span class="k">def</span> <span class="nf">get_type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the type of the LTG Payload.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            type (int):  Type of Payload</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ltg_type</span>
+
+    <span class="k">def</span> <span class="nf">get_params</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns a list of parameters of the LTG Payload.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            params (list of int):  Parameters of the Payload</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+    <span class="k">def</span> <span class="nf">serialize</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns a list of 32 bit intergers that can be added as arguments to a Cmd.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            words (list of int):  List of 32-bit words representing the Schedule</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">args</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_params</span><span class="p">()</span>
+        <span class="n">args</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">ltg_type</span> <span class="o">&lt;&lt;</span> <span class="mi">16</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">params</span><span class="p">)))</span>
+        <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">params</span><span class="p">:</span>
+            <span class="n">args</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">param</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">args</span>
+
+    <span class="k">def</span> <span class="nf">validate_length</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">length</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns a valid LTG Payload length and prints warnings if length was invalid.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            length (int):  Length of the payload (in bytes)</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            length (int):  Adjusted length of the payload (in bytes)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">msg</span>  <span class="o">=</span> <span class="s">&quot;WARNING:  Adjusting LTG Payload length from {0} &quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">length</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">length</span> <span class="o">&lt;</span> <span class="n">LTG_PYLD_MIN</span><span class="p">):</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="s">&quot;to {0} (min).&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">LTG_PYLD_MIN</span><span class="p">)</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+            <span class="n">length</span> <span class="o">=</span> <span class="n">LTG_PYLD_MIN</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">length</span> <span class="o">&gt;</span> <span class="n">LTG_PYLD_MAX</span><span class="p">):</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="s">&quot;to {0} (max).&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">LTG_PYLD_MAX</span><span class="p">)</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+            <span class="n">length</span> <span class="o">=</span> <span class="n">LTG_PYLD_MAX</span>
+
+        <span class="k">return</span> <span class="n">length</span>
+
+<span class="c"># End Class Payload</span>
+
+</div>
+<div class="viewcode-block" id="PayloadFixed"><a class="viewcode-back" href="../../ltg.html#wlan_exp.ltg.PayloadFixed">[docs]</a><span class="k">class</span> <span class="nc">PayloadFixed</span><span class="p">(</span><span class="n">Payload</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;LTG payload that will generate a fixed payload of the given length.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        dest_addr (int):   Destination MAC address</span>
+<span class="sd">        length (int):      Minimum length of the LTG payload (in bytes)</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">dest_addr</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="n">length</span>    <span class="o">=</span> <span class="bp">None</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dest_addr</span><span class="p">,</span> <span class="n">length</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ltg_type</span>  <span class="o">=</span> <span class="n">LTG_PYLD_TYPE_FIXED</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dest_addr</span> <span class="o">=</span> <span class="n">dest_addr</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">length</span>    <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">validate_length</span><span class="p">(</span><span class="n">length</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_params</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns a list of parameters of the LTG Payload.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            params (list of int):  Parameters of the Payload</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">addr0</span> <span class="o">=</span> <span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">dest_addr</span> <span class="o">&gt;&gt;</span> <span class="mi">32</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0xFFFF</span><span class="p">)</span>
+        <span class="n">addr1</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dest_addr</span> <span class="o">&amp;</span> <span class="mh">0xFFFFFFFF</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">addr0</span><span class="p">,</span> <span class="n">addr1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">length</span><span class="p">]</span>
+
+<span class="c"># End Class PayloadFixed</span>
+
+</div>
+<div class="viewcode-block" id="PayloadUniformRandom"><a class="viewcode-back" href="../../ltg.html#wlan_exp.ltg.PayloadUniformRandom">[docs]</a><span class="k">class</span> <span class="nc">PayloadUniformRandom</span><span class="p">(</span><span class="n">Payload</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;LTG payload that will generate a payload with uniformly random size</span>
+<span class="sd">    between min_length and max_length bytes.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        dest_addr (int):       Destination MAC address</span>
+<span class="sd">        min_length (int):      Minimum length of the LTG payload (in bytes)</span>
+<span class="sd">        max_length (int):      Maximum length of the LTG payload (in bytes)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">dest_addr</span>  <span class="o">=</span> <span class="bp">None</span>
+    <span class="n">min_length</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="n">max_length</span> <span class="o">=</span> <span class="bp">None</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dest_addr</span><span class="p">,</span> <span class="n">min_length</span><span class="p">,</span> <span class="n">max_length</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ltg_type</span>   <span class="o">=</span> <span class="n">LTG_PYLD_TYPE_UNIFORM_RAND</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dest_addr</span>  <span class="o">=</span> <span class="n">dest_addr</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">min_length</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">validate_length</span><span class="p">(</span><span class="n">min_length</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_length</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">validate_length</span><span class="p">(</span><span class="n">max_length</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_params</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns a list of parameters of the LTG Payload.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            params (list of int):  Parameters of the Payload</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">addr0</span> <span class="o">=</span> <span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">dest_addr</span> <span class="o">&gt;&gt;</span> <span class="mi">32</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0xFFFF</span><span class="p">)</span>
+        <span class="n">addr1</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dest_addr</span> <span class="o">&amp;</span> <span class="mh">0xFFFFFFFF</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">addr0</span><span class="p">,</span> <span class="n">addr1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_length</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_length</span><span class="p">]</span>
+
+<span class="c"># End Class PayloadUniformRand</span>
+
+</div>
+<div class="viewcode-block" id="PayloadAllAssocFixed"><a class="viewcode-back" href="../../ltg.html#wlan_exp.ltg.PayloadAllAssocFixed">[docs]</a><span class="k">class</span> <span class="nc">PayloadAllAssocFixed</span><span class="p">(</span><span class="n">Payload</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;LTG payload that will generate a fixed payload of the given length</span>
+<span class="sd">    to all associated deivces.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        length (int):      Length of the LTG payload (in bytes)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">length</span>    <span class="o">=</span> <span class="bp">None</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">length</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ltg_type</span>  <span class="o">=</span> <span class="n">LTG_PYLD_TYPE_ALL_ASSOC_FIXED</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">length</span>    <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">validate_length</span><span class="p">(</span><span class="n">length</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_params</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns a list of parameters of the LTG Payload.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            params (list of int):  Parameters of the Payload</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">length</span><span class="p">]</span>
+
+<span class="c"># End Class PayloadAllAssocFixed</span>
+
+
+<span class="c">#-----------------------------------------------------------------------------</span>
+<span class="c"># LTG Flow Configurations</span>
+<span class="c">#-----------------------------------------------------------------------------</span></div>
+<div class="viewcode-block" id="FlowConfig"><a class="viewcode-back" href="../../ltg.html#wlan_exp.ltg.FlowConfig">[docs]</a><span class="k">class</span> <span class="nc">FlowConfig</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Base class for LTG Flow Configurations.&quot;&quot;&quot;</span>
+    <span class="n">ltg_schedule</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="n">ltg_payload</span>  <span class="o">=</span> <span class="bp">None</span>
+
+    <span class="k">def</span> <span class="nf">get_schedule</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ltg_schedule</span>
+    <span class="k">def</span> <span class="nf">get_payload</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>   <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ltg_payload</span>
+
+    <span class="k">def</span> <span class="nf">serialize</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns a list of 32 bit intergers that can be added as arguments to a Cmd.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            words (list of int):  List of 32-bit words representing the FlowConfig</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">args</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">ltg_schedule</span><span class="o">.</span><span class="n">serialize</span><span class="p">():</span>
+            <span class="n">args</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">ltg_payload</span><span class="o">.</span><span class="n">serialize</span><span class="p">():</span>
+            <span class="n">args</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">args</span>
+
+    <span class="k">def</span> <span class="nf">enforce_min_resolution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resolution</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Enforce the minimum resolution on the Schedule.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            resolution (int):  Resolution of the schedule</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ltg_schedule</span><span class="o">.</span><span class="n">enforce_min_resolution</span><span class="p">(</span><span class="n">resolution</span><span class="p">)</span>
+
+<span class="c"># End Class FlowConfig</span>
+
+</div>
+<div class="viewcode-block" id="FlowConfigCBR"><a class="viewcode-back" href="../../ltg.html#wlan_exp.ltg.FlowConfigCBR">[docs]</a><span class="k">class</span> <span class="nc">FlowConfigCBR</span><span class="p">(</span><span class="n">FlowConfig</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Class to implement a Constant Bit Rate LTG flow configuration to a given device.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        dest_addr (int):      Destination MAC address</span>
+<span class="sd">        payload_length (int): Length of the LTG payload (in bytes)</span>
+<span class="sd">        interval (float):     Interval between packets (in float seconds);</span>
+<span class="sd">                              actual packet creation interval will be quantized </span>
+<span class="sd">                              to the interval of the fast timer in CPU High.</span>
+<span class="sd">                              Currently this interval is 64 usec.</span>
+<span class="sd">        duration (float):     Duration of the traffic flow (in float seconds)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dest_addr</span><span class="p">,</span> <span class="n">payload_length</span><span class="p">,</span> <span class="n">interval</span><span class="p">,</span> <span class="n">duration</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ltg_schedule</span> <span class="o">=</span> <span class="n">SchedulePeriodic</span><span class="p">(</span><span class="n">interval</span><span class="p">,</span> <span class="n">duration</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ltg_payload</span>  <span class="o">=</span> <span class="n">PayloadFixed</span><span class="p">(</span><span class="n">dest_addr</span><span class="p">,</span> <span class="n">payload_length</span><span class="p">)</span>
+
+<span class="c"># End Class FlowConfigCBR</span>
+
+</div>
+<div class="viewcode-block" id="FlowConfigAllAssocCBR"><a class="viewcode-back" href="../../ltg.html#wlan_exp.ltg.FlowConfigAllAssocCBR">[docs]</a><span class="k">class</span> <span class="nc">FlowConfigAllAssocCBR</span><span class="p">(</span><span class="n">FlowConfig</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Class to implement a Constant Bit Rate LTG flow configuration to all associated</span>
+<span class="sd">    devices.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        payload_length (int): Length of the LTG payload (in bytes)</span>
+<span class="sd">        interval (float):     Interval between packets (in float seconds);</span>
+<span class="sd">                              actual packet creation interval will be quantized </span>
+<span class="sd">                              to the interval of the fast timer in CPU High.</span>
+<span class="sd">                              Currently this interval is 64 usec.</span>
+<span class="sd">        duration (float):     Duration of the traffic flow (in float seconds)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">payload_length</span><span class="p">,</span> <span class="n">interval</span><span class="p">,</span> <span class="n">duration</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ltg_schedule</span> <span class="o">=</span> <span class="n">SchedulePeriodic</span><span class="p">(</span><span class="n">interval</span><span class="p">,</span> <span class="n">duration</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ltg_payload</span>  <span class="o">=</span> <span class="n">PayloadAllAssocFixed</span><span class="p">(</span><span class="n">payload_length</span><span class="p">)</span>
+
+<span class="c"># End Class FlowConfigCBR</span>
+
+</div>
+<div class="viewcode-block" id="FlowConfigRandomRandom"><a class="viewcode-back" href="../../ltg.html#wlan_exp.ltg.FlowConfigRandomRandom">[docs]</a><span class="k">class</span> <span class="nc">FlowConfigRandomRandom</span><span class="p">(</span><span class="n">FlowConfig</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Class to implement an LTG flow configuration with random period and random</span>
+<span class="sd">    sized payload to a given device.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        dest_addr (int):               Destination MAC address</span>
+<span class="sd">        min_payload_length (int):      Minimum length of the LTG payload (in bytes)</span>
+<span class="sd">        max_payload_length (int):      Maximum length of the LTG payload (in bytes)</span>
+<span class="sd">        min_interval (float):          Minimum interval between packets (in float seconds);</span>
+<span class="sd">                                       actual packet creation interval will be quantized </span>
+<span class="sd">                                       to the interval of the fast timer in CPU High.</span>
+<span class="sd">                                       Currently this interval is 64 usec.</span>
+<span class="sd">        max_interval (float):          Maximum interval between packets (in float seconds)</span>
+<span class="sd">                                       actual packet creation interval will be quantized </span>
+<span class="sd">                                       to the interval of the fast timer in CPU High.</span>
+<span class="sd">                                       Currently this interval is 64 usec.</span>
+<span class="sd">        duration (float, optional):    Duration of the traffic flow (in float seconds)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dest_addr</span><span class="p">,</span> <span class="n">min_payload_length</span><span class="p">,</span> <span class="n">max_payload_length</span><span class="p">,</span> <span class="n">min_interval</span><span class="p">,</span> <span class="n">max_interval</span><span class="p">,</span> <span class="n">duration</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ltg_schedule</span> <span class="o">=</span> <span class="n">ScheduleUniformRandom</span><span class="p">(</span><span class="n">min_interval</span><span class="p">,</span> <span class="n">max_interval</span><span class="p">,</span> <span class="n">duration</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ltg_payload</span>  <span class="o">=</span> <span class="n">PayloadUniformRandom</span><span class="p">(</span><span class="n">dest_addr</span><span class="p">,</span> <span class="n">min_payload_length</span><span class="p">,</span> <span class="n">max_payload_length</span><span class="p">)</span>
+
+<span class="c"># End Class FlowConfigRandom</span>
+</pre></div></div>
+
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Mango Communications, Inc..
+    </p>
+  </div>
+
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'wlan_exp v1.5.2  ',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,1350 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>wlan_exp.log.entry_types &mdash; mango_wlan_exp wlan_exp v1.5.2   documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../../_static/rtd_overrides.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="mango_wlan_exp wlan_exp v1.5.2   documentation" href="../../../index.html"/>
+        <link rel="up" title="Module code" href="../../index.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="../../../index.html" class="fa fa-home"> mango_wlan_exp</a>
+        
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../wlan_exp.html">Framework</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../node.html">Node Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../wlan_exp_util.html">WLAN Exp Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ltg.html">LTG Flow Configurations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../device.html">WLAN Device</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../wlan_exp_log.html">Event Log</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../log_overview.html">Event Log Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../log_entry_types.html">Log Entry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../log_util.html">Event Log Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../log_util_hdf.html">HDF5 Utilities</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../index.html">mango_wlan_exp</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      
+    <li>wlan_exp.log.entry_types</li>
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <h1>Source code for wlan_exp.log.entry_types</h1><div class="highlight"><pre>
+<span class="c"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">------------------------------------------------------------------------------</span>
+<span class="sd">Mango 802.11 Reference Design Experiments Framework - Log Entry Types</span>
+<span class="sd">------------------------------------------------------------------------------</span>
+<span class="sd">Authors:   Chris Hunter (chunter [at] mangocomm.com)</span>
+<span class="sd">           Patrick Murphy (murphpo [at] mangocomm.com)</span>
+<span class="sd">           Erik Welsh (welsh [at] mangocomm.com)</span>
+<span class="sd">License:   Copyright 2014-2016, Mango Communications. All rights reserved.</span>
+<span class="sd">           Distributed under the WARP license (http://warpproject.org/license)</span>
+<span class="sd">------------------------------------------------------------------------------</span>
+
+<span class="sd">This module defines each type of log entry that may exist in the event log of</span>
+<span class="sd">an 802.11 Reference Design Node.</span>
+
+<span class="sd">The log entry definitions in this file must match the corresponding</span>
+<span class="sd">definitions in the wlan_mac_entries.h header file in the C code</span>
+<span class="sd">running on the node.</span>
+
+<span class="sd">This module maintains a dictionary which contains a reference to each</span>
+<span class="sd">known log entry type. This dictionary is stored in the variable</span>
+<span class="sd">``wlan_exp_log_entry_types``. The :class:`WlanExpLogEntryType` constructor</span>
+<span class="sd">automatically adds each log entry type definition to this dictionary. Users</span>
+<span class="sd">may access the dictionary to view currently defined log entry types. But</span>
+<span class="sd">user code should not modify the dictionary contents directly.</span>
+
+
+<span class="sd">Custom Log Entry Types</span>
+<span class="sd">----------------------</span>
+<span class="sd">The :mod:`log_entries` module includes definitions for the log entry types</span>
+<span class="sd">implemented in the current 802.11 Reference Design C code.</span>
+
+<span class="sd">Log entry types defined here must match the corresponding entry definitions in</span>
+<span class="sd">the node C code.  Custom entries can be defined and added to the global</span>
+<span class="sd">dictionary by user scripts.</span>
+
+<span class="sd">Log entry type definitions are instances of the :class:`WlanExpLogEntryType`</span>
+<span class="sd">class. The :class:`WlanExpLogEntryType` constructor requires two arguments:</span>
+<span class="sd">``name`` and ``entry_type_id``.  Both the name and entry type ID **must** be</span>
+<span class="sd">unique relative to the existing entry types defined in :mod:`log_entries`.</span>
+
+<span class="sd">To define a custom log entry type::</span>
+
+<span class="sd">    import wlan_exp.log.entry_types as entry_types</span>
+
+<span class="sd">    #name and entry_type_id must not collide with existing log entry type definitions</span>
+<span class="sd">    my_entry_type = entry_types.WlanExpLogEntryType(name=&#39;MY_ENTRY&#39;, entry_type_id=999)</span>
+<span class="sd">    my_entry_type.append_field_defs([</span>
+<span class="sd">            (&#39;timestamp&#39;,              &#39;Q&#39;,      &#39;uint64&#39;),</span>
+<span class="sd">            (&#39;field_A&#39;,                &#39;H&#39;,      &#39;uint16&#39;),</span>
+<span class="sd">            (&#39;field_B&#39;,                &#39;H&#39;,      &#39;uint16&#39;)])</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">struct</span> <span class="kn">import</span> <span class="n">pack</span><span class="p">,</span> <span class="n">unpack</span><span class="p">,</span> <span class="n">calcsize</span><span class="p">,</span> <span class="n">error</span>
+<span class="kn">import</span> <span class="nn">wlan_exp.util</span> <span class="kn">as</span> <span class="nn">util</span>
+
+<span class="c"># Fix to support Python 2.x and 3.x</span>
+<span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="s">&quot;3&quot;</span><span class="p">:</span> <span class="nb">long</span><span class="o">=</span><span class="bp">None</span>
+
+
+<span class="c"># Event Log Constants</span>
+<span class="c">#   Must match corresponding C definitions in wlan_mac_event_log.h</span>
+<span class="n">WLAN_EXP_LOG_DELIM</span> <span class="o">=</span> <span class="mh">0xACED</span>
+
+
+<span class="c"># Log Entry Type Constants</span>
+<span class="c">#   Must match corresponding C definitions in wlan_mac_entries.h</span>
+<span class="n">ENTRY_TYPE_NULL</span>                   <span class="o">=</span> <span class="mi">0</span>
+<span class="n">ENTRY_TYPE_NODE_INFO</span>              <span class="o">=</span> <span class="mi">1</span>
+<span class="n">ENTRY_TYPE_EXP_INFO</span>               <span class="o">=</span> <span class="mi">2</span>
+
+<span class="n">ENTRY_TYPE_NODE_TEMPERATURE</span>       <span class="o">=</span> <span class="mi">4</span>
+
+<span class="n">ENTRY_TYPE_TIME_INFO</span>              <span class="o">=</span> <span class="mi">6</span>
+
+<span class="n">ENTRY_TYPE_RX_OFDM</span>                <span class="o">=</span> <span class="mi">10</span>
+<span class="n">ENTRY_TYPE_RX_OFDM_LTG</span>            <span class="o">=</span> <span class="mi">11</span>
+
+<span class="n">ENTRY_TYPE_RX_DSSS</span>                <span class="o">=</span> <span class="mi">15</span>
+
+<span class="n">ENTRY_TYPE_TX_HIGH</span>                <span class="o">=</span> <span class="mi">20</span>
+<span class="n">ENTRY_TYPE_TX_HIGH_LTG</span>            <span class="o">=</span> <span class="mi">21</span>
+
+<span class="n">ENTRY_TYPE_TX_LOW</span>                 <span class="o">=</span> <span class="mi">25</span>
+<span class="n">ENTRY_TYPE_TX_LOW_LTG</span>             <span class="o">=</span> <span class="mi">26</span>
+
+<span class="c"># -----------------------------------------------------------------------------</span>
+<span class="c"># Log Entry Type Container</span>
+<span class="c"># -----------------------------------------------------------------------------</span>
+
+<span class="n">log_entry_types</span>          <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+
+<span class="c"># -----------------------------------------------------------------------------</span>
+<span class="c"># Log Entry Type Base Class</span>
+<span class="c"># -----------------------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="WlanExpLogEntryType"><a class="viewcode-back" href="../../../log_entry_types.html#wlan_exp.log.entry_types.WlanExpLogEntryType">[docs]</a><span class="k">class</span> <span class="nc">WlanExpLogEntryType</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Class to define a log entry type.&quot;&quot;&quot;</span>
+    <span class="c"># _fields is a list of 3-tuples:</span>
+    <span class="c">#     (field_name, field_fmt_struct, field_fmt_np)</span>
+    <span class="n">_fields</span>             <span class="o">=</span> <span class="bp">None</span>
+
+    <span class="n">entry_type_id</span>       <span class="o">=</span> <span class="bp">None</span> <span class="c"># Unique integer ID for entry type</span>
+    <span class="n">name</span>                <span class="o">=</span> <span class="bp">None</span> <span class="c"># Unique string name for entry type</span>
+    <span class="n">description</span>         <span class="o">=</span> <span class="s">&#39;&#39;</span>   <span class="c"># Description of log entry type, used for generating documentation</span>
+
+    <span class="n">fields_np_dt</span>        <span class="o">=</span> <span class="bp">None</span> <span class="c"># numpy dtype object describing format</span>
+    <span class="n">fields_fmt_struct</span>   <span class="o">=</span> <span class="bp">None</span> <span class="c"># List of field formats, in struct module format</span>
+    <span class="n">_field_offsets</span>      <span class="o">=</span> <span class="bp">None</span>
+
+    <span class="n">gen_numpy_callbacks</span> <span class="o">=</span> <span class="bp">None</span>
+
+    <span class="n">consts</span>              <span class="o">=</span> <span class="bp">None</span> <span class="c"># Container for user-defined, entry-specific constants</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">entry_type_id</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="c"># Require valid name</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">name</span> <span class="ow">in</span> <span class="n">log_entry_types</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+                <span class="k">print</span><span class="p">(</span><span class="s">&quot;WARNING: replacing exisitng WlanExpLogEntryType with name {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+            <span class="n">log_entry_types</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s">&quot;ERROR: new WlanExpLogEntryType instance must have valid name&quot;</span><span class="p">)</span>
+
+        <span class="c"># Entry type ID is optional</span>
+        <span class="k">if</span> <span class="n">entry_type_id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="c"># entry_type_id must be int</span>
+            <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">entry_type_id</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="nb">int</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s">&quot;ERROR: WlanExpLogEntryType entry_type_id must be int&quot;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">entry_type_id</span> <span class="ow">in</span> <span class="n">log_entry_types</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+                    <span class="k">print</span><span class="p">(</span><span class="s">&quot;WARNING: replacing exisitng WlanExpLogEntryType with ID {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">entry_type_id</span><span class="p">))</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">entry_type_id</span> <span class="o">=</span> <span class="n">entry_type_id</span>
+                <span class="n">log_entry_types</span><span class="p">[</span><span class="n">entry_type_id</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span>
+
+        <span class="c"># Initialize fields to empty lists</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fields</span>             <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c"># Initialize unpack variables</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields_fmt_struct</span>   <span class="o">=</span> <span class="s">&#39;&#39;</span>
+
+        <span class="c"># Initialize callbacks</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gen_numpy_callbacks</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c"># Initialize dictionary to contain constants specific to each entry type</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">consts</span>              <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">consts_dict</span><span class="p">()</span>
+
+        <span class="c"># Initialize variable that contains field names and byte offsets</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_field_offsets</span>      <span class="o">=</span> <span class="p">{}</span>
+
+
+    <span class="c"># -------------------------------------------------------------------------</span>
+    <span class="c"># Accessor methods for the WlanExpLogEntryType</span>
+    <span class="c"># -------------------------------------------------------------------------</span>
+<div class="viewcode-block" id="WlanExpLogEntryType.get_field_names"><a class="viewcode-back" href="../../../log_entry_types.html#wlan_exp.log.entry_types.WlanExpLogEntryType.get_field_names">[docs]</a>    <span class="k">def</span> <span class="nf">get_field_names</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get the field names of the log entry.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            names (list of str):  List of string field names for the entry</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fields</span><span class="p">]</span>
+</div>
+<div class="viewcode-block" id="WlanExpLogEntryType.get_field_struct_formats"><a class="viewcode-back" href="../../../log_entry_types.html#wlan_exp.log.entry_types.WlanExpLogEntryType.get_field_struct_formats">[docs]</a>    <span class="k">def</span> <span class="nf">get_field_struct_formats</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get the Python struct format of the log entry fields.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            formats (list of str):  List of Python struct formats for the fields in the log entry</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">f</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fields</span><span class="p">]</span>
+</div>
+    <span class="k">def</span> <span class="nf">get_field_defs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>          <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fields</span>
+
+    <span class="k">def</span> <span class="nf">get_field_offsets</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>       <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_field_offsets</span>
+
+<div class="viewcode-block" id="WlanExpLogEntryType.get_entry_type_id"><a class="viewcode-back" href="../../../log_entry_types.html#wlan_exp.log.entry_types.WlanExpLogEntryType.get_entry_type_id">[docs]</a>    <span class="k">def</span> <span class="nf">get_entry_type_id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get the ID for the entry type.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            ID (int):  Integer ID for the log entry</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">entry_type_id</span>
+</div>
+<div class="viewcode-block" id="WlanExpLogEntryType.append_field_defs"><a class="viewcode-back" href="../../../log_entry_types.html#wlan_exp.log.entry_types.WlanExpLogEntryType.append_field_defs">[docs]</a>    <span class="k">def</span> <span class="nf">append_field_defs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field_info</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Adds fields to the definition of the log entry type.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            field_info (list of tuple):  Each must be of the form</span>
+<span class="sd">                ``(field_name, field_type_struct, field_type_numpy)`` where:</span>
+<span class="sd">                </span>
+<span class="sd">                    * ``field_name``: Name of field as string</span>
+<span class="sd">                    * ``field_type_struct``: Field type as string, using formats specified by ``struct`` module</span>
+<span class="sd">                    * ``field_type_numpy``: Field type as string, using formats specified by numpy ``dtype``</span>
+<span class="sd">                    * ``field_desc``: String describing the field&#39;s meaning, used to generate wiki docs</span>
+<span class="sd">        </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">field_info</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">list</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_fields</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">field_info</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_fields</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">field_info</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_update_field_defs</span><span class="p">()</span>
+
+</div>
+<div class="viewcode-block" id="WlanExpLogEntryType.modify_field_def"><a class="viewcode-back" href="../../../log_entry_types.html#wlan_exp.log.entry_types.WlanExpLogEntryType.modify_field_def">[docs]</a>    <span class="k">def</span> <span class="nf">modify_field_def</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">struct_type</span><span class="p">,</span> <span class="n">numpy_type</span><span class="p">,</span> <span class="n">doc_str</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Modifies fields of the definition of the log entry type.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            name (str):              Name of field to modify</span>
+<span class="sd">            struct_type (str):       New Python struct type for the field</span>
+<span class="sd">            numpy_type (str):        New numpy type for the field</span>
+<span class="sd">            doc_str (str, optional): New documentation string</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="bp">None</span>
+
+        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">f</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_fields</span><span class="p">):</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">name</span><span class="p">):</span>
+                <span class="n">index</span> <span class="o">=</span> <span class="n">idx</span>
+
+        <span class="k">if</span> <span class="n">index</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">&quot;WARNING:  Field {0} not found in {1}.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+            <span class="k">return</span>
+
+        <span class="k">if</span> <span class="n">doc_str</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">field</span> <span class="o">=</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">struct_type</span><span class="p">,</span> <span class="n">numpy_type</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fields</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="mi">3</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">field</span> <span class="o">=</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">struct_type</span><span class="p">,</span> <span class="n">numpy_type</span><span class="p">,</span> <span class="n">doc_str</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fields</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span>
+
+</div>
+<div class="viewcode-block" id="WlanExpLogEntryType.add_gen_numpy_array_callback"><a class="viewcode-back" href="../../../log_entry_types.html#wlan_exp.log.entry_types.WlanExpLogEntryType.add_gen_numpy_array_callback">[docs]</a>    <span class="k">def</span> <span class="nf">add_gen_numpy_array_callback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">callback</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Add callback that is run after the numpy array is generated from </span>
+<span class="sd">        the entry type.</span>
+
+<span class="sd">        The callbacks will be executed in the order the are added to the log </span>
+<span class="sd">        entry</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            callback (function):  Function to run after the numpy array is generated</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">callable</span><span class="p">(</span><span class="n">callback</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">gen_numpy_callbacks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">callback</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">&quot;ERROR:  Callback must be callable function.&quot;</span><span class="p">)</span>
+
+
+    <span class="c"># -------------------------------------------------------------------------</span>
+    <span class="c"># Utility methods for the WlanExpLogEntryType</span>
+    <span class="c"># -------------------------------------------------------------------------</span></div>
+    <span class="k">def</span> <span class="nf">generate_numpy_array</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">log_data</span><span class="p">,</span> <span class="n">byte_offsets</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Generate a NumPy array from the log_bytes of the given WlanExpLogEntryType instance</span>
+<span class="sd">        at the given byte_offsets.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+        <span class="n">index_iter</span> <span class="o">=</span> <span class="p">[</span><span class="n">log_data</span><span class="p">[</span><span class="n">o</span> <span class="p">:</span> <span class="n">o</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">fields_np_dt</span><span class="o">.</span><span class="n">itemsize</span><span class="p">]</span> <span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">byte_offsets</span><span class="p">]</span>
+        <span class="n">np_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fromiter</span><span class="p">(</span><span class="n">index_iter</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">fields_np_dt</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">byte_offsets</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">gen_numpy_callbacks</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">callback</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">gen_numpy_callbacks</span><span class="p">:</span>
+                <span class="n">np_arr</span> <span class="o">=</span> <span class="n">callback</span><span class="p">(</span><span class="n">np_arr</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">np_arr</span>
+
+
+    <span class="k">def</span> <span class="nf">generate_entry_doc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s">&#39;wiki&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Generate wiki documentation.&quot;&quot;&quot;</span>
+        <span class="kn">import</span> <span class="nn">textwrap</span>
+        <span class="kn">import</span> <span class="nn">wlan_exp.log.util</span> <span class="kn">as</span> <span class="nn">log_util</span>
+
+        <span class="n">field_descs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fields</span><span class="p">:</span>
+            <span class="c"># Field tuple is (name, struct_type, np_type, (optional)desc)</span>
+            <span class="c">#   Construct new tuple of (name, np_type, desc (&#39;&#39; if not defined))</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">field_descs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">f</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">f</span><span class="p">[</span><span class="mi">3</span><span class="p">]))</span>
+            <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
+                <span class="c"># Field missing description; use empty string</span>
+                <span class="n">field_descs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">f</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="s">&#39;&#39;</span><span class="p">))</span>
+
+        <span class="k">def</span> <span class="nf">doc_fields_table</span><span class="p">(</span><span class="n">field_list</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s">&#39;wiki&#39;</span><span class="p">):</span>
+            <span class="sd">&quot;&quot;&quot;field_list must be iterable of 3-tuples:</span>
+<span class="sd">            0: Field name (string)</span>
+<span class="sd">            1: Field data type (string, preferably the numpy datatype string)</span>
+<span class="sd">            2: Field description (string)</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+
+            <span class="n">doc_str</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+
+            <span class="k">if</span> <span class="n">fmt</span> <span class="o">==</span> <span class="s">&#39;wiki&#39;</span><span class="p">:</span>
+                <span class="n">doc_str</span> <span class="o">+=</span> <span class="s">&#39;{{{#!th align=center</span><span class="se">\n</span><span class="s">Field Name</span><span class="se">\n</span><span class="s">}}}</span><span class="se">\n</span><span class="s">&#39;</span>
+                <span class="n">doc_str</span> <span class="o">+=</span> <span class="s">&#39;{{{#!th align=center</span><span class="se">\n</span><span class="s">Data Type</span><span class="se">\n</span><span class="s">}}}</span><span class="se">\n</span><span class="s">&#39;</span>
+                <span class="n">doc_str</span> <span class="o">+=</span> <span class="s">&#39;{{{#!th align=center</span><span class="se">\n</span><span class="s">Description</span><span class="se">\n</span><span class="s">}}}</span><span class="se">\n</span><span class="s">&#39;</span>
+                <span class="n">doc_str</span> <span class="o">+=</span> <span class="s">&#39;|----------------</span><span class="se">\n</span><span class="s">&#39;</span>
+
+                <span class="k">for</span> <span class="n">fd</span> <span class="ow">in</span> <span class="n">field_list</span><span class="p">:</span>
+                    <span class="kn">import</span> <span class="nn">re</span>
+                    <span class="c"># Wiki-ify some string formats:</span>
+                    <span class="c">#   Line breaks in descriptions must be explicit &quot;[[BR]]&quot;</span>
+                    <span class="c">#   Braces with numeric contents need escape (![) to disable Trac interpretting as changeset number</span>
+                    <span class="n">fd_desc</span> <span class="o">=</span> <span class="n">fd</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+                    <span class="n">fd_desc</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s">&#39;(\[[\d:,]+\])&#39;</span><span class="p">,</span> <span class="s">&#39;!</span><span class="se">\\</span><span class="s">1&#39;</span><span class="p">,</span> <span class="n">fd_desc</span><span class="p">)</span> <span class="c"># do this first, so other wiki tags inserted below aren&#39;t escaped</span>
+                    <span class="c">#fd_desc = fd_desc.replace(&#39;\n&#39;, &#39;[[BR]]&#39;)</span>
+
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="n">consts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">consts</span><span class="p">[</span><span class="n">fd</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+                        <span class="n">fd_desc</span> <span class="o">+=</span> <span class="s">&#39;</span><span class="se">\n\n</span><span class="s">Constants defined for this field:</span><span class="se">\n</span><span class="s">&#39;</span>
+                        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">consts</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                            <span class="n">fd_desc</span> <span class="o">+=</span> <span class="s">&#39; * {{{{{{</span><span class="se">\&#39;</span><span class="s">{0}</span><span class="se">\&#39;</span><span class="s">: {1}}}}}}}</span><span class="se">\n</span><span class="s">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">consts</span><span class="p">[</span><span class="n">c</span><span class="p">])</span>
+                    <span class="k">except</span><span class="p">:</span>
+                        <span class="c"># Field didn&#39;t have constants defined</span>
+                        <span class="k">pass</span>
+
+                    <span class="n">doc_str</span> <span class="o">+=</span> <span class="s">&#39;{{{{{{#!td align=left</span><span class="se">\n</span><span class="s">{0}</span><span class="se">\n</span><span class="s">}}}}}}</span><span class="se">\n</span><span class="s">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">fd</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                    <span class="n">doc_str</span> <span class="o">+=</span> <span class="s">&#39;{{{{{{#!td align=center</span><span class="se">\n</span><span class="s">{0}</span><span class="se">\n</span><span class="s">}}}}}}</span><span class="se">\n</span><span class="s">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">fd</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+                    <span class="n">doc_str</span> <span class="o">+=</span> <span class="s">&#39;{{{{{{#!td align=left</span><span class="se">\n</span><span class="s">{0}</span><span class="se">\n</span><span class="s">}}}}}}</span><span class="se">\n</span><span class="s">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">fd_desc</span><span class="p">)</span>
+                    <span class="n">doc_str</span> <span class="o">+=</span> <span class="s">&#39;|----------------</span><span class="se">\n</span><span class="s">&#39;</span>
+
+            <span class="k">elif</span> <span class="n">fmt</span> <span class="o">==</span> <span class="s">&#39;txt&#39;</span><span class="p">:</span>
+                <span class="n">doc_str</span> <span class="o">+=</span> <span class="s">&#39;Field Name</span><span class="se">\t\t\t</span><span class="s">| Data Type</span><span class="se">\t</span><span class="s">| Description</span><span class="se">\n</span><span class="s">&#39;</span>
+                <span class="n">doc_str</span> <span class="o">+=</span> <span class="s">&#39;---------------------------------------------------------------------------------------------------------------------</span><span class="se">\n</span><span class="s">&#39;</span>
+
+                <span class="k">for</span> <span class="n">fd</span> <span class="ow">in</span> <span class="n">field_descs</span><span class="p">:</span>
+                    <span class="n">doc_str</span> <span class="o">+=</span> <span class="s">&#39;{0:30}</span><span class="se">\t</span><span class="s">| {1:10}</span><span class="se">\t</span><span class="s">| {2}</span><span class="se">\n</span><span class="s">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">fd</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">fd</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">fd</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+
+                <span class="n">doc_str</span> <span class="o">+=</span> <span class="s">&#39;---------------------------------------------------------------------------------------------------------------------</span><span class="se">\n</span><span class="s">&#39;</span>
+
+            <span class="k">return</span> <span class="n">doc_str</span>
+
+        <span class="k">if</span> <span class="n">fmt</span> <span class="o">==</span> <span class="s">&#39;wiki&#39;</span><span class="p">:</span>
+            <span class="c"># Construct the Trac-wiki-style documentation string for this entry type</span>
+            <span class="n">doc_str</span> <span class="o">=</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">----</span><span class="se">\n\n</span><span class="s">&#39;</span>
+            <span class="n">doc_str</span> <span class="o">+=</span> <span class="s">&#39;=== Entry Type {0} ===</span><span class="se">\n</span><span class="s">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+            <span class="n">doc_str</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">+</span> <span class="s">&#39;</span><span class="se">\n\n</span><span class="s">&#39;</span>
+            <span class="n">doc_str</span> <span class="o">+=</span> <span class="s">&#39;Entry type ID: {0}</span><span class="se">\n\n</span><span class="s">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">entry_type_id</span><span class="p">)</span>
+
+            <span class="n">doc_str</span> <span class="o">+=</span> <span class="n">doc_fields_table</span><span class="p">(</span><span class="n">field_descs</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s">&#39;wiki&#39;</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="n">fmt</span> <span class="o">==</span> <span class="s">&#39;txt&#39;</span><span class="p">:</span>
+            <span class="c"># Construct plain text version of documentation string for this entry type</span>
+            <span class="n">doc_str</span> <span class="o">=</span> <span class="s">&#39;---------------------------------------------------------------------------------------------------------------------</span><span class="se">\n</span><span class="s">&#39;</span>
+            <span class="n">doc_str</span> <span class="o">+=</span> <span class="s">&#39;Entry Type {0}</span><span class="se">\n</span><span class="s">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+            <span class="n">doc_str</span> <span class="o">+=</span> <span class="s">&#39;Entry type ID: {0}</span><span class="se">\n\n</span><span class="s">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">entry_type_id</span><span class="p">)</span>
+            <span class="n">doc_str</span> <span class="o">+=</span> <span class="n">textwrap</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="p">)</span> <span class="o">+</span> <span class="s">&#39;</span><span class="se">\n\n</span><span class="s">&#39;</span>
+
+            <span class="n">doc_str</span> <span class="o">+=</span> <span class="n">doc_fields_table</span><span class="p">(</span><span class="n">field_descs</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s">&#39;txt&#39;</span><span class="p">)</span>
+
+        <span class="c"># Check each post-numpy array generation callback to any documentation to include</span>
+        <span class="c">#   The callbacks can define &quot;virtual&quot; fields - convenience fields appended to the numpy</span>
+        <span class="c">#   array that are calculated from the &quot;real&quot; fields</span>
+        <span class="k">for</span> <span class="n">cb</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">gen_numpy_callbacks</span><span class="p">:</span>
+            <span class="n">field_descs</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="p">(</span><span class="n">cb_doc_str</span><span class="p">,</span> <span class="n">cb_doc_fields</span><span class="p">)</span> <span class="o">=</span> <span class="n">cb</span><span class="p">(</span><span class="n">np_arr_orig</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">docs_only</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+                <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">cb_doc_fields</span><span class="p">:</span>
+                    <span class="n">field_descs</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">f</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">f</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
+
+                <span class="n">doc_str</span> <span class="o">+=</span> <span class="s">&#39;</span><span class="se">\n\n</span><span class="s">&#39;</span>
+                <span class="n">doc_str</span> <span class="o">+=</span> <span class="n">cb_doc_str</span> <span class="o">+</span> <span class="s">&#39;</span><span class="se">\n\n</span><span class="s">&#39;</span>
+                <span class="n">doc_str</span> <span class="o">+=</span> <span class="n">doc_fields_table</span><span class="p">(</span><span class="n">field_descs</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="n">fmt</span><span class="p">)</span>
+
+            <span class="k">except</span> <span class="p">(</span><span class="ne">TypeError</span><span class="p">,</span> <span class="ne">IndexError</span><span class="p">):</span>
+                <span class="c"># Callback didn&#39;t implement suitable &#39;docs_only&#39; output; fail quietly and return</span>
+                <span class="c">#   print(&#39;Error generating callback field docs for {0}\n&#39;.format(cb))</span>
+                <span class="k">pass</span>
+
+        <span class="k">return</span> <span class="n">doc_str</span>
+
+
+    <span class="k">def</span> <span class="nf">_entry_as_string</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">buf</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Generate a string representation of the entry from a buffer. </span>
+<span class="sd">        </span>
+<span class="sd">        This method should only be used for debugging log data parsing and log </span>
+<span class="sd">        index generation, not for general creation of text log files.</span>
+
+<span class="sd">        This method does not work correctly on RX_OFDM entries due to the way </span>
+<span class="sd">        the channel estimates are defined.  The channel_est, mac_payload_len, </span>
+<span class="sd">        and mac_payload will all be zeros.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">entry_size</span> <span class="o">=</span> <span class="n">calcsize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fields_fmt_struct</span><span class="p">)</span>
+        <span class="n">entry</span>      <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">deserialize</span><span class="p">(</span><span class="n">buf</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">entry_size</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="n">str_out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s">&#39;: &#39;</span>
+
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">entry</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="n">entry</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+            <span class="k">if</span><span class="p">((</span><span class="nb">type</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">long</span><span class="p">)):</span>
+                <span class="n">str_out</span> <span class="o">+=</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">    {0:30s} = {1:20d} (0x{1:16x})&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+            <span class="k">elif</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">str</span><span class="p">):</span>
+                <span class="n">s</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">ord</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">entry</span><span class="p">[</span><span class="n">k</span><span class="p">]))</span>
+                <span class="n">str_out</span> <span class="o">+=</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">    {0:30s} = [&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
+                    <span class="n">str_out</span> <span class="o">+=</span> <span class="s">&quot;{0:d}, &quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+                <span class="n">str_out</span> <span class="o">+=</span> <span class="s">&quot;</span><span class="se">\b\b</span><span class="s">]&quot;</span>
+
+        <span class="n">str_out</span> <span class="o">+=</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span>
+
+        <span class="k">return</span> <span class="n">str_out</span>
+
+
+    <span class="k">def</span> <span class="nf">_entry_as_byte_array_string</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">buf</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Generate a string representation of the entry from a buffer as an array of bytes. This</span>
+<span class="sd">        method should only be used for debugging log data parsing and log index generation, not</span>
+<span class="sd">        for general creation of text log files.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">entry_size</span> <span class="o">=</span> <span class="n">calcsize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fields_fmt_struct</span><span class="p">)</span>
+        <span class="n">entry</span>      <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">deserialize</span><span class="p">(</span><span class="n">buf</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">entry_size</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="n">str_out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s">&#39;: &#39;</span>
+
+        <span class="n">line_num</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">for</span> <span class="n">byte</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">entry_size</span><span class="p">):</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">byte</span> <span class="o">%</span> <span class="mi">16</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">str_out</span>  <span class="o">+=</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">{0:&gt;8d}: &quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">line_num</span><span class="p">)</span>
+                <span class="n">line_num</span> <span class="o">+=</span> <span class="mi">16</span>
+            <span class="n">str_out</span> <span class="o">+=</span> <span class="s">&quot;0x{0:02x} &quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="n">buf</span><span class="p">[</span><span class="n">byte</span><span class="p">]))</span>
+
+        <span class="n">str_out</span> <span class="o">+=</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span>
+
+        <span class="k">print</span><span class="p">(</span><span class="n">entry</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">str_out</span>
+
+
+<div class="viewcode-block" id="WlanExpLogEntryType.deserialize"><a class="viewcode-back" href="../../../log_entry_types.html#wlan_exp.log.entry_types.WlanExpLogEntryType.deserialize">[docs]</a>    <span class="k">def</span> <span class="nf">deserialize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">buf</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Unpacks one or more raw log entries of the same type into a list of dictionaries</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            buf (bytearray): Array of raw log data containing 1 or more log entries of the same type.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            entries (List of dict):</span>
+<span class="sd">                Each dictionary in the list has one value per field in the log entry definition using</span>
+<span class="sd">                the field names as keys.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
+
+        <span class="n">ret_val</span>    <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">buf_size</span>   <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">buf</span><span class="p">)</span>
+        <span class="n">entry_size</span> <span class="o">=</span> <span class="n">calcsize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fields_fmt_struct</span><span class="p">)</span>
+        <span class="n">index</span>      <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">while</span> <span class="p">(</span><span class="n">index</span> <span class="o">&lt;</span> <span class="n">buf_size</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">dataTuple</span> <span class="o">=</span> <span class="n">unpack</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fields_fmt_struct</span><span class="p">,</span> <span class="n">buf</span><span class="p">[</span><span class="n">index</span><span class="p">:</span><span class="n">index</span><span class="o">+</span><span class="n">entry_size</span><span class="p">])</span>
+                <span class="n">all_names</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_field_names</span><span class="p">()</span>
+                <span class="n">all_fmts</span>  <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_field_struct_formats</span><span class="p">()</span>
+
+                <span class="c"># Filter out names for fields ignored during unpacking</span>
+                <span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="n">n</span> <span class="k">for</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">f</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">all_names</span><span class="p">,</span> <span class="n">all_fmts</span><span class="p">)</span> <span class="k">if</span> <span class="s">&#39;x&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">f</span><span class="p">]</span>
+
+                <span class="c"># Use OrderedDict to preserve user-specified field order</span>
+                <span class="n">ret_val</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">OrderedDict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">names</span><span class="p">,</span> <span class="n">dataTuple</span><span class="p">)))</span>
+
+            <span class="k">except</span> <span class="n">error</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+                <span class="k">print</span><span class="p">(</span><span class="s">&quot;Error unpacking {0} buffer with len {1}: {2}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">buf</span><span class="p">),</span> <span class="n">err</span><span class="p">))</span>
+
+            <span class="n">index</span> <span class="o">+=</span> <span class="n">entry_size</span>
+
+        <span class="k">return</span> <span class="n">ret_val</span>
+
+</div>
+<div class="viewcode-block" id="WlanExpLogEntryType.serialize"><a class="viewcode-back" href="../../../log_entry_types.html#wlan_exp.log.entry_types.WlanExpLogEntryType.serialize">[docs]</a>    <span class="k">def</span> <span class="nf">serialize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entries</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Packs one or more list of dictionaries into a buffer of log entries of the same type</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            entry_list (dictionary):  Array of dictionaries for 1 or more log entries of the same type</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            data (bytearray):  Bytearray of packed binary data</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">length</span>     <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">ret_val</span>    <span class="o">=</span> <span class="s">&quot;&quot;</span>
+        <span class="n">entry_size</span> <span class="o">=</span> <span class="n">calcsize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fields_fmt_struct</span><span class="p">)</span>
+
+        <span class="c"># Convert entries to a list if it is not already one</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">entries</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="nb">list</span><span class="p">:</span>
+            <span class="n">entries</span> <span class="o">=</span> <span class="p">[</span><span class="n">entries</span><span class="p">]</span>
+
+        <span class="c"># Pack each of the entries into a single data buffer</span>
+        <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">entries</span><span class="p">:</span>
+            <span class="n">fields</span>     <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">tmp_values</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">used_field</span> <span class="o">=</span> <span class="p">[]</span>
+
+            <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fields</span><span class="p">:</span>
+                <span class="k">if</span> <span class="s">&#39;x&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">field</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+                    <span class="n">fields</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">field</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="n">tmp_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">entry</span><span class="p">[</span><span class="n">field</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
+                        <span class="n">used_field</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+                    <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+                        <span class="n">tmp_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+                        <span class="n">used_field</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="bp">False</span><span class="p">):</span>
+                <span class="k">print</span><span class="p">(</span><span class="s">&quot;Serialize Entry:&quot;</span><span class="p">)</span>
+                <span class="k">print</span><span class="p">(</span><span class="n">fields</span><span class="p">)</span>
+                <span class="k">print</span><span class="p">(</span><span class="n">used_field</span><span class="p">)</span>
+                <span class="k">print</span><span class="p">(</span><span class="n">tmp_values</span><span class="p">)</span>
+
+            <span class="n">ret_val</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fields_fmt_struct</span><span class="p">,</span> <span class="o">*</span><span class="n">tmp_values</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">entry_size</span> <span class="o">*</span> <span class="n">length</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">ret_val</span><span class="p">):</span>
+            <span class="n">msg</span>  <span class="o">=</span> <span class="s">&quot;WARNING: Sizes do not match.</span><span class="se">\n</span><span class="s">&quot;</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="s">&quot;    Expected  {0} bytes&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">entry_size</span> <span class="o">*</span> <span class="n">length</span><span class="p">)</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="s">&quot;    Buffer is {0} bytes&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ret_val</span><span class="p">))</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">ret_val</span>
+
+
+    <span class="c"># -------------------------------------------------------------------------</span>
+    <span class="c"># Internal methods for the WlanExpLogEntryType</span>
+    <span class="c"># -------------------------------------------------------------------------</span></div>
+    <span class="k">def</span> <span class="nf">_update_field_defs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Internal method to update fields.&quot;&quot;&quot;</span>
+        <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+        <span class="c"># Update the fields format used by struct unpack/calcsize</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields_fmt_struct</span> <span class="o">=</span> <span class="s">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_field_struct_formats</span><span class="p">())</span>
+
+        <span class="c"># Update the numpy dtype definition</span>
+        <span class="c"># fields_np_dt is a numpy dtype, built using a dictionary of names/formats/offsets:</span>
+        <span class="c">#     {&#39;names&#39;:[field_names], &#39;formats&#39;:[field_formats], &#39;offsets&#39;:[field_offsets]}</span>
+        <span class="c"># We specify each field&#39;s byte offset explicitly. Byte offsets for fields in _fields</span>
+        <span class="c"># are inferred, assuming tight C-struct-type packing (same assumption as struct.unpack)</span>
+
+        <span class="n">get_np_size</span> <span class="o">=</span> <span class="p">(</span><span class="k">lambda</span> <span class="n">f</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">f</span><span class="p">)</span><span class="o">.</span><span class="n">itemsize</span><span class="p">)</span>
+
+        <span class="c"># Compute the offset of each real field, inferred by the sizes of all previous fields</span>
+        <span class="c">#   This loop must look at all real fields, even ignored/padding fields</span>
+        <span class="n">sizes</span>   <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">get_np_size</span><span class="p">,</span> <span class="p">[</span><span class="n">f</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fields</span><span class="p">]))</span>
+        <span class="n">offsets</span> <span class="o">=</span> <span class="p">[</span><span class="nb">sum</span><span class="p">(</span><span class="n">sizes</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">i</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sizes</span><span class="p">))]</span>
+
+        <span class="n">np_fields</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fields</span>
+
+        <span class="c"># numpy processing ignores the same fields ignored by struct.unpack</span>
+        <span class="c"># !!!BAD!!! Doing this filtering breaks HDF5 export</span>
+        <span class="c"># offsets = [o for (o,f) in zip(offsets_all, self._fields) if &#39;x&#39; not in f[1]]</span>
+        <span class="c"># np_fields = [f for f in self._fields if &#39;x&#39; not in f[1]]</span>
+
+        <span class="n">names</span>   <span class="o">=</span>  <span class="p">[</span><span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">np_fields</span><span class="p">]</span>
+        <span class="n">formats</span> <span class="o">=</span>  <span class="p">[</span><span class="n">f</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">np_fields</span><span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields_np_dt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">({</span><span class="s">&#39;names&#39;</span><span class="p">:</span><span class="n">names</span><span class="p">,</span> <span class="s">&#39;formats&#39;</span><span class="p">:</span><span class="n">formats</span><span class="p">,</span> <span class="s">&#39;offsets&#39;</span><span class="p">:</span><span class="n">offsets</span><span class="p">})</span>
+
+        <span class="c"># Update the field offsets</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_field_offsets</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">names</span><span class="p">,</span> <span class="n">offsets</span><span class="p">))</span>
+
+        <span class="c"># Check our definitions of struct vs numpy are in sync</span>
+        <span class="n">struct_size</span> <span class="o">=</span> <span class="n">calcsize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fields_fmt_struct</span><span class="p">)</span>
+        <span class="n">np_size</span>     <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fields_np_dt</span><span class="o">.</span><span class="n">itemsize</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">struct_size</span> <span class="o">!=</span> <span class="n">np_size</span><span class="p">):</span>
+            <span class="n">msg</span>  <span class="o">=</span> <span class="s">&quot;WARNING:  Definitions of struct {0} do not match.</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="s">&quot;    Struct size = {0}    Numpy size = {1}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">struct_size</span><span class="p">,</span> <span class="n">np_size</span><span class="p">)</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;WlanExpLogEntryType are equal if their names are equal.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">str</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">other</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">__lt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;WlanExpLogEntryType are less than if their names are less than.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">str</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">&lt;</span> <span class="n">other</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">&lt;</span> <span class="n">other</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">__gt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;WlanExpLogEntryType are greater than if their names are greater than.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">str</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">&gt;</span> <span class="n">other</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">&gt;</span> <span class="n">other</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">__ne__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">__eq__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">hash</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+
+<span class="c"># End class</span>
+
+
+<span class="c"># -----------------------------------------------------------------------------</span>
+<span class="c"># Log Entry Type Functions</span>
+<span class="c"># -----------------------------------------------------------------------------</span>
+</div>
+<span class="k">def</span> <span class="nf">np_array_add_txrx_ltg_fields</span><span class="p">(</span><span class="n">np_arr_orig</span><span class="p">,</span> <span class="n">docs_only</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Add &#39;virtual&#39; fields to TX/RX LTG packets.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">np_array_add_fields</span><span class="p">(</span><span class="n">np_arr_orig</span><span class="p">,</span> <span class="n">mac_addr</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">ltg</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">docs_only</span><span class="o">=</span><span class="n">docs_only</span><span class="p">)</span>
+
+<span class="c"># End def</span>
+
+
+<span class="k">def</span> <span class="nf">np_array_add_txrx_fields</span><span class="p">(</span><span class="n">np_arr_orig</span><span class="p">,</span> <span class="n">docs_only</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Add &#39;virtual&#39; fields to TX/RX packets.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">np_array_add_fields</span><span class="p">(</span><span class="n">np_arr_orig</span><span class="p">,</span> <span class="n">mac_addr</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">ltg</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">docs_only</span><span class="o">=</span><span class="n">docs_only</span><span class="p">)</span>
+
+<span class="c"># End def</span>
+
+
+<div class="viewcode-block" id="np_array_add_fields"><a class="viewcode-back" href="../../../log_entry_types.html#wlan_exp.log.entry_types.np_array_add_fields">[docs]</a><span class="k">def</span> <span class="nf">np_array_add_fields</span><span class="p">(</span><span class="n">np_arr_orig</span><span class="p">,</span> <span class="n">mac_addr</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">ltg</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">docs_only</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Add &#39;virtual&#39; fields to the numpy array.</span>
+
+<span class="sd">    This is an example of a gen_numpy_array_callback</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        np_arr_orig (Numpy Array):  Numpy array to extend</span>
+<span class="sd">        mac_addr (bool, optional):  Add MAC address information to the numpy array?</span>
+<span class="sd">        ltg (bool, optional):       Add LTG information ot the numpy array?</span>
+<span class="sd">        docs_only (bool):           Only generate documentation strings for virtual fields?</span>
+<span class="sd">            If this is True, then only documentation strings are returned.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        np_array (Numpy Array):     Updated numpy array</span>
+
+<span class="sd">    Extend the default np_arr with convenience fields for:</span>
+<span class="sd">        * MAC header addresses</span>
+<span class="sd">        * LTG packet information</span>
+
+<span class="sd">    IMPORTANT: np_arr uses the original bytearray as its underlying data</span>
+<span class="sd">    We must operate on a copy to avoid clobbering log entries adjacent to the</span>
+<span class="sd">    Tx or Rx entries being extended.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+    <span class="n">names</span>   <span class="o">=</span> <span class="p">()</span>
+    <span class="n">formats</span> <span class="o">=</span> <span class="p">()</span>
+    <span class="n">descs</span>   <span class="o">=</span> <span class="p">()</span>
+
+    <span class="c"># Add the MAC address fields</span>
+    <span class="k">if</span> <span class="n">mac_addr</span><span class="p">:</span>
+        <span class="n">names</span>   <span class="o">+=</span> <span class="p">(</span><span class="s">&#39;addr1&#39;</span><span class="p">,</span> <span class="s">&#39;addr2&#39;</span><span class="p">,</span> <span class="s">&#39;addr3&#39;</span><span class="p">,</span> <span class="s">&#39;mac_seq&#39;</span><span class="p">)</span>
+        <span class="n">formats</span> <span class="o">+=</span> <span class="p">(</span><span class="s">&#39;uint64&#39;</span><span class="p">,</span> <span class="s">&#39;uint64&#39;</span><span class="p">,</span> <span class="s">&#39;uint64&#39;</span><span class="p">,</span> <span class="s">&#39;uint16&#39;</span><span class="p">)</span>
+        <span class="n">descs</span>   <span class="o">+=</span> <span class="p">(</span><span class="s">&#39;MAC Header Address 1&#39;</span><span class="p">,</span> <span class="s">&#39;MAC Header Address 2&#39;</span><span class="p">,</span> <span class="s">&#39;MAC Header Address 3&#39;</span><span class="p">,</span> <span class="s">&#39;MAC Header Sequence Number&#39;</span><span class="p">)</span>
+
+    <span class="c"># Add the LTG fields</span>
+    <span class="k">if</span> <span class="n">ltg</span><span class="p">:</span>
+        <span class="n">names</span>   <span class="o">+=</span> <span class="p">(</span><span class="s">&#39;ltg_uniq_seq&#39;</span><span class="p">,</span> <span class="s">&#39;ltg_flow_id&#39;</span><span class="p">)</span>
+        <span class="n">formats</span> <span class="o">+=</span> <span class="p">(</span><span class="s">&#39;uint64&#39;</span><span class="p">,</span> <span class="s">&#39;uint64&#39;</span><span class="p">)</span>
+        <span class="n">descs</span>   <span class="o">+=</span> <span class="p">(</span><span class="s">&#39;Unique sequence number for LTG packet&#39;</span><span class="p">,</span> <span class="s">&#39;LTG Flow ID, calculated as:</span><span class="se">\n</span><span class="s">  16LSB: LTG instance ID</span><span class="se">\n</span><span class="s">  48MSB: Destination MAC address&#39;</span><span class="p">)</span>
+
+    <span class="c"># If there are no fields to add, just return the original array</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">names</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np_arr_orig</span>
+
+    <span class="k">if</span> <span class="n">docs_only</span><span class="p">:</span>
+        <span class="n">ret_str</span>  <span class="o">=</span> <span class="s">&#39;The following fields are populated when the log entry is part of a numpy array generated via the {{{generate_numpy_array}}} method. &#39;</span>
+        <span class="n">ret_str</span> <span class="o">+=</span> <span class="s">&#39;These fields are calculated from the underlying bytes in the raw log entries and are stored in more convenient formats tha the raw &#39;</span>
+        <span class="n">ret_str</span> <span class="o">+=</span> <span class="s">&#39;log fields. For example, these MAC address fields are 48-bit values stored in 64-bit integers. These integer addresses are much easier &#39;</span>
+        <span class="n">ret_str</span> <span class="o">+=</span> <span class="s">&#39;to use when filtering Tx/Rx log entries using numpy and pandas.&#39;</span>
+
+        <span class="n">ret_list</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="n">names</span><span class="p">,</span> <span class="n">formats</span><span class="p">,</span> <span class="n">descs</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="p">(</span><span class="n">ret_str</span><span class="p">,</span> <span class="n">ret_list</span><span class="p">)</span>
+
+    <span class="c"># Return if array is None to not raise an Attribute Exception</span>
+    <span class="k">if</span> <span class="n">np_arr_orig</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np_arr_orig</span>
+
+    <span class="c"># Create a new numpy dtype with additional fields</span>
+    <span class="n">dt_new</span> <span class="o">=</span> <span class="n">extend_np_dt</span><span class="p">(</span><span class="n">np_arr_orig</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;names&#39;</span><span class="p">:</span> <span class="n">names</span><span class="p">,</span> <span class="s">&#39;formats&#39;</span><span class="p">:</span> <span class="n">formats</span><span class="p">})</span>
+
+    <span class="c"># Initialize the output array (same shape, new dtype)</span>
+    <span class="n">np_arr_out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">np_arr_orig</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dt_new</span><span class="p">)</span>
+
+    <span class="c"># Copy data from the base numpy array into the output array</span>
+    <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">np_arr_orig</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">names</span><span class="p">:</span>
+        <span class="c"># TODO: maybe don&#39;t copy fields that are ignored in the struct format?</span>
+        <span class="c">#   problem is non-TxRx entries would still have these fields in their numpy versions</span>
+        <span class="n">np_arr_out</span><span class="p">[</span><span class="n">f</span><span class="p">]</span> <span class="o">=</span> <span class="n">np_arr_orig</span><span class="p">[</span><span class="n">f</span><span class="p">]</span>
+
+    <span class="c"># Extract the MAC payload (the payload is at a minimum a 24-entry uint8 array)</span>
+    <span class="n">mac_hdrs</span> <span class="o">=</span> <span class="n">np_arr_orig</span><span class="p">[</span><span class="s">&#39;mac_payload&#39;</span><span class="p">]</span>
+
+    <span class="c"># Populate the MAC Address fields</span>
+    <span class="k">if</span> <span class="n">mac_addr</span><span class="p">:</span>
+        <span class="c"># Helper array of powers of 2</span>
+        <span class="c">#   this array arranges bytes such that they match other u64 representations of MAC addresses</span>
+        <span class="c">#   elsewhere in the framework</span>
+        <span class="n">addr_conv_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">uint64</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">40</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">8</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="s">&#39;uint64&#39;</span><span class="p">)</span>
+
+        <span class="c"># Compute values for address-as-int fields using numpy&#39;s dot-product routine</span>
+        <span class="c">#  MAC header offsets here select the 3 6-byte address fields and 1 3-byte sequence number</span>
+        <span class="c">#  Each field is conditioned on the MAC payload length exceeding the bytes needed to compute the field</span>
+        <span class="c">#   This check handles the case of logging code being changed to record short/no payloads or</span>
+        <span class="c">#    for short packet Tx/Rx, such as ACKs, which do not contain all 3 address and sequence number fields</span>
+
+        <span class="n">arr_filt</span> <span class="o">=</span> <span class="n">np_arr_out</span><span class="p">[</span><span class="s">&#39;mac_payload_len&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">10</span>
+        <span class="n">np_arr_out</span><span class="p">[</span><span class="s">&#39;addr1&#39;</span><span class="p">][</span><span class="n">arr_filt</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">addr_conv_arr</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">mac_hdrs</span><span class="p">[</span><span class="n">arr_filt</span><span class="p">,</span>  <span class="mi">4</span><span class="p">:</span><span class="mi">10</span><span class="p">]))</span>
+
+        <span class="n">arr_filt</span> <span class="o">=</span> <span class="n">np_arr_out</span><span class="p">[</span><span class="s">&#39;mac_payload_len&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">16</span>
+        <span class="n">np_arr_out</span><span class="p">[</span><span class="s">&#39;addr2&#39;</span><span class="p">][</span><span class="n">arr_filt</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">addr_conv_arr</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">mac_hdrs</span><span class="p">[</span><span class="n">arr_filt</span><span class="p">,</span> <span class="mi">10</span><span class="p">:</span><span class="mi">16</span><span class="p">]))</span>
+
+        <span class="n">arr_filt</span> <span class="o">=</span> <span class="n">np_arr_out</span><span class="p">[</span><span class="s">&#39;mac_payload_len&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">22</span>
+        <span class="n">np_arr_out</span><span class="p">[</span><span class="s">&#39;addr3&#39;</span><span class="p">][</span><span class="n">arr_filt</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">addr_conv_arr</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">mac_hdrs</span><span class="p">[</span><span class="n">arr_filt</span><span class="p">,</span> <span class="mi">16</span><span class="p">:</span><span class="mi">22</span><span class="p">]))</span>
+
+        <span class="n">arr_filt</span> <span class="o">=</span> <span class="n">np_arr_out</span><span class="p">[</span><span class="s">&#39;mac_payload_len&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">24</span>
+        <span class="n">np_arr_out</span><span class="p">[</span><span class="s">&#39;mac_seq&#39;</span><span class="p">][</span><span class="n">arr_filt</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">mac_hdrs</span><span class="p">[</span><span class="n">arr_filt</span><span class="p">,</span> <span class="mi">22</span><span class="p">:</span><span class="mi">24</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">256</span><span class="p">])</span> <span class="o">//</span> <span class="mi">16</span>
+
+    <span class="c"># Populate the LTG fields</span>
+    <span class="k">if</span> <span class="n">ltg</span><span class="p">:</span>
+        <span class="c"># Helper array of powers of 2</span>
+        <span class="c">#   this array arranges bytes such that they match other u64 representations of MAC addresses</span>
+        <span class="c">#   elsewhere in the framework</span>
+        <span class="n">uniq_seq_conv_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">uint64</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="s">&#39;uint64&#39;</span><span class="p">)</span>
+        <span class="n">flow_id_conv_arr</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">uint64</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="s">&#39;uint64&#39;</span><span class="p">)</span>
+
+        <span class="c"># Compute the LTG unique sequence number from the bytes in the LTG mac payload</span>
+        <span class="n">np_arr_out</span><span class="p">[</span><span class="s">&#39;ltg_uniq_seq&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">uniq_seq_conv_arr</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">mac_hdrs</span><span class="p">[:,</span> <span class="mi">32</span><span class="p">:</span><span class="mi">40</span><span class="p">]))</span>
+
+        <span class="c"># Compute the LTG flow ID from the bytes in the LTG mac payload and the transmitting address (ie &#39;addr2&#39;) if present.</span>
+        <span class="c">#     flow_id[63:16] = Transmitting address</span>
+        <span class="c">#     flow_id[15: 0] = LTG ID from LTG mac payload</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">np_arr_out</span><span class="p">[</span><span class="s">&#39;ltg_flow_id&#39;</span><span class="p">]</span>  <span class="o">=</span> <span class="p">(</span><span class="n">np_arr_out</span><span class="p">[</span><span class="s">&#39;addr2&#39;</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="mi">16</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">flow_id_conv_arr</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">mac_hdrs</span><span class="p">[:,</span> <span class="mi">40</span><span class="p">:</span><span class="mi">44</span><span class="p">]))</span> <span class="o">&amp;</span> <span class="mh">0xFFFF</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="n">np_arr_out</span><span class="p">[</span><span class="s">&#39;ltg_flow_id&#39;</span><span class="p">]</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">flow_id_conv_arr</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">mac_hdrs</span><span class="p">[:,</span> <span class="mi">40</span><span class="p">:</span><span class="mi">44</span><span class="p">]))</span>
+
+    <span class="k">return</span> <span class="n">np_arr_out</span>
+
+<span class="c"># End def</span>
+
+</div>
+<span class="k">def</span> <span class="nf">extend_np_dt</span><span class="p">(</span><span class="n">dt_orig</span><span class="p">,</span> <span class="n">new_fields</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Extends a numpy dtype object with additional fields.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        dt_orig (Numpy DataType):  Original Numpy data type</span>
+<span class="sd">        new_fields (dict):         Dictionary with keys &#39;names&#39; and &#39;formats&#39;, same as when specifying</span>
+<span class="sd">            new dtype objects. The return dtype will *not* contain byte offset values for existing or</span>
+<span class="sd">            new fields, even if exisiting fields had specified offsets. Thus the original dtype should</span>
+<span class="sd">            be used to interpret raw data buffers before the extended dtype is used to add new fields.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+    <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">dt_orig</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s">&quot;ERROR: extend_np_dt requires valid numpy dtype as input&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c"># Use ordered dictionary to preserve original field order (not required, just convenient)</span>
+        <span class="n">dt_ext</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
+
+        <span class="c"># Extract the names/formats/offsets dictionary for the base dtype</span>
+        <span class="c">#   dt.fields returns dictionary with field names as keys and</span>
+        <span class="c">#   values of (dtype, offset). The dtype objects in the first tuple field</span>
+        <span class="c">#   can be used as values in the &#39;formats&#39; entry when creating a new dtype</span>
+        <span class="c"># This approach will preserve the types and dimensions of scalar and non-scalar fields</span>
+        <span class="n">dt_ext</span><span class="p">[</span><span class="s">&#39;names&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">dt_orig</span><span class="o">.</span><span class="n">names</span><span class="p">)</span>
+        <span class="n">dt_ext</span><span class="p">[</span><span class="s">&#39;formats&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">dt_orig</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="n">f</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">dt_orig</span><span class="o">.</span><span class="n">names</span><span class="p">]</span>
+
+        <span class="k">if</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">new_fields</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="c"># Add new fields to the extended dtype</span>
+            <span class="n">dt_ext</span><span class="p">[</span><span class="s">&#39;names&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">new_fields</span><span class="p">[</span><span class="s">&#39;names&#39;</span><span class="p">])</span>
+            <span class="n">dt_ext</span><span class="p">[</span><span class="s">&#39;formats&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">new_fields</span><span class="p">[</span><span class="s">&#39;formats&#39;</span><span class="p">])</span>
+        <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">new_fields</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s">&quot;ERROR: new_fields argument must be dictionary with keys &#39;names&#39; and &#39;formats&#39;&quot;</span><span class="p">)</span>
+
+        <span class="c"># Construct and return the new numpy dtype object</span>
+        <span class="n">dt_new</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">dt_ext</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">dt_new</span>
+
+<span class="c"># End def</span>
+
+
+<span class="c"># -----------------------------------------------------------------------------</span>
+<span class="c"># Log Entry Type Definitions</span>
+<span class="c"># -----------------------------------------------------------------------------</span>
+
+<span class="c"># The code below runs when this module is imported to define each log entry type implemented</span>
+<span class="c">#  in the reference design. However the append_field_defs method depends on numpy, which is</span>
+<span class="c">#  not avaiable on the warpproject.org server, so this code will break autodoc as-is</span>
+<span class="c"># The server sets an environment variable BUILDING_DOCS_ON_SERVER when it runs post-svn-commit</span>
+<span class="c">#  Skip all code below if this variable is set</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;BUILDING_DOCS_ON_SERVER&#39;</span><span class="p">,</span> <span class="bp">False</span><span class="p">):</span>
+
+    <span class="c"># -----------------------------------------------------------------------------</span>
+    <span class="c"># Common Log Entry Contants</span>
+    <span class="c"># -----------------------------------------------------------------------------</span>
+
+    <span class="c"># Packet Type</span>
+    <span class="c">#     Matches definition in wlan_mac_802_11_defs.h</span>
+    <span class="n">common_pkt_type</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">consts_dict</span><span class="p">({</span>
+        <span class="s">&#39;BEACON&#39;</span>            <span class="p">:</span>  <span class="mh">0x80</span><span class="p">,</span>
+        <span class="s">&#39;PROBE_RESP&#39;</span>        <span class="p">:</span>  <span class="mh">0x50</span><span class="p">,</span>
+        <span class="s">&#39;ACK&#39;</span>               <span class="p">:</span>  <span class="mh">0xD4</span><span class="p">,</span>        
+        <span class="s">&#39;CTS&#39;</span>               <span class="p">:</span>  <span class="mh">0xC4</span><span class="p">,</span>
+        <span class="s">&#39;RTS&#39;</span>               <span class="p">:</span>  <span class="mh">0xB4</span><span class="p">,</span>
+        <span class="s">&#39;DATA&#39;</span>              <span class="p">:</span>  <span class="mh">0x08</span><span class="p">,</span>        
+        <span class="s">&#39;QOSDATA&#39;</span>           <span class="p">:</span>  <span class="mh">0x88</span><span class="p">,</span>
+        <span class="s">&#39;NULLDATA&#39;</span>          <span class="p">:</span>  <span class="mh">0x48</span><span class="p">,})</span>
+        
+
+    <span class="c"># -----------------------------------------------------------------------------</span>
+    <span class="c"># NULL Log Entry Instance</span>
+    <span class="c"># -----------------------------------------------------------------------------</span>
+
+    <span class="c"># The NULL entry is used to &quot;remove&quot; an existing entry within the log.</span>
+    <span class="c">#   By replacing the current entry type with the NULL entry type and zeroing</span>
+    <span class="c">#   out all data following the header, this can effectively remove an entry</span>
+    <span class="c">#   without changing the memory footprint of the log.  NULL entries will</span>
+    <span class="c">#   be filtered and never show up in the raw_log_index.</span>
+
+    <span class="n">entry_null</span> <span class="o">=</span> <span class="n">WlanExpLogEntryType</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;NULL&#39;</span><span class="p">,</span> <span class="n">entry_type_id</span><span class="o">=</span><span class="n">ENTRY_TYPE_NULL</span><span class="p">)</span>
+
+
+    <span class="c"># -----------------------------------------------------------------------------</span>
+    <span class="c"># Virtual Log Entry Instances</span>
+    <span class="c"># -----------------------------------------------------------------------------</span>
+
+    <span class="c">###########################################################################</span>
+    <span class="c"># Rx Common</span>
+    <span class="c">#</span>
+    <span class="n">entry_rx_common</span> <span class="o">=</span> <span class="n">WlanExpLogEntryType</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;RX_ALL&#39;</span><span class="p">,</span> <span class="n">entry_type_id</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+
+    <span class="n">entry_rx_common</span><span class="o">.</span><span class="n">description</span>  <span class="o">=</span> <span class="s">&#39;These log entries will only be created for packets that are passed to the high-level MAC code in CPU High. If &#39;</span>
+    <span class="n">entry_rx_common</span><span class="o">.</span><span class="n">description</span> <span class="o">+=</span> <span class="s">&#39;the low-level MAC filter drops the packet, it will not be logged. For full &quot;monitor mode&quot; ensure the low-level &#39;</span>
+    <span class="n">entry_rx_common</span><span class="o">.</span><span class="n">description</span> <span class="o">+=</span> <span class="s">&#39;MAC filter is configured to pass all receptions up to CPU High.&#39;</span>
+
+    <span class="n">entry_rx_common</span><span class="o">.</span><span class="n">append_field_defs</span><span class="p">([</span>
+        <span class="p">(</span><span class="s">&#39;timestamp&#39;</span><span class="p">,</span>              <span class="s">&#39;Q&#39;</span><span class="p">,</span>      <span class="s">&#39;uint64&#39;</span><span class="p">,</span>  <span class="s">&#39;Value of MAC Time in microseconds at PHY RX_START&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;timestamp_frac&#39;</span><span class="p">,</span>         <span class="s">&#39;B&#39;</span><span class="p">,</span>      <span class="s">&#39;uint8&#39;</span><span class="p">,</span>   <span class="s">&#39;Fractional timestamp (units of 6.25ns)&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;phy_samp_rate&#39;</span><span class="p">,</span>          <span class="s">&#39;B&#39;</span><span class="p">,</span>      <span class="s">&#39;uint8&#39;</span><span class="p">,</span>   <span class="s">&#39;PHY Sampling Rate Mode&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;length&#39;</span><span class="p">,</span>                 <span class="s">&#39;H&#39;</span><span class="p">,</span>      <span class="s">&#39;uint16&#39;</span><span class="p">,</span>  <span class="s">&#39;Length of payload in bytes&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;cfo_est&#39;</span><span class="p">,</span>                <span class="s">&#39;i&#39;</span><span class="p">,</span>      <span class="s">&#39;int32&#39;</span><span class="p">,</span>   <span class="s">&#39;Time-domain CFO estimate from Rx PHY; Fix32_31 value, CFO as fraction of sampling frequency&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;mcs&#39;</span><span class="p">,</span>                    <span class="s">&#39;B&#39;</span><span class="p">,</span>      <span class="s">&#39;uint8&#39;</span><span class="p">,</span>   <span class="s">&#39;MCS index, in [0:7]&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;phy_mode&#39;</span><span class="p">,</span>               <span class="s">&#39;B&#39;</span><span class="p">,</span>      <span class="s">&#39;uint8&#39;</span><span class="p">,</span>   <span class="s">&#39;PHY mode&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;ant_mode&#39;</span><span class="p">,</span>               <span class="s">&#39;B&#39;</span><span class="p">,</span>      <span class="s">&#39;uint8&#39;</span><span class="p">,</span>   <span class="s">&#39;Antenna mode: [1,2,3,4] for SISO Rx on RF [A,B,C,D]&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;power&#39;</span><span class="p">,</span>                  <span class="s">&#39;b&#39;</span><span class="p">,</span>      <span class="s">&#39;int8&#39;</span><span class="p">,</span>    <span class="s">&#39;Rx power in dBm&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;padding0&#39;</span><span class="p">,</span>               <span class="s">&#39;x&#39;</span><span class="p">,</span>      <span class="s">&#39;uint8&#39;</span><span class="p">,</span>   <span class="s">&#39;&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;pkt_type&#39;</span><span class="p">,</span>               <span class="s">&#39;B&#39;</span><span class="p">,</span>      <span class="s">&#39;uint8&#39;</span><span class="p">,</span>   <span class="s">&#39;Packet type, (first frame control byte of 802.11 header)&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;channel&#39;</span><span class="p">,</span>                <span class="s">&#39;B&#39;</span><span class="p">,</span>      <span class="s">&#39;uint8&#39;</span><span class="p">,</span>   <span class="s">&#39;Channel (center frequency) index&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;padding1&#39;</span><span class="p">,</span>               <span class="s">&#39;x&#39;</span><span class="p">,</span>      <span class="s">&#39;uint8&#39;</span><span class="p">,</span>   <span class="s">&#39;&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;rf_gain&#39;</span><span class="p">,</span>                <span class="s">&#39;B&#39;</span><span class="p">,</span>      <span class="s">&#39;uint8&#39;</span><span class="p">,</span>   <span class="s">&#39;AGC RF gain setting: [1,2,3] for [0,15,30]dB gain&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;bb_gain&#39;</span><span class="p">,</span>                <span class="s">&#39;B&#39;</span><span class="p">,</span>      <span class="s">&#39;uint8&#39;</span><span class="p">,</span>   <span class="s">&#39;AGC BB gain setting: [0:31] for approx [0:63]dB gain&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;flags&#39;</span><span class="p">,</span>                  <span class="s">&#39;H&#39;</span><span class="p">,</span>      <span class="s">&#39;uint16&#39;</span><span class="p">,</span>  <span class="s">&#39;1-bit flags&#39;</span><span class="p">)])</span>
+
+    <span class="n">entry_rx_common</span><span class="o">.</span><span class="n">consts</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">consts_dict</span><span class="p">({</span>
+        <span class="s">&#39;ant_mode&#39;</span>      <span class="p">:</span> <span class="n">util</span><span class="o">.</span><span class="n">consts_dict</span><span class="p">({</span>
+                <span class="s">&#39;RF_A&#39;</span><span class="p">:</span> <span class="mh">0x01</span><span class="p">,</span>
+                <span class="s">&#39;RF_B&#39;</span><span class="p">:</span> <span class="mh">0x02</span><span class="p">,</span>
+                <span class="s">&#39;RF_C&#39;</span><span class="p">:</span> <span class="mh">0x03</span><span class="p">,</span>
+                <span class="s">&#39;RF_D&#39;</span><span class="p">:</span> <span class="mh">0x04</span><span class="p">,</span>
+            <span class="p">}),</span>
+        <span class="s">&#39;pkt_type&#39;</span>      <span class="p">:</span> <span class="n">common_pkt_type</span><span class="p">,</span>
+        <span class="s">&#39;phy_mode&#39;</span>      <span class="p">:</span> <span class="n">util</span><span class="o">.</span><span class="n">phy_modes</span><span class="p">,</span>
+        <span class="s">&#39;flags&#39;</span>         <span class="p">:</span> <span class="n">util</span><span class="o">.</span><span class="n">consts_dict</span><span class="p">({</span>
+            <span class="s">&#39;FCS_GOOD&#39;</span>                 <span class="p">:</span> <span class="mh">0x0001</span><span class="p">,</span>
+            <span class="s">&#39;DUPLICATE&#39;</span>                <span class="p">:</span> <span class="mh">0x0002</span><span class="p">,</span>
+            <span class="s">&#39;UNEXPECTED_RESPONSE&#39;</span>      <span class="p">:</span> <span class="mh">0x0004</span><span class="p">,</span>
+            <span class="s">&#39;LTG_PYLD&#39;</span>                 <span class="p">:</span> <span class="mh">0x0040</span><span class="p">,</span>
+            <span class="s">&#39;LTG&#39;</span>                      <span class="p">:</span> <span class="mh">0x0080</span>
+        <span class="p">})</span>
+    <span class="p">})</span>
+
+
+    <span class="c">###########################################################################</span>
+    <span class="c"># Tx CPU High Common</span>
+    <span class="c">#</span>
+    <span class="n">entry_tx_common</span> <span class="o">=</span> <span class="n">WlanExpLogEntryType</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;TX_ALL&#39;</span><span class="p">,</span> <span class="n">entry_type_id</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+
+    <span class="n">entry_tx_common</span><span class="o">.</span><span class="n">description</span>  <span class="o">=</span> <span class="s">&#39;Tx events in CPU High, logged for each MPDU frame created and enqueued in CPU High. See TX_LOW for log entries of &#39;</span>
+    <span class="n">entry_tx_common</span><span class="o">.</span><span class="n">description</span> <span class="o">+=</span> <span class="s">&#39;actual Tx events, including re-transmissions. The time values in this log entry can be used to determine time in queue &#39;</span>
+    <span class="n">entry_tx_common</span><span class="o">.</span><span class="n">description</span> <span class="o">+=</span> <span class="s">&#39;(time_to_accept), time taken by CPU Low for all Tx attempts (time_to_done) and total time from creation to completion &#39;</span>
+    <span class="n">entry_tx_common</span><span class="o">.</span><span class="n">description</span> <span class="o">+=</span> <span class="s">&#39;(time_to_accept+time_to_done).&#39;</span>
+
+    <span class="n">entry_tx_common</span><span class="o">.</span><span class="n">append_field_defs</span><span class="p">([</span>
+        <span class="p">(</span><span class="s">&#39;timestamp&#39;</span><span class="p">,</span>              <span class="s">&#39;Q&#39;</span><span class="p">,</span>      <span class="s">&#39;uint64&#39;</span><span class="p">,</span>  <span class="s">&#39;Value of MAC Time in microseconds when packet was created, immediately before it was enqueued&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;time_to_accept&#39;</span><span class="p">,</span>         <span class="s">&#39;I&#39;</span><span class="p">,</span>      <span class="s">&#39;uint32&#39;</span><span class="p">,</span>  <span class="s">&#39;Time duration in microseconds between packet creation and packet acceptance by CPU Low&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;time_to_done&#39;</span><span class="p">,</span>           <span class="s">&#39;I&#39;</span><span class="p">,</span>      <span class="s">&#39;uint32&#39;</span><span class="p">,</span>  <span class="s">&#39;Time duration in microseconds between packet acceptance by CPU Low and Tx completion in CPU Low&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;uniq_seq&#39;</span><span class="p">,</span>               <span class="s">&#39;Q&#39;</span><span class="p">,</span>      <span class="s">&#39;uint64&#39;</span><span class="p">,</span>  <span class="s">&#39;Unique sequence number for Tx packet; 12 LSB of this used for 802.11 MAC header sequence number&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;mcs&#39;</span><span class="p">,</span>                    <span class="s">&#39;B&#39;</span><span class="p">,</span>      <span class="s">&#39;uint8&#39;</span><span class="p">,</span>   <span class="s">&#39;MCS index in [0:7]&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;phy_mode&#39;</span><span class="p">,</span>               <span class="s">&#39;B&#39;</span><span class="p">,</span>      <span class="s">&#39;uint8&#39;</span><span class="p">,</span>   <span class="s">&#39;PHY mode&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;ant_mode&#39;</span><span class="p">,</span>               <span class="s">&#39;B&#39;</span><span class="p">,</span>      <span class="s">&#39;uint8&#39;</span><span class="p">,</span>   <span class="s">&#39;PHY antenna mode in [0x10, 0x20, 0x30, 0x40]&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;tx_power&#39;</span><span class="p">,</span>               <span class="s">&#39;b&#39;</span><span class="p">,</span>      <span class="s">&#39;int8&#39;</span><span class="p">,</span>    <span class="s">&#39;Tx power in dBm&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;num_tx&#39;</span><span class="p">,</span>                 <span class="s">&#39;B&#39;</span><span class="p">,</span>      <span class="s">&#39;uint8&#39;</span><span class="p">,</span>   <span class="s">&#39;Number of Tx attempts that were made for this packet&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;padding0&#39;</span><span class="p">,</span>               <span class="s">&#39;B&#39;</span><span class="p">,</span>      <span class="s">&#39;uint8&#39;</span><span class="p">,</span>   <span class="s">&#39;Padding&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;length&#39;</span><span class="p">,</span>                 <span class="s">&#39;H&#39;</span><span class="p">,</span>      <span class="s">&#39;uint16&#39;</span><span class="p">,</span>  <span class="s">&#39;Length in bytes of MPDU; includes MAC header, payload and FCS&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;padding1&#39;</span><span class="p">,</span>               <span class="s">&#39;x&#39;</span><span class="p">,</span>      <span class="s">&#39;uint8&#39;</span><span class="p">,</span>   <span class="s">&#39;&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;pkt_type&#39;</span><span class="p">,</span>               <span class="s">&#39;B&#39;</span><span class="p">,</span>      <span class="s">&#39;uint8&#39;</span><span class="p">,</span>   <span class="s">&#39;Packet type, (first frame control byte of 802.11 header)&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;queue_id&#39;</span><span class="p">,</span>               <span class="s">&#39;H&#39;</span><span class="p">,</span>      <span class="s">&#39;uint16&#39;</span><span class="p">,</span>  <span class="s">&#39;Tx queue ID from which the packet was retrieved&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;queue_occupancy&#39;</span><span class="p">,</span>        <span class="s">&#39;H&#39;</span><span class="p">,</span>      <span class="s">&#39;uint16&#39;</span><span class="p">,</span>  <span class="s">&#39;Occupancy of the Tx queue at the time the packet was created (value includes itself)&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;flags&#39;</span><span class="p">,</span>                  <span class="s">&#39;H&#39;</span><span class="p">,</span>      <span class="s">&#39;uint16&#39;</span><span class="p">,</span>  <span class="s">&#39;1-bit flags&#39;</span><span class="p">)])</span>
+
+    <span class="n">entry_tx_common</span><span class="o">.</span><span class="n">consts</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">consts_dict</span><span class="p">({</span>
+        <span class="s">&#39;ant_mode&#39;</span>      <span class="p">:</span> <span class="n">util</span><span class="o">.</span><span class="n">consts_dict</span><span class="p">({</span>
+                <span class="s">&#39;RF_A&#39;</span><span class="p">:</span> <span class="mh">0x10</span><span class="p">,</span>
+                <span class="s">&#39;RF_B&#39;</span><span class="p">:</span> <span class="mh">0x20</span><span class="p">,</span>
+                <span class="s">&#39;RF_C&#39;</span><span class="p">:</span> <span class="mh">0x30</span><span class="p">,</span>
+                <span class="s">&#39;RF_D&#39;</span><span class="p">:</span> <span class="mh">0x40</span><span class="p">,</span>
+            <span class="p">}),</span>
+        <span class="s">&#39;phy_mode&#39;</span>   <span class="p">:</span> <span class="n">util</span><span class="o">.</span><span class="n">phy_modes</span><span class="p">,</span>
+        <span class="s">&#39;pkt_type&#39;</span>   <span class="p">:</span> <span class="n">common_pkt_type</span><span class="p">,</span>
+        <span class="s">&#39;flags&#39;</span>      <span class="p">:</span> <span class="n">util</span><span class="o">.</span><span class="n">consts_dict</span><span class="p">({</span>
+            <span class="s">&#39;SUCCESSFUL&#39;</span>     <span class="p">:</span> <span class="mh">0x0001</span><span class="p">,</span>
+            <span class="s">&#39;LTG_PYLD&#39;</span>       <span class="p">:</span> <span class="mh">0x0040</span><span class="p">,</span>
+            <span class="s">&#39;LTG&#39;</span>            <span class="p">:</span> <span class="mh">0x0080</span>
+        <span class="p">})</span>
+    <span class="p">})</span>
+
+
+    <span class="c">###########################################################################</span>
+    <span class="c"># Tx CPU Low Common</span>
+    <span class="c">#</span>
+    <span class="n">entry_tx_low_common</span> <span class="o">=</span> <span class="n">WlanExpLogEntryType</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;TX_LOW_ALL&#39;</span><span class="p">,</span> <span class="n">entry_type_id</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+
+    <span class="n">entry_tx_low_common</span><span class="o">.</span><span class="n">description</span>  <span class="o">=</span> <span class="s">&#39;Record of actual PHY transmission. At least one TX_LOW will be logged for every TX entry. Multiple TX_LOW entries &#39;</span>
+    <span class="n">entry_tx_low_common</span><span class="o">.</span><span class="n">description</span> <span class="o">+=</span> <span class="s">&#39;may be created for the same TX entry if the low-level MAC re-transmitted the frame. The uniq_seq fields can be match &#39;</span>
+    <span class="n">entry_tx_low_common</span><span class="o">.</span><span class="n">description</span> <span class="o">+=</span> <span class="s">&#39;between TX and TX_LOW entries to find records common to the same MPUD.&#39;</span>
+
+    <span class="n">entry_tx_low_common</span><span class="o">.</span><span class="n">append_field_defs</span><span class="p">([</span>
+        <span class="p">(</span><span class="s">&#39;timestamp&#39;</span><span class="p">,</span>              <span class="s">&#39;Q&#39;</span><span class="p">,</span>      <span class="s">&#39;uint64&#39;</span><span class="p">,</span>  <span class="s">&#39;Value of MAC Time in microseconds when packet transmission actually started (PHY TX_START time)&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;uniq_seq&#39;</span><span class="p">,</span>               <span class="s">&#39;Q&#39;</span><span class="p">,</span>      <span class="s">&#39;uint64&#39;</span><span class="p">,</span>  <span class="s">&#39;Unique sequence number of original MPDU&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;mcs&#39;</span><span class="p">,</span>                    <span class="s">&#39;B&#39;</span><span class="p">,</span>      <span class="s">&#39;uint8&#39;</span><span class="p">,</span>   <span class="s">&#39;MCS index in [0:7]&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;phy_mode&#39;</span><span class="p">,</span>               <span class="s">&#39;B&#39;</span><span class="p">,</span>      <span class="s">&#39;uint8&#39;</span><span class="p">,</span>   <span class="s">&#39;PHY mode&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;ant_mode&#39;</span><span class="p">,</span>               <span class="s">&#39;B&#39;</span><span class="p">,</span>      <span class="s">&#39;uint8&#39;</span><span class="p">,</span>   <span class="s">&#39;PHY antenna mode in [0x10, 0x20, 0x30, 0x40]&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;tx_power&#39;</span><span class="p">,</span>               <span class="s">&#39;b&#39;</span><span class="p">,</span>      <span class="s">&#39;int8&#39;</span><span class="p">,</span>    <span class="s">&#39;Tx power in dBm&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;tx_count&#39;</span><span class="p">,</span>               <span class="s">&#39;B&#39;</span><span class="p">,</span>      <span class="s">&#39;uint8&#39;</span><span class="p">,</span>   <span class="s">&#39;Transmission index for this attempt, starting at 0 (0 = initial Tx, 1+ = subsequent attempts)&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;channel&#39;</span><span class="p">,</span>                <span class="s">&#39;B&#39;</span><span class="p">,</span>      <span class="s">&#39;uint8&#39;</span><span class="p">,</span>   <span class="s">&#39;Channel (center frequency) index&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;length&#39;</span><span class="p">,</span>                 <span class="s">&#39;H&#39;</span><span class="p">,</span>      <span class="s">&#39;uint16&#39;</span><span class="p">,</span>  <span class="s">&#39;Length in bytes of MPDU; includes MAC header, payload and FCS&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;num_slots&#39;</span><span class="p">,</span>              <span class="s">&#39;h&#39;</span><span class="p">,</span>      <span class="s">&#39;int16&#39;</span><span class="p">,</span>   <span class="s">&#39;Number of backoff slots allotted prior to this transmission; may not have been used for initial Tx (tx_count==0); A value of -1 in this field means no backoff occured&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;cw&#39;</span><span class="p">,</span>                     <span class="s">&#39;H&#39;</span><span class="p">,</span>      <span class="s">&#39;uint16&#39;</span><span class="p">,</span>  <span class="s">&#39;Contention window value at time of this Tx&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;pkt_type&#39;</span><span class="p">,</span>               <span class="s">&#39;B&#39;</span><span class="p">,</span>      <span class="s">&#39;uint8&#39;</span><span class="p">,</span>   <span class="s">&#39;Packet type, (first frame control byte of 802.11 header)&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;flags&#39;</span><span class="p">,</span>                  <span class="s">&#39;B&#39;</span><span class="p">,</span>      <span class="s">&#39;uint8&#39;</span><span class="p">,</span>   <span class="s">&#39;1-bit Flags&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;timestamp_frac&#39;</span><span class="p">,</span>         <span class="s">&#39;B&#39;</span><span class="p">,</span>      <span class="s">&#39;uint8&#39;</span><span class="p">,</span>   <span class="s">&#39;Fractional timestamp (units of 6.25ns)&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;phy_samp_rate&#39;</span><span class="p">,</span>          <span class="s">&#39;B&#39;</span><span class="p">,</span>      <span class="s">&#39;uint8&#39;</span><span class="p">,</span>   <span class="s">&#39;PHY Sampling Rate Mode&#39;</span><span class="p">)])</span>
+
+    <span class="n">entry_tx_low_common</span><span class="o">.</span><span class="n">consts</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">consts_dict</span><span class="p">({</span>
+        <span class="s">&#39;ant_mode&#39;</span>      <span class="p">:</span> <span class="n">util</span><span class="o">.</span><span class="n">consts_dict</span><span class="p">({</span>
+                <span class="s">&#39;RF_A&#39;</span><span class="p">:</span> <span class="mh">0x10</span><span class="p">,</span>
+                <span class="s">&#39;RF_B&#39;</span><span class="p">:</span> <span class="mh">0x20</span><span class="p">,</span>
+                <span class="s">&#39;RF_C&#39;</span><span class="p">:</span> <span class="mh">0x30</span><span class="p">,</span>
+                <span class="s">&#39;RF_D&#39;</span><span class="p">:</span> <span class="mh">0x40</span><span class="p">,</span>
+            <span class="p">}),</span>
+        <span class="s">&#39;phy_mode&#39;</span>      <span class="p">:</span> <span class="n">util</span><span class="o">.</span><span class="n">phy_modes</span><span class="p">,</span>
+        <span class="s">&#39;pkt_type&#39;</span>      <span class="p">:</span> <span class="n">common_pkt_type</span><span class="p">,</span>
+        <span class="s">&#39;flags&#39;</span>         <span class="p">:</span> <span class="n">util</span><span class="o">.</span><span class="n">consts_dict</span><span class="p">({</span>
+            <span class="s">&#39;RECEIVED_RESPONSE&#39;</span>          <span class="p">:</span> <span class="mh">0x01</span><span class="p">,</span>
+            <span class="s">&#39;LTG&#39;</span>                        <span class="p">:</span> <span class="mh">0x40</span><span class="p">,</span>
+            <span class="s">&#39;LTG_PYLD&#39;</span>                   <span class="p">:</span> <span class="mh">0x80</span>
+        <span class="p">})</span>
+    <span class="p">})</span>
+
+
+    <span class="c"># -----------------------------------------------------------------------------</span>
+    <span class="c"># Log Entry Type Instances</span>
+    <span class="c"># -----------------------------------------------------------------------------</span>
+
+    <span class="c">###########################################################################</span>
+    <span class="c"># Node Info</span>
+    <span class="c">#</span>
+    <span class="n">entry_node_info</span> <span class="o">=</span> <span class="n">WlanExpLogEntryType</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;NODE_INFO&#39;</span><span class="p">,</span> <span class="n">entry_type_id</span><span class="o">=</span><span class="n">ENTRY_TYPE_NODE_INFO</span><span class="p">)</span>
+
+    <span class="n">entry_node_info</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s">&#39;Details about the node hardware and its configuration. Node info values are static after boot.&#39;</span>
+
+    <span class="n">entry_node_info</span><span class="o">.</span><span class="n">append_field_defs</span><span class="p">([</span>
+        <span class="p">(</span><span class="s">&#39;timestamp&#39;</span><span class="p">,</span>                  <span class="s">&#39;Q&#39;</span><span class="p">,</span>  <span class="s">&#39;uint64&#39;</span><span class="p">,</span>  <span class="s">&#39;Value of MAC Time in microseconds when log entry created&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;node_type&#39;</span><span class="p">,</span>                  <span class="s">&#39;I&#39;</span><span class="p">,</span>  <span class="s">&#39;uint32&#39;</span><span class="p">,</span>  <span class="s">&#39;Code identifying applications in CPU High and CPU Low&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;node_id&#39;</span><span class="p">,</span>                    <span class="s">&#39;I&#39;</span><span class="p">,</span>  <span class="s">&#39;uint32&#39;</span><span class="p">,</span>  <span class="s">&#39;Node ID, as set during wlan_exp init&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;hw_generation&#39;</span><span class="p">,</span>              <span class="s">&#39;I&#39;</span><span class="p">,</span>  <span class="s">&#39;uint32&#39;</span><span class="p">,</span>  <span class="s">&#39;WARP hardware generation; always 3 for WARP v3&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;serial_num&#39;</span><span class="p">,</span>                 <span class="s">&#39;I&#39;</span><span class="p">,</span>  <span class="s">&#39;uint32&#39;</span><span class="p">,</span>  <span class="s">&#39;Serial number of WARP board&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;fpga_dna&#39;</span><span class="p">,</span>                   <span class="s">&#39;Q&#39;</span><span class="p">,</span>  <span class="s">&#39;uint64&#39;</span><span class="p">,</span>  <span class="s">&#39;DNA value of node FPGA&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;version&#39;</span><span class="p">,</span>                    <span class="s">&#39;I&#39;</span><span class="p">,</span>  <span class="s">&#39;uint32&#39;</span><span class="p">,</span>  <span class="s">&#39;wlan_exp version, as packed values [(u8)major (u8)minor (u16)rev]&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;wlan_scheduler_resolution&#39;</span><span class="p">,</span>  <span class="s">&#39;I&#39;</span><span class="p">,</span>  <span class="s">&#39;uint32&#39;</span><span class="p">,</span>  <span class="s">&#39;Minimum interval in microseconds of the WLAN scheduler&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;wlan_mac_addr&#39;</span><span class="p">,</span>              <span class="s">&#39;Q&#39;</span><span class="p">,</span>  <span class="s">&#39;uint64&#39;</span><span class="p">,</span>  <span class="s">&#39;Node MAC address, 6 bytes in lower 48-bits of u64&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;wlan_max_tx_power_dbm&#39;</span><span class="p">,</span>      <span class="s">&#39;i&#39;</span><span class="p">,</span>  <span class="s">&#39;int32&#39;</span><span class="p">,</span>   <span class="s">&#39;Maximum transmit power&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;wlan_min_tx_power_dbm&#39;</span><span class="p">,</span>      <span class="s">&#39;i&#39;</span><span class="p">,</span>  <span class="s">&#39;int32&#39;</span><span class="p">,</span>   <span class="s">&#39;Minimum transmit power&#39;</span><span class="p">)])</span>
+
+    <span class="n">entry_node_info</span><span class="o">.</span><span class="n">consts</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">consts_dict</span><span class="p">({</span>
+        <span class="s">&#39;node_type&#39;</span><span class="p">:</span> <span class="n">util</span><span class="o">.</span><span class="n">consts_dict</span><span class="p">({</span>
+            <span class="s">&#39;AP_DCF&#39;</span><span class="p">:</span>     <span class="mh">0x00010101</span><span class="p">,</span>
+            <span class="s">&#39;STA_DCF&#39;</span><span class="p">:</span>    <span class="mh">0x00010201</span><span class="p">,</span>
+            <span class="s">&#39;IBSS_DCF&#39;</span><span class="p">:</span>   <span class="mh">0x00010301</span><span class="p">,</span>
+            <span class="s">&#39;AP_NOMAC&#39;</span><span class="p">:</span>   <span class="mh">0x00010102</span><span class="p">,</span>
+            <span class="s">&#39;STA_NOMAC&#39;</span><span class="p">:</span>  <span class="mh">0x00010202</span><span class="p">,</span>
+            <span class="s">&#39;IBSS_NOMAC&#39;</span><span class="p">:</span> <span class="mh">0x00010302</span><span class="p">,</span>
+            <span class="p">})</span>
+        <span class="p">})</span>
+
+    <span class="c">###########################################################################</span>
+    <span class="c"># Experiment Info header - actual exp_info contains a &quot;message&quot; field that</span>
+    <span class="c">#   follows this header. Since the message is variable length it is not described</span>
+    <span class="c">#   in the fields list below. Full exp_info entries (header + message) must be extracted</span>
+    <span class="c">#   directly by a user script.</span>
+    <span class="c">#</span>
+    <span class="n">entry_exp_info_hdr</span> <span class="o">=</span> <span class="n">WlanExpLogEntryType</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;EXP_INFO&#39;</span><span class="p">,</span> <span class="n">entry_type_id</span><span class="o">=</span><span class="n">ENTRY_TYPE_EXP_INFO</span><span class="p">)</span>
+
+    <span class="n">entry_exp_info_hdr</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s">&#39;Header for generic experiment info entries created by the user application. &#39;</span>
+    <span class="n">entry_exp_info_hdr</span><span class="o">.</span><span class="n">description</span> <span class="o">+=</span> <span class="s">&#39;The payload of the EXP_INFO entry is not described by the Python entry type. User &#39;</span>
+    <span class="n">entry_exp_info_hdr</span><span class="o">.</span><span class="n">description</span> <span class="o">+=</span> <span class="s">&#39;code must access the payload in the binary log data directly.&#39;</span>
+
+    <span class="n">entry_exp_info_hdr</span><span class="o">.</span><span class="n">append_field_defs</span><span class="p">([</span>
+        <span class="p">(</span><span class="s">&#39;timestamp&#39;</span><span class="p">,</span>              <span class="s">&#39;Q&#39;</span><span class="p">,</span>      <span class="s">&#39;uint64&#39;</span><span class="p">,</span>  <span class="s">&#39;Value of MAC Time in microseconds when log entry created&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;info_type&#39;</span><span class="p">,</span>              <span class="s">&#39;H&#39;</span><span class="p">,</span>      <span class="s">&#39;uint16&#39;</span><span class="p">,</span>  <span class="s">&#39;Exp info type - arbitrary value supplied by application&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;info_len&#39;</span><span class="p">,</span>               <span class="s">&#39;H&#39;</span><span class="p">,</span>      <span class="s">&#39;uint16&#39;</span><span class="p">,</span>  <span class="s">&#39;Exp info length - length (in byte) of info_payload&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;info_payload&#39;</span><span class="p">,</span>           <span class="s">&#39;I&#39;</span><span class="p">,</span>      <span class="s">&#39;uint32&#39;</span><span class="p">,</span>  <span class="s">&#39;Exp info payload&#39;</span><span class="p">)])</span>
+
+
+    <span class="c">###########################################################################</span>
+    <span class="c"># Time Info</span>
+    <span class="c">#</span>
+    <span class="n">entry_time_info</span> <span class="o">=</span> <span class="n">WlanExpLogEntryType</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;TIME_INFO&#39;</span><span class="p">,</span> <span class="n">entry_type_id</span><span class="o">=</span><span class="n">ENTRY_TYPE_TIME_INFO</span><span class="p">)</span>
+
+    <span class="n">entry_time_info</span><span class="o">.</span><span class="n">description</span>  <span class="o">=</span> <span class="s">&#39;Record of a time base event at the node. This log entry is used to enable parsing of log data &#39;</span>
+    <span class="n">entry_time_info</span><span class="o">.</span><span class="n">description</span> <span class="o">+=</span> <span class="s">&#39;recorded before and after changes to the node</span><span class="se">\&#39;</span><span class="s">s microsecond MAC timer. This entry also allows a wlan_exp controler to &#39;</span>
+    <span class="n">entry_time_info</span><span class="o">.</span><span class="n">description</span> <span class="o">+=</span> <span class="s">&#39;write the current host time to the node log without affecting the node</span><span class="se">\&#39;</span><span class="s">s MAC timer value. This enables adjustment &#39;</span>
+    <span class="n">entry_time_info</span><span class="o">.</span><span class="n">description</span> <span class="o">+=</span> <span class="s">&#39;of log entry timestamps to real timestamps in post-proessing.&#39;</span>
+
+    <span class="n">entry_time_info</span><span class="o">.</span><span class="n">append_field_defs</span><span class="p">([</span>
+        <span class="p">(</span><span class="s">&#39;timestamp&#39;</span><span class="p">,</span>              <span class="s">&#39;Q&#39;</span><span class="p">,</span>      <span class="s">&#39;uint64&#39;</span><span class="p">,</span> <span class="s">&#39;Value of MAC Time in microseconds when log entry created (before any time change is applied)&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;time_id&#39;</span><span class="p">,</span>                <span class="s">&#39;I&#39;</span><span class="p">,</span>      <span class="s">&#39;uint32&#39;</span><span class="p">,</span> <span class="s">&#39;Random ID value included in wlan_exp TIME_INFO command; used to find common entries across nodes&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;reason&#39;</span><span class="p">,</span>                 <span class="s">&#39;I&#39;</span><span class="p">,</span>      <span class="s">&#39;uint32&#39;</span><span class="p">,</span> <span class="s">&#39;Reason code for TIME_INFO log entry creation&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;mac_timestamp&#39;</span><span class="p">,</span>          <span class="s">&#39;Q&#39;</span><span class="p">,</span>      <span class="s">&#39;uint64&#39;</span><span class="p">,</span> <span class="s">&#39;New value of MAC Time in microseconds &#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;system_timestamp&#39;</span><span class="p">,</span>       <span class="s">&#39;Q&#39;</span><span class="p">,</span>      <span class="s">&#39;uint64&#39;</span><span class="p">,</span> <span class="s">&#39;Value of System Time in microseconds&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;host_timestamp&#39;</span><span class="p">,</span>         <span class="s">&#39;Q&#39;</span><span class="p">,</span>      <span class="s">&#39;uint64&#39;</span><span class="p">,</span> <span class="s">&#39;Host time in microseconds-since-epoch; 0xFFFFFFFFFFFFFFFF if unknown&#39;</span><span class="p">)])</span>
+
+    <span class="n">entry_time_info</span><span class="o">.</span><span class="n">consts</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">consts_dict</span><span class="p">({</span>
+        <span class="s">&#39;reason&#39;</span>        <span class="p">:</span> <span class="n">util</span><span class="o">.</span><span class="n">consts_dict</span><span class="p">({</span>
+            <span class="s">&#39;SYSTEM&#39;</span>                   <span class="p">:</span> <span class="mh">0x00000000</span><span class="p">,</span>
+            <span class="s">&#39;WLAN_EXP_SET_TIME&#39;</span>        <span class="p">:</span> <span class="mh">0x00000001</span><span class="p">,</span>
+            <span class="s">&#39;WLAN_EXP_ADD_LOG&#39;</span>         <span class="p">:</span> <span class="mh">0x00000002</span>
+        <span class="p">})</span>
+    <span class="p">})</span>
+
+
+    <span class="c">###########################################################################</span>
+    <span class="c"># Temperature</span>
+    <span class="c">#</span>
+    <span class="n">entry_node_temperature</span> <span class="o">=</span> <span class="n">WlanExpLogEntryType</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;NODE_TEMPERATURE&#39;</span><span class="p">,</span> <span class="n">entry_type_id</span><span class="o">=</span><span class="n">ENTRY_TYPE_NODE_TEMPERATURE</span><span class="p">)</span>
+
+    <span class="n">entry_node_temperature</span><span class="o">.</span><span class="n">description</span>  <span class="o">=</span> <span class="s">&#39;Record of the FPGA system monitor die temperature. This entry is only created when directed by a wlan_exp &#39;</span>
+    <span class="n">entry_node_temperature</span><span class="o">.</span><span class="n">description</span> <span class="o">+=</span> <span class="s">&#39;command. Temperature values are stored as 32-bit unsigned integers. To convert to degrees Celcius, apply &#39;</span>
+    <span class="n">entry_node_temperature</span><span class="o">.</span><span class="n">description</span> <span class="o">+=</span> <span class="s">&#39;(((float)temp_u32)/(65536.0*0.00198421639)) - 273.15&#39;</span>
+
+    <span class="n">entry_node_temperature</span><span class="o">.</span><span class="n">append_field_defs</span><span class="p">([</span>
+        <span class="p">(</span><span class="s">&#39;timestamp&#39;</span><span class="p">,</span>              <span class="s">&#39;Q&#39;</span><span class="p">,</span>      <span class="s">&#39;uint64&#39;</span><span class="p">,</span> <span class="s">&#39;Value of MAC Time in microseconds when log entry created&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;node_id&#39;</span><span class="p">,</span>                <span class="s">&#39;I&#39;</span><span class="p">,</span>      <span class="s">&#39;uint32&#39;</span><span class="p">,</span> <span class="s">&#39;wlan_exp node ID&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;serial_num&#39;</span><span class="p">,</span>             <span class="s">&#39;I&#39;</span><span class="p">,</span>      <span class="s">&#39;uint32&#39;</span><span class="p">,</span> <span class="s">&#39;Node serial number&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;temp_current&#39;</span><span class="p">,</span>           <span class="s">&#39;I&#39;</span><span class="p">,</span>      <span class="s">&#39;uint32&#39;</span><span class="p">,</span> <span class="s">&#39;Current FPGA die temperature (deg C)&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;temp_min&#39;</span><span class="p">,</span>               <span class="s">&#39;I&#39;</span><span class="p">,</span>      <span class="s">&#39;uint32&#39;</span><span class="p">,</span> <span class="s">&#39;Minimum FPGA die temperature (deg C) since FPGA configuration or sysmon reset&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;temp_max&#39;</span><span class="p">,</span>               <span class="s">&#39;I&#39;</span><span class="p">,</span>      <span class="s">&#39;uint32&#39;</span><span class="p">,</span> <span class="s">&#39;Maximum FPGA die temperature (deg C) since FPGA configuration or sysmon reset&#39;</span><span class="p">)])</span>
+
+
+    <span class="c">###########################################################################</span>
+    <span class="c"># Receive OFDM</span>
+    <span class="c">#</span>
+    <span class="n">entry_rx_ofdm</span> <span class="o">=</span> <span class="n">WlanExpLogEntryType</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;RX_OFDM&#39;</span><span class="p">,</span> <span class="n">entry_type_id</span><span class="o">=</span><span class="n">ENTRY_TYPE_RX_OFDM</span><span class="p">)</span>
+
+    <span class="n">entry_rx_ofdm</span><span class="o">.</span><span class="n">description</span>  <span class="o">=</span> <span class="s">&#39;Rx events from OFDM PHY. &#39;</span> <span class="o">+</span> <span class="n">entry_rx_common</span><span class="o">.</span><span class="n">description</span>
+
+    <span class="n">entry_rx_ofdm</span><span class="o">.</span><span class="n">append_field_defs</span><span class="p">(</span><span class="n">entry_rx_common</span><span class="o">.</span><span class="n">get_field_defs</span><span class="p">())</span>
+    <span class="n">entry_rx_ofdm</span><span class="o">.</span><span class="n">append_field_defs</span><span class="p">([</span>
+        <span class="p">(</span><span class="s">&#39;chan_est&#39;</span><span class="p">,</span>               <span class="s">&#39;256B&#39;</span><span class="p">,</span>   <span class="s">&#39;(64,2)i2&#39;</span><span class="p">,</span>    <span class="s">&#39;OFDM Rx channel estimates, packed as [(uint16)I (uint16)Q] values, one per subcarrier&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;mac_payload_len&#39;</span><span class="p">,</span>        <span class="s">&#39;I&#39;</span><span class="p">,</span>      <span class="s">&#39;uint32&#39;</span><span class="p">,</span>      <span class="s">&#39;Length in bytes of MAC payload recorded in log for this packet&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;mac_payload&#39;</span><span class="p">,</span>            <span class="s">&#39;24s&#39;</span><span class="p">,</span>    <span class="s">&#39;24uint8&#39;</span><span class="p">,</span>     <span class="s">&#39;First 24 bytes of MAC payload, typically the 802.11 MAC header&#39;</span><span class="p">)])</span>
+
+    <span class="n">entry_rx_ofdm</span><span class="o">.</span><span class="n">add_gen_numpy_array_callback</span><span class="p">(</span><span class="n">np_array_add_txrx_fields</span><span class="p">)</span>
+
+    <span class="n">entry_rx_ofdm</span><span class="o">.</span><span class="n">consts</span> <span class="o">=</span> <span class="n">entry_rx_common</span><span class="o">.</span><span class="n">consts</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+
+    <span class="c">###########################################################################</span>
+    <span class="c"># Receive OFDM LTG packet</span>
+    <span class="c">#</span>
+    <span class="n">entry_rx_ofdm_ltg</span> <span class="o">=</span> <span class="n">WlanExpLogEntryType</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;RX_OFDM_LTG&#39;</span><span class="p">,</span> <span class="n">entry_type_id</span><span class="o">=</span><span class="n">ENTRY_TYPE_RX_OFDM_LTG</span><span class="p">)</span>
+
+    <span class="n">entry_rx_ofdm_ltg</span><span class="o">.</span><span class="n">description</span>  <span class="o">=</span> <span class="s">&#39;LTG &#39;</span> <span class="o">+</span> <span class="n">entry_rx_ofdm</span><span class="o">.</span><span class="n">description</span>
+
+    <span class="n">entry_rx_ofdm_ltg</span><span class="o">.</span><span class="n">append_field_defs</span><span class="p">(</span><span class="n">entry_rx_common</span><span class="o">.</span><span class="n">get_field_defs</span><span class="p">())</span>
+    <span class="n">entry_rx_ofdm_ltg</span><span class="o">.</span><span class="n">append_field_defs</span><span class="p">([</span>
+        <span class="p">(</span><span class="s">&#39;chan_est&#39;</span><span class="p">,</span>               <span class="s">&#39;256B&#39;</span><span class="p">,</span>   <span class="s">&#39;(64,2)i2&#39;</span><span class="p">,</span>    <span class="s">&#39;OFDM Rx channel estimates, packed as [(uint16)I (uint16)Q] values, one per subcarrier&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;mac_payload_len&#39;</span><span class="p">,</span>        <span class="s">&#39;I&#39;</span><span class="p">,</span>      <span class="s">&#39;uint32&#39;</span><span class="p">,</span>      <span class="s">&#39;Length in bytes of MAC payload recorded in log for this packet&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;mac_payload&#39;</span><span class="p">,</span>            <span class="s">&#39;44s&#39;</span><span class="p">,</span>    <span class="s">&#39;44uint8&#39;</span><span class="p">,</span>     <span class="s">&#39;First 44 bytes of MAC payload: the 802.11 MAC header, LLC header, Packet ID, LTG ID&#39;</span><span class="p">)])</span>
+
+    <span class="n">entry_rx_ofdm_ltg</span><span class="o">.</span><span class="n">add_gen_numpy_array_callback</span><span class="p">(</span><span class="n">np_array_add_txrx_ltg_fields</span><span class="p">)</span>
+
+    <span class="n">entry_rx_ofdm_ltg</span><span class="o">.</span><span class="n">consts</span> <span class="o">=</span> <span class="n">entry_rx_common</span><span class="o">.</span><span class="n">consts</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+
+    <span class="c">###########################################################################</span>
+    <span class="c"># Receive DSSS</span>
+    <span class="c">#</span>
+    <span class="n">entry_rx_dsss</span> <span class="o">=</span> <span class="n">WlanExpLogEntryType</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;RX_DSSS&#39;</span><span class="p">,</span> <span class="n">entry_type_id</span><span class="o">=</span><span class="n">ENTRY_TYPE_RX_DSSS</span><span class="p">)</span>
+
+    <span class="n">entry_rx_dsss</span><span class="o">.</span><span class="n">description</span>  <span class="o">=</span> <span class="s">&#39;Rx events from DSSS PHY. &#39;</span> <span class="o">+</span> <span class="n">entry_rx_common</span><span class="o">.</span><span class="n">description</span>
+
+    <span class="n">entry_rx_dsss</span><span class="o">.</span><span class="n">append_field_defs</span><span class="p">(</span><span class="n">entry_rx_common</span><span class="o">.</span><span class="n">get_field_defs</span><span class="p">())</span>
+    <span class="n">entry_rx_dsss</span><span class="o">.</span><span class="n">append_field_defs</span><span class="p">([</span>
+        <span class="p">(</span><span class="s">&#39;mac_payload_len&#39;</span><span class="p">,</span>        <span class="s">&#39;I&#39;</span><span class="p">,</span>      <span class="s">&#39;uint32&#39;</span><span class="p">,</span>      <span class="s">&#39;Length in bytes of MAC payload recorded in log for this packet&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;mac_payload&#39;</span><span class="p">,</span>            <span class="s">&#39;24s&#39;</span><span class="p">,</span>    <span class="s">&#39;24uint8&#39;</span><span class="p">,</span>     <span class="s">&#39;First 24 bytes of MAC payload, typically the 802.11 MAC header&#39;</span><span class="p">)])</span>
+
+    <span class="n">entry_rx_dsss</span><span class="o">.</span><span class="n">add_gen_numpy_array_callback</span><span class="p">(</span><span class="n">np_array_add_txrx_fields</span><span class="p">)</span>
+
+    <span class="n">entry_rx_dsss</span><span class="o">.</span><span class="n">consts</span> <span class="o">=</span> <span class="n">entry_rx_common</span><span class="o">.</span><span class="n">consts</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+
+    <span class="c">###########################################################################</span>
+    <span class="c"># Transmit from CPU High</span>
+    <span class="c">#</span>
+    <span class="n">entry_tx_high</span> <span class="o">=</span> <span class="n">WlanExpLogEntryType</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;TX_HIGH&#39;</span><span class="p">,</span> <span class="n">entry_type_id</span><span class="o">=</span><span class="n">ENTRY_TYPE_TX_HIGH</span><span class="p">)</span>
+
+    <span class="n">entry_tx_high</span><span class="o">.</span><span class="n">description</span>  <span class="o">=</span> <span class="n">entry_tx_common</span><span class="o">.</span><span class="n">description</span>
+
+    <span class="n">entry_tx_high</span><span class="o">.</span><span class="n">append_field_defs</span><span class="p">(</span><span class="n">entry_tx_common</span><span class="o">.</span><span class="n">get_field_defs</span><span class="p">())</span>
+    <span class="n">entry_tx_high</span><span class="o">.</span><span class="n">append_field_defs</span><span class="p">([</span>
+        <span class="p">(</span><span class="s">&#39;mac_payload_len&#39;</span><span class="p">,</span>        <span class="s">&#39;I&#39;</span><span class="p">,</span>      <span class="s">&#39;uint32&#39;</span><span class="p">,</span>      <span class="s">&#39;Length in bytes of MAC payload recorded in log for this packet&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;mac_payload&#39;</span><span class="p">,</span>            <span class="s">&#39;24s&#39;</span><span class="p">,</span>    <span class="s">&#39;24uint8&#39;</span><span class="p">,</span>     <span class="s">&#39;First 24 bytes of MAC payload, typically the 802.11 MAC header&#39;</span><span class="p">)])</span>
+
+    <span class="n">entry_tx_high</span><span class="o">.</span><span class="n">add_gen_numpy_array_callback</span><span class="p">(</span><span class="n">np_array_add_txrx_fields</span><span class="p">)</span>
+
+    <span class="n">entry_tx_high</span><span class="o">.</span><span class="n">consts</span> <span class="o">=</span> <span class="n">entry_tx_common</span><span class="o">.</span><span class="n">consts</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+
+    <span class="c">###########################################################################</span>
+    <span class="c"># Transmit from CPU High LTG packet</span>
+    <span class="c">#</span>
+    <span class="n">entry_tx_high_ltg</span> <span class="o">=</span> <span class="n">WlanExpLogEntryType</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;TX_HIGH_LTG&#39;</span><span class="p">,</span> <span class="n">entry_type_id</span><span class="o">=</span><span class="n">ENTRY_TYPE_TX_HIGH_LTG</span><span class="p">)</span>
+
+    <span class="n">entry_tx_high_ltg</span><span class="o">.</span><span class="n">description</span>  <span class="o">=</span> <span class="n">entry_tx_common</span><span class="o">.</span><span class="n">description</span>
+
+    <span class="n">entry_tx_high_ltg</span><span class="o">.</span><span class="n">append_field_defs</span><span class="p">(</span><span class="n">entry_tx_common</span><span class="o">.</span><span class="n">get_field_defs</span><span class="p">())</span>
+    <span class="n">entry_tx_high_ltg</span><span class="o">.</span><span class="n">append_field_defs</span><span class="p">([</span>
+        <span class="p">(</span><span class="s">&#39;mac_payload_len&#39;</span><span class="p">,</span>        <span class="s">&#39;I&#39;</span><span class="p">,</span>      <span class="s">&#39;uint32&#39;</span><span class="p">,</span>      <span class="s">&#39;Length in bytes of MAC payload recorded in log for this packet&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;mac_payload&#39;</span><span class="p">,</span>            <span class="s">&#39;44s&#39;</span><span class="p">,</span>    <span class="s">&#39;44uint8&#39;</span><span class="p">,</span>     <span class="s">&#39;First 44 bytes of MAC payload: the 802.11 MAC header, LLC header, Packet ID, LTG ID&#39;</span><span class="p">)])</span>
+
+    <span class="n">entry_tx_high_ltg</span><span class="o">.</span><span class="n">add_gen_numpy_array_callback</span><span class="p">(</span><span class="n">np_array_add_txrx_ltg_fields</span><span class="p">)</span>
+
+    <span class="n">entry_tx_high_ltg</span><span class="o">.</span><span class="n">consts</span> <span class="o">=</span> <span class="n">entry_tx_common</span><span class="o">.</span><span class="n">consts</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+
+    <span class="c">###########################################################################</span>
+    <span class="c"># Transmit from CPU Low</span>
+    <span class="c">#</span>
+    <span class="n">entry_tx_low</span> <span class="o">=</span> <span class="n">WlanExpLogEntryType</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;TX_LOW&#39;</span><span class="p">,</span> <span class="n">entry_type_id</span><span class="o">=</span><span class="n">ENTRY_TYPE_TX_LOW</span><span class="p">)</span>
+
+    <span class="n">entry_tx_low</span><span class="o">.</span><span class="n">description</span>  <span class="o">=</span> <span class="n">entry_tx_low_common</span><span class="o">.</span><span class="n">description</span>
+
+    <span class="n">entry_tx_low</span><span class="o">.</span><span class="n">append_field_defs</span><span class="p">(</span><span class="n">entry_tx_low_common</span><span class="o">.</span><span class="n">get_field_defs</span><span class="p">())</span>
+    <span class="n">entry_tx_low</span><span class="o">.</span><span class="n">append_field_defs</span><span class="p">([</span>
+        <span class="p">(</span><span class="s">&#39;mac_payload_len&#39;</span><span class="p">,</span>        <span class="s">&#39;I&#39;</span><span class="p">,</span>      <span class="s">&#39;uint32&#39;</span><span class="p">,</span>      <span class="s">&#39;Length in bytes of MAC payload recorded in log for this packet&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;mac_payload&#39;</span><span class="p">,</span>            <span class="s">&#39;24s&#39;</span><span class="p">,</span>    <span class="s">&#39;24uint8&#39;</span><span class="p">,</span>     <span class="s">&#39;First 24 bytes of MAC payload, typically the 802.11 MAC header&#39;</span><span class="p">)])</span>
+
+    <span class="n">entry_tx_low</span><span class="o">.</span><span class="n">add_gen_numpy_array_callback</span><span class="p">(</span><span class="n">np_array_add_txrx_fields</span><span class="p">)</span>
+
+    <span class="n">entry_tx_low</span><span class="o">.</span><span class="n">consts</span> <span class="o">=</span> <span class="n">entry_tx_low_common</span><span class="o">.</span><span class="n">consts</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+
+    <span class="c">###########################################################################</span>
+    <span class="c"># Transmit from CPU Low LTG packet</span>
+    <span class="c">#</span>
+    <span class="n">entry_tx_low_ltg</span> <span class="o">=</span> <span class="n">WlanExpLogEntryType</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;TX_LOW_LTG&#39;</span><span class="p">,</span> <span class="n">entry_type_id</span><span class="o">=</span><span class="n">ENTRY_TYPE_TX_LOW_LTG</span><span class="p">)</span>
+
+    <span class="n">entry_tx_low_ltg</span><span class="o">.</span><span class="n">description</span>  <span class="o">=</span> <span class="n">entry_tx_low_common</span><span class="o">.</span><span class="n">description</span>
+
+    <span class="n">entry_tx_low_ltg</span><span class="o">.</span><span class="n">append_field_defs</span><span class="p">(</span><span class="n">entry_tx_low_common</span><span class="o">.</span><span class="n">get_field_defs</span><span class="p">())</span>
+    <span class="n">entry_tx_low_ltg</span><span class="o">.</span><span class="n">append_field_defs</span><span class="p">([</span>
+        <span class="p">(</span><span class="s">&#39;mac_payload_len&#39;</span><span class="p">,</span>        <span class="s">&#39;I&#39;</span><span class="p">,</span>      <span class="s">&#39;uint32&#39;</span><span class="p">,</span>      <span class="s">&#39;Length in bytes of MAC payload recorded in log for this packet&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;mac_payload&#39;</span><span class="p">,</span>            <span class="s">&#39;44s&#39;</span><span class="p">,</span>    <span class="s">&#39;44uint8&#39;</span><span class="p">,</span>     <span class="s">&#39;First 44 bytes of MAC payload: the 802.11 MAC header, LLC header, Packet ID, LTG ID&#39;</span><span class="p">)])</span>
+
+    <span class="n">entry_tx_low_ltg</span><span class="o">.</span><span class="n">add_gen_numpy_array_callback</span><span class="p">(</span><span class="n">np_array_add_txrx_ltg_fields</span><span class="p">)</span>
+
+    <span class="n">entry_tx_low_ltg</span><span class="o">.</span><span class="n">consts</span> <span class="o">=</span> <span class="n">entry_tx_low_common</span><span class="o">.</span><span class="n">consts</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+</pre></div>
+
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Mango Communications, Inc..
+    </p>
+  </div>
+
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'wlan_exp v1.5.2  ',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,21 @@
+Metadata-Version: 1.0
+Name: warpnet
+Version: 2.0.0
+Summary: Toolchain to support WARP hardware communication
+Home-page: http://warpproject.org/
+Author: Mango Communications
+Author-email: info@mangocomm.com
+License: LICENSE
+Description: 
+    WARP is a scalable and extensible programmable wireless platform, built 
+from the ground up, to prototype advanced wireless networks. You can find 
+the WARP documentation, binaries and toolchains on our website at 
+http://warpproject.org/. 
+ 
+    Learn more about the WARP Project at 
+https://warpproject.org/trac/wiki/about
+
+    If you have any questions about WARP, please use the forums at 
+https://warpproject.org/forums/
+
+Platform: UNKNOWN

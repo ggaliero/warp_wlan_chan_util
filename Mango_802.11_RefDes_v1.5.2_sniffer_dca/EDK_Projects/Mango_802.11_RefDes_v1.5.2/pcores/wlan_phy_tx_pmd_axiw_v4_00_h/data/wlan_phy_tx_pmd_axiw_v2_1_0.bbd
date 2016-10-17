@@ -1,0 +1,17 @@
+#############################################################
+# Copyright (c) 1995-2016 Xilinx, Inc.  All rights reserved.
+# 
+# You may copy and modify these files for your own internal
+# use solely with Xilinx programmable logic devices and
+# Xilinx EDK system or create IP modules solely for Xilinx
+# programmable logic devices and Xilinx EDK system.
+# No rights are granted to distribute any files unless they
+# are distributed in Xilinx programmable logic devices.
+#
+# Black Box Definition (BBD) file
+# created by System Generator
+# Feb 13, 2016 2:38:01 PM
+#############################################################
+
+FILES
+xlpersistentdff.ngc, xfft_v8_0_3683b4047ed128ab.ngc, mult_11_2_f2bb5a57782af7d9.ngc, mult_11_2_414c0fa5acc33f35.ngc, fifo_fg92_6a1156e8dc43a711.ngc, dp_ram_wr_1b_rd_8b_512b.ngc, dmg_72_d59da422e431313e.ngc, dmg_72_d16d082a6bc00ceb.ngc, dmg_72_58f1077b49388e77.ngc, dmg_72_48a0132db6517610.ngc, dmg_72_2be916f69ff4e5b8.ngc, dmg_72_2b0650236539a42c.ngc, dmg_72_134e91999cae8947.ngc, dmg_72_06262d82a068201e.ngc, cntr_11_0_f068fb73312ae1e5.ngc, cntr_11_0_d5912692bc2e79ac.ngc, cntr_11_0_bcc28bfecf25caff.ngc, cntr_11_0_87d991c7bcfe987f.ngc, cntr_11_0_86806e294f737f4c.ngc, cntr_11_0_6454489cfe866515.ngc, cntr_11_0_511eb7a1af6f3f2a.ngc, cntr_11_0_36e2bb554c95560d.ngc, bmg_72_e4abe4c74ea5aa02.ngc, bmg_72_d44417b0abe027bf.ngc, bmg_72_8bdf24f02e925a98.ngc, bmg_72_30fab105208816ae.ngc, axififo_fg92_83e0abc99b742965.ngc, addsb_11_0_f66fe30ee2d0a6f0.ngc, addsb_11_0_d5bf78f2384e976c.ngc, addsb_11_0_a52ead9b8a3c1e76.ngc, addsb_11_0_8942e2ad5d8d4897.ngc, addsb_11_0_7cf14debcedb76ce.ngc, addsb_11_0_7925f33378f00f6a.ngc, addsb_11_0_73986f767e994888.ngc, addsb_11_0_6695c8a33176d3c2.ngc, addsb_11_0_60fd3b5996582b7a.ngc, addsb_11_0_5c670787eb4ba225.ngc, addsb_11_0_2fe7f24afe1bc972.ngc
