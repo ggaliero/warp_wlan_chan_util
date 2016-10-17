@@ -1,0 +1,49 @@
+WARPNet
+
+  WARPNet provides the basic python communication structure for talking with 
+WARP hardware.  The basic file structure:
+
+  - wn_node.py 
+      - WARPNet Node (WnNode) encapsulates information about a single hardware
+        board and allows a user to interact with that board
+  - wn_transport*.py
+      - WARPNet transport that allows a node to communicate over a given 
+        transport type.  Currently, UDP over Ethernet is the only communication
+        protocol supported.
+  - wn_message.py
+      - Python definitions for the packets used to communicate over the 
+        transport.  You can find more information about the wire format for
+        the Transport Header and Command Header at:
+        https://warpproject.org/trac/wiki/WARPLab/Reference/Architecture/WireFormat
+  - wn_cmds.py
+      - Python definitions for each command that is communicated between 
+        the python node and the board.
+  - wn_config.py
+      - Python definitions for interacting with configuration files.
+  - wn_exception.py
+      - Python definitions for exceptions used within WARPNet
+  - wn_util.py
+      - Top level utility functions used to interact with multiple nodes        
+
+
+Top Level Scripts:
+  - wn_setup
+      - Used to create initialization files that will set up the WARPNet
+        environment.
+
+
+Notes:
+    WARP is a scalable and extensible programmable wireless platform, built 
+from the ground up, to prototype advanced wireless networks. You can find 
+the WARP documentation, binaries and toolchains on our website at 
+http://warpproject.org/. 
+ 
+    Learn more about the WARP Project at 
+https://warpproject.org/trac/wiki/about
+
+    If you have any questions about WARP, please use the forums at 
+https://warpproject.org/forums/
+
+
+
+

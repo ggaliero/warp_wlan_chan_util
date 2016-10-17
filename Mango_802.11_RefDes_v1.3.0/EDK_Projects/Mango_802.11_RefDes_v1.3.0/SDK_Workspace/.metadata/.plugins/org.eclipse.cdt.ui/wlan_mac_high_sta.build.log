@@ -1,0 +1,34 @@
+
+**** Build of configuration Debug for project wlan_mac_high_sta ****
+
+make -j8 all 
+Building file: ../src/wlan_mac_sta.c
+Invoking: MicroBlaze gcc compiler
+mb-gcc -Wall -Os -g3 -I"C:\Users\egagali\software\Mango_802.11_RefDes_v1.3.0\EDK_Projects\Mango_802.11_RefDes_v1.3.0\SDK_Workspace\wlan_mac_high_sta\src\include" -I"C:\Users\egagali\software\Mango_802.11_RefDes_v1.3.0\EDK_Projects\Mango_802.11_RefDes_v1.3.0\SDK_Workspace\wlan_mac_shared\wlan_mac_common\include" -I"C:\Users\egagali\software\Mango_802.11_RefDes_v1.3.0\EDK_Projects\Mango_802.11_RefDes_v1.3.0\SDK_Workspace\wlan_mac_shared\wlan_mac_high_framework\include" -c -fmessage-length=0 -Wl,--no-relax -I../../wlan_bsp_cpu_high/mb_high/include -mlittle-endian -mxl-barrel-shift -mxl-pattern-compare -mcpu=v8.40.b -mno-xl-soft-mul -MMD -MP -MF"src/wlan_mac_sta.d" -MT"src/wlan_mac_sta.d" -o"src/wlan_mac_sta.o" "../src/wlan_mac_sta.c"
+Finished building: ../src/wlan_mac_sta.c
+' '
+Building target: wlan_mac_high_sta.elf
+Invoking: MicroBlaze gcc linker
+mb-gcc -Wl,--no-relax -Wl,-Map=executable.map -Wl,-T -Wl,../src/lscript.ld -L../../wlan_bsp_cpu_high/mb_high/lib -mlittle-endian -mxl-barrel-shift -mxl-pattern-compare -mcpu=v8.40.b -mno-xl-soft-mul -o"wlan_mac_high_sta.elf"  ./wlan_mac_high_framework/wlan_exp_common.o ./wlan_mac_high_framework/wlan_exp_node.o ./wlan_mac_high_framework/wlan_exp_transport.o ./wlan_mac_high_framework/wlan_mac_addr_filter.o ./wlan_mac_high_framework/wlan_mac_bss_info.o ./wlan_mac_high_framework/wlan_mac_dl_list.o ./wlan_mac_high_framework/wlan_mac_entries.o ./wlan_mac_high_framework/wlan_mac_eth_util.o ./wlan_mac_high_framework/wlan_mac_event_log.o ./wlan_mac_high_framework/wlan_mac_high.o ./wlan_mac_high_framework/wlan_mac_ltg.o ./wlan_mac_high_framework/wlan_mac_packet_types.o ./wlan_mac_high_framework/wlan_mac_queue.o ./wlan_mac_high_framework/wlan_mac_schedule.o  ./wlan_mac_common/wlan_mac_ipc_util.o  ./src/wlan_exp_node_sta.o ./src/wlan_mac_scan_fsm.o ./src/wlan_mac_sta.o ./src/wlan_mac_sta_join_fsm.o ./src/wlan_mac_sta_uart_menu.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: wlan_mac_high_sta.elf
+' '
+Invoking: MicroBlaze Print Size
+mb-size wlan_mac_high_sta.elf  |tee "wlan_mac_high_sta.elf.size"
+Invoking: Xilinx ELF Check
+elfcheck wlan_mac_high_sta.elf -hw ../../Mango_802.11_RefDes_v1.3.0_hw_platform/system.xml -pe mb_high  |tee "wlan_mac_high_sta.elf.elfcheck"
+   text	   data	    bss	    dec	    hex	filename
+ 183690	   5240	  26798	 215728	  34ab0	wlan_mac_high_sta.elf
+Finished building: wlan_mac_high_sta.elf.size
+' '
+elfcheck
+Xilinx EDK 14.4 Build EDK_P.49d
+Copyright (c) 1995-2012 Xilinx, Inc.  All rights reserved.
+
+Command Line: elfcheck -hw
+../../Mango_802.11_RefDes_v1.3.0_hw_platform/system.xml -pe mb_high
+wlan_mac_high_sta.elf 
+
+ELF file	: wlan_mac_high_sta.elf
+elfcheck passed.
+Finished building: wlan_mac_high_sta.elf.elfcheck
+' '

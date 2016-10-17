@@ -1,0 +1,49 @@
+
+**** Build of configuration Debug for project wlan_mac_low_nomac ****
+
+make all 
+Building file: C:/Users/egagali/software/Mango_802.11_RefDes_v1.3.0/EDK_Projects/Mango_802.11_RefDes_v1.3.0/SDK_Workspace/wlan_mac_shared/wlan_mac_low_framework/wlan_mac_low.c
+Invoking: MicroBlaze gcc compiler
+mb-gcc -Wall -O2 -g3 -I"C:\Users\egagali\software\Mango_802.11_RefDes_v1.3.0\EDK_Projects\Mango_802.11_RefDes_v1.3.0\SDK_Workspace\wlan_mac_low_nomac\src\include" -I"C:\Users\egagali\software\Mango_802.11_RefDes_v1.3.0\EDK_Projects\Mango_802.11_RefDes_v1.3.0\SDK_Workspace\wlan_mac_shared\wlan_mac_common\include" -I"C:\Users\egagali\software\Mango_802.11_RefDes_v1.3.0\EDK_Projects\Mango_802.11_RefDes_v1.3.0\SDK_Workspace\wlan_mac_shared\wlan_mac_low_framework\include" -c -fmessage-length=0 -Wl,--no-relax -I../../wlan_bsp_cpu_low/mb_low/include -mlittle-endian -mxl-barrel-shift -mxl-pattern-compare -mno-xl-soft-div -mcpu=v8.40.b -mno-xl-soft-mul -MMD -MP -MF"wlan_mac_low_framework/wlan_mac_low.d" -MT"wlan_mac_low_framework/wlan_mac_low.d" -o"wlan_mac_low_framework/wlan_mac_low.o" "C:/Users/egagali/software/Mango_802.11_RefDes_v1.3.0/EDK_Projects/Mango_802.11_RefDes_v1.3.0/SDK_Workspace/wlan_mac_shared/wlan_mac_low_framework/wlan_mac_low.c"
+Finished building: C:/Users/egagali/software/Mango_802.11_RefDes_v1.3.0/EDK_Projects/Mango_802.11_RefDes_v1.3.0/SDK_Workspace/wlan_mac_shared/wlan_mac_low_framework/wlan_mac_low.c
+' '
+Building file: C:/Users/egagali/software/Mango_802.11_RefDes_v1.3.0/EDK_Projects/Mango_802.11_RefDes_v1.3.0/SDK_Workspace/wlan_mac_shared/wlan_mac_low_framework/wlan_phy_util.c
+Invoking: MicroBlaze gcc compiler
+mb-gcc -Wall -O2 -g3 -I"C:\Users\egagali\software\Mango_802.11_RefDes_v1.3.0\EDK_Projects\Mango_802.11_RefDes_v1.3.0\SDK_Workspace\wlan_mac_low_nomac\src\include" -I"C:\Users\egagali\software\Mango_802.11_RefDes_v1.3.0\EDK_Projects\Mango_802.11_RefDes_v1.3.0\SDK_Workspace\wlan_mac_shared\wlan_mac_common\include" -I"C:\Users\egagali\software\Mango_802.11_RefDes_v1.3.0\EDK_Projects\Mango_802.11_RefDes_v1.3.0\SDK_Workspace\wlan_mac_shared\wlan_mac_low_framework\include" -c -fmessage-length=0 -Wl,--no-relax -I../../wlan_bsp_cpu_low/mb_low/include -mlittle-endian -mxl-barrel-shift -mxl-pattern-compare -mno-xl-soft-div -mcpu=v8.40.b -mno-xl-soft-mul -MMD -MP -MF"wlan_mac_low_framework/wlan_phy_util.d" -MT"wlan_mac_low_framework/wlan_phy_util.d" -o"wlan_mac_low_framework/wlan_phy_util.o" "C:/Users/egagali/software/Mango_802.11_RefDes_v1.3.0/EDK_Projects/Mango_802.11_RefDes_v1.3.0/SDK_Workspace/wlan_mac_shared/wlan_mac_low_framework/wlan_phy_util.c"
+Finished building: C:/Users/egagali/software/Mango_802.11_RefDes_v1.3.0/EDK_Projects/Mango_802.11_RefDes_v1.3.0/SDK_Workspace/wlan_mac_shared/wlan_mac_low_framework/wlan_phy_util.c
+' '
+Building file: C:/Users/egagali/software/Mango_802.11_RefDes_v1.3.0/EDK_Projects/Mango_802.11_RefDes_v1.3.0/SDK_Workspace/wlan_mac_shared/wlan_mac_common/wlan_mac_ipc_util.c
+Invoking: MicroBlaze gcc compiler
+mb-gcc -Wall -O2 -g3 -I"C:\Users\egagali\software\Mango_802.11_RefDes_v1.3.0\EDK_Projects\Mango_802.11_RefDes_v1.3.0\SDK_Workspace\wlan_mac_low_nomac\src\include" -I"C:\Users\egagali\software\Mango_802.11_RefDes_v1.3.0\EDK_Projects\Mango_802.11_RefDes_v1.3.0\SDK_Workspace\wlan_mac_shared\wlan_mac_common\include" -I"C:\Users\egagali\software\Mango_802.11_RefDes_v1.3.0\EDK_Projects\Mango_802.11_RefDes_v1.3.0\SDK_Workspace\wlan_mac_shared\wlan_mac_low_framework\include" -c -fmessage-length=0 -Wl,--no-relax -I../../wlan_bsp_cpu_low/mb_low/include -mlittle-endian -mxl-barrel-shift -mxl-pattern-compare -mno-xl-soft-div -mcpu=v8.40.b -mno-xl-soft-mul -MMD -MP -MF"wlan_mac_common/wlan_mac_ipc_util.d" -MT"wlan_mac_common/wlan_mac_ipc_util.d" -o"wlan_mac_common/wlan_mac_ipc_util.o" "C:/Users/egagali/software/Mango_802.11_RefDes_v1.3.0/EDK_Projects/Mango_802.11_RefDes_v1.3.0/SDK_Workspace/wlan_mac_shared/wlan_mac_common/wlan_mac_ipc_util.c"
+Finished building: C:/Users/egagali/software/Mango_802.11_RefDes_v1.3.0/EDK_Projects/Mango_802.11_RefDes_v1.3.0/SDK_Workspace/wlan_mac_shared/wlan_mac_common/wlan_mac_ipc_util.c
+' '
+Building file: ../src/wlan_mac_nomac.c
+Invoking: MicroBlaze gcc compiler
+mb-gcc -Wall -O2 -g3 -I"C:\Users\egagali\software\Mango_802.11_RefDes_v1.3.0\EDK_Projects\Mango_802.11_RefDes_v1.3.0\SDK_Workspace\wlan_mac_low_nomac\src\include" -I"C:\Users\egagali\software\Mango_802.11_RefDes_v1.3.0\EDK_Projects\Mango_802.11_RefDes_v1.3.0\SDK_Workspace\wlan_mac_shared\wlan_mac_common\include" -I"C:\Users\egagali\software\Mango_802.11_RefDes_v1.3.0\EDK_Projects\Mango_802.11_RefDes_v1.3.0\SDK_Workspace\wlan_mac_shared\wlan_mac_low_framework\include" -c -fmessage-length=0 -Wl,--no-relax -I../../wlan_bsp_cpu_low/mb_low/include -mlittle-endian -mxl-barrel-shift -mxl-pattern-compare -mno-xl-soft-div -mcpu=v8.40.b -mno-xl-soft-mul -MMD -MP -MF"src/wlan_mac_nomac.d" -MT"src/wlan_mac_nomac.d" -o"src/wlan_mac_nomac.o" "../src/wlan_mac_nomac.c"
+Finished building: ../src/wlan_mac_nomac.c
+' '
+Building target: wlan_mac_low_nomac.elf
+Invoking: MicroBlaze gcc linker
+mb-gcc -Wl,--no-relax -Wl,-T -Wl,../src/lscript.ld -L../../wlan_bsp_cpu_low/mb_low/lib -mlittle-endian -mxl-barrel-shift -mxl-pattern-compare -mno-xl-soft-div -mcpu=v8.40.b -mno-xl-soft-mul -o"wlan_mac_low_nomac.elf"  ./wlan_mac_low_framework/wlan_mac_low.o ./wlan_mac_low_framework/wlan_phy_util.o  ./wlan_mac_common/wlan_mac_ipc_util.o  ./src/wlan_mac_nomac.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+Finished building target: wlan_mac_low_nomac.elf
+' '
+Invoking: MicroBlaze Print Size
+mb-size wlan_mac_low_nomac.elf  |tee "wlan_mac_low_nomac.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+  46566	   1456	   4496	  52518	   cd26	wlan_mac_low_nomac.elf
+Finished building: wlan_mac_low_nomac.elf.size
+' '
+Invoking: Xilinx ELF Check
+elfcheck wlan_mac_low_nomac.elf -hw ../../Mango_802.11_RefDes_v1.3.0_hw_platform/system.xml -pe mb_low  |tee "wlan_mac_low_nomac.elf.elfcheck"
+elfcheck
+Xilinx EDK 14.4 Build EDK_P.49d
+Copyright (c) 1995-2012 Xilinx, Inc.  All rights reserved.
+
+Command Line: elfcheck -hw
+../../Mango_802.11_RefDes_v1.3.0_hw_platform/system.xml -pe mb_low
+wlan_mac_low_nomac.elf 
+
+ELF file	: wlan_mac_low_nomac.elf
+elfcheck passed.
+Finished building: wlan_mac_low_nomac.elf.elfcheck
+' '

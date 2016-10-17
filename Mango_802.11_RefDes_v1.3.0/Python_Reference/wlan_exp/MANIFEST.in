@@ -1,0 +1,2 @@
+#recursive-include docs Makefile *rst *py *png *css *js *html
+recursive-include docs Makefile *rst *py *png

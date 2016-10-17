@@ -1,0 +1,404 @@
+== WLAN Exp v1.2.0   Log Entry Types ==
+
+----
+
+=== Entry Type NODE_INFO ===
+Details about the node hardware and its configuration. Node info values are static after boot.
+
+Entry type ID: 1
+
+||=  Field Name  =||=  Data Type  =||=  Description  =||
+|| timestamp ||  uint64  || Microsecond timer value at time of log entry creation ||
+|| node_type ||  uint32  || Node type as 4 byte value: [b0 b1 b2 b3]:[[BR]] b0: Always 0x00[[BR]] b1: Always 0x01 for 802.11 ref design nodes[[BR]] b2: CPU High application: 0x1 = AP, 0x2 = STA, 0x3 = IBSS[[BR]] b3: CPU Low application: 0x1 = DCF, 0x2 = NOMAC ||
+|| node_id ||  uint32  || Node ID, as set during wlan_exp init ||
+|| hw_generation ||  uint32  || WARP hardware generation: 3 for WARP v3 ||
+|| wn_ver ||  uint32  || WARPnet version, as packed bytes [0 major minor rev] ||
+|| fpga_dna ||  uint64  || DNA value of node FPGA ||
+|| serial_num ||  uint32  || Serial number of WARP board ||
+|| wlan_exp_ver ||  uint32  || wlan_exp version, as packed values [(u8)major (u8)minor (u16)rev] ||
+|| wlan_mac_addr ||  uint64  || Node MAC address, 6 bytes in lower 48-bits of u64 ||
+|| wlan_scheduler_resolution ||  uint32  || Minimum interval in microseconds of the WLAN scheduler ||
+
+
+----
+
+=== Entry Type EXP_INFO ===
+Header for generic experiment info entries created by the user application. The payload of the EXP_INFO entry is not described by the Python entry type. User code must access the payload in the binary log data directly.
+
+Entry type ID: 2
+
+||=  Field Name  =||=  Data Type  =||=  Description  =||
+|| timestamp ||  uint64  || Microsecond timer value at time of log entry creation ||
+|| info_type ||  uint16  || Exp info type (arbitrary value supplied by application ||
+|| info_len ||  uint16  || Exp info length (describes arbitrary payload supplied by application ||
+|| info_payload ||  uint32  || Exp info payload ||
+
+
+----
+
+=== Entry Type STATION_INFO ===
+Information about an 802.11 association. At the AP one STATION_INFO is created for each associated STA and is logged whenever the STA association state changes. At the STA one STATION_INFO is logged whenever the STA associaiton state changes.
+
+Entry type ID: 3
+
+||=  Field Name  =||=  Data Type  =||=  Description  =||
+|| timestamp ||  uint64  || Microsecond timer value at time of log entry creation ||
+|| mac_addr ||  6uint8  || MAC address of associated device ||
+|| aid ||  uint16  || Association ID (AID) of device ||
+|| host_name ||  20uint8  || String hostname (19 chars max), taken from DHCP DISCOVER packets ||
+|| flags ||  uint32  || Association state flags: ??? ||
+|| latest_activity_timestamp ||  uint64  || Microsecond timer value at time of last successful Rx from device ||
+|| rx_last_seq ||  uint16  || Sequence number of last packet received from device ||
+|| rx_last_power ||  int8  || Rx power in dBm of last packet received from device ||
+|| rx_last_rate ||  uint8  || PHY rate index in ![1:8] of last packet received from device ||
+|| tx_phy_rate ||  uint8  || Current PHY rate index in ![1:8] for new transmissions to device ||
+|| tx_phy_antenna_mode ||  uint8  || Current PHY antenna mode in ![1:4] for new transmissions to device ||
+|| tx_phy_power ||  int8  || Current Tx power in dBm for new transmissions to device ||
+|| tx_phy_flags ||  uint8  || Flags for Tx PHY config for new transmissions to deivce ||
+|| tx_mac_num_tx_max ||  uint8  || Maximum number of transmissions (original Tx + re-Tx) per MPDU to device ||
+|| tx_mac_flags ||  uint8  || Flags for Tx MAC config for new transmissions to device ||
+|| padding ||  uint16  ||  ||
+
+
+----
+
+=== Entry Type NODE_TEMPERATURE ===
+Record of the FPGA system monitor die temperature. This entry is only created when directed by a wlan_exp command. Temperature values are stored as 32-bit unsigned integers. To convert to degrees Celcius, apply (((float)temp_u32)/(65536.0*0.00198421639)) - 273.15
+
+Entry type ID: 4
+
+||=  Field Name  =||=  Data Type  =||=  Description  =||
+|| timestamp ||  uint64  || Microsecond timer value at time of log entry creation ||
+|| node_id ||  uint32  || wlan_exp node ID ||
+|| serial_num ||  uint32  || Node serial number ||
+|| temp_current ||  uint32  || Current FPGA die temperature ||
+|| temp_min ||  uint32  || Minimum FPGA die temperature since FPGA configuration or sysmon reset ||
+|| temp_max ||  uint32  || Maximum FPGA die temperature since FPGA configuration or sysmon reset ||
+
+
+----
+
+=== Entry Type WN_CMD_INFO ===
+Record of a WARPnet / wlan_exp command received by the node. The full command payload is logged, including any (possibly personal-info-carrying) parameters like MAC addresses.
+
+Entry type ID: 5
+
+||=  Field Name  =||=  Data Type  =||=  Description  =||
+|| timestamp ||  uint64  || Microsecond timer value at time of log entry creation ||
+|| command ||  uint32  || WARPnet / wlan_exp command ID ||
+|| src_id ||  uint16  || Node ID of device sending command ||
+|| num_args ||  uint16  || Number of arguments supplied in command ||
+|| args ||  10uint32  || Command arguments ||
+
+
+----
+
+=== Entry Type TIME_INFO ===
+Record of a time base event at the node. This log entry is used to enable parsing of log data recored before and after changes to the node's microsecond timer. This entry also allows a wlan_exp controler to write the current absolute time to the node log without affecting the node's timer value. This enables adjustment of log entry timestamps to real timestamps in post-proessing.
+
+Entry type ID: 6
+
+||=  Field Name  =||=  Data Type  =||=  Description  =||
+|| timestamp ||  uint64  || Microsecond timer value at time of log entry creation ||
+|| time_id ||  uint32  || Random ID value included in wlan_exp TIME_INFO command; used to find common entries across nodes ||
+|| reason ||  uint32  || Reason code for TIME_INFO log entry creation ||
+|| new_time ||  uint64  || New value of microsecond timer value; 0xFFFFFFFFFFFFFFFF if timer was not changed ||
+|| abs_time ||  uint64  || Absolute time in microseconds-since-epoch; 0xFFFFFFFFFFFFFFFF if unknown ||
+
+
+----
+
+=== Entry Type BSS_INFO ===
+Information about an 802.11 basic service set (BSS). 
+
+Entry type ID: 7
+
+||=  Field Name  =||=  Data Type  =||=  Description  =||
+|| timestamp ||  uint64  || Microsecond timer value at time of log entry creation ||
+|| bssid ||  6uint8  || BSS ID ||
+|| chan_num ||  uint8  || Channel (center frequency) index of transmission ||
+|| flags ||  uint8  || BSS flags ||
+|| latest_activity_timestamp ||  uint64  || Microsecond timer value at time of last Tx or Rx event to node with address mac_addr ||
+|| ssid ||  33uint8  || SSID (32 chars max) ||
+|| state ||  uint8  || State of the BSS ||
+|| capabilities ||  uint16  || Supported capabilities of the BSS ||
+|| beacon_interval ||  uint16  || Beacon interval - In time units of 1024 us ||
+|| padding0 ||  uint8  ||  ||
+|| num_basic_rates ||  uint8  || Number of basic rates supported ||
+|| basic_rates ||  10uint8  || Supported basic rates ||
+|| padding1 ||  2uint8  ||  ||
+
+
+----
+
+=== Entry Type RX_OFDM_LTG ===
+LTG Rx events from OFDM PHY. These log entries will only be created for packets that are passed to the high-level MAC code in CPU High. If the low-level MAC filter drops the packet, it will not be logged. For full "monitor mode" ensure the low-level MAC filter is configured to pass all receptions up to CPU High.
+
+Entry type ID: 11
+
+||=  Field Name  =||=  Data Type  =||=  Description  =||
+|| timestamp ||  uint64  || Microsecond timer value at PHY Rx start ||
+|| length ||  uint16  || Length of payload in bytes ||
+|| rate ||  uint8  || PHY rate index, in ![1:8] ||
+|| power ||  int8  || Rx power in dBm ||
+|| fcs_result ||  uint8  || Checksum status, 0 = no errors ||
+|| pkt_type ||  uint8  || Packet type: 1 = other data, 2 = encapsulated Ethernet, 3 = LTG, 11 = management, 21 = control ||
+|| chan_num ||  uint8  || Channel (center frequency) index ||
+|| ant_mode ||  uint8  || Antenna mode: ![1,2,3,4] for SISO Rx on RF [A,B,C,D] ||
+|| rf_gain ||  uint8  || AGC RF gain setting: ![1,2,3] for ![0,15,30]dB gain ||
+|| bb_gain ||  uint8  || AGC BB gain setting: ![0:31] for approx ![0:63]dB gain ||
+|| flags ||  uint16  || Bit OR'd flags: 0x1 = Rx was duplicate of previous Rx ||
+|| chan_est ||  (64,2)i2  || OFDM Rx channel estimates, packed as [(uint16)I (uint16)Q] values, one per subcarrier ||
+|| mac_payload_len ||  uint32  || Length in bytes of MAC payload recorded in log for this packet ||
+|| mac_payload ||  44uint8  || First 44 bytes of MAC payload: the 802.11 MAC header, LLC header, Packet ID, LTG ID ||
+
+
+The following fields are populated when the log entry is part of a numpy array generated via the {{{generate_numpy_array}}} method. These fields are calculated from the underlying bytes in the raw log entries and are stored in more convenient formats tha the raw log fields. For example, these MAC address fields are 48-bit values stored in 64-bit integers. These integer addresses are much easier to use when filtering Tx/Rx log entries using numpy and pandas.
+
+||=  Field Name  =||=  Data Type  =||=  Description  =||
+|| addr1 ||  uint64  || MAC Header Address 1 ||
+|| addr2 ||  uint64  || MAC Header Address 2 ||
+|| addr3 ||  uint64  || MAC Header Address 3 ||
+|| mac_seq ||  uint16  || MAC Header Sequence Number ||
+|| ltg_uniq_seq ||  uint64  || Unique sequence number for LTG packet ||
+|| ltg_flow_id ||  uint64  || LTG Flow ID, calculated as:[[BR]]  16LSB: LTG instance ID[[BR]]  48MSB: Destination MAC address ||
+
+
+----
+
+=== Entry Type RX_DSSS ===
+Rx events from DSSS PHY. These log entries will only be created for packets that are passed to the high-level MAC code in CPU High. If the low-level MAC filter drops the packet, it will not be logged. For full "monitor mode" ensure the low-level MAC filter is configured to pass all receptions up to CPU High.
+
+Entry type ID: 15
+
+||=  Field Name  =||=  Data Type  =||=  Description  =||
+|| timestamp ||  uint64  || Microsecond timer value at PHY Rx start ||
+|| length ||  uint16  || Length of payload in bytes ||
+|| rate ||  uint8  || PHY rate index, in ![1:8] ||
+|| power ||  int8  || Rx power in dBm ||
+|| fcs_result ||  uint8  || Checksum status, 0 = no errors ||
+|| pkt_type ||  uint8  || Packet type: 1 = other data, 2 = encapsulated Ethernet, 3 = LTG, 11 = management, 21 = control ||
+|| chan_num ||  uint8  || Channel (center frequency) index ||
+|| ant_mode ||  uint8  || Antenna mode: ![1,2,3,4] for SISO Rx on RF [A,B,C,D] ||
+|| rf_gain ||  uint8  || AGC RF gain setting: ![1,2,3] for ![0,15,30]dB gain ||
+|| bb_gain ||  uint8  || AGC BB gain setting: ![0:31] for approx ![0:63]dB gain ||
+|| flags ||  uint16  || Bit OR'd flags: 0x1 = Rx was duplicate of previous Rx ||
+|| mac_payload_len ||  uint32  || Length in bytes of MAC payload recorded in log for this packet ||
+|| mac_payload ||  24uint8  || First 24 bytes of MAC payload, typically the 802.11 MAC header ||
+
+
+The following fields are populated when the log entry is part of a numpy array generated via the {{{generate_numpy_array}}} method. These fields are calculated from the underlying bytes in the raw log entries and are stored in more convenient formats tha the raw log fields. For example, these MAC address fields are 48-bit values stored in 64-bit integers. These integer addresses are much easier to use when filtering Tx/Rx log entries using numpy and pandas.
+
+||=  Field Name  =||=  Data Type  =||=  Description  =||
+|| addr1 ||  uint64  || MAC Header Address 1 ||
+|| addr2 ||  uint64  || MAC Header Address 2 ||
+|| addr3 ||  uint64  || MAC Header Address 3 ||
+|| mac_seq ||  uint16  || MAC Header Sequence Number ||
+
+
+----
+
+=== Entry Type TX ===
+Tx events in CPU High, logged for each MPDU frame created and enqueued in CPU High. See TX_LOW for log entries of actual Tx events, including re-transmissions. The time values in this log entry can be used to determine time in queue (time_to_accept), time taken by CPU Low for all Tx attempts (time_to_done) and total time from creation to completion (time_to_accept+time_to_done).
+
+Entry type ID: 20
+
+||=  Field Name  =||=  Data Type  =||=  Description  =||
+|| timestamp ||  uint64  || Microsecond timer value at time packet was created, immediately before it was enqueued ||
+|| time_to_accept ||  uint32  || Time duration in microseconds between packet creation and packet acceptance by CPU Low ||
+|| time_to_done ||  uint32  || Time duration in microseconds between packet acceptance by CPU Low and Tx completion in CPU Low ||
+|| uniq_seq ||  uint64  || Unique sequence number for Tx packet; 12 LSB of this used for 802.11 MAC header sequence number ||
+|| num_tx ||  uint8  || Number of actual PHY Tx events which were used to transmit the MPDU (first Tx + all re-Tx) ||
+|| tx_power ||  int8  || Tx power in dBm of final Tx attempt ||
+|| chan_num ||  uint8  || Channel (center frequency) index of transmission ||
+|| rate ||  uint8  || PHY rate index in ![1:8] of final Tx attempt ||
+|| length ||  uint16  || Length in bytes of MPDU; includes MAC header, payload and FCS ||
+|| result ||  uint8  || Tx result; 0 = ACK received or not required ||
+|| pkt_type ||  uint8  || Packet type: 1 = other data, 2 = encapsulated Ethernet, 3 = LTG, 11 = management, 21 = control ||
+|| ant_mode ||  uint8  || PHY antenna mode of final Tx attempt ||
+|| queue_id ||  uint8  || Tx queue ID from which the packet was retrieved ||
+|| padding ||  2uint8  ||  ||
+|| mac_payload_len ||  uint32  || Length in bytes of MAC payload recorded in log for this packet ||
+|| mac_payload ||  24uint8  || First 24 bytes of MAC payload, typically the 802.11 MAC header ||
+
+
+The following fields are populated when the log entry is part of a numpy array generated via the {{{generate_numpy_array}}} method. These fields are calculated from the underlying bytes in the raw log entries and are stored in more convenient formats tha the raw log fields. For example, these MAC address fields are 48-bit values stored in 64-bit integers. These integer addresses are much easier to use when filtering Tx/Rx log entries using numpy and pandas.
+
+||=  Field Name  =||=  Data Type  =||=  Description  =||
+|| addr1 ||  uint64  || MAC Header Address 1 ||
+|| addr2 ||  uint64  || MAC Header Address 2 ||
+|| addr3 ||  uint64  || MAC Header Address 3 ||
+|| mac_seq ||  uint16  || MAC Header Sequence Number ||
+
+
+----
+
+=== Entry Type TX_LTG ===
+Tx events in CPU High, logged for each MPDU frame created and enqueued in CPU High. See TX_LOW for log entries of actual Tx events, including re-transmissions. The time values in this log entry can be used to determine time in queue (time_to_accept), time taken by CPU Low for all Tx attempts (time_to_done) and total time from creation to completion (time_to_accept+time_to_done).
+
+Entry type ID: 21
+
+||=  Field Name  =||=  Data Type  =||=  Description  =||
+|| timestamp ||  uint64  || Microsecond timer value at time packet was created, immediately before it was enqueued ||
+|| time_to_accept ||  uint32  || Time duration in microseconds between packet creation and packet acceptance by CPU Low ||
+|| time_to_done ||  uint32  || Time duration in microseconds between packet acceptance by CPU Low and Tx completion in CPU Low ||
+|| uniq_seq ||  uint64  || Unique sequence number for Tx packet; 12 LSB of this used for 802.11 MAC header sequence number ||
+|| num_tx ||  uint8  || Number of actual PHY Tx events which were used to transmit the MPDU (first Tx + all re-Tx) ||
+|| tx_power ||  int8  || Tx power in dBm of final Tx attempt ||
+|| chan_num ||  uint8  || Channel (center frequency) index of transmission ||
+|| rate ||  uint8  || PHY rate index in ![1:8] of final Tx attempt ||
+|| length ||  uint16  || Length in bytes of MPDU; includes MAC header, payload and FCS ||
+|| result ||  uint8  || Tx result; 0 = ACK received or not required ||
+|| pkt_type ||  uint8  || Packet type: 1 = other data, 2 = encapsulated Ethernet, 3 = LTG, 11 = management, 21 = control ||
+|| ant_mode ||  uint8  || PHY antenna mode of final Tx attempt ||
+|| queue_id ||  uint8  || Tx queue ID from which the packet was retrieved ||
+|| padding ||  2uint8  ||  ||
+|| mac_payload_len ||  uint32  || Length in bytes of MAC payload recorded in log for this packet ||
+|| mac_payload ||  44uint8  || First 44 bytes of MAC payload: the 802.11 MAC header, LLC header, Packet ID, LTG ID ||
+
+
+The following fields are populated when the log entry is part of a numpy array generated via the {{{generate_numpy_array}}} method. These fields are calculated from the underlying bytes in the raw log entries and are stored in more convenient formats tha the raw log fields. For example, these MAC address fields are 48-bit values stored in 64-bit integers. These integer addresses are much easier to use when filtering Tx/Rx log entries using numpy and pandas.
+
+||=  Field Name  =||=  Data Type  =||=  Description  =||
+|| addr1 ||  uint64  || MAC Header Address 1 ||
+|| addr2 ||  uint64  || MAC Header Address 2 ||
+|| addr3 ||  uint64  || MAC Header Address 3 ||
+|| mac_seq ||  uint16  || MAC Header Sequence Number ||
+|| ltg_uniq_seq ||  uint64  || Unique sequence number for LTG packet ||
+|| ltg_flow_id ||  uint64  || LTG Flow ID, calculated as:[[BR]]  16LSB: LTG instance ID[[BR]]  48MSB: Destination MAC address ||
+
+
+----
+
+=== Entry Type TX_LOW ===
+Record of actual PHY transmission. At least one TX_LOW will be logged for every TX entry. Multiple TX_LOW entries may be created for the same TX entry if the low-level MAC re-transmitted the frame. The uniq_seq fields can be match between TX and TX_LOW entries to find records common to the same MPUD.
+
+Entry type ID: 25
+
+||=  Field Name  =||=  Data Type  =||=  Description  =||
+|| timestamp ||  uint64  || Microsecond timer value at time packet transmission actually started (PHY TX_START time) ||
+|| uniq_seq ||  uint64  || Unique sequence number of original MPDU ||
+|| rate ||  uint8  || PHY rate index in ![1:8] ||
+|| ant_mode ||  uint8  || PHY antenna mode in ![1:4] ||
+|| tx_power ||  int8  || Tx power in dBm ||
+|| phy_flags ||  uint8  || Tx PHY flags ||
+|| tx_count ||  uint8  || Transmission index for this attempt; 0 = initial Tx, 1+ = subsequent re-transmissions ||
+|| chan_num ||  uint8  || Channel (center frequency) index ||
+|| length ||  uint16  || Length in bytes of MPDU; includes MAC header, payload and FCS ||
+|| num_slots ||  int16  || Number of backoff slots allotted prior to this transmission; may not have been used for initial Tx (tx_count==0); A value of -1 in this field means no backoff occured ||
+|| cw ||  uint16  || Contention window value at time of this Tx ||
+|| pkt_type ||  uint8  || Packet type: 1 = other data, 2 = encapsulated Ethernet, 3 = LTG, 11 = management, 21 = control ||
+|| flags ||  uint8  || B0: 1 = ACKed, 0 = Not ACKed ||
+|| padding0 ||  uint8  ||  ||
+|| padding1 ||  uint8  ||  ||
+|| mac_payload_len ||  uint32  || Length in bytes of MAC payload recorded in log for this packet ||
+|| mac_payload ||  24uint8  || First 24 bytes of MAC payload, typically the 802.11 MAC header ||
+
+
+The following fields are populated when the log entry is part of a numpy array generated via the {{{generate_numpy_array}}} method. These fields are calculated from the underlying bytes in the raw log entries and are stored in more convenient formats tha the raw log fields. For example, these MAC address fields are 48-bit values stored in 64-bit integers. These integer addresses are much easier to use when filtering Tx/Rx log entries using numpy and pandas.
+
+||=  Field Name  =||=  Data Type  =||=  Description  =||
+|| addr1 ||  uint64  || MAC Header Address 1 ||
+|| addr2 ||  uint64  || MAC Header Address 2 ||
+|| addr3 ||  uint64  || MAC Header Address 3 ||
+|| mac_seq ||  uint16  || MAC Header Sequence Number ||
+
+
+----
+
+=== Entry Type TX_LOW_LTG ===
+Record of actual PHY transmission. At least one TX_LOW will be logged for every TX entry. Multiple TX_LOW entries may be created for the same TX entry if the low-level MAC re-transmitted the frame. The uniq_seq fields can be match between TX and TX_LOW entries to find records common to the same MPUD.
+
+Entry type ID: 26
+
+||=  Field Name  =||=  Data Type  =||=  Description  =||
+|| timestamp ||  uint64  || Microsecond timer value at time packet transmission actually started (PHY TX_START time) ||
+|| uniq_seq ||  uint64  || Unique sequence number of original MPDU ||
+|| rate ||  uint8  || PHY rate index in ![1:8] ||
+|| ant_mode ||  uint8  || PHY antenna mode in ![1:4] ||
+|| tx_power ||  int8  || Tx power in dBm ||
+|| phy_flags ||  uint8  || Tx PHY flags ||
+|| tx_count ||  uint8  || Transmission index for this attempt; 0 = initial Tx, 1+ = subsequent re-transmissions ||
+|| chan_num ||  uint8  || Channel (center frequency) index ||
+|| length ||  uint16  || Length in bytes of MPDU; includes MAC header, payload and FCS ||
+|| num_slots ||  int16  || Number of backoff slots allotted prior to this transmission; may not have been used for initial Tx (tx_count==0); A value of -1 in this field means no backoff occured ||
+|| cw ||  uint16  || Contention window value at time of this Tx ||
+|| pkt_type ||  uint8  || Packet type: 1 = other data, 2 = encapsulated Ethernet, 3 = LTG, 11 = management, 21 = control ||
+|| flags ||  uint8  || B0: 1 = ACKed, 0 = Not ACKed ||
+|| padding0 ||  uint8  ||  ||
+|| padding1 ||  uint8  ||  ||
+|| mac_payload_len ||  uint32  || Length in bytes of MAC payload recorded in log for this packet ||
+|| mac_payload ||  44uint8  || First 44 bytes of MAC payload: the 802.11 MAC header, LLC header, Packet ID, LTG ID ||
+
+
+The following fields are populated when the log entry is part of a numpy array generated via the {{{generate_numpy_array}}} method. These fields are calculated from the underlying bytes in the raw log entries and are stored in more convenient formats tha the raw log fields. For example, these MAC address fields are 48-bit values stored in 64-bit integers. These integer addresses are much easier to use when filtering Tx/Rx log entries using numpy and pandas.
+
+||=  Field Name  =||=  Data Type  =||=  Description  =||
+|| addr1 ||  uint64  || MAC Header Address 1 ||
+|| addr2 ||  uint64  || MAC Header Address 2 ||
+|| addr3 ||  uint64  || MAC Header Address 3 ||
+|| mac_seq ||  uint16  || MAC Header Sequence Number ||
+|| ltg_uniq_seq ||  uint64  || Unique sequence number for LTG packet ||
+|| ltg_flow_id ||  uint64  || LTG Flow ID, calculated as:[[BR]]  16LSB: LTG instance ID[[BR]]  48MSB: Destination MAC address ||
+
+
+----
+
+=== Entry Type TXRX_STATS ===
+Copy of the Tx/Rx statistics struct maintained by CPU High. If promiscuous statistics mode is Tx/Rx stats structs will be maintained for every unique source MAC address, up to the max_stats value. Otherwise statistics are maintaind only associated nodes.
+
+Entry type ID: 30
+
+||=  Field Name  =||=  Data Type  =||=  Description  =||
+|| timestamp ||  uint64  || Microsecond timer value at time of log entry creation ||
+|| mac_addr ||  6uint8  || MAC address of remote node whose statics are recorded here ||
+|| associated ||  uint8  || Boolean indicating whether remote node is currently associated with this node ||
+|| padding ||  uint8  ||  ||
+|| data_num_rx_bytes ||  uint64  || Total number of bytes received in DATA packets from remote node ||
+|| data_num_tx_bytes_success ||  uint64  || Total number of bytes successfully transmitted in DATA packets to remote node ||
+|| data_num_tx_bytes_total ||  uint64  || Total number of bytes transmitted (successfully or not) in DATA packets to remote node ||
+|| data_num_rx_packets ||  uint32  || Total number of DATA packets received from remote node ||
+|| data_num_tx_packets_success ||  uint32  || Total number of DATA packets successfully transmitted to remote node ||
+|| data_num_tx_packets_total ||  uint32  || Total number of DATA packets transmitted (successfully or not) to remote node ||
+|| data_num_tx_packets_low ||  uint32  || Total number of PHY transmissions of DATA packets to remote node (includes re-transmissions) ||
+|| mgmt_num_rx_bytes ||  uint64  || Total number of bytes received in management packets from remote node ||
+|| mgmt_num_tx_bytes_success ||  uint64  || Total number of bytes successfully transmitted in management packets to remote node ||
+|| mgmt_num_tx_bytes_total ||  uint64  || Total number of bytes transmitted (successfully or not) in management packets to remote node ||
+|| mgmt_num_rx_packets ||  uint32  || Total number of management packets received from remote node ||
+|| mgmt_num_tx_packets_success ||  uint32  || Total number of management packets successfully transmitted to remote node ||
+|| mgmt_num_tx_packets_total ||  uint32  || Total number of management packets transmitted (successfully or not) to remote node ||
+|| mgmt_num_tx_packets_low ||  uint32  || Total number of PHY transmissions of management packets to remote node (includes re-transmissions) ||
+
+
+----
+
+=== Entry Type RX_OFDM ===
+Rx events from OFDM PHY. These log entries will only be created for packets that are passed to the high-level MAC code in CPU High. If the low-level MAC filter drops the packet, it will not be logged. For full "monitor mode" ensure the low-level MAC filter is configured to pass all receptions up to CPU High.
+
+Entry type ID: 10
+
+||=  Field Name  =||=  Data Type  =||=  Description  =||
+|| timestamp ||  uint64  || Microsecond timer value at PHY Rx start ||
+|| length ||  uint16  || Length of payload in bytes ||
+|| rate ||  uint8  || PHY rate index, in ![1:8] ||
+|| power ||  int8  || Rx power in dBm ||
+|| fcs_result ||  uint8  || Checksum status, 0 = no errors ||
+|| pkt_type ||  uint8  || Packet type: 1 = other data, 2 = encapsulated Ethernet, 3 = LTG, 11 = management, 21 = control ||
+|| chan_num ||  uint8  || Channel (center frequency) index ||
+|| ant_mode ||  uint8  || Antenna mode: ![1,2,3,4] for SISO Rx on RF [A,B,C,D] ||
+|| rf_gain ||  uint8  || AGC RF gain setting: ![1,2,3] for ![0,15,30]dB gain ||
+|| bb_gain ||  uint8  || AGC BB gain setting: ![0:31] for approx ![0:63]dB gain ||
+|| flags ||  uint16  || Bit OR'd flags: 0x1 = Rx was duplicate of previous Rx ||
+|| chan_est ||  (64,2)i2  || OFDM Rx channel estimates, packed as [(uint16)I (uint16)Q] values, one per subcarrier ||
+|| mac_payload_len ||  uint32  || Length in bytes of MAC payload recorded in log for this packet ||
+|| mac_payload ||  24uint8  || First 24 bytes of MAC payload, typically the 802.11 MAC header ||
+
+
+The following fields are populated when the log entry is part of a numpy array generated via the {{{generate_numpy_array}}} method. These fields are calculated from the underlying bytes in the raw log entries and are stored in more convenient formats tha the raw log fields. For example, these MAC address fields are 48-bit values stored in 64-bit integers. These integer addresses are much easier to use when filtering Tx/Rx log entries using numpy and pandas.
+
+||=  Field Name  =||=  Data Type  =||=  Description  =||
+|| addr1 ||  uint64  || MAC Header Address 1 ||
+|| addr2 ||  uint64  || MAC Header Address 2 ||
+|| addr3 ||  uint64  || MAC Header Address 3 ||
+|| mac_seq ||  uint16  || MAC Header Sequence Number ||
+
