@@ -1,0 +1,428 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>LTG Flow Configurations &mdash; mango_wlan_exp wlan_exp v1.5.2   documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/rtd_overrides.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="mango_wlan_exp wlan_exp v1.5.2   documentation" href="index.html"/>
+        <link rel="up" title="Framework" href="wlan_exp.html"/>
+        <link rel="next" title="WLAN Device" href="device.html"/>
+        <link rel="prev" title="WLAN Exp Utilities" href="wlan_exp_util.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="index.html" class="fa fa-home"> mango_wlan_exp</a>
+        
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="wlan_exp.html">Framework</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="node.html">Node Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wlan_exp_util.html">WLAN Exp Utilities</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">LTG Flow Configurations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="device.html">WLAN Device</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="wlan_exp_log.html">Event Log</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="log_overview.html">Event Log Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="log_entry_types.html">Log Entry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="log_util.html">Event Log Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="log_util_hdf.html">HDF5 Utilities</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">mango_wlan_exp</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="wlan_exp.html">Framework</a> &raquo;</li>
+      
+    <li>LTG Flow Configurations</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="_sources/ltg.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="ltg-flow-configurations">
+<h1>LTG Flow Configurations<a class="headerlink" href="#ltg-flow-configurations" title="Permalink to this headline">¶</a></h1>
+<dl class="docutils">
+<dt>An LTG Flow Configuration is defined by two things:</dt>
+<dd><ul class="first last simple">
+<li>Packet <strong>payload</strong> specification - responsible for setting the Tx parameters (rate, power) and creating the MAC header and payload of LTG packets.</li>
+<li>Packet generation <strong>schedule</strong> - responsible for scheduling the creation and enqueue of LTG packets.</li>
+</ul>
+</dd>
+</dl>
+<p>The 802.11 Reference Design code defines two schedules and three payload specifications. These schedules and payloads are used to define three
+LTG Flow Configurations in the reference code.</p>
+<p>For more information on the LTG framework in C please refer to the user guide <a class="reference external" href="http://warpproject.org/trac/wiki/802.11/MAC/Upper/MACHighFramework/LTG">LTG docs</a>.</p>
+<div class="section" id="flow-config">
+<h2>Flow Config<a class="headerlink" href="#flow-config" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="wlan_exp.ltg.FlowConfig">
+<em class="property">class </em><code class="descname">FlowConfig</code><a class="reference internal" href="_modules/wlan_exp/ltg.html#FlowConfig"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.ltg.FlowConfig" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base class for LTG Flow Configurations.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="wlan_exp.ltg.FlowConfigCBR">
+<em class="property">class </em><code class="descname">FlowConfigCBR</code><span class="sig-paren">(</span><em>dest_addr</em>, <em>payload_length</em>, <em>interval</em>, <em>duration=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/ltg.html#FlowConfigCBR"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.ltg.FlowConfigCBR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class to implement a Constant Bit Rate LTG flow configuration to a given device.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>dest_addr</strong> (<em>int</em>) &#8211;
+Destination MAC address</li>
+<li><strong>payload_length</strong> (<em>int</em>) &#8211;
+Length of the LTG payload (in bytes)</li>
+<li><strong>interval</strong> (<em>float</em>) &#8211;
+Interval between packets (in float seconds);
+actual packet creation interval will be quantized
+to the interval of the fast timer in CPU High.
+Currently this interval is 64 usec.</li>
+<li><strong>duration</strong> (<em>float</em>) &#8211;
+Duration of the traffic flow (in float seconds)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="wlan_exp.ltg.FlowConfigAllAssocCBR">
+<em class="property">class </em><code class="descname">FlowConfigAllAssocCBR</code><span class="sig-paren">(</span><em>payload_length</em>, <em>interval</em>, <em>duration=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/ltg.html#FlowConfigAllAssocCBR"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.ltg.FlowConfigAllAssocCBR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class to implement a Constant Bit Rate LTG flow configuration to all associated
+devices.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>payload_length</strong> (<em>int</em>) &#8211;
+Length of the LTG payload (in bytes)</li>
+<li><strong>interval</strong> (<em>float</em>) &#8211;
+Interval between packets (in float seconds);
+actual packet creation interval will be quantized
+to the interval of the fast timer in CPU High.
+Currently this interval is 64 usec.</li>
+<li><strong>duration</strong> (<em>float</em>) &#8211;
+Duration of the traffic flow (in float seconds)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="wlan_exp.ltg.FlowConfigRandomRandom">
+<em class="property">class </em><code class="descname">FlowConfigRandomRandom</code><span class="sig-paren">(</span><em>dest_addr</em>, <em>min_payload_length</em>, <em>max_payload_length</em>, <em>min_interval</em>, <em>max_interval</em>, <em>duration=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/ltg.html#FlowConfigRandomRandom"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.ltg.FlowConfigRandomRandom" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class to implement an LTG flow configuration with random period and random
+sized payload to a given device.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>dest_addr</strong> (<em>int</em>) &#8211;
+Destination MAC address</li>
+<li><strong>min_payload_length</strong> (<em>int</em>) &#8211;
+Minimum length of the LTG payload (in bytes)</li>
+<li><strong>max_payload_length</strong> (<em>int</em>) &#8211;
+Maximum length of the LTG payload (in bytes)</li>
+<li><strong>min_interval</strong> (<em>float</em>) &#8211;
+Minimum interval between packets (in float seconds);
+actual packet creation interval will be quantized
+to the interval of the fast timer in CPU High.
+Currently this interval is 64 usec.</li>
+<li><strong>max_interval</strong> (<em>float</em>) &#8211;
+Maximum interval between packets (in float seconds)
+actual packet creation interval will be quantized
+to the interval of the fast timer in CPU High.
+Currently this interval is 64 usec.</li>
+<li><strong>duration</strong> (<em>float, optional</em>) &#8211;
+Duration of the traffic flow (in float seconds)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="schedule">
+<h2>Schedule<a class="headerlink" href="#schedule" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="wlan_exp.ltg.Schedule">
+<em class="property">class </em><code class="descname">Schedule</code><a class="reference internal" href="_modules/wlan_exp/ltg.html#Schedule"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.ltg.Schedule" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base class for LTG Schedules.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="wlan_exp.ltg.SchedulePeriodic">
+<em class="property">class </em><code class="descname">SchedulePeriodic</code><span class="sig-paren">(</span><em>interval</em>, <em>duration=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/ltg.html#SchedulePeriodic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.ltg.SchedulePeriodic" title="Permalink to this definition">¶</a></dt>
+<dd><p>LTG Schedule that will generate a payload every &#8216;interval&#8217; microseconds.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>interval</strong> (<em>float</em>) &#8211;
+Interval between packets (in float seconds);
+actual packet creation interval will be quantized
+to the interval of the fast timer in CPU High.
+Currently this interval is 64 usec.</li>
+<li><strong>duration</strong> (<em>float, optional</em>) &#8211;
+Duration of the traffic flow (in float seconds)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="wlan_exp.ltg.ScheduleUniformRandom">
+<em class="property">class </em><code class="descname">ScheduleUniformRandom</code><span class="sig-paren">(</span><em>min_interval</em>, <em>max_interval</em>, <em>duration=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/ltg.html#ScheduleUniformRandom"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.ltg.ScheduleUniformRandom" title="Permalink to this definition">¶</a></dt>
+<dd><p>LTG Schedule that will generate a payload a uniformly random time
+between min_interval and max_interval microseconds.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>min_interval</strong> (<em>float</em>) &#8211;
+Minimum interval between packets (in float seconds);
+actual packet creation interval will be quantized
+to the interval of the fast timer in CPU High.
+Currently this interval is 64 usec.</li>
+<li><strong>max_interval</strong> (<em>float</em>) &#8211;
+Maximum interval between packets (in float seconds);
+actual packet creation interval will be quantized
+to the interval of the fast timer in CPU High.
+Currently this interval is 64 usec.</li>
+<li><strong>duration</strong> (<em>float, optional</em>) &#8211;
+Duration of the traffic flow (in float seconds)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="payload">
+<h2>Payload<a class="headerlink" href="#payload" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="wlan_exp.ltg.Payload">
+<em class="property">class </em><code class="descname">Payload</code><a class="reference internal" href="_modules/wlan_exp/ltg.html#Payload"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.ltg.Payload" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base class for LTG Payloads.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="wlan_exp.ltg.PayloadFixed">
+<em class="property">class </em><code class="descname">PayloadFixed</code><span class="sig-paren">(</span><em>dest_addr</em>, <em>length</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/ltg.html#PayloadFixed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.ltg.PayloadFixed" title="Permalink to this definition">¶</a></dt>
+<dd><p>LTG payload that will generate a fixed payload of the given length.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>dest_addr</strong> (<em>int</em>) &#8211;
+Destination MAC address</li>
+<li><strong>length</strong> (<em>int</em>) &#8211;
+Minimum length of the LTG payload (in bytes)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="wlan_exp.ltg.PayloadUniformRandom">
+<em class="property">class </em><code class="descname">PayloadUniformRandom</code><span class="sig-paren">(</span><em>dest_addr</em>, <em>min_length</em>, <em>max_length</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/ltg.html#PayloadUniformRandom"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.ltg.PayloadUniformRandom" title="Permalink to this definition">¶</a></dt>
+<dd><p>LTG payload that will generate a payload with uniformly random size
+between min_length and max_length bytes.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>dest_addr</strong> (<em>int</em>) &#8211;
+Destination MAC address</li>
+<li><strong>min_length</strong> (<em>int</em>) &#8211;
+Minimum length of the LTG payload (in bytes)</li>
+<li><strong>max_length</strong> (<em>int</em>) &#8211;
+Maximum length of the LTG payload (in bytes)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="wlan_exp.ltg.PayloadAllAssocFixed">
+<em class="property">class </em><code class="descname">PayloadAllAssocFixed</code><span class="sig-paren">(</span><em>length</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/ltg.html#PayloadAllAssocFixed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.ltg.PayloadAllAssocFixed" title="Permalink to this definition">¶</a></dt>
+<dd><p>LTG payload that will generate a fixed payload of the given length
+to all associated deivces.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>length</strong> (<em>int</em>) &#8211;
+Length of the LTG payload (in bytes)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="device.html" class="btn btn-neutral float-right" title="WLAN Device">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="wlan_exp_util.html" class="btn btn-neutral" title="WLAN Exp Utilities"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Mango Communications, Inc..
+    </p>
+  </div>
+
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'wlan_exp v1.5.2  ',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

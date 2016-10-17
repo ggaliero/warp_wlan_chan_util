@@ -1,0 +1,271 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>wlan_exp.device &mdash; mango_wlan_exp wlan_exp v1.5.2   documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../_static/rtd_overrides.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="mango_wlan_exp wlan_exp v1.5.2   documentation" href="../../index.html"/>
+        <link rel="up" title="Module code" href="../index.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="../../index.html" class="fa fa-home"> mango_wlan_exp</a>
+        
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../wlan_exp.html">Framework</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../node.html">Node Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../wlan_exp_util.html">WLAN Exp Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ltg.html">LTG Flow Configurations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../device.html">WLAN Device</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../wlan_exp_log.html">Event Log</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../log_overview.html">Event Log Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../log_entry_types.html">Log Entry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../log_util.html">Event Log Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../log_util_hdf.html">HDF5 Utilities</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../index.html">mango_wlan_exp</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+      
+    <li>wlan_exp.device</li>
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <h1>Source code for wlan_exp.device</h1><div class="highlight"><pre>
+<span class="c"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">------------------------------------------------------------------------------</span>
+<span class="sd">Mango 802.11 Reference Design Experiments Framework - Device Classes</span>
+<span class="sd">------------------------------------------------------------------------------</span>
+<span class="sd">Authors:   Chris Hunter (chunter [at] mangocomm.com)</span>
+<span class="sd">           Patrick Murphy (murphpo [at] mangocomm.com)</span>
+<span class="sd">           Erik Welsh (welsh [at] mangocomm.com)</span>
+<span class="sd">License:   Copyright 2014-2016, Mango Communications. All rights reserved.</span>
+<span class="sd">           Distributed under the WARP license (http://warpproject.org/license)</span>
+<span class="sd">------------------------------------------------------------------------------</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;WlanDevice&#39;</span><span class="p">]</span>
+
+
+<span class="c"># Fix to support Python 2.x and 3.x</span>
+<span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="s">&quot;3&quot;</span><span class="p">:</span> <span class="nb">long</span><span class="o">=</span><span class="bp">None</span>
+
+
+<div class="viewcode-block" id="WlanDevice"><a class="viewcode-back" href="../../device.html#wlan_exp.device.WlanDevice">[docs]</a><span class="k">class</span> <span class="nc">WlanDevice</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Class for WLAN Device. This is the parent class for all wlan_exp node class definitions.</span>
+<span class="sd">    This class also provides a node type for devices which exist in a wireless network but are not</span>
+<span class="sd">    controlled by wlan_exp (i.e. a Wi-Fi client connected to an 802.11 Reference Design AP).</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        mac_address (int, str): Medium Access Control (MAC) address of the WLAN device (48-bits)</span>
+<span class="sd">             The mac_address should be of the format:  0x0123456789AB or &#39;01:23:45:67:89:AB&#39;</span>
+<span class="sd">        name (string):          User generated description of the WLAN device</span>
+<span class="sd">        ht_capable (bool):      Indicates if device has PHY capable of HT (802.11n) rates </span>
+
+<span class="sd">    **Class Members:**</span>
+<span class="sd">    </span>
+<span class="sd">    Attributes:</span>
+<span class="sd">        device_type (int):     Unique type of the WLAN Device</span>
+<span class="sd">        name (string):         User generated description of the WLAN device</span>
+<span class="sd">        wlan_mac_address(int): MAC Address of WLAN Device</span>
+<span class="sd">        ht_capable (bool):     Indicates if device has PHY capable of HT (802.11n) rates </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">device_type</span>           <span class="o">=</span> <span class="bp">None</span>
+    <span class="n">name</span>                  <span class="o">=</span> <span class="bp">None</span>
+    <span class="n">description</span>           <span class="o">=</span> <span class="bp">None</span>
+    
+    <span class="n">wlan_mac_address</span>      <span class="o">=</span> <span class="bp">None</span>
+    
+    <span class="n">ht_capable</span>            <span class="o">=</span> <span class="bp">None</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mac_address</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ht_capable</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ht_capable</span> <span class="o">=</span> <span class="n">ht_capable</span>
+                
+        <span class="k">if</span> <span class="n">mac_address</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>        
+            <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">mac_address</span><span class="p">)</span> <span class="ow">in</span> <span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">long</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">wlan_mac_address</span> <span class="o">=</span> <span class="n">mac_address</span>
+            <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">mac_address</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">str</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="kn">import</span> <span class="nn">wlan_exp.util</span> <span class="kn">as</span> <span class="nn">util</span>                    
+                    <span class="bp">self</span><span class="o">.</span><span class="n">wlan_mac_address</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">str_to_mac_addr</span><span class="p">(</span><span class="n">mac_address</span><span class="p">)</span>
+                    
+                <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&quot;MAC address is not valid&quot;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&quot;MAC address is not valid&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&quot;MAC address is not valid&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">description</span>  <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__repr__</span><span class="p">()</span>
+
+
+
+    <span class="c">#-------------------------------------------------------------------------</span>
+    <span class="c"># WLAN Commands for the Device</span>
+    <span class="c">#-------------------------------------------------------------------------</span>
+
+
+    <span class="c"># -------------------------------------------------------------------------</span>
+    <span class="c"># Misc methods for the Device</span>
+    <span class="c"># -------------------------------------------------------------------------</span>
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return device description&quot;&quot;&quot;</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+        
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">wlan_mac_address</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">wlan_exp.util</span> <span class="kn">import</span> <span class="n">mac_addr_to_str</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="s">&quot;WLAN Device &#39;{0}&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mac_addr_to_str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">wlan_mac_address</span><span class="p">))</span>
+            
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">msg</span> <span class="o">+=</span> <span class="s">&quot; ({0})&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="s">&quot;Node not initialized.&quot;</span>
+        
+        <span class="k">return</span> <span class="n">msg</span>
+
+<span class="c"># End Class WlanDevice</span>
+</pre></div></div>
+
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Mango Communications, Inc..
+    </p>
+  </div>
+
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'wlan_exp v1.5.2  ',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

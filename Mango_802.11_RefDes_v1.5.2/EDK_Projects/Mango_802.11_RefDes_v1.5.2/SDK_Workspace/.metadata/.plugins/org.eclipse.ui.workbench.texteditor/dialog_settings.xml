@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
+		<item value="257" key="DIALOG_WIDTH"/>
+		<item value="78" key="DIALOG_Y_ORIGIN"/>
+		<item value="14" key="DIALOG_X_ORIGIN"/>
+		<item value="380" key="DIALOG_HEIGHT"/>
+		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
+	</section>
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
+		<item value="true" key="wrap"/>
+		<item value="false" key="casesensitive"/>
+		<item value="false" key="isRegEx"/>
+		<item value="false" key="incremental"/>
+		<item value="false" key="wholeword"/>
+		<item value="wlan_exp_log_create_rx_entry" key="selection"/>
+		<list key="findhistory">
+			<item value="wlan_exp_log_create_rx_entry"/>
+			<item value="wlan_mac_low_init"/>
+			<item value="init_chan_idx"/>
+			<item value="dual_mode_ch"/>
+			<item value="STATION_ID_TO_QUEUE_ID"/>
+			<item value="QID_TO_AID"/>
+			<item value="default_bssid"/>
+		</list>
+		<list key="replacehistory">
+			<item value="ch_idx_dual"/>
+			<item value="wlan_ch_dual_mode"/>
+			<item value="access_point_bssid"/>
+		</list>
+	</section>
+</section>

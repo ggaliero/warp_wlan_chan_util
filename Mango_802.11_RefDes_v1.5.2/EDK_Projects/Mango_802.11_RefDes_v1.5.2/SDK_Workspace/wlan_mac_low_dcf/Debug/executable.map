@@ -1,0 +1,1524 @@
+Archive member included because of file (symbol)
+
+../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xil_printf.o)
+                              ./wlan_mac_low_framework/wlan_mac_low.o (xil_printf)
+../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(_exception_handler.o)
+                              c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/../../../../microblaze-xilinx-elf/lib/bs/m/le/crt0.o (_exception_handler)
+../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(_program_clean.o)
+                              c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/../../../../microblaze-xilinx-elf/lib/bs/m/le/crtinit.o (_program_clean)
+../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(_program_init.o)
+                              c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/../../../../microblaze-xilinx-elf/lib/bs/m/le/crtinit.o (_program_init)
+../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(hw_exception_handler.o)
+                              c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/../../../../microblaze-xilinx-elf/lib/bs/m/le/crt0.o (_hw_exception_handler)
+../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(microblaze_enable_exceptions.o)
+                              ./wlan_mac_low_framework/wlan_phy_util.o (microblaze_enable_exceptions)
+../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(microblaze_interrupt_handler.o)
+                              c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/../../../../microblaze-xilinx-elf/lib/bs/m/le/crt0.o (_interrupt_handler)
+../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(microblaze_interrupts_g.o)
+                              ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(microblaze_interrupt_handler.o) (MB_InterruptVectorTable)
+../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(outbyte.o)
+                              ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xil_printf.o) (outbyte)
+../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xuartlite_l.o)
+                              ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(outbyte.o) (XUartLite_SendByte)
+../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xmbox.o)
+                              ./wlan_mac_common/wlan_mac_mailbox_util.o (XMbox_CfgInitialize)
+../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xmbox_sinit.o)
+                              ./wlan_mac_common/wlan_mac_mailbox_util.o (XMbox_LookupConfig)
+../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xmutex.o)
+                              ./wlan_mac_common/wlan_mac_pkt_buf_util.o (XMutex_CfgInitialize)
+../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xmutex_sinit.o)
+                              ./wlan_mac_common/wlan_mac_pkt_buf_util.o (XMutex_LookupConfig)
+../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(radio_controller.o)
+                              ./wlan_mac_low_framework/wlan_phy_util.o (radio_controller_init)
+../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(w3_ad_controller.o)
+                              ./wlan_mac_low_framework/wlan_phy_util.o (ad_init)
+../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(w3_clock_controller.o)
+                              ./wlan_mac_low_framework/wlan_phy_util.o (clk_init)
+../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(w3_iic_eeprom.o)
+                              ./wlan_mac_common/wlan_mac_common.o (w3_eeprom_read_serial_num)
+../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(print.o)
+                              ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(w3_ad_controller.o) (print)
+../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xbasic_types.o)
+                              ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(hw_exception_handler.o) (XNullHandler)
+../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xil_assert.o)
+                              ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xmbox.o) (Xil_Assert)
+../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xmbox_g.o)
+                              ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xmbox_sinit.o) (XMbox_ConfigTable)
+../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xmutex_g.o)
+                              ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xmutex_sinit.o) (XMutex_ConfigTable)
+c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/bs/m/le\libgcc.a(udivsi3.o)
+                              ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xil_printf.o) (__udivsi3)
+c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/bs/m/le\libgcc.a(umodsi3.o)
+                              ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xil_printf.o) (__umodsi3)
+../../wlan_bsp_cpu_low/mb_low/lib\libc.a(lib_a-ctype_.o)
+                              ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xil_printf.o) (__ctype_ptr__)
+../../wlan_bsp_cpu_low/mb_low/lib\libc.a(lib_a-exit.o)
+                              c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/../../../../microblaze-xilinx-elf/lib/bs/m/le/crt0.o (exit)
+../../wlan_bsp_cpu_low/mb_low/lib\libc.a(lib_a-impure.o)
+                              ../../wlan_bsp_cpu_low/mb_low/lib\libc.a(lib_a-exit.o) (_global_impure_ptr)
+../../wlan_bsp_cpu_low/mb_low/lib\libc.a(lib_a-memcmp.o)
+                              ./src/wlan_mac_dcf.o (memcmp)
+../../wlan_bsp_cpu_low/mb_low/lib\libc.a(lib_a-memcpy.o)
+                              ./wlan_mac_low_framework/wlan_mac_low.o (memcpy)
+../../wlan_bsp_cpu_low/mb_low/lib\libc.a(lib_a-memset.o)
+                              ./wlan_mac_low_framework/wlan_phy_util.o (memset)
+../../wlan_bsp_cpu_low/mb_low/lib\libc.a(lib_a-rand.o)
+                              ./wlan_mac_low_framework/wlan_mac_low.o (srand)
+../../wlan_bsp_cpu_low/mb_low/lib\libc.a(lib_a-strlen.o)
+                              ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xil_printf.o) (strlen)
+../../wlan_bsp_cpu_low/mb_low/lib\libc.a(lib_a-__call_atexit.o)
+                              ../../wlan_bsp_cpu_low/mb_low/lib\libc.a(lib_a-exit.o) (__call_exitprocs)
+../../wlan_bsp_cpu_low/mb_low/lib\libc.a(lib_a-malloc.o)
+                              ../../wlan_bsp_cpu_low/mb_low/lib\libc.a(lib_a-rand.o) (malloc)
+../../wlan_bsp_cpu_low/mb_low/lib\libc.a(lib_a-mallocr.o)
+                              ../../wlan_bsp_cpu_low/mb_low/lib\libc.a(lib_a-malloc.o) (_malloc_r)
+../../wlan_bsp_cpu_low/mb_low/lib\libc.a(lib_a-mlock.o)
+                              ../../wlan_bsp_cpu_low/mb_low/lib\libc.a(lib_a-mallocr.o) (__malloc_lock)
+../../wlan_bsp_cpu_low/mb_low/lib\libc.a(lib_a-sbrkr.o)
+                              ../../wlan_bsp_cpu_low/mb_low/lib\libc.a(lib_a-mallocr.o) (_sbrk_r)
+../../wlan_bsp_cpu_low/mb_low/lib\libc.a(lib_a-freer.o)
+                              ../../wlan_bsp_cpu_low/mb_low/lib\libc.a(lib_a-malloc.o) (_free_r)
+../../wlan_bsp_cpu_low/mb_low/lib\libc.a(lib_a-reent.o)
+                              ../../wlan_bsp_cpu_low/mb_low/lib\libc.a(lib_a-sbrkr.o) (errno)
+../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(sbrk.o)
+                              ../../wlan_bsp_cpu_low/mb_low/lib\libc.a(lib_a-sbrkr.o) (sbrk)
+../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(errno.o)
+                              ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(sbrk.o) (__errno)
+c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/bs/m/le\libgcc.a(_muldi3.o)
+                              ../../wlan_bsp_cpu_low/mb_low/lib\libc.a(lib_a-rand.o) (__muldi3)
+
+Allocating common symbols
+Common symbol       size              file
+
+gl_beacon_txrx_configure
+                    0x14              ./src/wlan_mac_dcf.o
+gl_red_led_index    0x1               ./src/wlan_mac_dcf.o
+errno               0x4               ../../wlan_bsp_cpu_low/mb_low/lib\libc.a(lib_a-reent.o)
+XAssertStatus       0x4               ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xbasic_types.o)
+gl_green_led_index  0x1               ./src/wlan_mac_dcf.o
+Xil_AssertStatus    0x4               ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xil_assert.o)
+
+Discarded input sections
+
+ .data          0x00000000        0x0 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/../../../../microblaze-xilinx-elf/lib/bs/m/le/crt0.o
+ .bss           0x00000000        0x0 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/../../../../microblaze-xilinx-elf/lib/bs/m/le/crt0.o
+ .vectors.sw_exception
+                0x00000000        0x8 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/../../../../microblaze-xilinx-elf/lib/bs/m/le/crt0.o
+ .vectors.interrupt
+                0x00000000        0x8 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/../../../../microblaze-xilinx-elf/lib/bs/m/le/crt0.o
+ .vectors.hw_exception
+                0x00000000        0x8 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/../../../../microblaze-xilinx-elf/lib/bs/m/le/crt0.o
+ .text          0x00000000        0x0 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/bs/m/le/crti.o
+ .data          0x00000000        0x0 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/bs/m/le/crti.o
+ .bss           0x00000000        0x0 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/bs/m/le/crti.o
+ .data          0x00000000        0x8 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/bs/m/le/crtbegin.o
+ .data          0x00000000        0x0 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/../../../../microblaze-xilinx-elf/lib/bs/m/le/crtinit.o
+ .bss           0x00000000        0x0 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/../../../../microblaze-xilinx-elf/lib/bs/m/le/crtinit.o
+ .text          0x00000000        0x0 ./wlan_mac_low_framework/wlan_mac_low.o
+ .data          0x00000000        0x0 ./wlan_mac_low_framework/wlan_mac_low.o
+ .bss           0x00000000        0x0 ./wlan_mac_low_framework/wlan_mac_low.o
+ .text.wlan_mac_low_disable_new_mpdu_tx
+                0x00000000       0x10 ./wlan_mac_low_framework/wlan_mac_low.o
+ .text.wlan_mac_low_enable_new_mpdu_tx
+                0x00000000       0x74 ./wlan_mac_low_framework/wlan_mac_low.o
+ .text.wlan_mac_reset_backoff_counter
+                0x00000000       0x28 ./wlan_mac_low_framework/wlan_mac_low.o
+ .text          0x00000000        0x0 ./wlan_mac_low_framework/wlan_phy_util.o
+ .data          0x00000000        0x0 ./wlan_mac_low_framework/wlan_phy_util.o
+ .bss           0x00000000        0x0 ./wlan_mac_low_framework/wlan_phy_util.o
+ .text.wlan_tx_start
+                0x00000000       0x28 ./wlan_mac_low_framework/wlan_phy_util.o
+ .text          0x00000000        0x0 ./wlan_mac_common/wlan_mac_common.o
+ .data          0x00000000        0x0 ./wlan_mac_common/wlan_mac_common.o
+ .bss           0x00000000        0x0 ./wlan_mac_common/wlan_mac_common.o
+ .text.get_mac_hw_addr_wlan_exp
+                0x00000000       0x10 ./wlan_mac_common/wlan_mac_common.o
+ .text          0x00000000        0x0 ./wlan_mac_common/wlan_mac_mailbox_util.o
+ .data          0x00000000        0x0 ./wlan_mac_common/wlan_mac_mailbox_util.o
+ .bss           0x00000000        0x0 ./wlan_mac_common/wlan_mac_mailbox_util.o
+ .text.send_msg
+                0x00000000       0x34 ./wlan_mac_common/wlan_mac_mailbox_util.o
+ .text.ipc_mailbox_read_isempty
+                0x00000000       0x28 ./wlan_mac_common/wlan_mac_mailbox_util.o
+ .text          0x00000000        0x0 ./wlan_mac_common/wlan_mac_pkt_buf_util.o
+ .data          0x00000000        0x0 ./wlan_mac_common/wlan_mac_pkt_buf_util.o
+ .bss           0x00000000        0x0 ./wlan_mac_common/wlan_mac_pkt_buf_util.o
+ .text.get_rx_pkt_buf_status
+                0x00000000       0x4c ./wlan_mac_common/wlan_mac_pkt_buf_util.o
+ .text          0x00000000        0x0 ./wlan_mac_common/wlan_mac_sysmon_util.o
+ .data          0x00000000        0x0 ./wlan_mac_common/wlan_mac_sysmon_util.o
+ .bss           0x00000000        0x0 ./wlan_mac_common/wlan_mac_sysmon_util.o
+ .text.init_sysmon
+                0x00000000       0x9c ./wlan_mac_common/wlan_mac_sysmon_util.o
+ .text.get_current_temp
+                0x00000000       0x10 ./wlan_mac_common/wlan_mac_sysmon_util.o
+ .text.get_min_temp
+                0x00000000       0x10 ./wlan_mac_common/wlan_mac_sysmon_util.o
+ .text.get_max_temp
+                0x00000000       0x10 ./wlan_mac_common/wlan_mac_sysmon_util.o
+ .debug_frame   0x00000000       0x50 ./wlan_mac_common/wlan_mac_sysmon_util.o
+ .debug_info    0x00000000       0xf1 ./wlan_mac_common/wlan_mac_sysmon_util.o
+ .debug_abbrev  0x00000000       0x74 ./wlan_mac_common/wlan_mac_sysmon_util.o
+ .debug_loc     0x00000000       0x60 ./wlan_mac_common/wlan_mac_sysmon_util.o
+ .debug_aranges
+                0x00000000       0x38 ./wlan_mac_common/wlan_mac_sysmon_util.o
+ .debug_ranges  0x00000000       0x28 ./wlan_mac_common/wlan_mac_sysmon_util.o
+ .debug_line    0x00000000      0x1b9 ./wlan_mac_common/wlan_mac_sysmon_util.o
+ .debug_str     0x00000000      0x209 ./wlan_mac_common/wlan_mac_sysmon_util.o
+ .text          0x00000000        0x0 ./wlan_mac_common/wlan_mac_time_util.o
+ .data          0x00000000        0x0 ./wlan_mac_common/wlan_mac_time_util.o
+ .bss           0x00000000        0x0 ./wlan_mac_common/wlan_mac_time_util.o
+ .text          0x00000000        0x0 ./wlan_mac_common/wlan_mac_userio_util.o
+ .data          0x00000000        0x0 ./wlan_mac_common/wlan_mac_userio_util.o
+ .bss           0x00000000        0x0 ./wlan_mac_common/wlan_mac_userio_util.o
+ .text.hex_to_seven_segment
+                0x00000000       0x20 ./wlan_mac_common/wlan_mac_userio_util.o
+ .text.enable_hex_pwm
+                0x00000000       0x20 ./wlan_mac_common/wlan_mac_userio_util.o
+ .text.disable_hex_pwm
+                0x00000000       0x20 ./wlan_mac_common/wlan_mac_userio_util.o
+ .text.set_hex_pwm_period
+                0x00000000       0x28 ./wlan_mac_common/wlan_mac_userio_util.o
+ .text.set_hex_pwm_min_max
+                0x00000000       0x50 ./wlan_mac_common/wlan_mac_userio_util.o
+ .text.write_hex_display
+                0x00000000       0xb8 ./wlan_mac_common/wlan_mac_userio_util.o
+ .text.write_hex_display_with_pwm
+                0x00000000       0xe0 ./wlan_mac_common/wlan_mac_userio_util.o
+ .text.set_hex_display_right_dp
+                0x00000000       0x28 ./wlan_mac_common/wlan_mac_userio_util.o
+ .text.set_hex_display_left_dp
+                0x00000000       0x28 ./wlan_mac_common/wlan_mac_userio_util.o
+ .text          0x00000000        0x0 ./src/wlan_mac_dcf.o
+ .data          0x00000000        0x0 ./src/wlan_mac_dcf.o
+ .bss           0x00000000        0x0 ./src/wlan_mac_dcf.o
+ .text.reset_ssrc
+                0x00000000       0x10 ./src/wlan_mac_dcf.o
+ .text.reset_slrc
+                0x00000000       0x10 ./src/wlan_mac_dcf.o
+ .data          0x00000000        0x0 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xil_printf.o)
+ .bss           0x00000000        0x0 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xil_printf.o)
+ .text          0x00000000        0x8 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(_exception_handler.o)
+ .data          0x00000000        0x0 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(_exception_handler.o)
+ .bss           0x00000000        0x0 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(_exception_handler.o)
+ .debug_line    0x00000000       0x70 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(_exception_handler.o)
+ .debug_info    0x00000000       0xc4 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(_exception_handler.o)
+ .debug_abbrev  0x00000000       0x14 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(_exception_handler.o)
+ .debug_aranges
+                0x00000000       0x20 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(_exception_handler.o)
+ .data          0x00000000        0x0 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(_program_clean.o)
+ .bss           0x00000000        0x0 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(_program_clean.o)
+ .data          0x00000000        0x0 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(_program_init.o)
+ .bss           0x00000000        0x0 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(_program_init.o)
+ .text          0x00000000      0x480 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(hw_exception_handler.o)
+ .data          0x00000000       0x4c ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(hw_exception_handler.o)
+ .bss           0x00000000        0x0 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(hw_exception_handler.o)
+ .debug_line    0x00000000      0x10d ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(hw_exception_handler.o)
+ .debug_info    0x00000000       0xe1 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(hw_exception_handler.o)
+ .debug_abbrev  0x00000000       0x14 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(hw_exception_handler.o)
+ .debug_aranges
+                0x00000000       0x20 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(hw_exception_handler.o)
+ .data          0x00000000        0x0 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(microblaze_enable_exceptions.o)
+ .bss           0x00000000        0x0 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(microblaze_enable_exceptions.o)
+ .text          0x00000000       0xb8 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(microblaze_interrupt_handler.o)
+ .data          0x00000000        0x0 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(microblaze_interrupt_handler.o)
+ .bss           0x00000000        0x0 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(microblaze_interrupt_handler.o)
+ .debug_frame   0x00000000       0x54 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(microblaze_interrupt_handler.o)
+ .debug_info    0x00000000      0x116 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(microblaze_interrupt_handler.o)
+ .debug_abbrev  0x00000000       0xbf ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(microblaze_interrupt_handler.o)
+ .debug_loc     0x00000000       0x21 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(microblaze_interrupt_handler.o)
+ .debug_aranges
+                0x00000000       0x20 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(microblaze_interrupt_handler.o)
+ .debug_line    0x00000000       0xd6 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(microblaze_interrupt_handler.o)
+ .debug_str     0x00000000      0x1e8 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(microblaze_interrupt_handler.o)
+ .text          0x00000000        0x0 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(microblaze_interrupts_g.o)
+ .data          0x00000000        0x8 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(microblaze_interrupts_g.o)
+ .bss           0x00000000        0x0 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(microblaze_interrupts_g.o)
+ .debug_info    0x00000000       0xd6 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(microblaze_interrupts_g.o)
+ .debug_abbrev  0x00000000       0x96 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(microblaze_interrupts_g.o)
+ .debug_line    0x00000000       0x81 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(microblaze_interrupts_g.o)
+ .debug_str     0x00000000      0x1ab ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(microblaze_interrupts_g.o)
+ .data          0x00000000        0x0 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(outbyte.o)
+ .bss           0x00000000        0x0 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(outbyte.o)
+ .data          0x00000000        0x0 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xuartlite_l.o)
+ .bss           0x00000000        0x0 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xuartlite_l.o)
+ .data          0x00000000        0x0 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xmbox.o)
+ .bss           0x00000000        0x0 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xmbox.o)
+ .data          0x00000000        0x0 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xmbox_sinit.o)
+ .bss           0x00000000        0x0 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xmbox_sinit.o)
+ .data          0x00000000        0x0 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xmutex.o)
+ .bss           0x00000000        0x0 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xmutex.o)
+ .data          0x00000000        0x0 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xmutex_sinit.o)
+ .bss           0x00000000        0x0 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xmutex_sinit.o)
+ .data          0x00000000        0x0 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(radio_controller.o)
+ .bss           0x00000000        0x0 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(radio_controller.o)
+ .data          0x00000000        0x0 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(w3_ad_controller.o)
+ .bss           0x00000000        0x0 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(w3_ad_controller.o)
+ .data          0x00000000        0x0 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(w3_clock_controller.o)
+ .bss           0x00000000        0x0 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(w3_clock_controller.o)
+ .data          0x00000000        0x0 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(w3_iic_eeprom.o)
+ .bss           0x00000000        0x0 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(w3_iic_eeprom.o)
+ .data          0x00000000        0x0 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(print.o)
+ .bss           0x00000000        0x0 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(print.o)
+ .text          0x00000000       0x50 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xbasic_types.o)
+ .data          0x00000000        0x4 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xbasic_types.o)
+ .bss           0x00000000        0x4 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xbasic_types.o)
+ .debug_frame   0x00000000       0x48 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xbasic_types.o)
+ .debug_info    0x00000000      0x15c ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xbasic_types.o)
+ .debug_abbrev  0x00000000       0xd4 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xbasic_types.o)
+ .debug_loc     0x00000000       0x46 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xbasic_types.o)
+ .debug_aranges
+                0x00000000       0x20 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xbasic_types.o)
+ .debug_line    0x00000000       0xa8 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xbasic_types.o)
+ .debug_str     0x00000000      0x1d9 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xbasic_types.o)
+ COMMON         0x00000000        0x4 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xbasic_types.o)
+ .text          0x00000000        0x0 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xmbox_g.o)
+ .bss           0x00000000        0x0 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xmbox_g.o)
+ .text          0x00000000        0x0 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xmutex_g.o)
+ .bss           0x00000000        0x0 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xmutex_g.o)
+ .data          0x00000000        0x0 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/bs/m/le\libgcc.a(udivsi3.o)
+ .bss           0x00000000        0x0 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/bs/m/le\libgcc.a(udivsi3.o)
+ .data          0x00000000        0x0 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/bs/m/le\libgcc.a(umodsi3.o)
+ .bss           0x00000000        0x0 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/bs/m/le\libgcc.a(umodsi3.o)
+ .text          0x00000000        0x0 ../../wlan_bsp_cpu_low/mb_low/lib\libc.a(lib_a-ctype_.o)
+ .bss           0x00000000        0x0 ../../wlan_bsp_cpu_low/mb_low/lib\libc.a(lib_a-ctype_.o)
+ .data          0x00000000        0x0 ../../wlan_bsp_cpu_low/mb_low/lib\libc.a(lib_a-exit.o)
+ .bss           0x00000000        0x0 ../../wlan_bsp_cpu_low/mb_low/lib\libc.a(lib_a-exit.o)
+ .text          0x00000000        0x0 ../../wlan_bsp_cpu_low/mb_low/lib\libc.a(lib_a-impure.o)
+ .bss           0x00000000        0x0 ../../wlan_bsp_cpu_low/mb_low/lib\libc.a(lib_a-impure.o)
+ .data          0x00000000        0x0 ../../wlan_bsp_cpu_low/mb_low/lib\libc.a(lib_a-memcmp.o)
+ .bss           0x00000000        0x0 ../../wlan_bsp_cpu_low/mb_low/lib\libc.a(lib_a-memcmp.o)
+ .data          0x00000000        0x0 ../../wlan_bsp_cpu_low/mb_low/lib\libc.a(lib_a-memcpy.o)
+ .bss           0x00000000        0x0 ../../wlan_bsp_cpu_low/mb_low/lib\libc.a(lib_a-memcpy.o)
+ .data          0x00000000        0x0 ../../wlan_bsp_cpu_low/mb_low/lib\libc.a(lib_a-memset.o)
+ .bss           0x00000000        0x0 ../../wlan_bsp_cpu_low/mb_low/lib\libc.a(lib_a-memset.o)
+ .data          0x00000000        0x0 ../../wlan_bsp_cpu_low/mb_low/lib\libc.a(lib_a-rand.o)
+ .bss           0x00000000        0x0 ../../wlan_bsp_cpu_low/mb_low/lib\libc.a(lib_a-rand.o)
+ .data          0x00000000        0x0 ../../wlan_bsp_cpu_low/mb_low/lib\libc.a(lib_a-strlen.o)
+ .bss           0x00000000        0x0 ../../wlan_bsp_cpu_low/mb_low/lib\libc.a(lib_a-strlen.o)
+ .data          0x00000000        0x0 ../../wlan_bsp_cpu_low/mb_low/lib\libc.a(lib_a-__call_atexit.o)
+ .bss           0x00000000        0x0 ../../wlan_bsp_cpu_low/mb_low/lib\libc.a(lib_a-__call_atexit.o)
+ .data          0x00000000        0x0 ../../wlan_bsp_cpu_low/mb_low/lib\libc.a(lib_a-malloc.o)
+ .bss           0x00000000        0x0 ../../wlan_bsp_cpu_low/mb_low/lib\libc.a(lib_a-malloc.o)
+ .data          0x00000000        0x0 ../../wlan_bsp_cpu_low/mb_low/lib\libc.a(lib_a-mlock.o)
+ .bss           0x00000000        0x0 ../../wlan_bsp_cpu_low/mb_low/lib\libc.a(lib_a-mlock.o)
+ .data          0x00000000        0x0 ../../wlan_bsp_cpu_low/mb_low/lib\libc.a(lib_a-sbrkr.o)
+ .bss           0x00000000        0x0 ../../wlan_bsp_cpu_low/mb_low/lib\libc.a(lib_a-sbrkr.o)
+ .data          0x00000000        0x0 ../../wlan_bsp_cpu_low/mb_low/lib\libc.a(lib_a-freer.o)
+ .bss           0x00000000        0x0 ../../wlan_bsp_cpu_low/mb_low/lib\libc.a(lib_a-freer.o)
+ .text          0x00000000      0x374 ../../wlan_bsp_cpu_low/mb_low/lib\libc.a(lib_a-reent.o)
+ .data          0x00000000        0x0 ../../wlan_bsp_cpu_low/mb_low/lib\libc.a(lib_a-reent.o)
+ .bss           0x00000000        0x0 ../../wlan_bsp_cpu_low/mb_low/lib\libc.a(lib_a-reent.o)
+ .data          0x00000000        0x0 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(sbrk.o)
+ .data          0x00000000        0x0 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(errno.o)
+ .bss           0x00000000        0x0 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(errno.o)
+ .data          0x00000000        0x0 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/bs/m/le\libgcc.a(_muldi3.o)
+ .bss           0x00000000        0x0 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/bs/m/le\libgcc.a(_muldi3.o)
+ .data          0x00000000        0x4 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/bs/m/le/crtend.o
+ .bss           0x00000000        0x0 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/bs/m/le/crtend.o
+ .eh_frame      0x00000000        0x4 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/bs/m/le/crtend.o
+ .jcr           0x00000000        0x4 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/bs/m/le/crtend.o
+ .text          0x00000000        0x0 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/bs/m/le/crtn.o
+ .data          0x00000000        0x0 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/bs/m/le/crtn.o
+ .bss           0x00000000        0x0 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/bs/m/le/crtn.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+mb_low_ilmb_bram_cntlr_mb_low_dlmb_bram_cntlr 0x00000050         0x0000ffb0
+pkt_buff_tx_bram_ctrl_S_AXI_BASEADDR 0xbf570000         0x00010000
+pkt_buff_rx_bram_ctrl_S_AXI_BASEADDR 0xbf560000         0x00010000
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+LOAD c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/../../../../microblaze-xilinx-elf/lib/bs/m/le/crt0.o
+LOAD c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/bs/m/le/crti.o
+LOAD c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/bs/m/le/crtbegin.o
+LOAD c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/../../../../microblaze-xilinx-elf/lib/bs/m/le/crtinit.o
+                [0x00000400]                _STACK_SIZE = DEFINED (_STACK_SIZE)?_STACK_SIZE:0x400
+                [0x00000100]                _HEAP_SIZE = DEFINED (_HEAP_SIZE)?_HEAP_SIZE:0x100
+
+.vectors.reset  0x00000000        0x8
+ *(.vectors.reset)
+ .vectors.reset
+                0x00000000        0x8 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/../../../../microblaze-xilinx-elf/lib/bs/m/le/crt0.o
+                0x00000000                _start
+
+.vectors.sw_exception
+ *(.vectors.sw_exception)
+
+.vectors.interrupt
+ *(.vectors.interrupt)
+
+.vectors.hw_exception
+ *(.vectors.hw_exception)
+
+.text           0x00000050     0xbc60
+ *(.text)
+ .text          0x00000050       0x34 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/../../../../microblaze-xilinx-elf/lib/bs/m/le/crt0.o
+                0x00000050                _start1
+                0x00000080                _exit
+ .text          0x00000084      0x118 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/bs/m/le/crtbegin.o
+ .text          0x0000019c       0xb0 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/../../../../microblaze-xilinx-elf/lib/bs/m/le/crtinit.o
+                0x0000019c                _crtinit
+ .text          0x0000024c      0x604 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xil_printf.o)
+                0x00000438                xil_printf
+ .text          0x00000850        0x8 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(_program_clean.o)
+                0x00000850                _program_clean
+ .text          0x00000858        0x8 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(_program_init.o)
+                0x00000858                _program_init
+ .text          0x00000860       0x14 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(microblaze_enable_exceptions.o)
+                0x00000860                microblaze_enable_exceptions
+ .text          0x00000874       0x2c ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(outbyte.o)
+                0x00000874                outbyte
+ .text          0x000008a0       0x38 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xuartlite_l.o)
+                0x000008a0                XUartLite_SendByte
+                0x000008bc                XUartLite_RecvByte
+ .text          0x000008d8      0xd28 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xmbox.o)
+                0x000008d8                XMbox_CfgInitialize
+                0x00000a08                XMbox_Read
+                0x00000c08                XMbox_ReadBlocking
+                0x00000d4c                XMbox_Write
+                0x00000f48                XMbox_WriteBlocking
+                0x0000108c                XMbox_IsEmpty
+                0x00001110                XMbox_IsFull
+                0x00001194                XMbox_Flush
+                0x00001228                XMbox_SetInterruptEnable
+                0x000012ac                XMbox_GetInterruptEnable
+                0x00001344                XMbox_GetInterruptStatus
+                0x000013dc                XMbox_ClearInterrupt
+                0x00001460                XMbox_SetSendThreshold
+                0x000014e4                XMbox_SetReceiveThreshold
+                0x00001568                XMbox_GetStatus
+ .text          0x00001600       0x24 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xmbox_sinit.o)
+                0x00001600                XMbox_LookupConfig
+ .text          0x00001624      0x6d4 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xmutex.o)
+                0x00001624                XMutex_CfgInitialize
+                0x00001774                XMutex_Lock
+                0x0000181c                XMutex_Trylock
+                0x000018e8                XMutex_Unlock
+                0x0000199c                XMutex_IsLocked
+                0x00001a40                XMutex_GetStatus
+                0x00001b38                XMutex_GetUser
+                0x00001c34                XMutex_SetUser
+ .text          0x00001cf8       0x24 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xmutex_sinit.o)
+                0x00001cf8                XMutex_LookupConfig
+ .text          0x00001d1c     0x114c ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(radio_controller.o)
+                0x00001d1c                radio_controller_init
+                0x00001f6c                radio_controller_TxEnable
+                0x00001ff8                radio_controller_RxEnable
+                0x00002084                radio_controller_TxRxDisable
+                0x00002110                radio_controller_SPI_read
+                0x000021cc                radio_controller_SPI_setRegBits
+                0x000023a8                radio_controller_setCenterFrequency
+                0x00002574                radio_controller_setRxHP
+                0x00002624                radio_controller_setCtrlSource
+                0x000026cc                radio_controller_setTxGainTarget
+                0x0000276c                radio_controller_setRadioParam
+                0x00002a38                radio_controller_setRxGainSource
+                0x00002b50                radio_controller_setTxGainSource
+                0x00002c6c                radio_controller_apply_TxDCO_calibration
+                0x00002e30                rc_usleep
+ .text          0x00002e68      0x91c ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(w3_ad_controller.o)
+                0x00002e68                ad_init
+                0x000030d0                ad_spi_read
+                0x000030f8                ad_spi_write
+                0x00003118                ad_set_TxDCO
+                0x000031b0                ad_set_TxGain1
+                0x00003218                ad_set_TxGain2
+                0x00003280                ad_config_filters
+                0x00003320                ad_config_clocks
+                0x000034c0                ad_config_DLL
+                0x00003744                ad_config_power
+ .text          0x00003784      0x518 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(w3_clock_controller.o)
+                0x00003784                clk_init
+                0x00003908                clk_config_outputs
+                0x00003a20                clk_config_input_rf_ref
+                0x00003a7c                clk_config_read_clkmod_status
+                0x00003a88                clk_config_dividers
+                0x00003c50                clk_spi_read
+                0x00003c7c                clk_spi_write
+ .text          0x00003c9c      0x9c0 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(w3_iic_eeprom.o)
+                0x00003c9c                iic_eeprom_trylock
+                0x00003cb4                iic_eeprom_unlock
+                0x00003cc0                w3_eeprom_read_serial_num
+                0x00003d04                w3_eeprom_read_eth_addr
+                0x00003da0                w3_eeprom_read_fpga_dna
+                0x00003df8                iic_eeprom_write_byte_internal
+                0x00003fa0                iic_eeprom_write_byte
+                0x00004004                iic_eeprom_read_byte_internal
+                0x00004168                iic_eeprom_read_fpga_dna
+                0x00004260                iic_eeprom_read_eth_addr
+                0x000043f4                iic_eeprom_read_serial_num
+                0x0000445c                iic_eeprom_init
+                0x000045d4                iic_eeprom_read_byte
+                0x00004638                iic_eeprom_wait_for_rx_ack
+ .text          0x0000465c       0x54 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(print.o)
+                0x0000465c                print
+ .text          0x000046b0       0x48 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xil_assert.o)
+                0x000046b0                Xil_Assert
+                0x000046e8                Xil_AssertSetCallback
+ .text          0x000046f8       0xa8 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/bs/m/le\libgcc.a(udivsi3.o)
+                0x000046f8                __udivsi3
+ .text          0x000047a0       0xbc c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/bs/m/le\libgcc.a(umodsi3.o)
+                0x000047a0                __umodsi3
+ .text          0x0000485c       0x40 ../../wlan_bsp_cpu_low/mb_low/lib\libc.a(lib_a-exit.o)
+                0x0000485c                exit
+ .text          0x0000489c       0xa0 ../../wlan_bsp_cpu_low/mb_low/lib\libc.a(lib_a-memcmp.o)
+                0x0000489c                memcmp
+ .text          0x0000493c      0x1bc ../../wlan_bsp_cpu_low/mb_low/lib\libc.a(lib_a-memcpy.o)
+                0x0000493c                memcpy
+ .text          0x00004af8      0x1e4 ../../wlan_bsp_cpu_low/mb_low/lib\libc.a(lib_a-memset.o)
+                0x00004af8                memset
+ .text          0x00004cdc      0x1dc ../../wlan_bsp_cpu_low/mb_low/lib\libc.a(lib_a-rand.o)
+                0x00004cdc                srand
+                0x00004d9c                rand
+ .text          0x00004eb8       0x5c ../../wlan_bsp_cpu_low/mb_low/lib\libc.a(lib_a-strlen.o)
+                0x00004eb8                strlen
+ .text          0x00004f14      0x2e4 ../../wlan_bsp_cpu_low/mb_low/lib\libc.a(lib_a-__call_atexit.o)
+                0x00004f14                __call_exitprocs
+ .text          0x000051f8       0x58 ../../wlan_bsp_cpu_low/mb_low/lib\libc.a(lib_a-malloc.o)
+                0x000051f8                malloc
+                0x00005224                free
+ .text          0x00005250      0x8b0 ../../wlan_bsp_cpu_low/mb_low/lib\libc.a(lib_a-mallocr.o)
+                0x00005250                _malloc_r
+ .text          0x00005b00       0x10 ../../wlan_bsp_cpu_low/mb_low/lib\libc.a(lib_a-mlock.o)
+                0x00005b00                __malloc_lock
+                0x00005b08                __malloc_unlock
+ .text          0x00005b10       0x5c ../../wlan_bsp_cpu_low/mb_low/lib\libc.a(lib_a-sbrkr.o)
+                0x00005b10                _sbrk_r
+ .text          0x00005b6c      0x430 ../../wlan_bsp_cpu_low/mb_low/lib\libc.a(lib_a-freer.o)
+                0x00005b6c                _malloc_trim_r
+                0x00005cb8                _free_r
+ .text          0x00005f9c       0x64 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(sbrk.o)
+                0x00005f9c                sbrk
+ .text          0x00006000       0x10 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(errno.o)
+                0x00006000                __errno
+ .text          0x00006010       0x70 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/bs/m/le\libgcc.a(_muldi3.o)
+                0x00006010                __muldi3
+ .text          0x00006080       0x4c c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/bs/m/le/crtend.o
+ *(.text.*)
+ .text.wlan_mac_low_send_status
+                0x000060cc       0x54 ./wlan_mac_low_framework/wlan_mac_low.o
+                0x000060cc                wlan_mac_low_send_status
+ .text.set_phy_samp_rate
+                0x00006120      0x540 ./wlan_mac_low_framework/wlan_mac_low.o
+                0x00006120                set_phy_samp_rate
+ .text.wlan_mac_low_init_finish
+                0x00006660       0x40 ./wlan_mac_low_framework/wlan_mac_low.o
+                0x00006660                wlan_mac_low_init_finish
+ .text.wlan_mac_low_send_exception
+                0x000066a0       0x74 ./wlan_mac_low_framework/wlan_mac_low.o
+                0x000066a0                wlan_mac_low_send_exception
+ .text.wlan_mac_low_DSSS_rx_enable
+                0x00006714       0x48 ./wlan_mac_low_framework/wlan_mac_low.o
+                0x00006714                wlan_mac_low_DSSS_rx_enable
+ .text.wlan_mac_low_DSSS_rx_disable
+                0x0000675c       0x24 ./wlan_mac_low_framework/wlan_mac_low.o
+                0x0000675c                wlan_mac_low_DSSS_rx_disable
+ .text.wlan_mac_low_proc_pkt_buf
+                0x00006780      0x2ac ./wlan_mac_low_framework/wlan_mac_low.o
+                0x00006780                wlan_mac_low_proc_pkt_buf
+ .text.wlan_mac_low_frame_ipc_send
+                0x00006a2c       0x38 ./wlan_mac_low_framework/wlan_mac_low.o
+                0x00006a2c                wlan_mac_low_frame_ipc_send
+ .text.wlan_mac_low_set_frame_rx_callback
+                0x00006a64       0x10 ./wlan_mac_low_framework/wlan_mac_low.o
+                0x00006a64                wlan_mac_low_set_frame_rx_callback
+ .text.wlan_mac_low_set_sample_rate_change_callback
+                0x00006a74       0x10 ./wlan_mac_low_framework/wlan_mac_low.o
+                0x00006a74                wlan_mac_low_set_sample_rate_change_callback
+ .text.wlan_mac_low_set_beacon_txrx_config_callback
+                0x00006a84       0x10 ./wlan_mac_low_framework/wlan_mac_low.o
+                0x00006a84                wlan_mac_low_set_beacon_txrx_config_callback
+ .text.wlan_mac_low_set_mactime_change_callback
+                0x00006a94       0x10 ./wlan_mac_low_framework/wlan_mac_low.o
+                0x00006a94                wlan_mac_low_set_mactime_change_callback
+ .text.wlan_mac_low_set_frame_tx_callback
+                0x00006aa4       0x10 ./wlan_mac_low_framework/wlan_mac_low.o
+                0x00006aa4                wlan_mac_low_set_frame_tx_callback
+ .text.wlan_mac_low_set_ipc_low_param_callback
+                0x00006ab4       0x10 ./wlan_mac_low_framework/wlan_mac_low.o
+                0x00006ab4                wlan_mac_low_set_ipc_low_param_callback
+ .text.wlan_mac_low_get_active_channel
+                0x00006ac4       0x10 ./wlan_mac_low_framework/wlan_mac_low.o
+                0x00006ac4                wlan_mac_low_get_active_channel
+ .text.wlan_mac_low_get_current_ctrl_tx_pow
+                0x00006ad4       0x10 ./wlan_mac_low_framework/wlan_mac_low.o
+                0x00006ad4                wlan_mac_low_get_current_ctrl_tx_pow
+ .text.wlan_mac_low_get_current_rx_filter
+                0x00006ae4       0x10 ./wlan_mac_low_framework/wlan_mac_low.o
+                0x00006ae4                wlan_mac_low_get_current_rx_filter
+ .text.wlan_mac_low_get_phy_samp_rate
+                0x00006af4       0x10 ./wlan_mac_low_framework/wlan_mac_low.o
+                0x00006af4                wlan_mac_low_get_phy_samp_rate
+ .text.wlan_mac_low_get_rx_start_timestamp
+                0x00006b04       0x34 ./wlan_mac_low_framework/wlan_mac_low.o
+                0x00006b04                wlan_mac_low_get_rx_start_timestamp
+ .text.wlan_mac_low_get_tx_start_timestamp
+                0x00006b38       0x34 ./wlan_mac_low_framework/wlan_mac_low.o
+                0x00006b38                wlan_mac_low_get_tx_start_timestamp
+ .text.wlan_mac_low_set_nav_check_addr
+                0x00006b6c       0x20 ./wlan_mac_low_framework/wlan_mac_low.o
+                0x00006b6c                wlan_mac_low_set_nav_check_addr
+ .text.wlan_mac_low_calculate_rx_power
+                0x00006b8c       0xc0 ./wlan_mac_low_framework/wlan_mac_low.o
+                0x00006b8c                wlan_mac_low_calculate_rx_power
+ .text.wlan_mac_low_rx_power_to_rssi
+                0x00006c4c       0x60 ./wlan_mac_low_framework/wlan_mac_low.o
+                0x00006c4c                wlan_mac_low_rx_power_to_rssi
+ .text.wlan_mac_low_set_pkt_det_min_power
+                0x00006cac       0x50 ./wlan_mac_low_framework/wlan_mac_low.o
+                0x00006cac                wlan_mac_low_set_pkt_det_min_power
+ .text.wlan_mac_low_lock_empty_rx_pkt_buf
+                0x00006cfc       0xf8 ./wlan_mac_low_framework/wlan_mac_low.o
+                0x00006cfc                wlan_mac_low_lock_empty_rx_pkt_buf
+ .text.wlan_mac_hw_rx_finish
+                0x00006df4       0x7c ./wlan_mac_low_framework/wlan_mac_low.o
+                0x00006df4                wlan_mac_hw_rx_finish
+ .text.wlan_mac_reset_NAV_counter
+                0x00006e70       0x28 ./wlan_mac_low_framework/wlan_mac_low.o
+                0x00006e70                wlan_mac_reset_NAV_counter
+ .text.wlan_mac_low_dbm_to_gain_target
+                0x00006e98       0x40 ./wlan_mac_low_framework/wlan_mac_low.o
+                0x00006e98                wlan_mac_low_dbm_to_gain_target
+ .text.wlan_mac_low_wlan_chan_to_rc_chan
+                0x00006ed8       0x88 ./wlan_mac_low_framework/wlan_mac_low.o
+                0x00006ed8                wlan_mac_low_wlan_chan_to_rc_chan
+ .text.wlan_mac_low_set_radio_channel
+                0x00006f60      0x150 ./wlan_mac_low_framework/wlan_mac_low.o
+                0x00006f60                wlan_mac_low_set_radio_channel
+ .text.wlan_mac_low_process_ipc_msg
+                0x000070b0      0x53c ./wlan_mac_low_framework/wlan_mac_low.o
+                0x000070b0                wlan_mac_low_process_ipc_msg
+ .text.wlan_mac_low_poll_ipc_rx
+                0x000075ec       0x44 ./wlan_mac_low_framework/wlan_mac_low.o
+                0x000075ec                wlan_mac_low_poll_ipc_rx
+ .text.wlan_mac_low_mcs_to_n_dbps
+                0x00007630       0x8c ./wlan_mac_low_framework/wlan_mac_low.o
+                0x00007630                wlan_mac_low_mcs_to_n_dbps
+ .text.wlan_mac_low_mcs_to_ctrl_resp_mcs
+                0x000076bc       0x6c ./wlan_mac_low_framework/wlan_mac_low.o
+                0x000076bc                wlan_mac_low_mcs_to_ctrl_resp_mcs
+ .text.wlan_mac_low_get_unique_seq
+                0x00007728       0x1c ./wlan_mac_low_framework/wlan_mac_low.o
+                0x00007728                wlan_mac_low_get_unique_seq
+ .text.wlan_mac_low_set_unique_seq
+                0x00007744       0x20 ./wlan_mac_low_framework/wlan_mac_low.o
+                0x00007744                wlan_mac_low_set_unique_seq
+ .text.wlan_mac_hw_clear_rx_started
+                0x00007764       0x30 ./wlan_mac_low_framework/wlan_mac_low.o
+                0x00007764                wlan_mac_hw_clear_rx_started
+ .text.wlan_mac_low_poll_frame_rx
+                0x00007794      0x1b8 ./wlan_mac_low_framework/wlan_mac_low.o
+                0x00007794                wlan_mac_low_poll_frame_rx
+ .text.wlan_mac_hw_init
+                0x0000794c       0xfc ./wlan_mac_low_framework/wlan_mac_low.o
+                0x0000794c                wlan_mac_hw_init
+ .text.wlan_mac_low_init
+                0x00007a48      0x2c8 ./wlan_mac_low_framework/wlan_mac_low.o
+                0x00007a48                wlan_mac_low_init
+ .text.w3_node_init
+                0x00007d10      0x2a8 ./wlan_mac_low_framework/wlan_phy_util.o
+                0x00007d10                w3_node_init
+ .text.wlan_radio_init
+                0x00007fb8      0x2ac ./wlan_mac_low_framework/wlan_phy_util.o
+                0x00007fb8                wlan_radio_init
+ .text.wlan_agc_config
+                0x00008264       0x54 ./wlan_mac_low_framework/wlan_phy_util.o
+                0x00008264                wlan_agc_config
+ .text.wlan_rx_config_ant_mode
+                0x000082b8      0x2cc ./wlan_mac_low_framework/wlan_phy_util.o
+                0x000082b8                wlan_rx_config_ant_mode
+ .text.wlan_phy_init
+                0x00008584      0x2a0 ./wlan_mac_low_framework/wlan_phy_util.o
+                0x00008584                wlan_phy_init
+ .text.wlan_ofdm_calc_num_payload_syms
+                0x00008824       0x60 ./wlan_mac_low_framework/wlan_phy_util.o
+                0x00008824                wlan_ofdm_calc_num_payload_syms
+ .text.wlan_ofdm_calc_txtime
+                0x00008884       0x74 ./wlan_mac_low_framework/wlan_phy_util.o
+                0x00008884                wlan_ofdm_calc_txtime
+ .text.write_phy_preamble
+                0x000088f8      0x1ec ./wlan_mac_low_framework/wlan_phy_util.o
+                0x000088f8                write_phy_preamble
+ .text.wlan_null_callback
+                0x00008ae4        0x8 ./wlan_mac_common/wlan_mac_common.o
+                0x00008ae4                wlan_null_callback
+ .text.wlan_verify_channel
+                0x00008aec       0x28 ./wlan_mac_common/wlan_mac_common.o
+                0x00008aec                wlan_verify_channel
+ .text.cpu_error_halt
+                0x00008b14       0x64 ./wlan_mac_common/wlan_mac_common.o
+                0x00008b14                cpu_error_halt
+ .text.init_mac_hw_info
+                0x00008b78       0xb0 ./wlan_mac_common/wlan_mac_common.o
+                0x00008b78                init_mac_hw_info
+ .text.get_mac_hw_info
+                0x00008c28       0x10 ./wlan_mac_common/wlan_mac_common.o
+                0x00008c28                get_mac_hw_info
+ .text.get_mac_hw_addr_wlan
+                0x00008c38       0x10 ./wlan_mac_common/wlan_mac_common.o
+                0x00008c38                get_mac_hw_addr_wlan
+ .text.init_mailbox
+                0x00008c48       0x3c ./wlan_mac_common/wlan_mac_mailbox_util.o
+                0x00008c48                init_mailbox
+ .text.write_mailbox_msg
+                0x00008c84       0x94 ./wlan_mac_common/wlan_mac_mailbox_util.o
+                0x00008c84                write_mailbox_msg
+ .text.read_mailbox_msg
+                0x00008d18      0x120 ./wlan_mac_common/wlan_mac_mailbox_util.o
+                0x00008d18                read_mailbox_msg
+ .text.lock_tx_pkt_buf
+                0x00008e38       0x4c ./wlan_mac_common/wlan_mac_pkt_buf_util.o
+                0x00008e38                lock_tx_pkt_buf
+ .text.lock_rx_pkt_buf
+                0x00008e84       0x4c ./wlan_mac_common/wlan_mac_pkt_buf_util.o
+                0x00008e84                lock_rx_pkt_buf
+ .text.unlock_tx_pkt_buf
+                0x00008ed0       0x70 ./wlan_mac_common/wlan_mac_pkt_buf_util.o
+                0x00008ed0                unlock_tx_pkt_buf
+ .text.force_lock_tx_pkt_buf
+                0x00008f40       0x68 ./wlan_mac_common/wlan_mac_pkt_buf_util.o
+                0x00008f40                force_lock_tx_pkt_buf
+ .text.unlock_rx_pkt_buf
+                0x00008fa8       0x4c ./wlan_mac_common/wlan_mac_pkt_buf_util.o
+                0x00008fa8                unlock_rx_pkt_buf
+ .text.force_lock_rx_pkt_buf
+                0x00008ff4       0x6c ./wlan_mac_common/wlan_mac_pkt_buf_util.o
+                0x00008ff4                force_lock_rx_pkt_buf
+ .text.init_pkt_buf
+                0x00009060       0x88 ./wlan_mac_common/wlan_mac_pkt_buf_util.o
+                0x00009060                init_pkt_buf
+ .text.get_tx_pkt_buf_status
+                0x000090e8       0x4c ./wlan_mac_common/wlan_mac_pkt_buf_util.o
+                0x000090e8                get_tx_pkt_buf_status
+ .text.get_mac_time_usec
+                0x00009134       0x58 ./wlan_mac_common/wlan_mac_time_util.o
+                0x00009134                get_mac_time_usec
+ .text.get_system_time_usec
+                0x0000918c       0x58 ./wlan_mac_common/wlan_mac_time_util.o
+                0x0000918c                get_system_time_usec
+ .text.set_mac_time_usec
+                0x000091e4       0x44 ./wlan_mac_common/wlan_mac_time_util.o
+                0x000091e4                set_mac_time_usec
+ .text.apply_mac_time_delta_usec
+                0x00009228       0x64 ./wlan_mac_common/wlan_mac_time_util.o
+                0x00009228                apply_mac_time_delta_usec
+ .text.usleep   0x0000928c       0x68 ./wlan_mac_common/wlan_mac_time_util.o
+                0x0000928c                usleep
+ .text.set_hex_display_error_status
+                0x000092f4       0x50 ./wlan_mac_common/wlan_mac_userio_util.o
+                0x000092f4                set_hex_display_error_status
+ .text.blink_hex_display
+                0x00009344      0x128 ./wlan_mac_common/wlan_mac_userio_util.o
+                0x00009344                blink_hex_display
+ .text.handle_sample_rate_change
+                0x0000946c      0x27c ./src/wlan_mac_dcf.o
+                0x0000946c                handle_sample_rate_change
+ .text.process_low_param
+                0x000096e8      0x114 ./src/wlan_mac_dcf.o
+                0x000096e8                process_low_param
+ .text.configure_beacon_txrx
+                0x000097fc      0x160 ./src/wlan_mac_dcf.o
+                0x000097fc                configure_beacon_txrx
+ .text.handle_mactime_change
+                0x0000995c       0x74 ./src/wlan_mac_dcf.o
+                0x0000995c                handle_mactime_change
+ .text.reset_cw
+                0x000099d0       0x1c ./src/wlan_mac_dcf.o
+                0x000099d0                reset_cw
+ .text.increment_lrc
+                0x000099ec       0xb8 ./src/wlan_mac_dcf.o
+                0x000099ec                increment_lrc
+ .text.increment_src
+                0x00009aa4       0xb8 ./src/wlan_mac_dcf.o
+                0x00009aa4                increment_src
+ .text.rand_num_slots
+                0x00009b5c       0x74 ./src/wlan_mac_dcf.o
+                0x00009b5c                rand_num_slots
+ .text.wlan_mac_dcf_hw_start_backoff
+                0x00009bd0       0x20 ./src/wlan_mac_dcf.o
+                0x00009bd0                wlan_mac_dcf_hw_start_backoff
+ .text.send_beacon
+                0x00009bf0      0x558 ./src/wlan_mac_dcf.o
+                0x00009bf0                send_beacon
+ .text.poll_tbtt
+                0x0000a148       0xb8 ./src/wlan_mac_dcf.o
+                0x0000a148                poll_tbtt
+ .text.startup.main
+                0x0000a200      0x35c ./src/wlan_mac_dcf.o
+                0x0000a200                main
+ .text.wlan_create_ack_frame
+                0x0000a55c       0x48 ./src/wlan_mac_dcf.o
+                0x0000a55c                wlan_create_ack_frame
+ .text.wlan_create_cts_frame
+                0x0000a5a4       0x48 ./src/wlan_mac_dcf.o
+                0x0000a5a4                wlan_create_cts_frame
+ .text.frame_receive
+                0x0000a5ec      0xccc ./src/wlan_mac_dcf.o
+                0x0000a5ec                frame_receive
+ .text.wlan_create_rts_frame
+                0x0000b2b8       0x78 ./src/wlan_mac_dcf.o
+                0x0000b2b8                wlan_create_rts_frame
+ .text.frame_transmit
+                0x0000b330      0x980 ./src/wlan_mac_dcf.o
+                0x0000b330                frame_transmit
+ *(.gnu.linkonce.t.*)
+
+.init           0x0000bcb0       0x3c
+ *(.init)
+ .init          0x0000bcb0       0x18 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/bs/m/le/crti.o
+                0x0000bcb0                __init
+ .init          0x0000bcc8        0xc c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/bs/m/le/crtbegin.o
+ .init          0x0000bcd4        0xc c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/bs/m/le/crtend.o
+ .init          0x0000bce0        0xc c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/bs/m/le/crtn.o
+
+.fini           0x0000bcec       0x20
+ *(.fini)
+ .fini          0x0000bcec        0x8 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/bs/m/le/crti.o
+                0x0000bcec                __fini
+ .fini          0x0000bcf4        0xc c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/bs/m/le/crtbegin.o
+ .fini          0x0000bd00        0xc c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/bs/m/le/crtn.o
+
+.ctors          0x0000bd0c        0x8
+                0x0000bd0c                __CTOR_LIST__ = .
+                0x0000bd0c                ___CTORS_LIST___ = .
+ *crtbegin.o(.ctors)
+ .ctors         0x0000bd0c        0x4 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/bs/m/le/crtbegin.o
+ *(EXCLUDE_FILE(*crtend.o) .ctors)
+ *(SORT(.ctors.*))
+ *(.ctors)
+ .ctors         0x0000bd10        0x4 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/bs/m/le/crtend.o
+                0x0000bd14                __CTOR_END__ = .
+                0x0000bd14                ___CTORS_END___ = .
+
+.dtors          0x0000bd14        0x8
+                0x0000bd14                __DTOR_LIST__ = .
+                0x0000bd14                ___DTORS_LIST___ = .
+ *crtbegin.o(.dtors)
+ .dtors         0x0000bd14        0x4 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/bs/m/le/crtbegin.o
+ *(EXCLUDE_FILE(*crtend.o) .dtors)
+ *(SORT(.dtors.*))
+ *(.dtors)
+ .dtors         0x0000bd18        0x4 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/bs/m/le/crtend.o
+                0x0000bd18                __DTOR_END__
+                0x0000bd1c                PROVIDE (__DTOR_END__, .)
+                0x0000bd1c                PROVIDE (___DTORS_END___, .)
+
+.rodata         0x0000bd1c     0x1651
+                0x0000bd1c                __rodata_start = .
+ *(.rodata)
+ .rodata        0x0000bd1c      0x1e2 ./wlan_mac_low_framework/wlan_mac_low.o
+ *fill*         0x0000befe        0x2 00
+ .rodata        0x0000bf00      0x330 ./wlan_mac_low_framework/wlan_phy_util.o
+ .rodata        0x0000c230       0x30 ./wlan_mac_common/wlan_mac_common.o
+ .rodata        0x0000c260      0x450 ./src/wlan_mac_dcf.o
+ .rodata        0x0000c6b0      0x164 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xil_printf.o)
+ .rodata        0x0000c814        0x8 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xmbox.o)
+ .rodata        0x0000c81c        0x9 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xmutex.o)
+ *fill*         0x0000c825        0x3 00
+ .rodata        0x0000c828      0x1c6 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(radio_controller.o)
+ *fill*         0x0000c9ee        0x2 00
+ .rodata        0x0000c9f0       0xaa ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(w3_ad_controller.o)
+ *fill*         0x0000ca9a        0x2 00
+ .rodata        0x0000ca9c       0x45 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(w3_clock_controller.o)
+ *fill*         0x0000cae1        0x3 00
+ .rodata        0x0000cae4      0x133 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(w3_iic_eeprom.o)
+ *fill*         0x0000cc17        0x1 00
+ .rodata        0x0000cc18      0x284 ../../wlan_bsp_cpu_low/mb_low/lib\libc.a(lib_a-ctype_.o)
+                0x0000cc18                _ctype_
+ .rodata        0x0000ce9c        0x6 ../../wlan_bsp_cpu_low/mb_low/lib\libc.a(lib_a-impure.o)
+                0x0000ce9c                _global_impure_ptr
+ *(.rodata.*)
+ *fill*         0x0000cea2        0x2 00
+ .rodata.wlan_mac_low_process_ipc_msg
+                0x0000cea4       0x64 ./wlan_mac_low_framework/wlan_mac_low.o
+ .rodata.wlan_mac_low_init
+                0x0000cf08       0x20 ./wlan_mac_low_framework/wlan_mac_low.o
+ .rodata.rssi_lookup_B5
+                0x0000cf28       0x7a ./wlan_mac_low_framework/wlan_mac_low.o
+                0x0000cf28                rssi_lookup_B5
+ *fill*         0x0000cfa2        0x2 00
+ .rodata.rssi_lookup_B24
+                0x0000cfa4       0x7a ./wlan_mac_low_framework/wlan_mac_low.o
+                0x0000cfa4                rssi_lookup_B24
+ *fill*         0x0000d01e        0x2 00
+ .rodata.pow_lookup_B5
+                0x0000d020       0x80 ./wlan_mac_low_framework/wlan_mac_low.o
+                0x0000d020                pow_lookup_B5
+ .rodata.pow_lookup_B24
+                0x0000d0a0       0x80 ./wlan_mac_low_framework/wlan_mac_low.o
+                0x0000d0a0                pow_lookup_B24
+ .rodata.mcs_to_n_dbps_nonht_lut
+                0x0000d120       0x10 ./wlan_mac_low_framework/wlan_mac_low.o
+ .rodata.mcs_to_n_dbps_htmf_lut
+                0x0000d130       0x10 ./wlan_mac_low_framework/wlan_mac_low.o
+ .rodata.CSWTCH.63
+                0x0000d140        0x7 ./wlan_mac_low_framework/wlan_mac_low.o
+ *fill*         0x0000d147        0x1 00
+ .rodata.w3_node_init
+                0x0000d148       0x1c ./wlan_mac_low_framework/wlan_phy_util.o
+ .rodata.wlan_rx_config_ant_mode
+                0x0000d164       0x18 ./wlan_mac_low_framework/wlan_phy_util.o
+ .rodata.ones_in_chars
+                0x0000d17c      0x100 ./wlan_mac_low_framework/wlan_phy_util.o
+                0x0000d17c                ones_in_chars
+ .rodata.CSWTCH.1
+                0x0000d27c       0x30 ./wlan_mac_common/wlan_mac_common.o
+ .rodata.CSWTCH.5
+                0x0000d2ac       0x10 ./wlan_mac_common/wlan_mac_userio_util.o
+ .rodata.process_low_param
+                0x0000d2bc       0x18 ./src/wlan_mac_dcf.o
+ .rodata.frame_transmit
+                0x0000d2d4       0x1c ./src/wlan_mac_dcf.o
+ .rodata.CSWTCH.85
+                0x0000d2f0       0x21 ./src/wlan_mac_dcf.o
+ *fill*         0x0000d311        0x3 00
+ .rodata.CSWTCH.87
+                0x0000d314        0x3 ./src/wlan_mac_dcf.o
+ *fill*         0x0000d317        0x1 00
+ .rodata.CSWTCH.89
+                0x0000d318        0x7 ./src/wlan_mac_dcf.o
+ *fill*         0x0000d31f        0x1 00
+ .rodata.CSWTCH.91
+                0x0000d320       0x21 ./src/wlan_mac_dcf.o
+ *fill*         0x0000d341        0x3 00
+ .rodata.CSWTCH.93
+                0x0000d344        0x7 ./src/wlan_mac_dcf.o
+ *fill*         0x0000d34b        0x1 00
+ .rodata.CSWTCH.95
+                0x0000d34c       0x21 ./src/wlan_mac_dcf.o
+ *(.gnu.linkonce.r.*)
+                0x0000d36d                __rodata_end = .
+
+.rela.dyn       0x0000d370        0x0
+ .rela.text     0x00000000        0x0 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/../../../../microblaze-xilinx-elf/lib/bs/m/le/crt0.o
+ .rela.vectors.sw_exception
+                0x00000000        0x0 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/../../../../microblaze-xilinx-elf/lib/bs/m/le/crt0.o
+ .rela.vectors.interrupt
+                0x00000000        0x0 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/../../../../microblaze-xilinx-elf/lib/bs/m/le/crt0.o
+ .rela.vectors.hw_exception
+                0x00000000        0x0 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/../../../../microblaze-xilinx-elf/lib/bs/m/le/crt0.o
+ .rela.text.wlan_mac_low_send_status
+                0x00000000        0x0 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/../../../../microblaze-xilinx-elf/lib/bs/m/le/crt0.o
+ .rela.text.set_phy_samp_rate
+                0x00000000        0x0 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/../../../../microblaze-xilinx-elf/lib/bs/m/le/crt0.o
+ .rela.text.wlan_mac_low_send_exception
+                0x00000000        0x0 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/../../../../microblaze-xilinx-elf/lib/bs/m/le/crt0.o
+ .rela.text.wlan_mac_low_proc_pkt_buf
+                0x00000000        0x0 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/../../../../microblaze-xilinx-elf/lib/bs/m/le/crt0.o
+ .rela.text.wlan_mac_low_frame_ipc_send
+                0x00000000        0x0 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/../../../../microblaze-xilinx-elf/lib/bs/m/le/crt0.o
+ .rela.text.wlan_mac_low_lock_empty_rx_pkt_buf
+                0x00000000        0x0 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/../../../../microblaze-xilinx-elf/lib/bs/m/le/crt0.o
+ .rela.text.wlan_mac_hw_rx_finish
+                0x00000000        0x0 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/../../../../microblaze-xilinx-elf/lib/bs/m/le/crt0.o
+ .rela.text.wlan_mac_low_set_radio_channel
+                0x00000000        0x0 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/../../../../microblaze-xilinx-elf/lib/bs/m/le/crt0.o
+ .rela.text.wlan_mac_low_process_ipc_msg
+                0x00000000        0x0 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/../../../../microblaze-xilinx-elf/lib/bs/m/le/crt0.o
+ .rela.text.wlan_mac_low_poll_ipc_rx
+                0x00000000        0x0 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/../../../../microblaze-xilinx-elf/lib/bs/m/le/crt0.o
+ .rela.text.wlan_mac_low_mcs_to_n_dbps
+                0x00000000        0x0 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/../../../../microblaze-xilinx-elf/lib/bs/m/le/crt0.o
+ .rela.text.wlan_mac_low_poll_frame_rx
+                0x00000000        0x0 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/../../../../microblaze-xilinx-elf/lib/bs/m/le/crt0.o
+ .rela.text.wlan_mac_low_init
+                0x00000000        0x0 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/../../../../microblaze-xilinx-elf/lib/bs/m/le/crt0.o
+ .rela.text.w3_node_init
+                0x00000000        0x0 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/../../../../microblaze-xilinx-elf/lib/bs/m/le/crt0.o
+ .rela.text.wlan_radio_init
+                0x00000000        0x0 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/../../../../microblaze-xilinx-elf/lib/bs/m/le/crt0.o
+ .rela.text.wlan_rx_config_ant_mode
+                0x00000000        0x0 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/../../../../microblaze-xilinx-elf/lib/bs/m/le/crt0.o
+ .rela.text.write_phy_preamble
+                0x00000000        0x0 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/../../../../microblaze-xilinx-elf/lib/bs/m/le/crt0.o
+ .rela.text.cpu_error_halt
+                0x00000000        0x0 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/../../../../microblaze-xilinx-elf/lib/bs/m/le/crt0.o
+ .rela.text.init_mac_hw_info
+                0x00000000        0x0 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/../../../../microblaze-xilinx-elf/lib/bs/m/le/crt0.o
+ .rela.text.init_mailbox
+                0x00000000        0x0 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/../../../../microblaze-xilinx-elf/lib/bs/m/le/crt0.o
+ .rela.text.write_mailbox_msg
+                0x00000000        0x0 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/../../../../microblaze-xilinx-elf/lib/bs/m/le/crt0.o
+ .rela.text.ipc_mailbox_read_isempty
+                0x00000000        0x0 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/../../../../microblaze-xilinx-elf/lib/bs/m/le/crt0.o
+ .rela.text.read_mailbox_msg
+                0x00000000        0x0 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/../../../../microblaze-xilinx-elf/lib/bs/m/le/crt0.o
+ .rela.text.lock_tx_pkt_buf
+                0x00000000        0x0 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/../../../../microblaze-xilinx-elf/lib/bs/m/le/crt0.o
+ .rela.text.lock_rx_pkt_buf
+                0x00000000        0x0 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/../../../../microblaze-xilinx-elf/lib/bs/m/le/crt0.o
+ .rela.text.unlock_tx_pkt_buf
+                0x00000000        0x0 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/../../../../microblaze-xilinx-elf/lib/bs/m/le/crt0.o
+ .rela.text.unlock_rx_pkt_buf
+                0x00000000        0x0 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/../../../../microblaze-xilinx-elf/lib/bs/m/le/crt0.o
+ .rela.text.init_pkt_buf
+                0x00000000        0x0 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/../../../../microblaze-xilinx-elf/lib/bs/m/le/crt0.o
+ .rela.text.get_tx_pkt_buf_status
+                0x00000000        0x0 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/../../../../microblaze-xilinx-elf/lib/bs/m/le/crt0.o
+ .rela.text.get_rx_pkt_buf_status
+                0x00000000        0x0 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/../../../../microblaze-xilinx-elf/lib/bs/m/le/crt0.o
+ .rela.text.process_low_param
+                0x00000000        0x0 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/../../../../microblaze-xilinx-elf/lib/bs/m/le/crt0.o
+ .rela.text.configure_beacon_txrx
+                0x00000000        0x0 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/../../../../microblaze-xilinx-elf/lib/bs/m/le/crt0.o
+ .rela.text.handle_mactime_change
+                0x00000000        0x0 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/../../../../microblaze-xilinx-elf/lib/bs/m/le/crt0.o
+ .rela.text.rand_num_slots
+                0x00000000        0x0 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/../../../../microblaze-xilinx-elf/lib/bs/m/le/crt0.o
+ .rela.text.send_beacon
+                0x00000000        0x0 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/../../../../microblaze-xilinx-elf/lib/bs/m/le/crt0.o
+ .rela.text.poll_tbtt
+                0x00000000        0x0 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/../../../../microblaze-xilinx-elf/lib/bs/m/le/crt0.o
+ .rela.text.startup.main
+                0x00000000        0x0 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/../../../../microblaze-xilinx-elf/lib/bs/m/le/crt0.o
+ .rela.text.frame_receive
+                0x00000000        0x0 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/../../../../microblaze-xilinx-elf/lib/bs/m/le/crt0.o
+ .rela.text.frame_transmit
+                0x00000000        0x0 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/../../../../microblaze-xilinx-elf/lib/bs/m/le/crt0.o
+ .rela.data     0x00000000        0x0 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/../../../../microblaze-xilinx-elf/lib/bs/m/le/crt0.o
+
+.sdata2         0x0000d36d        0x6
+                0x0000d370                . = ALIGN (0x8)
+ *fill*         0x0000d36d        0x3 00
+                0x0000d370                __sdata2_start = .
+ *(.sdata2)
+ *(.sdata2.*)
+ *(.gnu.linkonce.s2.*)
+                0x0000d370                . = ALIGN (0x8)
+                0x0000d370                __sdata2_end = .
+
+.sbss2          0x0000d373        0x0
+                0x0000d373                __sbss2_start = .
+ *(.sbss2)
+ *(.sbss2.*)
+ *(.gnu.linkonce.sb2.*)
+                0x0000d373                __sbss2_end = .
+
+.data           0x0000d374      0x528
+                0x0000d374                . = ALIGN (0x4)
+                0x0000d374                __data_start = .
+ *(.data)
+ .data          0x0000d374        0x4 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xil_assert.o)
+                0x0000d374                Xil_AssertWait
+ .data          0x0000d378        0xc ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xmbox_g.o)
+                0x0000d378                XMbox_ConfigTable
+ .data          0x0000d384       0x10 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xmutex_g.o)
+                0x0000d384                XMutex_ConfigTable
+ .data          0x0000d394        0x4 ../../wlan_bsp_cpu_low/mb_low/lib\libc.a(lib_a-ctype_.o)
+                0x0000d394                __ctype_ptr__
+ .data          0x0000d398       0xf4 ../../wlan_bsp_cpu_low/mb_low/lib\libc.a(lib_a-impure.o)
+                0x0000d398                _impure_ptr
+ .data          0x0000d48c      0x410 ../../wlan_bsp_cpu_low/mb_low/lib\libc.a(lib_a-mallocr.o)
+                0x0000d48c                __malloc_sbrk_base
+                0x0000d490                __malloc_trim_threshold
+                0x0000d494                __malloc_av_
+ *(.data.*)
+ *(.gnu.linkonce.d.*)
+                0x0000d89c                __data_end = .
+
+.got
+ *(.got)
+
+.got1
+ *(.got1)
+
+.got2
+ *(.got2)
+
+.eh_frame       0x0000d89c        0x0
+ *(.eh_frame)
+ .eh_frame      0x0000d89c        0x0 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/bs/m/le/crtbegin.o
+
+.jcr            0x0000d89c        0x0
+ *(.jcr)
+ .jcr           0x0000d89c        0x0 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/bs/m/le/crtbegin.o
+
+.gcc_except_table
+ *(.gcc_except_table)
+
+.sdata          0x0000d89c        0x4
+                0x0000d8a0                . = ALIGN (0x8)
+ *fill*         0x0000d89c        0x4 00
+                0x0000d8a0                __sdata_start = .
+ *(.sdata)
+ *(.sdata.*)
+ *(.gnu.linkonce.s.*)
+                0x0000d8a0                __sdata_end = .
+
+.sbss           0x0000d8a0        0x0
+                0x0000d8a0                . = ALIGN (0x4)
+                0x0000d8a0                __sbss_start = .
+ *(.sbss)
+ *(.sbss.*)
+ *(.gnu.linkonce.sb.*)
+                0x0000d8a0                . = ALIGN (0x8)
+                0x0000d8a0                __sbss_end = .
+
+.tdata          0x0000d8a0        0x0
+                0x0000d8a0                __tdata_start = .
+ *(.tdata)
+ *(.tdata.*)
+ *(.gnu.linkonce.td.*)
+                0x0000d8a0                __tdata_end = .
+
+.tbss           0x0000d8a0        0x0
+                0x0000d8a0                __tbss_start = .
+ *(.tbss)
+ *(.tbss.*)
+ *(.gnu.linkonce.tb.*)
+                0x0000d8a0                __tbss_end = .
+
+.bss            0x0000d8a0      0xb5c
+                0x0000d8a0                . = ALIGN (0x4)
+                0x0000d8a0                __bss_start = .
+ *(.bss)
+ .bss           0x0000d8a0       0x20 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/bs/m/le/crtbegin.o
+ .bss           0x0000d8c0        0x4 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xil_assert.o)
+ .bss           0x0000d8c4       0x34 ../../wlan_bsp_cpu_low/mb_low/lib\libc.a(lib_a-mallocr.o)
+                0x0000d8c4                __malloc_current_mallinfo
+                0x0000d8ec                __malloc_max_total_mem
+                0x0000d8f0                __malloc_max_sbrked_mem
+                0x0000d8f4                __malloc_top_pad
+ .bss           0x0000d8f8        0x4 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(sbrk.o)
+ *(.bss.*)
+ .bss.unique_seq
+                0x0000d8fc        0x8 ./wlan_mac_low_framework/wlan_mac_low.o
+ .bss.pkt_buf_pending_tx
+                0x0000d904        0x1 ./wlan_mac_low_framework/wlan_mac_low.o
+ .bss.allow_new_mpdu_tx
+                0x0000d905        0x1 ./wlan_mac_low_framework/wlan_mac_low.o
+ .bss.rx_pkt_buf
+                0x0000d906        0x1 ./wlan_mac_low_framework/wlan_mac_low.o
+ *fill*         0x0000d907        0x1 00
+ .bss.mac_param_rx_filter
+                0x0000d908        0x4 ./wlan_mac_low_framework/wlan_mac_low.o
+ .bss.mac_param_ctrl_tx_pow
+                0x0000d90c        0x1 ./wlan_mac_low_framework/wlan_mac_low.o
+ .bss.mac_param_dsss_en
+                0x0000d90d        0x1 ./wlan_mac_low_framework/wlan_mac_low.o
+ .bss.mac_param_band
+                0x0000d90e        0x1 ./wlan_mac_low_framework/wlan_mac_low.o
+ *fill*         0x0000d90f        0x1 00
+ .bss.mac_param_chan
+                0x0000d910        0x4 ./wlan_mac_low_framework/wlan_mac_low.o
+ .bss.gl_phy_samp_rate
+                0x0000d914        0x4 ./wlan_mac_low_framework/wlan_mac_low.o
+ .bss.cpu_low_status
+                0x0000d918        0x4 ./wlan_mac_low_framework/wlan_mac_low.o
+ .bss.cpu_low_type
+                0x0000d91c        0x4 ./wlan_mac_low_framework/wlan_mac_low.o
+ .bss.frame_rx_callback
+                0x0000d920        0x4 ./wlan_mac_low_framework/wlan_mac_low.o
+ .bss.frame_tx_callback
+                0x0000d924        0x4 ./wlan_mac_low_framework/wlan_mac_low.o
+ .bss.ipc_low_param_callback
+                0x0000d928        0x4 ./wlan_mac_low_framework/wlan_mac_low.o
+ .bss.beacon_txrx_config_callback
+                0x0000d92c        0x4 ./wlan_mac_low_framework/wlan_mac_low.o
+ .bss.mactime_change_callback
+                0x0000d930        0x4 ./wlan_mac_low_framework/wlan_mac_low.o
+ .bss.sample_rate_change_callback
+                0x0000d934        0x4 ./wlan_mac_low_framework/wlan_mac_low.o
+ .bss.ipc_msg_from_high
+                0x0000d938        0x8 ./wlan_mac_low_framework/wlan_mac_low.o
+ .bss.ipc_msg_from_high_payload
+                0x0000d940      0x190 ./wlan_mac_low_framework/wlan_mac_low.o
+ .bss.low_tx_details
+                0x0000dad0      0x898 ./wlan_mac_low_framework/wlan_mac_low.o
+ .bss.mac_hw_info
+                0x0000e368       0x18 ./wlan_mac_common/wlan_mac_common.o
+ .bss.ipc_mailbox
+                0x0000e380       0x10 ./wlan_mac_common/wlan_mac_mailbox_util.o
+ .bss.pkt_buf_mutex
+                0x0000e390       0x14 ./wlan_mac_common/wlan_mac_pkt_buf_util.o
+ .bss.gl_waiting_for_response
+                0x0000e3a4        0x1 ./src/wlan_mac_dcf.o
+ *fill*         0x0000e3a5        0x3 00
+ .bss.gl_dot11LongRetryLimit
+                0x0000e3a8        0x4 ./src/wlan_mac_dcf.o
+ .bss.gl_dot11ShortRetryLimit
+                0x0000e3ac        0x4 ./src/wlan_mac_dcf.o
+ .bss.gl_mpdu_pkt_buf
+                0x0000e3b0        0x1 ./src/wlan_mac_dcf.o
+ *fill*         0x0000e3b1        0x3 00
+ .bss.gl_eeprom_addr
+                0x0000e3b4        0x6 ./src/wlan_mac_dcf.o
+ *fill*         0x0000e3ba        0x2 00
+ .bss.gl_dot11RTSThreshold
+                0x0000e3bc        0x4 ./src/wlan_mac_dcf.o
+ .bss.gl_cw_exp_max
+                0x0000e3c0        0x1 ./src/wlan_mac_dcf.o
+ .bss.gl_cw_exp_min
+                0x0000e3c1        0x1 ./src/wlan_mac_dcf.o
+ *fill*         0x0000e3c2        0x2 00
+ .bss.gl_cw_exp
+                0x0000e3c4        0x4 ./src/wlan_mac_dcf.o
+ .bss.gl_stationLongRetryCount
+                0x0000e3c8        0x4 ./src/wlan_mac_dcf.o
+ .bss.gl_stationShortRetryCount
+                0x0000e3cc        0x4 ./src/wlan_mac_dcf.o
+ .bss.gl_mac_timing_values
+                0x0000e3d0        0xc ./src/wlan_mac_dcf.o
+ *(.gnu.linkonce.b.*)
+ *(COMMON)
+ COMMON         0x0000e3dc       0x16 ./src/wlan_mac_dcf.o
+                0x0000e3dc                gl_beacon_txrx_configure
+                0x0000e3f0                gl_red_led_index
+                0x0000e3f1                gl_green_led_index
+ *fill*         0x0000e3f2        0x2 00
+ COMMON         0x0000e3f4        0x4 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xil_assert.o)
+                0x0000e3f4                Xil_AssertStatus
+ COMMON         0x0000e3f8        0x4 ../../wlan_bsp_cpu_low/mb_low/lib\libc.a(lib_a-reent.o)
+                0x0000e3f8                errno
+                0x0000e3fc                . = ALIGN (0x4)
+                0x0000e3fc                __bss_end = .
+                0x0000d8a0                _SDA_BASE_ = (__sdata_start + ((__sbss_end - __sdata_start) / 0x2))
+                0x0000d371                _SDA2_BASE_ = (__sdata2_start + ((__sbss2_end - __sdata2_start) / 0x2))
+
+.heap           0x0000e3fc      0x104
+                0x0000e400                . = ALIGN (0x8)
+ *fill*         0x0000e3fc        0x4 00
+                0x0000e400                _heap = .
+                0x0000e400                _heap_start = .
+                0x0000e500                . = (. + _HEAP_SIZE)
+ *fill*         0x0000e400      0x100 00
+                0x0000e500                _heap_end = .
+
+.stack          0x0000e500      0x400
+                0x0000e500                _stack_end = .
+                0x0000e900                . = (. + _STACK_SIZE)
+ *fill*         0x0000e500      0x400 00
+                0x0000e900                . = ALIGN (0x8)
+                0x0000e900                _stack = .
+                0x0000e900                __stack = _stack
+                0x0000e900                _end = .
+LOAD ./wlan_mac_low_framework/wlan_mac_low.o
+LOAD ./wlan_mac_low_framework/wlan_phy_util.o
+LOAD ./wlan_mac_common/wlan_mac_common.o
+LOAD ./wlan_mac_common/wlan_mac_mailbox_util.o
+LOAD ./wlan_mac_common/wlan_mac_pkt_buf_util.o
+LOAD ./wlan_mac_common/wlan_mac_sysmon_util.o
+LOAD ./wlan_mac_common/wlan_mac_time_util.o
+LOAD ./wlan_mac_common/wlan_mac_userio_util.o
+LOAD ./src/wlan_mac_dcf.o
+START GROUP
+LOAD ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a
+LOAD c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/bs/m/le\libgcc.a
+LOAD ../../wlan_bsp_cpu_low/mb_low/lib\libc.a
+END GROUP
+LOAD c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/bs/m/le\libgcc.a
+START GROUP
+LOAD ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a
+LOAD ../../wlan_bsp_cpu_low/mb_low/lib\libc.a
+LOAD ../../wlan_bsp_cpu_low/mb_low/lib\libm.a
+END GROUP
+LOAD c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/bs/m/le\libgcc.a
+LOAD c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/bs/m/le/crtend.o
+LOAD c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/bs/m/le/crtn.o
+OUTPUT(wlan_mac_low_dcf.elf elf32-microblazeel)
+
+.debug_line     0x00000000     0x9230
+ .debug_line    0x00000000       0xaa c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/../../../../microblaze-xilinx-elf/lib/bs/m/le/crt0.o
+ .debug_line    0x000000aa       0x75 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/bs/m/le/crti.o
+ .debug_line    0x0000011f       0x86 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/../../../../microblaze-xilinx-elf/lib/bs/m/le/crtinit.o
+ .debug_line    0x000001a5     0x1583 ./wlan_mac_low_framework/wlan_mac_low.o
+ .debug_line    0x00001728      0xa56 ./wlan_mac_low_framework/wlan_phy_util.o
+ .debug_line    0x0000217e      0x2e9 ./wlan_mac_common/wlan_mac_common.o
+ .debug_line    0x00002467      0x34c ./wlan_mac_common/wlan_mac_mailbox_util.o
+ .debug_line    0x000027b3      0x41b ./wlan_mac_common/wlan_mac_pkt_buf_util.o
+ .debug_line    0x00002bce      0x234 ./wlan_mac_common/wlan_mac_time_util.o
+ .debug_line    0x00002e02      0x4e5 ./wlan_mac_common/wlan_mac_userio_util.o
+ .debug_line    0x000032e7     0x1c8c ./src/wlan_mac_dcf.o
+ .debug_line    0x00004f73      0x565 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xil_printf.o)
+ .debug_line    0x000054d8       0x6c ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(_program_clean.o)
+ .debug_line    0x00005544       0x6b ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(_program_init.o)
+ .debug_line    0x000055af       0x52 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(microblaze_enable_exceptions.o)
+ .debug_line    0x00005601       0x59 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(outbyte.o)
+ .debug_line    0x0000565a       0xa5 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xuartlite_l.o)
+ .debug_line    0x000056ff      0x9f5 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xmbox.o)
+ .debug_line    0x000060f4       0x83 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xmbox_sinit.o)
+ .debug_line    0x00006177      0x4a7 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xmutex.o)
+ .debug_line    0x0000661e       0x85 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xmutex_sinit.o)
+ .debug_line    0x000066a3      0xc81 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(radio_controller.o)
+ .debug_line    0x00007324      0xb80 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(w3_ad_controller.o)
+ .debug_line    0x00007ea4      0x4bb ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(w3_clock_controller.o)
+ .debug_line    0x0000835f      0x89d ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(w3_iic_eeprom.o)
+ .debug_line    0x00008bfc       0x8a ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(print.o)
+ .debug_line    0x00008c86       0x94 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xil_assert.o)
+ .debug_line    0x00008d1a       0x5f ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xmbox_g.o)
+ .debug_line    0x00008d79       0x61 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xmutex_g.o)
+ .debug_line    0x00008dda       0x91 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/bs/m/le\libgcc.a(udivsi3.o)
+ .debug_line    0x00008e6b       0x95 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/bs/m/le\libgcc.a(umodsi3.o)
+ .debug_line    0x00008f00       0xb3 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(sbrk.o)
+ .debug_line    0x00008fb3      0x15f ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(errno.o)
+ .debug_line    0x00009112       0xab c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/bs/m/le\libgcc.a(_muldi3.o)
+ .debug_line    0x000091bd       0x73 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/bs/m/le/crtn.o
+
+.debug_info     0x00000000     0xa31a
+ .debug_info    0x00000000       0xb2 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/../../../../microblaze-xilinx-elf/lib/bs/m/le/crt0.o
+ .debug_info    0x000000b2       0x80 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/bs/m/le/crti.o
+ .debug_info    0x00000132       0xb9 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/../../../../microblaze-xilinx-elf/lib/bs/m/le/crtinit.o
+ .debug_info    0x000001eb     0x1384 ./wlan_mac_low_framework/wlan_mac_low.o
+ .debug_info    0x0000156f      0x3d0 ./wlan_mac_low_framework/wlan_phy_util.o
+ .debug_info    0x0000193f      0x20a ./wlan_mac_common/wlan_mac_common.o
+ .debug_info    0x00001b49      0x304 ./wlan_mac_common/wlan_mac_mailbox_util.o
+ .debug_info    0x00001e4d      0x396 ./wlan_mac_common/wlan_mac_pkt_buf_util.o
+ .debug_info    0x000021e3      0x1b5 ./wlan_mac_common/wlan_mac_time_util.o
+ .debug_info    0x00002398      0x33c ./wlan_mac_common/wlan_mac_userio_util.o
+ .debug_info    0x000026d4     0x157e ./src/wlan_mac_dcf.o
+ .debug_info    0x00003c52      0x406 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xil_printf.o)
+ .debug_info    0x00004058       0xc0 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(_program_clean.o)
+ .debug_info    0x00004118       0xbf ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(_program_init.o)
+ .debug_info    0x000041d7       0xe9 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(microblaze_enable_exceptions.o)
+ .debug_info    0x000042c0       0x96 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(outbyte.o)
+ .debug_info    0x00004356       0xe1 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xuartlite_l.o)
+ .debug_info    0x00004437      0x6d5 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xmbox.o)
+ .debug_info    0x00004b0c      0x180 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xmbox_sinit.o)
+ .debug_info    0x00004c8c      0x40e ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xmutex.o)
+ .debug_info    0x0000509a      0x172 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xmutex_sinit.o)
+ .debug_info    0x0000520c      0x893 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(radio_controller.o)
+ .debug_info    0x00005a9f     0x1b67 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(w3_ad_controller.o)
+ .debug_info    0x00007606     0x13ad ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(w3_clock_controller.o)
+ .debug_info    0x000089b3      0x7c5 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(w3_iic_eeprom.o)
+ .debug_info    0x00009178       0x78 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(print.o)
+ .debug_info    0x000091f0      0x139 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xil_assert.o)
+ .debug_info    0x00009329      0x130 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xmbox_g.o)
+ .debug_info    0x00009459      0x122 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xmutex_g.o)
+ .debug_info    0x0000957b       0xad c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/bs/m/le\libgcc.a(udivsi3.o)
+ .debug_info    0x00009628       0xad c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/bs/m/le\libgcc.a(umodsi3.o)
+ .debug_info    0x000096d5      0x101 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(sbrk.o)
+ .debug_info    0x000097d6      0x8cf ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(errno.o)
+ .debug_info    0x0000a0a5      0x1f5 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/bs/m/le\libgcc.a(_muldi3.o)
+ .debug_info    0x0000a29a       0x80 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/bs/m/le/crtn.o
+
+.debug_abbrev   0x00000000     0x2297
+ .debug_abbrev  0x00000000       0x12 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/../../../../microblaze-xilinx-elf/lib/bs/m/le/crt0.o
+ .debug_abbrev  0x00000012       0x12 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/bs/m/le/crti.o
+ .debug_abbrev  0x00000024       0x14 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/../../../../microblaze-xilinx-elf/lib/bs/m/le/crtinit.o
+ .debug_abbrev  0x00000038      0x30d ./wlan_mac_low_framework/wlan_mac_low.o
+ .debug_abbrev  0x00000345      0x1a0 ./wlan_mac_low_framework/wlan_phy_util.o
+ .debug_abbrev  0x000004e5      0x109 ./wlan_mac_common/wlan_mac_common.o
+ .debug_abbrev  0x000005ee      0x141 ./wlan_mac_common/wlan_mac_mailbox_util.o
+ .debug_abbrev  0x0000072f       0xd7 ./wlan_mac_common/wlan_mac_pkt_buf_util.o
+ .debug_abbrev  0x00000806       0xdc ./wlan_mac_common/wlan_mac_time_util.o
+ .debug_abbrev  0x000008e2      0x167 ./wlan_mac_common/wlan_mac_userio_util.o
+ .debug_abbrev  0x00000a49      0x30f ./src/wlan_mac_dcf.o
+ .debug_abbrev  0x00000d58      0x1f8 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xil_printf.o)
+ .debug_abbrev  0x00000f50       0x14 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(_program_clean.o)
+ .debug_abbrev  0x00000f64       0x14 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(_program_init.o)
+ .debug_abbrev  0x00000f78       0x14 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(microblaze_enable_exceptions.o)
+ .debug_abbrev  0x00000f8c       0x4e ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(outbyte.o)
+ .debug_abbrev  0x00000fda       0x74 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xuartlite_l.o)
+ .debug_abbrev  0x0000104e      0x144 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xmbox.o)
+ .debug_abbrev  0x00001192       0xce ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xmbox_sinit.o)
+ .debug_abbrev  0x00001260      0x125 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xmutex.o)
+ .debug_abbrev  0x00001385       0xce ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xmutex_sinit.o)
+ .debug_abbrev  0x00001453      0x252 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(radio_controller.o)
+ .debug_abbrev  0x000016a5      0x253 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(w3_ad_controller.o)
+ .debug_abbrev  0x000018f8      0x21d ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(w3_clock_controller.o)
+ .debug_abbrev  0x00001b15      0x22f ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(w3_iic_eeprom.o)
+ .debug_abbrev  0x00001d44       0x76 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(print.o)
+ .debug_abbrev  0x00001dba       0xd4 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xil_assert.o)
+ .debug_abbrev  0x00001e8e       0x83 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xmbox_g.o)
+ .debug_abbrev  0x00001f11       0x83 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xmutex_g.o)
+ .debug_abbrev  0x00001f94       0x14 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/bs/m/le\libgcc.a(udivsi3.o)
+ .debug_abbrev  0x00001fa8       0x14 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/bs/m/le\libgcc.a(umodsi3.o)
+ .debug_abbrev  0x00001fbc       0x96 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(sbrk.o)
+ .debug_abbrev  0x00002052      0x147 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(errno.o)
+ .debug_abbrev  0x00002199       0xec c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/bs/m/le\libgcc.a(_muldi3.o)
+ .debug_abbrev  0x00002285       0x12 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/bs/m/le/crtn.o
+
+.debug_aranges  0x00000000      0x770
+ .debug_aranges
+                0x00000000       0x40 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/../../../../microblaze-xilinx-elf/lib/bs/m/le/crt0.o
+ .debug_aranges
+                0x00000040       0x28 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/bs/m/le/crti.o
+ .debug_aranges
+                0x00000068       0x20 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/../../../../microblaze-xilinx-elf/lib/bs/m/le/crtinit.o
+ .debug_aranges
+                0x00000088      0x170 ./wlan_mac_low_framework/wlan_mac_low.o
+ .debug_aranges
+                0x000001f8       0x60 ./wlan_mac_low_framework/wlan_phy_util.o
+ .debug_aranges
+                0x00000258       0x50 ./wlan_mac_common/wlan_mac_common.o
+ .debug_aranges
+                0x000002a8       0x40 ./wlan_mac_common/wlan_mac_mailbox_util.o
+ .debug_aranges
+                0x000002e8       0x60 ./wlan_mac_common/wlan_mac_pkt_buf_util.o
+ .debug_aranges
+                0x00000348       0x40 ./wlan_mac_common/wlan_mac_time_util.o
+ .debug_aranges
+                0x00000388       0x70 ./wlan_mac_common/wlan_mac_userio_util.o
+ .debug_aranges
+                0x000003f8       0xb0 ./src/wlan_mac_dcf.o
+ .debug_aranges
+                0x000004a8       0x20 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xil_printf.o)
+ .debug_aranges
+                0x000004c8       0x20 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(_program_clean.o)
+ .debug_aranges
+                0x000004e8       0x20 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(_program_init.o)
+ .debug_aranges
+                0x00000508       0x20 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(microblaze_enable_exceptions.o)
+ .debug_aranges
+                0x00000528       0x20 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(outbyte.o)
+ .debug_aranges
+                0x00000548       0x20 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xuartlite_l.o)
+ .debug_aranges
+                0x00000568       0x20 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xmbox.o)
+ .debug_aranges
+                0x00000588       0x20 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xmbox_sinit.o)
+ .debug_aranges
+                0x000005a8       0x20 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xmutex.o)
+ .debug_aranges
+                0x000005c8       0x20 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xmutex_sinit.o)
+ .debug_aranges
+                0x000005e8       0x20 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(radio_controller.o)
+ .debug_aranges
+                0x00000608       0x20 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(w3_ad_controller.o)
+ .debug_aranges
+                0x00000628       0x20 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(w3_clock_controller.o)
+ .debug_aranges
+                0x00000648       0x20 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(w3_iic_eeprom.o)
+ .debug_aranges
+                0x00000668       0x20 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(print.o)
+ .debug_aranges
+                0x00000688       0x20 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xil_assert.o)
+ .debug_aranges
+                0x000006a8       0x20 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/bs/m/le\libgcc.a(udivsi3.o)
+ .debug_aranges
+                0x000006c8       0x20 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/bs/m/le\libgcc.a(umodsi3.o)
+ .debug_aranges
+                0x000006e8       0x20 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(sbrk.o)
+ .debug_aranges
+                0x00000708       0x20 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(errno.o)
+ .debug_aranges
+                0x00000728       0x20 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/bs/m/le\libgcc.a(_muldi3.o)
+ .debug_aranges
+                0x00000748       0x28 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/bs/m/le/crtn.o
+
+.debug_ranges   0x00000000      0x938
+ .debug_ranges  0x00000000       0x38 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/../../../../microblaze-xilinx-elf/lib/bs/m/le/crt0.o
+ .debug_ranges  0x00000038       0x20 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/bs/m/le/crti.o
+ .debug_ranges  0x00000058      0x160 ./wlan_mac_low_framework/wlan_mac_low.o
+ .debug_ranges  0x000001b8       0x50 ./wlan_mac_low_framework/wlan_phy_util.o
+ .debug_ranges  0x00000208       0x40 ./wlan_mac_common/wlan_mac_common.o
+ .debug_ranges  0x00000248       0x30 ./wlan_mac_common/wlan_mac_mailbox_util.o
+ .debug_ranges  0x00000278       0x50 ./wlan_mac_common/wlan_mac_pkt_buf_util.o
+ .debug_ranges  0x000002c8       0x30 ./wlan_mac_common/wlan_mac_time_util.o
+ .debug_ranges  0x000002f8       0x60 ./wlan_mac_common/wlan_mac_userio_util.o
+ .debug_ranges  0x00000358       0xa0 ./src/wlan_mac_dcf.o
+ .debug_ranges  0x000003f8       0x30 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xil_printf.o)
+ .debug_ranges  0x00000428       0x60 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(radio_controller.o)
+ .debug_ranges  0x00000488      0x360 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(w3_ad_controller.o)
+ .debug_ranges  0x000007e8       0x90 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(w3_clock_controller.o)
+ .debug_ranges  0x00000878       0x60 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(w3_iic_eeprom.o)
+ .debug_ranges  0x000008d8       0x40 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/bs/m/le\libgcc.a(_muldi3.o)
+ .debug_ranges  0x00000918       0x20 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/bs/m/le/crtn.o
+
+.debug_frame    0x00000000     0x1200
+ .debug_frame   0x00000000      0x378 ./wlan_mac_low_framework/wlan_mac_low.o
+ .debug_frame   0x00000378       0xf8 ./wlan_mac_low_framework/wlan_phy_util.o
+ .debug_frame   0x00000470       0x94 ./wlan_mac_common/wlan_mac_common.o
+ .debug_frame   0x00000504       0x94 ./wlan_mac_common/wlan_mac_mailbox_util.o
+ .debug_frame   0x00000598       0xec ./wlan_mac_common/wlan_mac_pkt_buf_util.o
+ .debug_frame   0x00000684       0x78 ./wlan_mac_common/wlan_mac_time_util.o
+ .debug_frame   0x000006fc       0xd4 ./wlan_mac_common/wlan_mac_userio_util.o
+ .debug_frame   0x000007d0      0x1d4 ./src/wlan_mac_dcf.o
+ .debug_frame   0x000009a4       0x78 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xil_printf.o)
+ .debug_frame   0x00000a1c       0x28 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(outbyte.o)
+ .debug_frame   0x00000a44       0x30 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xuartlite_l.o)
+ .debug_frame   0x00000a74      0x184 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xmbox.o)
+ .debug_frame   0x00000bf8       0x20 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xmbox_sinit.o)
+ .debug_frame   0x00000c18       0xd4 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xmutex.o)
+ .debug_frame   0x00000cec       0x20 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xmutex_sinit.o)
+ .debug_frame   0x00000d0c      0x164 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(radio_controller.o)
+ .debug_frame   0x00000e70       0xc8 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(w3_ad_controller.o)
+ .debug_frame   0x00000f38       0x88 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(w3_clock_controller.o)
+ .debug_frame   0x00000fc0      0x174 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(w3_iic_eeprom.o)
+ .debug_frame   0x00001134       0x2c ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(print.o)
+ .debug_frame   0x00001160       0x38 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xil_assert.o)
+ .debug_frame   0x00001198       0x28 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(sbrk.o)
+ .debug_frame   0x000011c0       0x20 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(errno.o)
+ .debug_frame   0x000011e0       0x20 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/bs/m/le\libgcc.a(_muldi3.o)
+
+.debug_loc      0x00000000     0x8e02
+ .debug_loc     0x00000000      0xa07 ./wlan_mac_low_framework/wlan_mac_low.o
+ .debug_loc     0x00000a07      0x340 ./wlan_mac_low_framework/wlan_phy_util.o
+ .debug_loc     0x00000d47       0x8f ./wlan_mac_common/wlan_mac_common.o
+ .debug_loc     0x00000dd6      0x161 ./wlan_mac_common/wlan_mac_mailbox_util.o
+ .debug_loc     0x00000f37      0x2d5 ./wlan_mac_common/wlan_mac_pkt_buf_util.o
+ .debug_loc     0x0000120c       0xdc ./wlan_mac_common/wlan_mac_time_util.o
+ .debug_loc     0x000012e8      0x23d ./wlan_mac_common/wlan_mac_userio_util.o
+ .debug_loc     0x00001525      0xe23 ./src/wlan_mac_dcf.o
+ .debug_loc     0x00002348      0x4ef ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xil_printf.o)
+ .debug_loc     0x00002837       0x3e ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(outbyte.o)
+ .debug_loc     0x00002875      0xc1f ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xmbox.o)
+ .debug_loc     0x00003494       0x3e ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xmbox_sinit.o)
+ .debug_loc     0x000034d2      0x675 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xmutex.o)
+ .debug_loc     0x00003b47       0x3e ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xmutex_sinit.o)
+ .debug_loc     0x00003b85      0xea7 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(radio_controller.o)
+ .debug_loc     0x00004a2c     0x221e ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(w3_ad_controller.o)
+ .debug_loc     0x00006c4a     0x1628 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(w3_clock_controller.o)
+ .debug_loc     0x00008272      0x9e9 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(w3_iic_eeprom.o)
+ .debug_loc     0x00008c5b       0x3e ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(print.o)
+ .debug_loc     0x00008c99       0x46 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xil_assert.o)
+ .debug_loc     0x00008cdf       0x51 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(sbrk.o)
+ .debug_loc     0x00008d30       0xd2 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/bs/m/le\libgcc.a(_muldi3.o)
+
+.debug_str      0x00000000     0x3619
+ .debug_str     0x00000000      0xe03 ./wlan_mac_low_framework/wlan_mac_low.o
+                                0xfad (size before relaxing)
+ .debug_str     0x00000e03      0x1c5 ./wlan_mac_low_framework/wlan_phy_util.o
+                                0x3a1 (size before relaxing)
+ .debug_str     0x00000fc8      0x141 ./wlan_mac_common/wlan_mac_common.o
+                                0x2df (size before relaxing)
+ .debug_str     0x00001109      0x15e ./wlan_mac_common/wlan_mac_mailbox_util.o
+                                0x326 (size before relaxing)
+ .debug_str     0x00001267      0x17e ./wlan_mac_common/wlan_mac_pkt_buf_util.o
+                                0x33d (size before relaxing)
+ .debug_str     0x000013e5      0x131 ./wlan_mac_common/wlan_mac_time_util.o
+                                0x279 (size before relaxing)
+ .debug_str     0x00001516      0x1d0 ./wlan_mac_common/wlan_mac_userio_util.o
+                                0x31e (size before relaxing)
+ .debug_str     0x000016e6      0x881 ./src/wlan_mac_dcf.o
+                                0xf45 (size before relaxing)
+ .debug_str     0x00001f67      0x14b ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xil_printf.o)
+                                0x1f7 (size before relaxing)
+ .debug_str     0x000020b2       0xb3 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(outbyte.o)
+                                0x16d (size before relaxing)
+ .debug_str     0x00002165       0xd3 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xuartlite_l.o)
+                                0x19e (size before relaxing)
+ .debug_str     0x00002238      0x242 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xmbox.o)
+                                0x388 (size before relaxing)
+ .debug_str     0x0000247a       0x40 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xmbox_sinit.o)
+                                0x1e3 (size before relaxing)
+ .debug_str     0x000024ba      0x134 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xmutex.o)
+                                0x2cc (size before relaxing)
+ .debug_str     0x000025ee       0x36 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xmutex_sinit.o)
+                                0x1e4 (size before relaxing)
+ .debug_str     0x00002624      0x411 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(radio_controller.o)
+                                0x4e7 (size before relaxing)
+ .debug_str     0x00002a35      0x23a ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(w3_ad_controller.o)
+                                0x328 (size before relaxing)
+ .debug_str     0x00002c6f      0x18f ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(w3_clock_controller.o)
+                                0x28c (size before relaxing)
+ .debug_str     0x00002dfe      0x296 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(w3_iic_eeprom.o)
+                                0x37c (size before relaxing)
+ .debug_str     0x00003094       0x39 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(print.o)
+                                 0x83 (size before relaxing)
+ .debug_str     0x000030cd       0x74 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xil_assert.o)
+                                0x1e8 (size before relaxing)
+ .debug_str     0x00003141        0xa ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xmbox_g.o)
+                                0x1bf (size before relaxing)
+ .debug_str     0x0000314b        0xb ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(xmutex_g.o)
+                                0x1bf (size before relaxing)
+ .debug_str     0x00003156       0x57 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(sbrk.o)
+                                0x122 (size before relaxing)
+ .debug_str     0x000031ad      0x387 ../../wlan_bsp_cpu_low/mb_low/lib\libxil.a(errno.o)
+                                0x52a (size before relaxing)
+ .debug_str     0x00003534       0xe5 c:/xilinx/14.4/ise_ds/edk/gnu/microblaze/nt64/bin/../lib/gcc/microblaze-xilinx-elf/4.6.2/bs/m/le\libgcc.a(_muldi3.o)
+                                0x1bf (size before relaxing)
