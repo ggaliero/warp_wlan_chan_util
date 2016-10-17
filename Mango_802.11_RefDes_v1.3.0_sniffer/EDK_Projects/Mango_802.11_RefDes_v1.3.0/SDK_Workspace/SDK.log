@@ -1,0 +1,130 @@
+10:48:59 INFO  : Launching XSDB server: xsdb.bat -interactive C:\Users\Soledad\Desktop\software\Mango_802.11_RefDes_v1.3.0_sniffer\EDK_Projects\Mango_802.11_RefDes_v1.3.0\SDK_Workspace\temp_xsdb_launch_script.tcl
+10:49:12 INFO  : XSDB server has started successfully.
+10:49:28 INFO  : Restoring local repository preferences: 
+		 C:\Users\egagali\software\Mango_802.11_RefDes_v1.3.0\EDK_Projects\Mango_802.11_RefDes_v1.3.0
+10:49:28 WARN  : Invalid repository path C:\Users\egagali\software\Mango_802.11_RefDes_v1.3.0\EDK_Projects\Mango_802.11_RefDes_v1.3.0.
+10:50:12 ERROR : (XSDB Server)ERROR: [Hsi 55-1594] Core cpu of version 1.14.a not found in repositories
+ERROR: [Hsi 55-1594] Core axicdma of version 2.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core sysmon of version 5.02.a not found in repositories
+ERROR: [Hsi 55-1594] Core v6_ddrx of version 2.00.a not found in repositories
+ERROR: [Hsi 55-1594] Core axiethernet of version 3.00.a not found in repositories
+ERROR: [Hsi 55-1594] Core llfifo of version 2.03.a not found in repositories
+ERROR: [Hsi 55-1594] Core axiethernet of version 3.00.a not found in repositories
+ERROR: [Hsi 55-1594] Core bram of version 3.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core bram of version 3.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core bram of version 3.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core axidma of version 7.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core bram of version 3.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core bram of version 3.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core bram of version 3.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core intc of version 2.05.a not found in repositories
+ERROR: [Hsi 55-1594] Core gpio of version 3.00.a not found in repositories
+ERROR: [Hsi 55-1594] Core tmrctr of version 2.04.a not found in repositories
+ERROR: [Hsi 55-1594] Core gpio of version 3.00.a not found in repositories
+ERROR: [Hsi 55-1594] Core uartlite of version 2.00.a not found in repositories
+ERROR: [Hsi 55-1594] Core mbox of version 3.02.a not found in repositories
+ERROR: [Hsi 55-1594] Core bram of version 3.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core bram of version 3.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core mutex of version 3.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core w3_userio_axi of version 1.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core standalone of version 3.08.a not found in repositories
+ERROR: [Hsi 55-1594] Core WARP_HW_VER of version 3.10.a not found in repositories
+ERROR: [Hsi 55-1594] Core WARPxilnet of version 3.04.a not found in repositories
+
+10:50:12 ERROR :  [Common 17-39] 'hsi::open_sw_design' failed due to earlier errors.
+10:50:12 INFO  : Unable to read in MSS file C:\Users\Soledad\Desktop\software\Mango_802.11_RefDes_v1.3.0_sniffer\EDK_Projects\Mango_802.11_RefDes_v1.3.0\SDK_Workspace\wlan_bsp_cpu_high\system.mss : null
+10:50:12 ERROR : (XSDB Server)ERROR: [Hsi 55-1452] Error: running open_sw_design.
+ERROR: [Hsi 55-1594] Core cpu of version 1.14.a not found in repositories
+ERROR: [Hsi 55-1594] Core axicdma of version 2.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core sysmon of version 5.02.a not found in repositories
+ERROR: [Hsi 55-1594] Core v6_ddrx of version 2.00.a not found in repositories
+ERROR: [Hsi 55-1594] Core axiethernet of version 3.00.a not found in repositories
+ERROR: [Hsi 55-1594] Core llfifo of version 2.03.a not found in repositories
+ERROR: [Hsi 55-1594] Core axiethernet of version 3.00.a not found in repositories
+ERROR: [Hsi 55-1594] Core bram of version 3.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core bram of version 3.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core bram of version 3.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core axidma of version 7.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core bram of version 3.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core bram of version 3.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core bram of version 3.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core intc of version 2.05.a not found in repositories
+ERROR: [Hsi 55-1594] Core gpio of version 3.00.a not found in repositories
+ERROR: [Hsi 55-1594] Core tmrctr of version 2.04.a not found in repositories
+ERROR: [Hsi 55-1594] Core gpio of version 3.00.a not found in repositories
+ERROR: [Hsi 55-1594] Core uartlite of version 2.00.a not found in repositories
+ERROR: [Hsi 55-1594] Core mbox of version 3.02.a not found in repositories
+ERROR: [Hsi 55-1594] Core bram of version 3.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core bram of version 3.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core mutex of version 3.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core w3_userio_axi of version 1.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core standalone of version 3.08.a not found in repositories
+ERROR: [Hsi 55-1594] Core WARP_HW_VER of version 3.10.a not found in repositories
+ERROR: [Hsi 55-1594] Core WARPxilnet of version 3.04.a not found in repositories
+ERROR: [Hsi 55-1452] Error: running open_sw_design.
+
+10:50:12 ERROR : Failed in generating sources
+10:50:12 INFO  : BSP Project P/wlan_bsp_cpu_high has been successfully migrated.
+10:50:12 ERROR : (XSDB Server)ERROR: [Hsi 55-1594] Core cpu of version 1.14.a not found in repositories
+ERROR: [Hsi 55-1594] Core axicdma of version 2.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core sysmon of version 5.02.a not found in repositories
+ERROR: [Hsi 55-1594] Core v6_ddrx of version 2.00.a not found in repositories
+ERROR: [Hsi 55-1594] Core axiethernet of version 3.00.a not found in repositories
+ERROR: [Hsi 55-1594] Core llfifo of version 2.03.a not found in repositories
+ERROR: [Hsi 55-1594] Core axiethernet of version 3.00.a not found in repositories
+ERROR: [Hsi 55-1594] Core bram of version 3.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core bram of version 3.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core bram of version 3.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core axidma of version 7.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core bram of version 3.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core bram of version 3.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core bram of version 3.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core intc of version 2.05.a not found in repositories
+ERROR: [Hsi 55-1594] Core gpio of version 3.00.a not found in repositories
+ERROR: [Hsi 55-1594] Core tmrctr of version 2.04.a not found in repositories
+ERROR: [Hsi 55-1594] Core gpio of version 3.00.a not found in repositories
+ERROR: [Hsi 55-1594] Core uartlite of version 2.00.a not found in repositories
+ERROR: [Hsi 55-1594] Core mbox of version 3.02.a not found in repositories
+ERROR: [Hsi 55-1594] Core bram of version 3.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core bram of version 3.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core mutex of version 3.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core w3_userio_axi of version 1.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core standalone of version 3.08.a not found in repositories
+ERROR: [Hsi 55-1594] Core WARP_HW_VER of version 3.10.a not found in repositories
+ERROR: [Hsi 55-1594] Core WARPxilnet of version 3.04.a not found in repositories
+ERROR: [Hsi 55-1452] Error: running open_sw_design.
+
+10:50:13 ERROR : (XSDB Server)ERROR: [Hsi 55-1594] Core cpu of version 1.14.a not found in repositories
+
+10:50:13 ERROR : (XSDB Server)ERROR: [Hsi 55-1594] Core bram of version 3.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core bram of version 3.01.a not found in repositories
+
+10:50:13 ERROR : (XSDB Server)ERROR: [Hsi 55-1594] Core tmrctr of version 2.04.a not found in repositories
+ERROR: [Hsi 55-1594] Core uartlite of version 2.00.a not found in repositories
+ERROR: [Hsi 55-1594] Core mbox of version 3.02.a not found in repositories
+
+10:50:13 ERROR : (XSDB Server)ERROR: [Hsi 55-1594] Core bram of version 3.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core bram of version 3.01.a not found in repositories
+
+10:50:13 ERROR : (XSDB Server)ERROR: [Hsi 55-1594] Core mutex of version 3.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core radio_controller_axi of version 3.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core w3_ad_controller_axi of version 3.02.a not found in repositories
+
+10:50:13 ERROR :  [Common 17-39] 'hsi::open_sw_design' failed due to earlier errors.
+10:50:13 ERROR : (XSDB Server)ERROR: [Hsi 55-1594] Core w3_clock_controller_axi of version 4.00.a not found in repositories
+ERROR: [Hsi 55-1594] Core w3_iic_eeprom_axi of version 1.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core w3_userio_axi of version 1.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core wlan_agc_axiw of version 1.00.n not found in repositories
+ERROR: [Hsi 55-1594] Core wlan_mac_hw_axiw of version 2.00.a not found in repositories
+ERROR: [Hsi 55-1594] Core wlan_phy_rx_pmd_axiw of version 3.00.f not found in repositories
+ERROR: [Hsi 55-1594] Core wlan_phy_tx_pmd_axiw of version 2.01.c not found in repositories
+ERROR: [Hsi 55-1594] Core standalone of version 3.08.a not found in repositories
+ERROR: [Hsi 55-1452] Error: running open_sw_design.
+
+10:50:13 ERROR : (XSDB Server)ERROR: [Hsi 55-1452] Error: running open_sw_design.
+
+10:50:13 INFO  : Unable to read in MSS file C:\Users\Soledad\Desktop\software\Mango_802.11_RefDes_v1.3.0_sniffer\EDK_Projects\Mango_802.11_RefDes_v1.3.0\SDK_Workspace\wlan_bsp_cpu_low\system.mss : null
+10:50:13 ERROR : (XSDB Server)ERROR: [Hsi 55-1452] Error: running open_sw_design.
+
+10:50:13 ERROR : Failed in generating sources
+10:50:13 INFO  : BSP Project P/wlan_bsp_cpu_low has been successfully migrated.

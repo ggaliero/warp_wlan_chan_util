@@ -1,0 +1,7 @@
+10:49:54 **** Clean-only build of configuration Debug for project wlan_mac_low_dcf ****
+make clean 
+rm -rf  ./wlan_mac_low_framework/wlan_mac_low.o ./wlan_mac_low_framework/wlan_phy_util.o  ./wlan_mac_common/wlan_mac_ipc_util.o  ./src/wlan_mac_dcf.o  ./wlan_mac_low_framework/wlan_mac_low.d ./wlan_mac_low_framework/wlan_phy_util.d  ./wlan_mac_common/wlan_mac_ipc_util.d  ./src/wlan_mac_dcf.d  wlan_mac_low_dcf.elf.size  wlan_mac_low_dcf.elf.elfcheck  wlan_mac_low_dcf.elf
+' '
+
+10:49:59 Build Finished (took 5s.413ms)
+

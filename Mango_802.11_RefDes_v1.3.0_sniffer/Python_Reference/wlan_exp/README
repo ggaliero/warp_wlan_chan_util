@@ -1,0 +1,39 @@
+WLAN Experiment (wlan_exp)
+
+  The WLAN Experiment framework provides the basic python communication 
+structure for interacting with 802.11 nodes running on WARP hardware.  The 
+The basic file structure:
+
+  - node.py 
+      - WLAN Experiment Node (WlanExpNode) is a sub-class of WARPNet Node and
+        provides the base class for a single WARP node running a version of
+        the 802.11 reference design (either Access Point (AP), or Station (STA))
+  - node_*.py
+      - Sub-class of WlanExpNode to implement features specific to roles
+        of an 802.11 node.  Currently, the framework supports Access Points
+        (AP) or Stations (STA). 
+  - cmds.py
+      - Python definitions for each command that is communicated between 
+        the python node and the 802.11 node.
+  - util.py
+      - Top level utility functions used to interact with multiple nodes
+
+
+Top Level Scripts:
+  - None
+
+
+Notes:
+    The WLAN experiment framework builds on top of the 802.11 reference
+design for WARP hardware:  https://warpproject.org/trac/wiki/802.11  to 
+allow users to interact with nodes.
+
+    It also utilize the warpnet framework for communicating with WARP 
+nodes.  You can find the WARP documentation, binaries and toolchains on our 
+website at http://warpproject.org/. 
+ 
+    Learn more about the WARP Project at 
+https://warpproject.org/trac/wiki/about
+
+    If you have any questions about WARP, please use the forums at 
+https://warpproject.org/forums/

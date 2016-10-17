@@ -1,0 +1,4 @@
+THIRPARTY=false
+HW_PROJECT_REFERENCE=Mango_802.11_RefDes_v1.3.0_hw_platform
+PROCESSOR=mb_high
+MSS_FILE=system.mss

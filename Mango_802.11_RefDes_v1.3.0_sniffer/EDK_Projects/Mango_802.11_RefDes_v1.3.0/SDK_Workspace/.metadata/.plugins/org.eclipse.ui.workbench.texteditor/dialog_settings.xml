@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
+		<item value="257" key="DIALOG_WIDTH"/>
+		<item value="101" key="DIALOG_Y_ORIGIN"/>
+		<item value="380" key="DIALOG_HEIGHT"/>
+		<item value="8" key="DIALOG_X_ORIGIN"/>
+		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
+	</section>
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
+		<item value="true" key="wrap"/>
+		<item value="false" key="isRegEx"/>
+		<item value="false" key="casesensitive"/>
+		<item value="false" key="incremental"/>
+		<item value="false" key="wholeword"/>
+		<item value="len" key="selection"/>
+		<list key="findhistory">
+			<item value="len"/>
+			<item value="5"/>
+			<item value="mac_chan_status"/>
+			<item value="print_user_mac_addr"/>
+			<item value="MAX_NUM_STAT"/>
+			<item value="get_tot_mpdu"/>
+			<item value="T_DIFS_11G"/>
+			<item value="T_DIFS_11A"/>
+		</list>
+		<list key="replacehistory">
+			<item value="mac_chan_state"/>
+			<item value="T_DIFS_PHY_OFDM_24GHZ"/>
+			<item value="T_DIFS_PHY_OFDM_5GHZ"/>
+			<item value="T_SIFS_PHY_OFDM_24GHZ"/>
+			<item value="T_SIFS_PHY_OFDM_5GHZ"/>
+		</list>
+	</section>
+</section>
