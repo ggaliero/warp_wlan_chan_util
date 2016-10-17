@@ -1,0 +1,664 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Event Log Utilities &mdash; mango_wlan_exp wlan_exp v1.5.2   documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/rtd_overrides.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="mango_wlan_exp wlan_exp v1.5.2   documentation" href="index.html"/>
+        <link rel="up" title="Event Log" href="wlan_exp_log.html"/>
+        <link rel="next" title="HDF5 Utilities" href="log_util_hdf.html"/>
+        <link rel="prev" title="Log Entry" href="log_entry_types.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="index.html" class="fa fa-home"> mango_wlan_exp</a>
+        
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="wlan_exp.html">Framework</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="node.html">Node Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wlan_exp_util.html">WLAN Exp Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ltg.html">LTG Flow Configurations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="device.html">WLAN Device</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="wlan_exp_log.html">Event Log</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="log_overview.html">Event Log Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="log_entry_types.html">Log Entry</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Event Log Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="log_util_hdf.html">HDF5 Utilities</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">mango_wlan_exp</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="wlan_exp_log.html">Event Log</a> &raquo;</li>
+      
+    <li>Event Log Utilities</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="_sources/log_util.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="event-log-utilities">
+<span id="log-util"></span><h1>Event Log Utilities<a class="headerlink" href="#event-log-utilities" title="Permalink to this headline">¶</a></h1>
+<p>Common utilities for the WLAN Experiment logging framework.</p>
+<div class="section" id="log-utility-functions">
+<h2>Log Utility Functions<a class="headerlink" href="#log-utility-functions" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="wlan_exp.log.util.gen_raw_log_index">
+<code class="descname">gen_raw_log_index</code><span class="sig-paren">(</span><em>log_data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/log/util.html#gen_raw_log_index"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.log.util.gen_raw_log_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parses binary wlan_exp log data by recording the byte index of each entry.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>log_data</strong> (<em>bytes</em>) &#8211;
+Binary data from a WlanExpNode log</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>raw_log_index</strong> &#8211;<p>Dictionary that corresponds 1-to-1 with what is in the given log_data of the
+form:  <code class="docutils literal"><span class="pre">{</span> <span class="pre">&lt;int&gt;</span> <span class="pre">:</span> <span class="pre">[&lt;offsets&gt;]</span> <span class="pre">}</span></code></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">dict</td>
+</tr>
+</tbody>
+</table>
+<p>The byte indexes are returned in a dictionary with the entry type IDs as keys. This
+method does not unpack or interpret each log entry and does not change any values
+in the log file itself (the log_data array argument can be read-only).</p>
+<p>Format of log entry header:</p>
+<div class="highlight-python"><div class="highlight"><pre>typedef struct{
+    u32 delimiter;
+    u16 entry_type;
+    u16 entry_length;
+} entry_header;
+
+fmt_log_hdr = &#39;I H H&#39; # Using struct.unpack
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="wlan_exp.log.util.filter_log_index">
+<code class="descname">filter_log_index</code><span class="sig-paren">(</span><em>log_index</em>, <em>include_only=None</em>, <em>exclude=None</em>, <em>merge=None</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/log/util.html#filter_log_index"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.log.util.filter_log_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parses a log index to generate a filtered log index.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>log_index</strong> (<em>dict</em>) &#8211;
+Log index dictionary (can be either a &#8216;raw_log_index&#8217; or a
+previously processed &#8216;log_index&#8217;)</li>
+<li><strong>include_only</strong> (<em>list of WlanExpLogEntryType, optional</em>) &#8211;
+All WlanExpLogEntryType to
+include in the output log index.  This takes precedence over &#8216;exclude&#8217;.</li>
+<li><strong>exclude</strong> (<em>list of WlanExpLogEntryType, optional</em>) &#8211;
+All WlanExpLogEntryType to
+exclude in the output log index.  This will not be used if include != None.</li>
+<li><strong>merge</strong> (<em>dict, optional</em>) &#8211;
+Dictionary of the form:
+<code class="docutils literal"><span class="pre">{'WlanExpLogEntryType</span> <span class="pre">name':</span> <span class="pre">[List</span> <span class="pre">of</span> <span class="pre">'WlanExpLogEntryTypes</span> <span class="pre">name'</span> <span class="pre">to</span> <span class="pre">merge]}</span></code></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>log_index</strong> &#8211;
+Filtered log index dictionary based on the given parameters</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">dict</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Consumers, in general, cannot operate on a raw log index since that has
+not been converted in to log entry types.  The besides filtering a log
+index, this method will also convert any raw index entries (ie entries
+with keys of type int) in to the corresponding WlanExpLogEntryTypes.</p>
+<p>Using the &#8216;merge&#8217; argument can combine the indexes of WlanExpLogEntryTypes to
+create super-sets of entries.  For example, to create a log index that
+contains all the receive events use: <code class="docutils literal"><span class="pre">{'RX_ALL':</span> <span class="pre">['RX_OFDM',</span> <span class="pre">'RX_DSSS']}</span></code>
+as long as the names &#8216;RX_ALL&#8217;, &#8216;RX_OFDM&#8217;, and &#8216;RX_DSSS&#8217; are valid WlanExpLogEntryTypes.</p>
+<dl class="docutils">
+<dt>The filter follows the following basic rules:</dt>
+<dd><ol class="first last arabic simple">
+<li>Every requested output (either through &#8216;include_only&#8217; or &#8216;merge&#8217;) has a key in the output dictionary</li>
+<li>All input and output keys must refer to the &#8216;name&#8217; property of valid WlanExpLogEntryType instances</li>
+</ol>
+</dd>
+</dl>
+<p><strong>Examples:</strong></p>
+<dl class="docutils">
+<dt>Assume:</dt>
+<dd><ul class="first last simple">
+<li>&#8216;A&#8217;, &#8216;B&#8217;, &#8216;C&#8217;, &#8216;D&#8217;, &#8216;M&#8217; are valid WlanExpLogEntryType instance names</li>
+<li>The log_index = {&#8216;A&#8217;: [A0, A1, A2], &#8216;B&#8217;: [B0, B1], &#8216;C&#8217;: []}</li>
+</ul>
+</dd>
+</dl>
+<ul>
+<li><dl class="first docutils">
+<dt><strong>include_only</strong>:</dt>
+<dd><p class="first">All names specified in &#8216;include_only&#8217; are included as part of the
+output dictionary.  It is then up to the consumer to check if the
+number of entries for a given &#8216;name&#8217; is zero (ie the list is empty).</p>
+<div class="last highlight-python"><div class="highlight"><pre>x = filter_log_index(log_index, include_only=[&#39;A&#39;])
+x == {&#39;A&#39;: [A0, A1, A2]}
+
+x = filter_log_index(log_index, include_only=[&#39;A&#39;,B&#39;])
+x == {&#39;A&#39;: [A0, A1, A2], &#39;B&#39;: [B0, B1]}
+
+x = filter_log_index(log_index, include_only=[&#39;C&#39;])
+x == {&#39;C&#39;: []]}
+
+x = filter_log_index(log_index, include_only=[&#39;D&#39;])
+x == {&#39;D&#39;: []]}
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>exclude</strong>:</dt>
+<dd><p class="first">All names specified in &#8216;exclude&#8217; are removed from the output dictionary.
+However, there is no guarentee what other WlanExpLogEntryTypes are in
+the output dictionary.  That depends on the entries in the input log index.</p>
+<div class="last highlight-python"><div class="highlight"><pre>x = filter_log_index(log_index, exclude=[&#39;B&#39;])
+x == {&#39;A&#39;: [A0, A1, A2]}, &#39;C&#39;: []}
+
+x = filter_log_index(log_index, exclude=[&#39;D&#39;])
+WARNING:  D does not exist in log index.  Ignoring for exclude.
+x == {&#39;A&#39;: [A0, A1, A2]}, &#39;B&#39;: [B0, B1], &#39;C&#39;: []}
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>merge</strong>:</dt>
+<dd><p class="first">All names specified in the &#8216;merge&#8217; are included as part of the output
+dictionary.  It is then up to the consumer to check if the number of
+entries for a given &#8216;name&#8217; is zero (ie the list is empty).</p>
+<div class="last highlight-python"><div class="highlight"><pre>x = filter_log_index(log_index, merge={&#39;D&#39;: [&#39;A&#39;, &#39;B&#39;]}
+x == {&#39;A&#39;: [A0, A1, A2],
+      &#39;B&#39;: [B0, B1],
+      &#39;C&#39;: [],
+      &#39;D&#39;: [A0, A1, A2, B0, B1]}
+
+x = filter_log_index(log_index, merge={&#39;M&#39;: [&#39;C&#39;, &#39;D&#39;]}
+x == {&#39;A&#39;: [A0,A1,A2]},
+      &#39;B&#39;: [B0,B1],
+      &#39;C&#39;: [],
+      &#39;M&#39;: []}
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>Combined</strong>:</dt>
+<dd><p class="first">Combining the behavior of &#8216;include_only&#8217;, &#8216;exclude&#8217;, and &#8216;merge&#8217;</p>
+<div class="last highlight-python"><div class="highlight"><pre>x = filter_log_index(log_index, include_only=[&#39;M&#39;], merge={&#39;M&#39;: [&#39;A&#39;,&#39;C&#39;]}
+x == {&#39;M&#39;: [A0, A1, A2]}
+
+x = filter_log_index(log_index, include_only=[&#39;M&#39;], merge={&#39;M&#39;: [&#39;A&#39;,&#39;D&#39;]}
+WARNING:  D does not exist in log index.  Ignoring for merge.
+x == {&#39;M&#39;: [A0, A1, A2]}
+
+x = filter_log_index(log_index, include_only=[&#39;M&#39;], merge={&#39;M&#39;: [&#39;C&#39;,&#39;D&#39;]}
+WARNING:  D does not exist in log index.  Ignoring for merge.
+x == {&#39;M&#39;: []}
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="wlan_exp.log.util.log_data_to_np_arrays">
+<code class="descname">log_data_to_np_arrays</code><span class="sig-paren">(</span><em>log_data</em>, <em>log_index</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/log/util.html#log_data_to_np_arrays"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.log.util.log_data_to_np_arrays" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate numpy structured arrays using log_data and a log_index.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>log_data</strong> (<em>bytes</em>) &#8211;
+Binary data from a WlanExpNode log</li>
+<li><strong>log_index</strong> (<em>dict</em>) &#8211;
+Log index dictionary</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>np_array</strong> &#8211;
+Numpy structured arrays corresponding to the log_data and log_index</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Numpy Array</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="misc-utility-functions">
+<h2>Misc Utility Functions<a class="headerlink" href="#misc-utility-functions" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="wlan_exp.log.util.print_log_index_summary">
+<code class="descname">print_log_index_summary</code><span class="sig-paren">(</span><em>log_index</em>, <em>title=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/log/util.html#print_log_index_summary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.log.util.print_log_index_summary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prints a summary of the log_index.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>log_index</strong> (<em>dict</em>) &#8211;
+Log index dictionary</li>
+<li><strong>title</strong> (<em>str, optional</em>) &#8211;
+Title to be used for the log_index
+(default is &#8216;Log Index Summary:&#8217;)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="wlan_exp.log.util.calc_tx_time">
+<code class="descname">calc_tx_time</code><span class="sig-paren">(</span><em>mcs</em>, <em>phy_mode</em>, <em>payload_length</em>, <em>phy_samp_rate</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/log/util.html#calc_tx_time"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.log.util.calc_tx_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the duration of an 802.11 transmission given its rate and
+payload length.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>mcs</strong> (<em>int or list of ints</em>) &#8211;
+Modulation and coding scheme (MCS) index</li>
+<li><strong>phy_mode</strong> (<em>str, int or list of strs or ints</em>) &#8211;
+PHY mode (from util.phy_modes)</li>
+<li><strong>payload_length</strong> (<em>int or list of ints</em>) &#8211;
+Nnumber of bytes in the payload</li>
+<li><strong>phy_sample_rate</strong> (<em>int or list of ints</em>) &#8211;
+PHY sample rate; only (10, 20, 40) are valid</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>This method accounts only for PHY overhead (preamble, SIGNAL field, etc.).
+It does <em>not</em> account for MAC overhead. The payload_length argument must
+include any MAC fields (typically a 24-byte MAC header plus 4 byte FCS).</p>
+<p>All 4 arguments are required. The dimensions of the 4 arguments must match. To calculate
+the duration of a single packet, call this method with scalaer integer arguments. To
+calculate the duration of many packets, call this method with iterables (typically
+Numpy arrays) of integer values. When calling this method with arrays the lengths
+of the 4 arrays must be equal.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="wlan_exp.log.util.find_overlapping_tx_low">
+<code class="descname">find_overlapping_tx_low</code><span class="sig-paren">(</span><em>src_tx_low</em>, <em>int_tx_low</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/log/util.html#find_overlapping_tx_low"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.log.util.find_overlapping_tx_low" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds TX_LOW entries in the source that are overlapped by the TX_LOW entries in other flow.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>src_tx_low</strong> (<em>Numpy Array</em>) &#8211;
+Source TX_LOW numpy array of entries</li>
+<li><strong>int_tx_low</strong> (<em>Numpy Array</em>) &#8211;
+Other TX_LOW numpy array of entries</li>
+<li><strong>phy_sample_rate</strong> (<em>int</em>) &#8211;
+Sample rate of the PHY</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><p><strong>indexes</strong> &#8211;</p>
+<p>Tuple containing indexes into the provided arrays indicating which entries overlapped</p>
+</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">tuple</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="wlan_exp.log.util.convert_datetime_to_log_time_str">
+<code class="descname">convert_datetime_to_log_time_str</code><span class="sig-paren">(</span><em>datetime_obj</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/log/util.html#convert_datetime_to_log_time_str"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.log.util.convert_datetime_to_log_time_str" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a datetime object to a log time string.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>datetime_obj</strong> (<em>DateTime()</em>) &#8211;
+Python DateTime() object</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>log_time_str</strong> &#8211;<p>String format of the DateTime() object to be used in HDF5 files</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="wlan_exp.log.util.convert_log_time_str_to_datetime">
+<code class="descname">convert_log_time_str_to_datetime</code><span class="sig-paren">(</span><em>log_time_str</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/log/util.html#convert_log_time_str_to_datetime"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.log.util.convert_log_time_str_to_datetime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a log time string to a datetime object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>log_time_str</strong> (<em>str</em>) &#8211;
+String format of the DateTime() object to be used in HDF5 files</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>datetime_obj</strong> &#8211;
+Python DateTime() object</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">DateTime()</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="wlan_exp.log.util.get_now_as_log_time_str">
+<code class="descname">get_now_as_log_time_str</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/log/util.html#get_now_as_log_time_str"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.log.util.get_now_as_log_time_str" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the current time as a log time string.</p>
+<p>This should be used instead of datetime.datetime.now() because it
+automatically handles timezones.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>log_time_str</strong> &#8211;
+String format of the datetime.datetime.now() to be used in HDF5 files</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="wlan_exp.log.util.merge_log_indexes">
+<code class="descname">merge_log_indexes</code><span class="sig-paren">(</span><em>dest_index</em>, <em>src_index</em>, <em>offset</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/log/util.html#merge_log_indexes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.log.util.merge_log_indexes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Merge log indexes.</p>
+<p>Both the <code class="docutils literal"><span class="pre">dest_index</span></code> and <code class="docutils literal"><span class="pre">src_index</span></code> have log entry offsets that are relative
+to the beginning of the log data from which they were generated.  If the
+log data used to generate the log indexes are being merged, then move the
+log entry offsets in the <code class="docutils literal"><span class="pre">src_index</span></code> to their absolute offset in the merged
+log index.  For each of the log entry offsets in the <code class="docutils literal"><span class="pre">src_index</span></code>, the
+following translation will occur:</p>
+<div class="highlight-python"><div class="highlight"><pre>&lt;Offset in merged log index&gt; = &lt;Offset in src_index&gt; + offset
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>dest_index</strong> (<em>dict</em>) &#8211;
+Destination log index to merge <code class="docutils literal"><span class="pre">src_index</span></code> into</li>
+<li><strong>src_index</strong> (<em>dict</em>) &#8211;
+Source log index to merge into destination log index</li>
+<li><strong>offset</strong> (<em>int</em>) &#8211;
+Offset of <code class="docutils literal"><span class="pre">src_index</span></code> into <code class="docutils literal"><span class="pre">dest_index</span></code></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="wlan_exp.log.util.calc_next_entry_offset">
+<code class="descname">calc_next_entry_offset</code><span class="sig-paren">(</span><em>log_data</em>, <em>raw_log_index</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/log/util.html#calc_next_entry_offset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.log.util.calc_next_entry_offset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the offset of the next log entry given the log data and
+the raw log index.</p>
+<p>The log data does not necessarily end on a log entry boundary. Therefore,
+it is necessary to be able to calculate the offset of the next log entry
+so that it is possible to continue index generation when reading the log
+in multiple pieces.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>log_data</strong> (<em>bytes</em>) &#8211;
+Binary data from a WlanExpNode log</li>
+<li><strong>log_index</strong> (<em>dict</em>) &#8211;
+Raw log index dictionary</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>offset</strong> &#8211;
+Offset of next log entry</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">int</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="wlan_exp.log.util.overwrite_entries_with_null_entry">
+<code class="descname">overwrite_entries_with_null_entry</code><span class="sig-paren">(</span><em>log_data</em>, <em>byte_offsets</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/log/util.html#overwrite_entries_with_null_entry"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.log.util.overwrite_entries_with_null_entry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Overwrite the entries in byte_offsets with NULL entries.</p>
+<p>This is an in-place modification of log_data.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>log_data</strong> (<em>bytes</em>) &#8211;
+Binary data from a WlanExpNode log</li>
+<li><strong>byte_offsets</strong> (<em>list of int</em>) &#8211;
+List of offsets corresponding to the entries to overwrite</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="wlan_exp.log.util.overwrite_payloads">
+<code class="descname">overwrite_payloads</code><span class="sig-paren">(</span><em>log_data</em>, <em>byte_offsets</em>, <em>payload_offsets=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/log/util.html#overwrite_payloads"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.log.util.overwrite_payloads" title="Permalink to this definition">¶</a></dt>
+<dd><p>Overwrite any payloads with zeros.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>log_data</strong> (<em>bytes</em>) &#8211;
+Binary data from a WlanExpNode log</li>
+<li><strong>byte_offsets</strong> (<em>list of int</em>) &#8211;
+List of offsets corresponding to the entries to be modified</li>
+<li><strong>payload_offsets</strong> (<em>dict</em>) &#8211;
+Dictionary of <code class="docutils literal"><span class="pre">{</span> <span class="pre">entry_type_id</span> <span class="pre">:</span> <span class="pre">&lt;payload</span> <span class="pre">offset&gt;</span> <span class="pre">}</span></code></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>By default, if <code class="docutils literal"><span class="pre">payload_offsets</span></code> is not specified, the method will iterate
+through all the entry types and calculate the defined size of the entry
+(ie it will use calcsize on the struct format of the entry).  Sometimes,
+this is not the desired behavior and calling code would want to specify a
+different amount of the payload to keep.  For example, for data
+transmissions / receptions, it might be desired to also keep the SNAP
+headers and potentially the IP headers.  In this case, the calling code
+would get the appropriate set of byte_offsets and then create a
+<code class="docutils literal"><span class="pre">payload_offsets</span></code> dictionary with the desired &#8220;size&#8221; of the entry for those
+<code class="docutils literal"><span class="pre">byte_offsets</span></code>.  This will result in the calling code potentially calling
+this function multiple times with different <code class="docutils literal"><span class="pre">payload_offsets</span></code> for a given
+<code class="docutils literal"><span class="pre">entry_type_id</span></code>.</p>
+<p>This method relies on the fact that for variable length log entries, the
+variable length data, ie the payload, is always at the end of the entry.
+The code also knows, based on the entry type, the size of the entry without
+the payload.  Therefore, from the entry header, the code can determine how
+many payload bytes are after the defined fields and zero them out.</p>
+<p>This is an in-place modification of <code class="docutils literal"><span class="pre">log_data</span></code>.</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="log_util_hdf.html" class="btn btn-neutral float-right" title="HDF5 Utilities">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="log_entry_types.html" class="btn btn-neutral" title="Log Entry"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Mango Communications, Inc..
+    </p>
+  </div>
+
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'wlan_exp v1.5.2  ',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

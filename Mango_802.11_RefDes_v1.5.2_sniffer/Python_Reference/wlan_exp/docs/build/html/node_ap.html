@@ -1,0 +1,419 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Access Point (AP) Node &mdash; mango_wlan_exp wlan_exp v1.5.2   documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/rtd_overrides.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="mango_wlan_exp wlan_exp v1.5.2   documentation" href="index.html"/>
+        <link rel="up" title="Node Classes" href="node.html"/>
+        <link rel="next" title="Station (STA) Node" href="node_sta.html"/>
+        <link rel="prev" title="Node Classes" href="node.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="index.html" class="fa fa-home"> mango_wlan_exp</a>
+        
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="wlan_exp.html">Framework</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="node.html">Node Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wlan_exp_util.html">WLAN Exp Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ltg.html">LTG Flow Configurations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="device.html">WLAN Device</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="wlan_exp_log.html">Event Log</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="log_overview.html">Event Log Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="log_entry_types.html">Log Entry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="log_util.html">Event Log Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="log_util_hdf.html">HDF5 Utilities</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">mango_wlan_exp</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="wlan_exp.html">Framework</a> &raquo;</li>
+      
+          <li><a href="node.html">Node Classes</a> &raquo;</li>
+      
+    <li>Access Point (AP) Node</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="_sources/node_ap.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="access-point-ap-node">
+<span id="wlan-exp-node-ap"></span><h1>Access Point (AP) Node<a class="headerlink" href="#access-point-ap-node" title="Permalink to this headline">¶</a></h1>
+<p>Subclass of WlanExpNode that interfaces to an 802.11 Reference Design node running the
+Access Point (AP) application in CPU High. An AP node supports all the <a class="reference internal" href="node.html"><em>common node</em></a>
+methods plus the AP-specific methods described below.</p>
+<div class="section" id="ap-node-methods">
+<h2>AP Node Methods<a class="headerlink" href="#ap-node-methods" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="wlan_exp.node_ap.WlanExpNodeAp.configure_bss">
+<code class="descclassname">WlanExpNodeAp.</code><code class="descname">configure_bss</code><span class="sig-paren">(</span><em>bssid=False</em>, <em>ssid=None</em>, <em>channel=None</em>, <em>beacon_interval=False</em>, <em>ht_capable=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node_ap.html#WlanExpNodeAp.configure_bss"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node_ap.WlanExpNodeAp.configure_bss" title="Permalink to this definition">¶</a></dt>
+<dd><p>Configure the BSS information of the node</p>
+<p>Each node is either a member of no BSS (colloquially &#8220;unassociated&#8221;)
+or a member of one BSS.  A node requires a minimum valid set of BSS
+information to be a member of a BSS. The minimum valid set of BSS
+information for an AP is:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>BSSID: 48-bit MAC address</li>
+<li>Channel: Logical channel for Tx/Rx by BSS members</li>
+<li>SSID: Variable length string (ie the name of the network)</li>
+<li>Beacon Interval:  Interval (in TUs) for beacons</li>
+</ol>
+</div></blockquote>
+<p>If a node is not a member of a BSS (i.e. <code class="docutils literal"><span class="pre">n.get_bss_info()</span></code> returns
+<code class="docutils literal"><span class="pre">None</span></code>), then the node requires all parameters of a minimum valid
+set of BSS information be specified (i.e. Channel, SSID, and
+Beacon Interval).  For an AP, if BSSID is not specified, then it is
+assumed to be the wlan_mac_address of the node.</p>
+<p>See <a class="reference external" href="https://warpproject.org/trac/wiki/802.11/wlan_exp/bss">https://warpproject.org/trac/wiki/802.11/wlan_exp/bss</a>
+for more documentation on BSS information / configuration.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>bssid</strong> (<em>int, str</em>) &#8211;
+48-bit ID of the BSS either None or
+the wlan_mac_address of the node.  If not specified, it is
+by default the wlan_mac_address of the node.</li>
+<li><strong>ssid</strong> (<em>str</em>) &#8211;
+SSID string (Must be 32 characters or less)</li>
+<li><strong>channel</strong> (<em>int</em>) &#8211;
+Channel number on which the BSS operates</li>
+<li><strong>beacon_interval</strong> (<em>int</em>) &#8211;
+Integer number of beacon Time Units in [10, 65534]
+(<a class="reference external" href="http://en.wikipedia.org/wiki/TU_(Time_Unit">http://en.wikipedia.org/wiki/TU_(Time_Unit</a>); a TU is 1024 microseconds);
+A value of None will disable beacons;  A value of False will not
+update the current beacon interval.</li>
+<li><strong>ht_capable</strong> (<em>bool</em>) &#8211;
+Is the PHY mode HTMF (True) or NONHT (False)?</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.node_ap.WlanExpNodeAp.add_association">
+<code class="descclassname">WlanExpNodeAp.</code><code class="descname">add_association</code><span class="sig-paren">(</span><em>device_list</em>, <em>disable_timeout=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node_ap.html#WlanExpNodeAp.add_association"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node_ap.WlanExpNodeAp.add_association" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds each device in <code class="docutils literal"><span class="pre">device_list</span></code> to the list of associated stations at the AP. If a device
+is also an 802.11 Reference Design STA, the STA is also configured with the BSS of the AP. In this
+case the AP and STA attain the same association state as if they had associated via the standard
+wireless handshake. This method bypasses any any authentication address filtering at the AP.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>device_list</strong> (<em>list of WlanExpNode / WlanDevice</em>) &#8211;
+List of 802.11 devices
+or single 802.11 device to add to the AP&#8217;s association table</li>
+<li><strong>disable_timeout</strong> (<em>bool, optional</em>) &#8211;
+Disables the AP&#8217;s normal inactivity timeout for the new associations.</li>
+<li><strong>The AP periodically checks for associated stations with no recent Tx/Rx activity and removes inactive</strong></li>
+<li><strong>nodes from its list of associated stations. Set this parameter to True to force to AP to keep the new</strong></li>
+<li><strong>associations created by this method, even if the stations are inactive.</strong></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.node_ap.WlanExpNodeAp.is_associated">
+<code class="descclassname">WlanExpNodeAp.</code><code class="descname">is_associated</code><span class="sig-paren">(</span><em>device_list</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node_ap.html#WlanExpNodeAp.is_associated"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node_ap.WlanExpNodeAp.is_associated" title="Permalink to this definition">¶</a></dt>
+<dd><p>Are the devices in the device_list in the AP association table?</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>device_list</strong> (<em>WlanDevice</em>) &#8211;
+List of WLAN device (or sub-class of
+WLAN device)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>associated</strong> &#8211;
+List of booleans describing whether each given device is associated with the AP</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list of bool</td>
+</tr>
+</tbody>
+</table>
+<p>If the device_list is a single device, then only a boolean is returned.
+If the device_list is a list of devices, then a list of booleans will
+be returned in the same order as the devices in the list.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.node_ap.WlanExpNodeAp.disassociate">
+<code class="descclassname">WlanExpNodeAp.</code><code class="descname">disassociate</code><span class="sig-paren">(</span><em>device_list</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node_ap.html#WlanExpNodeAp.disassociate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node_ap.WlanExpNodeAp.disassociate" title="Permalink to this definition">¶</a></dt>
+<dd><p>De-authenticate specific devices and remove the devices from the AP&#8217;s
+association tables. This method triggers transmission of a de-authenticaion
+packet to the targeted STA nodes. The STA nodes are then removed from the AP
+association table.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>device_list</strong> (<em>list of WlanExpNode / WlanDevice</em>) &#8211;
+List of 802.11
+devices or single 802.11 device for which to disassociate</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.node_ap.WlanExpNodeAp.disassociate_all">
+<code class="descclassname">WlanExpNodeAp.</code><code class="descname">disassociate_all</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node_ap.html#WlanExpNodeAp.disassociate_all"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node_ap.WlanExpNodeAp.disassociate_all" title="Permalink to this definition">¶</a></dt>
+<dd><p>De-authenticates all devices and removes all devices from the AP&#8217;s
+association tables. This method triggers transmission of a de-authenticaion
+packet to every associated STA node. The STA nodes are then removed from the AP
+association table.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.node_ap.WlanExpNodeAp.set_authentication_address_filter">
+<code class="descclassname">WlanExpNodeAp.</code><code class="descname">set_authentication_address_filter</code><span class="sig-paren">(</span><em>allow</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node_ap.html#WlanExpNodeAp.set_authentication_address_filter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node_ap.WlanExpNodeAp.set_authentication_address_filter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Command to set the authentication address filter on the node.</p>
+<p>This command will reset the current address filter and then set the
+address filter to the values in the allow list.  The filter only affects
+over-the-air associations.  Assocaitions created by wlan_exp will
+bypass any filters configured by this method.</p>
+<p>Clients will be allowed to associate if they pass any of the filters
+that are set.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>allow</strong> (<em>list of tuple</em>) &#8211;
+List of (address, mask) tuples that will be
+used to filter addresses on the node.  A tuple can be substituted
+with a predefined string:  &#8220;NONE&#8221;, &#8220;ALL&#8221;, or &#8220;MANGO-W3&#8221;</td>
+</tr>
+</tbody>
+</table>
+<p>For the mask, bits that are 0 are treated as &#8220;any&#8221; and bits that are 1
+are treated as &#8220;must equal&#8221;.  For the address, locations of one bits
+in the mask must match the incoming addresses to pass the filter.</p>
+<p>Examples:</p>
+<ul>
+<li><p class="first">Only allow client with MAC address <code class="docutils literal"><span class="pre">01:23:45:67:89:AB</span></code>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">n_ap</span><span class="o">.</span><span class="n">set_authentication_address_filter</span><span class="p">(</span><span class="n">allow</span><span class="o">=</span><span class="p">(</span><span class="mh">0x0123456789AB</span><span class="p">,</span> <span class="mh">0xFFFFFFFFFFFF</span><span class="p">))</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Only allow clients with MAC addresses starting with <code class="docutils literal"><span class="pre">01:23:45</span></code>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">n_ap</span><span class="o">.</span><span class="n">set_authentication_address_filter</span><span class="p">(</span><span class="n">allow</span><span class="o">=</span><span class="p">(</span><span class="mh">0x012345000000</span><span class="p">,</span> <span class="mh">0xFFFFFF000000</span><span class="p">))</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Allow clients with MAC addresses starting with <code class="docutils literal"><span class="pre">01:23:45</span></code> or <code class="docutils literal"><span class="pre">40:</span></code></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">n_ap</span><span class="o">.</span><span class="n">set_authentication_address_filter</span><span class="p">(</span><span class="n">allow</span><span class="o">=</span><span class="p">[(</span><span class="mh">0x012345000000</span><span class="p">,</span> <span class="mh">0xFFFFFF000000</span><span class="p">),</span> <span class="p">(</span><span class="mh">0x400000000000</span><span class="p">,</span> <span class="mh">0xFF0000000000</span><span class="p">)])</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Use one of the pre-defined address filter configurations:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">n_ap</span><span class="o">.</span><span class="n">set_authentication_address_filter</span><span class="p">(</span><span class="n">allow</span><span class="o">=</span><span class="s">&#39;NONE&#39;</span><span class="p">)</span>     <span class="c"># Same as allow=(0x000000000000, 0xFFFFFFFFFFFF)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n_ap</span><span class="o">.</span><span class="n">set_authentication_address_filter</span><span class="p">(</span><span class="n">allow</span><span class="o">=</span><span class="s">&#39;ALL&#39;</span><span class="p">)</span>      <span class="c"># Same as allow=(0x000000000000, 0x000000000000)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n_ap</span><span class="o">.</span><span class="n">set_authentication_address_filter</span><span class="p">(</span><span class="n">allow</span><span class="o">=</span><span class="s">&#39;MANGO-W3&#39;</span><span class="p">)</span> <span class="c"># Same as allow=(0x40d855042000, 0xFFFFFFFFF000)</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.node_ap.WlanExpNodeAp.enable_DTIM_multicast_buffering">
+<code class="descclassname">WlanExpNodeAp.</code><code class="descname">enable_DTIM_multicast_buffering</code><span class="sig-paren">(</span><em>enable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node_ap.html#WlanExpNodeAp.enable_DTIM_multicast_buffering"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node_ap.WlanExpNodeAp.enable_DTIM_multicast_buffering" title="Permalink to this definition">¶</a></dt>
+<dd><p>Enable / Disable DTIM buffering of multicast data</p>
+<p>The Delivery Traffic Indication Map (DTIM) keeps track of STA sleep
+states and will buffer traffic for the node based on those sleep
+states.  When an AP is configured with enable_DTIM_multicast_buffering(False),
+it will include the multicast queue in the normal polling of queues,
+independent of any STA sleep states.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>enable</strong> (<em>bool</em>) &#8211;
+True - enable DTIM multicast buffering
+False - disable DTIM multicast buffering
+(Default value on Node: True)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="wlan_exp.node_ap.WlanExpNodeAp.enable_beacon_mac_time_update">
+<code class="descclassname">WlanExpNodeAp.</code><code class="descname">enable_beacon_mac_time_update</code><span class="sig-paren">(</span><em>enable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/node_ap.html#WlanExpNodeAp.enable_beacon_mac_time_update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.node_ap.WlanExpNodeAp.enable_beacon_mac_time_update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Enable / Disable MAC time update from beacons</p>
+<p>Raises NotImplementedError().  Current AP implementation does not
+support updating MAC time from beacon receptions</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>enable</strong> (<em>bool</em>) &#8211;
+True - enable MAC time updates from beacons
+False - disable MAC time updates from beacons</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="node_sta.html" class="btn btn-neutral float-right" title="Station (STA) Node">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="node.html" class="btn btn-neutral" title="Node Classes"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Mango Communications, Inc..
+    </p>
+  </div>
+
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'wlan_exp v1.5.2  ',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

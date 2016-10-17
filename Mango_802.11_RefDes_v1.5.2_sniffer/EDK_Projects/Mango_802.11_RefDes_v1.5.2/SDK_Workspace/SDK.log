@@ -1,0 +1,172 @@
+11:01:30 INFO  : Launching XSDB server: xsdb.bat -interactive C:\Users\Soledad\Desktop\software\Mango_802.11_RefDes_v1.5.2_sniffer\EDK_Projects\Mango_802.11_RefDes_v1.5.2\SDK_Workspace\temp_xsdb_launch_script.tcl
+11:01:38 INFO  : XSDB server has started successfully.
+11:01:39 INFO  : Restoring local repository preferences: 
+		 C:\Users\egagali\software\Mango_802.11_RefDes_v1.5.2_sniffer\EDK_Projects\Mango_802.11_RefDes_v1.5.2
+11:01:39 WARN  : Invalid repository path C:\Users\egagali\software\Mango_802.11_RefDes_v1.5.2_sniffer\EDK_Projects\Mango_802.11_RefDes_v1.5.2.
+11:01:41 ERROR : (XSDB Server)ERROR: [Hsi 55-1594] Core cpu of version 1.14.a not found in repositories
+ERROR: [Hsi 55-1594] Core axicdma of version 2.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core sysmon of version 5.02.a not found in repositories
+
+11:01:41 ERROR : (XSDB Server)ERROR: [Hsi 55-1594] Core v6_ddrx of version 2.00.a not found in repositories
+ERROR: [Hsi 55-1594] Core axidma of version 7.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core axiethernet of version 3.00.a not found in repositories
+ERROR: [Hsi 55-1594] Core axidma of version 7.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core axiethernet of version 3.00.a not found in repositories
+ERROR: [Hsi 55-1594] Core bram of version 3.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core bram of version 3.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core bram of version 3.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core bram of version 3.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core bram of version 3.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core bram of version 3.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core intc of version 2.05.a not found in repositories
+ERROR: [Hsi 55-1594] Core gpio of version 3.00.a not found in repositories
+ERROR: [Hsi 55-1594] Core tmrctr of version 2.04.a not found in repositories
+ERROR: [Hsi 55-1594] Core uartlite of version 2.00.a not found in repositories
+ERROR: [Hsi 55-1594] Core mbox of version 3.02.a not found in repositories
+ERROR: [Hsi 55-1594] Core bram of version 3.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core bram of version 3.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core mutex of version 3.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core w3_iic_eeprom_axi of version 1.02.a not found in repositories
+ERROR: [Hsi 55-1594] Core w3_userio_axi of version 1.02.a not found in repositories
+ERROR: [Hsi 55-1594] Core wlan_mac_time_hw_axiw of version 1.00.d not found in repositories
+ERROR: [Hsi 55-1594] Core standalone of version 3.08.a not found in repositories
+ERROR: [Hsi 55-1594] Core WARP_HW_VER of version 3.10.a not found in repositories
+ERROR: [Hsi 55-1594] Core WARP_ip_udp of version 1.00.b not found in repositories
+ERROR: [Hsi 55-1452] Error: running open_sw_design.
+
+11:01:41 ERROR :  [Common 17-39] 'hsi::open_sw_design' failed due to earlier errors.
+11:01:41 ERROR : (XSDB Server)ERROR: [Hsi 55-1594] Core cpu of version 1.14.a not found in repositories
+ERROR: [Hsi 55-1594] Core axicdma of version 2.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core sysmon of version 5.02.a not found in repositories
+ERROR: [Hsi 55-1594] Core v6_ddrx of version 2.00.a not found in repositories
+ERROR: [Hsi 55-1594] Core axidma of version 7.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core axiethernet of version 3.00.a not found in repositories
+ERROR: [Hsi 55-1594] Core axidma of version 7.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core axiethernet of version 3.00.a not found in repositories
+ERROR: [Hsi 55-1594] Core bram of version 3.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core bram of version 3.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core bram of version 3.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core bram of version 3.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core bram of version 3.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core bram of version 3.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core intc of version 2.05.a not found in repositories
+ERROR: [Hsi 55-1594] Core gpio of version 3.00.a not found in repositories
+ERROR: [Hsi 55-1594] Core tmrctr of version 2.04.a not found in repositories
+ERROR: [Hsi 55-1594] Core uartlite of version 2.00.a not found in repositories
+ERROR: [Hsi 55-1594] Core mbox of version 3.02.a not found in repositories
+ERROR: [Hsi 55-1594] Core bram of version 3.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core bram of version 3.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core mutex of version 3.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core w3_iic_eeprom_axi of version 1.02.a not found in repositories
+ERROR: [Hsi 55-1594] Core w3_userio_axi of version 1.02.a not found in repositories
+ERROR: [Hsi 55-1594] Core wlan_mac_time_hw_axiw of version 1.00.d not found in repositories
+ERROR: [Hsi 55-1594] Core standalone of version 3.08.a not found in repositories
+ERROR: [Hsi 55-1594] Core WARP_HW_VER of version 3.10.a not found in repositories
+ERROR: [Hsi 55-1594] Core WARP_ip_udp of version 1.00.b not found in repositories
+ERROR: [Hsi 55-1452] Error: running open_sw_design.
+
+11:01:41 INFO  : Unable to read in MSS file C:\Users\Soledad\Desktop\software\Mango_802.11_RefDes_v1.5.2_sniffer\EDK_Projects\Mango_802.11_RefDes_v1.5.2\SDK_Workspace\wlan_bsp_cpu_high\system.mss : null
+11:01:41 ERROR : (XSDB Server)ERROR: [Hsi 55-1594] Core cpu of version 1.14.a not found in repositories
+
+11:01:41 ERROR : (XSDB Server)ERROR: [Hsi 55-1594] Core axicdma of version 2.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core sysmon of version 5.02.a not found in repositories
+ERROR: [Hsi 55-1594] Core v6_ddrx of version 2.00.a not found in repositories
+ERROR: [Hsi 55-1594] Core axidma of version 7.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core axiethernet of version 3.00.a not found in repositories
+ERROR: [Hsi 55-1594] Core axidma of version 7.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core axiethernet of version 3.00.a not found in repositories
+ERROR: [Hsi 55-1594] Core bram of version 3.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core bram of version 3.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core bram of version 3.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core bram of version 3.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core bram of version 3.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core bram of version 3.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core intc of version 2.05.a not found in repositories
+ERROR: [Hsi 55-1594] Core gpio of version 3.00.a not found in repositories
+ERROR: [Hsi 55-1594] Core tmrctr of version 2.04.a not found in repositories
+ERROR: [Hsi 55-1594] Core uartlite of version 2.00.a not found in repositories
+ERROR: [Hsi 55-1594] Core mbox of version 3.02.a not found in repositories
+ERROR: [Hsi 55-1594] Core bram of version 3.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core bram of version 3.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core mutex of version 3.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core w3_iic_eeprom_axi of version 1.02.a not found in repositories
+ERROR: [Hsi 55-1594] Core w3_userio_axi of version 1.02.a not found in repositories
+ERROR: [Hsi 55-1594] Core wlan_mac_time_hw_axiw of version 1.00.d not found in repositories
+ERROR: [Hsi 55-1594] Core standalone of version 3.08.a not found in repositories
+ERROR: [Hsi 55-1594] Core WARP_HW_VER of version 3.10.a not found in repositories
+ERROR: [Hsi 55-1594] Core WARP_ip_udp of version 1.00.b not found in repositories
+ERROR: [Hsi 55-1452] Error: running open_sw_design.
+
+11:01:41 ERROR : Failed in generating sources
+11:01:41 INFO  : BSP Project P/wlan_bsp_cpu_high has been successfully migrated.
+11:01:42 ERROR : (XSDB Server)ERROR: [Hsi 55-1594] Core cpu of version 1.14.a not found in repositories
+
+11:01:42 ERROR : (XSDB Server)ERROR: [Hsi 55-1594] Core sysmon of version 5.02.a not found in repositories
+ERROR: [Hsi 55-1594] Core bram of version 3.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core bram of version 3.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core tmrctr of version 2.04.a not found in repositories
+ERROR: [Hsi 55-1594] Core uartlite of version 2.00.a not found in repositories
+ERROR: [Hsi 55-1594] Core mbox of version 3.02.a not found in repositories
+
+11:01:42 ERROR : (XSDB Server)ERROR: [Hsi 55-1594] Core bram of version 3.01.a not found in repositories
+
+11:01:42 ERROR : (XSDB Server)ERROR: [Hsi 55-1594] Core bram of version 3.01.a not found in repositories
+
+11:01:42 ERROR : (XSDB Server)ERROR: [Hsi 55-1594] Core mutex of version 3.01.a not found in repositories
+
+11:01:42 ERROR : (XSDB Server)ERROR: [Hsi 55-1594] Core radio_controller_axi of version 3.01.a not found in repositories
+ERROR: [Hsi 55-1594] Core w3_ad_controller_axi of version 3.02.a not found in repositories
+ERROR: [Hsi 55-1594] Core w3_clock_controller_axi of version 4.00.a not found in repositories
+ERROR: [Hsi 55-1594] Core w3_iic_eeprom_axi of version 1.02.a not found in repositories
+ERROR: [Hsi 55-1594] Core w3_userio_axi of version 1.02.a not found in repositories
+ERROR: [Hsi 55-1594] Core wlan_agc_axiw of version 2.00.b not found in repositories
+
+11:01:42 ERROR : (XSDB Server)ERROR: [Hsi 55-1452] Error: running open_sw_design.
+
+11:01:42 ERROR :  [Common 17-39] 'hsi::open_sw_design' failed due to earlier errors.
+11:01:42 ERROR : (XSDB Server)ERROR: [Hsi 55-1452] Error: running open_sw_design.
+
+11:01:42 INFO  : Unable to read in MSS file C:\Users\Soledad\Desktop\software\Mango_802.11_RefDes_v1.5.2_sniffer\EDK_Projects\Mango_802.11_RefDes_v1.5.2\SDK_Workspace\wlan_bsp_cpu_low\system.mss : null
+11:01:42 ERROR : Failed to migrate BSP project wlan_bsp_cpu_low
+org.eclipse.core.internal.resources.ResourceException: Problems encountered while deleting resources.
+	at org.eclipse.core.internal.resources.Resource.delete(Resource.java:794)
+	at org.eclipse.core.internal.resources.Resource.delete(Resource.java:749)
+	at com.xilinx.sdk.sw.core.BspMigrationUtils.internalMigrateBsp(BspMigrationUtils.java:56)
+	at com.xilinx.sdk.sw.core.BspMigrationUtils.access$0(BspMigrationUtils.java:46)
+	at com.xilinx.sdk.sw.core.BspMigrationUtils$1.run(BspMigrationUtils.java:34)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2241)
+	at com.xilinx.sdk.sw.core.BspMigrationUtils.migrateBspProject(BspMigrationUtils.java:38)
+	at com.xilinx.sdk.startup.InitSDK$7$1.run(InitSDK.java:248)
+	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:119)
+Contains: Could not delete '/wlan_bsp_cpu_low/mb_low'.
+org.eclipse.core.internal.resources.ResourceException: Problems encountered while deleting resources.
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.delete(FileSystemResourceManager.java:354)
+	at org.eclipse.core.internal.resources.ResourceTree.internalDeleteFolder(ResourceTree.java:358)
+	at org.eclipse.core.internal.resources.ResourceTree.standardDeleteFolder(ResourceTree.java:810)
+	at org.eclipse.core.internal.resources.Resource.unprotectedDelete(Resource.java:1831)
+	at org.eclipse.core.internal.resources.Resource.delete(Resource.java:781)
+	at org.eclipse.core.internal.resources.Resource.delete(Resource.java:749)
+	at com.xilinx.sdk.sw.core.BspMigrationUtils.internalMigrateBsp(BspMigrationUtils.java:56)
+	at com.xilinx.sdk.sw.core.BspMigrationUtils.access$0(BspMigrationUtils.java:46)
+	at com.xilinx.sdk.sw.core.BspMigrationUtils$1.run(BspMigrationUtils.java:34)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2241)
+	at com.xilinx.sdk.sw.core.BspMigrationUtils.migrateBspProject(BspMigrationUtils.java:38)
+	at com.xilinx.sdk.startup.InitSDK$7$1.run(InitSDK.java:248)
+	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:119)
+Contains: Problems encountered while deleting files.
+Contains: Could not delete: C:\Users\Soledad\Desktop\software\Mango_802.11_RefDes_v1.5.2_sniffer\EDK_Projects\Mango_802.11_RefDes_v1.5.2\SDK_Workspace\wlan_bsp_cpu_low\mb_low\libsrc\common_v1_00_a\src\xutil_memtest.c.
+Contains: Could not delete: C:\Users\Soledad\Desktop\software\Mango_802.11_RefDes_v1.5.2_sniffer\EDK_Projects\Mango_802.11_RefDes_v1.5.2\SDK_Workspace\wlan_bsp_cpu_low\mb_low\libsrc\common_v1_00_a\src.
+Contains: Could not delete: C:\Users\Soledad\Desktop\software\Mango_802.11_RefDes_v1.5.2_sniffer\EDK_Projects\Mango_802.11_RefDes_v1.5.2\SDK_Workspace\wlan_bsp_cpu_low\mb_low\libsrc\common_v1_00_a.
+Contains: Could not delete: C:\Users\Soledad\Desktop\software\Mango_802.11_RefDes_v1.5.2_sniffer\EDK_Projects\Mango_802.11_RefDes_v1.5.2\SDK_Workspace\wlan_bsp_cpu_low\mb_low\libsrc\mutex_v3_01_a.
+Contains: Could not delete: C:\Users\Soledad\Desktop\software\Mango_802.11_RefDes_v1.5.2_sniffer\EDK_Projects\Mango_802.11_RefDes_v1.5.2\SDK_Workspace\wlan_bsp_cpu_low\mb_low\libsrc\uartlite_v2_00_a\src\xuartlite.c.
+Contains: Could not delete: C:\Users\Soledad\Desktop\software\Mango_802.11_RefDes_v1.5.2_sniffer\EDK_Projects\Mango_802.11_RefDes_v1.5.2\SDK_Workspace\wlan_bsp_cpu_low\mb_low\libsrc\uartlite_v2_00_a\src\xuartlite.h.
+Contains: Could not delete: C:\Users\Soledad\Desktop\software\Mango_802.11_RefDes_v1.5.2_sniffer\EDK_Projects\Mango_802.11_RefDes_v1.5.2\SDK_Workspace\wlan_bsp_cpu_low\mb_low\libsrc\uartlite_v2_00_a\src.
+Contains: Could not delete: C:\Users\Soledad\Desktop\software\Mango_802.11_RefDes_v1.5.2_sniffer\EDK_Projects\Mango_802.11_RefDes_v1.5.2\SDK_Workspace\wlan_bsp_cpu_low\mb_low\libsrc\uartlite_v2_00_a.
+Contains: Could not delete: C:\Users\Soledad\Desktop\software\Mango_802.11_RefDes_v1.5.2_sniffer\EDK_Projects\Mango_802.11_RefDes_v1.5.2\SDK_Workspace\wlan_bsp_cpu_low\mb_low\libsrc\wlan_mac_hw_axiw_v2_01_f\src\wlan_mac_hw_axiw.c.
+Contains: Could not delete: C:\Users\Soledad\Desktop\software\Mango_802.11_RefDes_v1.5.2_sniffer\EDK_Projects\Mango_802.11_RefDes_v1.5.2\SDK_Workspace\wlan_bsp_cpu_low\mb_low\libsrc\wlan_mac_hw_axiw_v2_01_f\src.
+Contains: Could not delete: C:\Users\Soledad\Desktop\software\Mango_802.11_RefDes_v1.5.2_sniffer\EDK_Projects\Mango_802.11_RefDes_v1.5.2\SDK_Workspace\wlan_bsp_cpu_low\mb_low\libsrc\wlan_mac_hw_axiw_v2_01_f.
+Contains: Could not delete: C:\Users\Soledad\Desktop\software\Mango_802.11_RefDes_v1.5.2_sniffer\EDK_Projects\Mango_802.11_RefDes_v1.5.2\SDK_Workspace\wlan_bsp_cpu_low\mb_low\libsrc\wlan_phy_rx_pmd_axiw_v4_00_u\src\wlan_phy_rx_pmd_axiw.c.
+Contains: Could not delete: C:\Users\Soledad\Desktop\software\Mango_802.11_RefDes_v1.5.2_sniffer\EDK_Projects\Mango_802.11_RefDes_v1.5.2\SDK_Workspace\wlan_bsp_cpu_low\mb_low\libsrc\wlan_phy_rx_pmd_axiw_v4_00_u\src.
+Contains: Could not delete: C:\Users\Soledad\Desktop\software\Mango_802.11_RefDes_v1.5.2_sniffer\EDK_Projects\Mango_802.11_RefDes_v1.5.2\SDK_Workspace\wlan_bsp_cpu_low\mb_low\libsrc\wlan_phy_rx_pmd_axiw_v4_00_u.
+Contains: Could not delete: C:\Users\Soledad\Desktop\software\Mango_802.11_RefDes_v1.5.2_sniffer\EDK_Projects\Mango_802.11_RefDes_v1.5.2\SDK_Workspace\wlan_bsp_cpu_low\mb_low\libsrc.
+Contains: Could not delete: C:\Users\Soledad\Desktop\software\Mango_802.11_RefDes_v1.5.2_sniffer\EDK_Projects\Mango_802.11_RefDes_v1.5.2\SDK_Workspace\wlan_bsp_cpu_low\mb_low.

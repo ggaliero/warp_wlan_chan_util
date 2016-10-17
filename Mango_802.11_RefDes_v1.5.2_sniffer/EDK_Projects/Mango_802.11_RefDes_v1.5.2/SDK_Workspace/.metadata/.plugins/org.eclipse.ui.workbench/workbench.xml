@@ -1,0 +1,446 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workbench progressCount="20" version="2.0">
+<workbenchAdvisor/>
+<window height="720" maximized="true" width="1024" x="50" y="0">
+<fastViewData fastViewLocation="1024"/>
+<perspectiveBar>
+<itemSize x="160"/>
+</perspectiveBar>
+<coolbarLayout locked="0">
+<coolItem id="group.file" itemType="typeGroupMarker"/>
+<coolItem id="org.eclipse.ui.workbench.file" itemType="typeToolBarContribution" x="268" y="22"/>
+<coolItem id="additions" itemType="typeGroupMarker"/>
+<coolItem id="com.xilinx.sdk.xbash.toolbar1" itemType="typeToolBarContribution" x="38" y="22"/>
+<coolItem id="com.xilinx.sdk.targetmanager.ui.toolbar1" itemType="typeToolBarContribution" x="61" y="22"/>
+<coolItem id="com.xilinx.sdk.sw.toolbar1" itemType="typeToolBarContribution" x="38" y="22"/>
+<coolItem id="org.eclipse.cdt.ui.CElementCreationActionSet" itemType="typeToolBarContribution" x="167" y="22"/>
+<coolItem id="org.eclipse.cdt.ui.buildConfigActionSet" itemType="typeToolBarContribution" x="89" y="22"/>
+<coolItem id="org.eclipse.debug.ui.launchActionSet" itemType="typeToolBarContribution" x="129" y="22"/>
+<coolItem id="org.eclipse.search.searchActionSet" itemType="typeToolBarContribution" x="76" y="22"/>
+<coolItem id="org.eclipse.ui.edit.text.actionSet.presentation" itemType="typeToolBarContribution" x="84" y="22"/>
+<coolItem id="group.nav" itemType="typeGroupMarker"/>
+<coolItem id="org.eclipse.ui.workbench.navigate" itemType="typeToolBarContribution" x="190" y="22"/>
+<coolItem id="group.editor" itemType="typeGroupMarker"/>
+<coolItem id="org.eclipse.cdt.ui.editor.CEditor" itemType="typeToolBarContribution" x="-1" y="-1"/>
+<coolItem id="group.help" itemType="typeGroupMarker"/>
+<coolItem id="org.eclipse.ui.workbench.help" itemType="typeToolBarContribution" x="-1" y="-1"/>
+</coolbarLayout>
+<page aggregateWorkingSetId="Aggregate for window 1467820172080" focus="true" label="Workspace - C/C++">
+<editors>
+<editorArea activeWorkbook="DefaultEditorWorkbook">
+<info part="DefaultEditorWorkbook">
+<folder appearance="1" expanded="2">
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
+<part id="8"/>
+<part id="0"/>
+<part id="1"/>
+<part id="2"/>
+<part id="3"/>
+<part id="4"/>
+<part id="5"/>
+<part id="6"/>
+<part id="7"/>
+</presentation>
+</folder>
+</info>
+</editorArea>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="wlan_mac_ap_uart_menu.c" partName="wlan_mac_ap_uart_menu.c" path="C:/Users/egagali/software/Mango_802.11_RefDes_v1.5.2_sniffer/EDK_Projects/Mango_802.11_RefDes_v1.5.2/SDK_Workspace/svn_src/wlan_mac_high_ap/wlan_mac_ap_uart_menu.c" title="wlan_mac_ap_uart_menu.c" tooltip="wlan_mac_high_ap/src/wlan_mac_ap_uart_menu.c" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/wlan_mac_high_ap/src/wlan_mac_ap_uart_menu.c"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="14571" selectionTopPixel="8155"/>
+</editor>
+<editor activePart="true" focus="true" id="org.eclipse.cdt.ui.editor.CEditor" name="wlan_mac_ap.c" partName="wlan_mac_ap.c" path="C:/Users/egagali/software/Mango_802.11_RefDes_v1.5.2_sniffer/EDK_Projects/Mango_802.11_RefDes_v1.5.2/SDK_Workspace/svn_src/wlan_mac_high_ap/wlan_mac_ap.c" title="wlan_mac_ap.c" tooltip="wlan_mac_high_ap/src/wlan_mac_ap.c" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/wlan_mac_high_ap/src/wlan_mac_ap.c"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1960" selectionTopPixel="984"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="wlan_mac_sta.c" partName="wlan_mac_sta.c" path="C:/Users/egagali/src/Mango_802.11_RefDes_v1.5.2_sniffer/EDK_Projects/Mango_802.11_RefDes_v1.5.2/SDK_Workspace/svn_src/wlan_mac_high_sta/wlan_mac_sta.c" title="wlan_mac_sta.c" tooltip="wlan_mac_high_sta/src/wlan_mac_sta.c" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/wlan_mac_high_sta/src/wlan_mac_sta.c"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="2686" selectionTopPixel="1565"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="wlan_mac_bss_info.h" partName="wlan_mac_bss_info.h" path="C:/Users/egagali/src/Mango_802.11_RefDes_v1.5.2/EDK_Projects/Mango_802.11_RefDes_v1.5.2/SDK_Workspace/svn_src/wlan_mac_high_framework/include/wlan_mac_bss_info.h" title="wlan_mac_bss_info.h" tooltip="wlan_mac_high_sta/wlan_mac_high_framework/include/wlan_mac_bss_info.h" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/wlan_mac_high_sta/wlan_mac_high_framework/include/wlan_mac_bss_info.h"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="6179" selectionTopPixel="2358"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="wlan_mac_bss_info.c" partName="wlan_mac_bss_info.c" path="C:/Users/egagali/src/Mango_802.11_RefDes_v1.5.2_sniffer/EDK_Projects/Mango_802.11_RefDes_v1.5.2/SDK_Workspace/svn_src/wlan_mac_high_framework/wlan_mac_bss_info.c" title="wlan_mac_bss_info.c" tooltip="wlan_mac_high_sta/wlan_mac_high_framework/wlan_mac_bss_info.c" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/wlan_mac_high_sta/wlan_mac_high_framework/wlan_mac_bss_info.c"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="17907" selectionTopPixel="511"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="wlan_mac_sta.h" partName="wlan_mac_sta.h" path="C:/Users/egagali/software/Mango_802.11_RefDes_v1.5.2_sniffer/EDK_Projects/Mango_802.11_RefDes_v1.5.2/SDK_Workspace/svn_src/wlan_mac_high_sta/include/wlan_mac_sta.h" title="wlan_mac_sta.h" tooltip="wlan_mac_high_sta/src/include/wlan_mac_sta.h" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/wlan_mac_high_sta/src/include/wlan_mac_sta.h"/>
+<editorState selectionHorizontalPixel="0" selectionLength="24" selectionOffset="3772" selectionTopPixel="1479"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="wlan_mac_ap.h" partName="wlan_mac_ap.h" path="C:/Users/egagali/software/Mango_802.11_RefDes_v1.5.2_sniffer/EDK_Projects/Mango_802.11_RefDes_v1.5.2/SDK_Workspace/svn_src/wlan_mac_high_ap/include/wlan_mac_ap.h" title="wlan_mac_ap.h" tooltip="wlan_mac_high_ap/src/include/wlan_mac_ap.h" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/wlan_mac_high_ap/src/include/wlan_mac_ap.h"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="109" selectionTopPixel="527"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="wlan_mac_chan_util.h" partName="wlan_mac_chan_util.h" path="C:/Users/egagali/software/Mango_802.11_RefDes_v1.5.2_sniffer/EDK_Projects/Mango_802.11_RefDes_v1.5.2/SDK_Workspace/svn_src/wlan_mac_high_ap/include/wlan_mac_chan_util.h" title="wlan_mac_chan_util.h" tooltip="wlan_mac_high_ap/src/include/wlan_mac_chan_util.h" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/wlan_mac_high_ap/src/include/wlan_mac_chan_util.h"/>
+<editorState selectionHorizontalPixel="0" selectionLength="18" selectionOffset="5281" selectionTopPixel="2345"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="wlan_mac_chan_util.c" partName="wlan_mac_chan_util.c" path="C:/Users/egagali/software/Mango_802.11_RefDes_v1.5.2_sniffer/EDK_Projects/Mango_802.11_RefDes_v1.5.2/SDK_Workspace/svn_src/wlan_mac_high_ap/wlan_mac_chan_util.c" title="wlan_mac_chan_util.c" tooltip="wlan_mac_high_ap/src/wlan_mac_chan_util.c" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/wlan_mac_high_ap/src/wlan_mac_chan_util.c"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="10254" selectionTopPixel="6392"/>
+</editor>
+</editors>
+<views>
+<view id="org.eclipse.ui.navigator.ProjectExplorer" partName="Project Explorer">
+<viewState CommonNavigator.LINKING_ENABLED="0" CommonNavigator.LINKING_ENABLED.delayed="0" org.eclipse.cdt.ui.cview.groupincludes="false" org.eclipse.cdt.ui.cview.groupmacros="false" org.eclipse.cdt.ui.editor.CUChildren="true" org.eclipse.ui.navigator.resources.workingSets.showTopLevelWorkingSets="0"/>
+</view>
+<view id="org.eclipse.ui.views.PropertySheet" partName="Properties"/>
+<view id="org.eclipse.tm.terminal.view.TerminalView" partName="Terminal"/>
+<view id="org.eclipse.ui.views.ProblemView" partName="Problems">
+<viewState PRIMARY_SORT_FIELD="org.eclipse.ui.ide.severityAndDescriptionField" categoryGroup="org.eclipse.ui.ide.severity" markerContentGenerator="org.eclipse.ui.ide.problemsGenerator" partName="Problems">
+<expanded>&#x0A;<category IMemento.internal.id="Errors"/>
+</expanded>
+<columnWidths org.eclipse.ui.ide.locationField="0" org.eclipse.ui.ide.markerType="0" org.eclipse.ui.ide.pathField="0" org.eclipse.ui.ide.resourceField="0" org.eclipse.ui.ide.severityAndDescriptionField="0"/>
+<visible IMemento.internal.id="org.eclipse.ui.ide.severityAndDescriptionField"/>
+<visible IMemento.internal.id="org.eclipse.ui.ide.resourceField"/>
+<visible IMemento.internal.id="org.eclipse.ui.ide.pathField"/>
+<visible IMemento.internal.id="org.eclipse.ui.ide.locationField"/>
+<visible IMemento.internal.id="org.eclipse.ui.ide.markerType"/>
+</viewState>
+</view>
+<view id="org.eclipse.ui.console.ConsoleView" partName="Console">
+<viewState/>
+</view>
+<view id="org.eclipse.ui.views.TaskList" partName="Tasks"/>
+</views>
+<perspectives activePart="org.eclipse.cdt.ui.editor.CEditor" activePerspective="org.eclipse.cdt.ui.CPerspective">
+<perspective editorAreaTrimState="2" editorAreaVisible="1" fixed="0" version="0.016">
+<descriptor class="org.eclipse.cdt.internal.ui.CPerspectiveFactory" id="org.eclipse.cdt.ui.CPerspective" label="C/C++"/>
+<alwaysOnActionSet id="org.eclipse.ui.cheatsheets.actionSet"/>
+<alwaysOnActionSet id="org.eclipse.rse.core.search.searchActionSet"/>
+<alwaysOnActionSet id="org.eclipse.search.searchActionSet"/>
+<alwaysOnActionSet id="org.eclipse.ui.edit.text.actionSet.annotationNavigation"/>
+<alwaysOnActionSet id="org.eclipse.ui.edit.text.actionSet.navigation"/>
+<alwaysOnActionSet id="org.eclipse.ui.edit.text.actionSet.convertLineDelimitersTo"/>
+<alwaysOnActionSet id="org.eclipse.ui.externaltools.ExternalToolsSet"/>
+<alwaysOnActionSet id="org.eclipse.ui.actionSet.keyBindings"/>
+<alwaysOnActionSet id="org.eclipse.ui.actionSet.openFiles"/>
+<alwaysOnActionSet id="org.eclipse.cdt.ui.SearchActionSet"/>
+<alwaysOnActionSet id="org.eclipse.cdt.ui.CElementCreationActionSet"/>
+<alwaysOnActionSet id="org.eclipse.ui.NavigateActionSet"/>
+<alwaysOnActionSet id="org.eclipse.debug.ui.breakpointActionSet"/>
+<alwaysOnActionSet id="org.eclipse.cdt.make.ui.makeTargetActionSet"/>
+<alwaysOnActionSet id="org.eclipse.debug.ui.launchActionSet"/>
+<alwaysOnActionSet id="org.eclipse.cdt.ui.buildConfigActionSet"/>
+<alwaysOnActionSet id="org.eclipse.cdt.ui.NavigationActionSet"/>
+<alwaysOnActionSet id="org.eclipse.cdt.ui.OpenActionSet"/>
+<alwaysOnActionSet id="org.eclipse.cdt.ui.CodingActionSet"/>
+<alwaysOnActionSet id="org.eclipse.ui.edit.text.actionSet.presentation"/>
+<show_view_action id="org.eclipse.ui.console.ConsoleView"/>
+<show_view_action id="org.eclipse.search.ui.views.SearchView"/>
+<show_view_action id="org.eclipse.ui.views.ContentOutline"/>
+<show_view_action id="org.eclipse.ui.views.ProblemView"/>
+<show_view_action id="org.eclipse.cdt.ui.CView"/>
+<show_view_action id="org.eclipse.ui.views.ResourceNavigator"/>
+<show_view_action id="org.eclipse.ui.views.PropertySheet"/>
+<show_view_action id="org.eclipse.ui.views.TaskList"/>
+<show_view_action id="org.eclipse.tm.terminal.view.TerminalView"/>
+<show_view_action id="org.eclipse.cdt.make.ui.views.MakeView"/>
+<show_view_action id="org.eclipse.ui.navigator.ProjectExplorer"/>
+<show_view_action id="org.eclipse.cdt.ui.includeBrowser"/>
+<new_wizard_action id="org.eclipse.cdt.ui.wizards.NewSourceFolderCreationWizard"/>
+<new_wizard_action id="org.eclipse.cdt.ui.wizards.NewFolderCreationWizard"/>
+<new_wizard_action id="org.eclipse.cdt.ui.wizards.NewSourceFileCreationWizard"/>
+<new_wizard_action id="org.eclipse.cdt.ui.wizards.NewHeaderFileCreationWizard"/>
+<new_wizard_action id="org.eclipse.cdt.ui.wizards.NewFileCreationWizard"/>
+<new_wizard_action id="org.eclipse.cdt.ui.wizards.NewClassCreationWizard"/>
+<new_wizard_action id="com.xilinx.sdk.appwiz.AppWizard"/>
+<new_wizard_action id="com.xilinx.sdk.sw.ui.NewBspWizard"/>
+<perspective_action id="org.eclipse.debug.ui.DebugPerspective"/>
+<perspective_action id="org.eclipse.team.ui.TeamSynchronizingPerspective"/>
+<hide_toolbar_item_id id="org.eclipse.ui.edit.text.toggleShowSelectedElementOnly"/>
+<view id="org.eclipse.ui.navigator.ProjectExplorer"/>
+<view id="org.eclipse.ui.views.ProblemView"/>
+<view id="org.eclipse.ui.views.TaskList"/>
+<view id="org.eclipse.ui.console.ConsoleView"/>
+<view id="org.eclipse.ui.views.PropertySheet"/>
+<view id="org.eclipse.tm.terminal.view.TerminalView"/>
+<fastViewBars/>
+<layout>
+<mainWindow>
+<info folder="true" part="topLeft">
+<folder activePageID="org.eclipse.ui.navigator.ProjectExplorer" appearance="2" expanded="2">
+<page content="org.eclipse.ui.navigator.ProjectExplorer" label="Project Explorer"/>
+<page content="org.eclipse.cdt.ui.CView" label="LabelNotFound"/>
+<page content="org.eclipse.ui.views.ResourceNavigator" label="LabelNotFound"/>
+<page content="org.eclipse.ui.views.BookmarkView" label="LabelNotFound"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
+<part id="0"/>
+</presentation>
+</folder>
+</info>
+<info folder="true" part="org.eclipse.ui.internal.ViewStack@559fe5e6" ratio="0.75" ratioLeft="750" ratioRight="250" relationship="2" relative="topLeft">
+<folder appearance="2" expanded="2">
+<page content="org.eclipse.help.ui.HelpView" label="LabelNotFound"/>
+<page content="org.eclipse.ui.internal.introview" label="LabelNotFound"/>
+<page content="org.eclipse.ui.cheatsheets.views.CheatSheetView" label="LabelNotFound"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
+</folder>
+</info>
+<info part="org.eclipse.ui.editorss" ratio="0.25" ratioLeft="250" ratioRight="750" relationship="2" relative="topLeft"/>
+<info folder="true" part="bottom" ratio="0.7135593" ratioLeft="421" ratioRight="169" relationship="4" relative="org.eclipse.ui.editorss">
+<folder activePageID="org.eclipse.ui.console.ConsoleView" appearance="2" expanded="2">
+<page content="org.eclipse.ui.views.ProblemView" label="Problems"/>
+<page content="org.eclipse.ui.views.TaskList" label="Tasks"/>
+<page content="org.eclipse.ui.console.ConsoleView" label="Console"/>
+<page content="org.eclipse.ui.views.PropertySheet" label="Properties"/>
+<page content="org.eclipse.tm.terminal.view.TerminalView" label="Terminal"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
+<part id="0"/>
+<part id="1"/>
+<part id="2"/>
+<part id="3"/>
+<part id="4"/>
+</presentation>
+</folder>
+</info>
+<info folder="true" part="topRight" ratio="0.7493333" ratioLeft="562" ratioRight="188" relationship="2" relative="org.eclipse.ui.editorss">
+<folder appearance="2" expanded="2">
+<page content="org.eclipse.ui.views.ContentOutline" label="LabelNotFound"/>
+<page content="org.eclipse.cdt.make.ui.views.MakeView" label="LabelNotFound"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
+</folder>
+</info>
+</mainWindow>
+</layout>
+</perspective>
+</perspectives>
+<workingSets/>
+<navigationHistory>
+<editors>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/wlan_mac_high_ap/src/wlan_mac_ap.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/wlan_mac_high_ap/src/include/wlan_mac_chan_util.h"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/wlan_mac_high_ap/src/wlan_mac_chan_util.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/wlan_mac_high_ap/src/wlan_mac_ap_uart_menu.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/wlan_mac_high_ap/src/wlan_mac_chan_util.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/wlan_mac_high_ap/src/include/wlan_mac_chan_util.h"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/wlan_mac_high_sta/src/include/wlan_mac_sta.h"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/wlan_mac_high_ap/src/wlan_mac_ap_uart_menu.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/wlan_mac_high_ap/src/include/wlan_mac_chan_util.h"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/wlan_mac_high_ap/src/wlan_mac_chan_util.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/wlan_mac_high_ap/src/wlan_mac_chan_util.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/wlan_mac_high_ap/src/include/wlan_mac_chan_util.h"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/wlan_mac_high_ap/src/wlan_mac_ap_uart_menu.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/wlan_mac_high_ap/src/wlan_mac_ap.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/wlan_mac_high_ap/src/wlan_mac_chan_util.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/wlan_mac_high_ap/src/wlan_mac_ap_uart_menu.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/wlan_mac_high_ap/src/include/wlan_mac_chan_util.h"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/wlan_mac_high_ap/src/wlan_mac_chan_util.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/wlan_mac_high_ap/src/wlan_mac_ap_uart_menu.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/wlan_mac_high_ap/src/wlan_mac_ap.c"/>
+</editors>
+<item historyLabel="wlan_mac_ap.c" index="0">
+<position info="not_deleted" x="6418" y="79"/>
+</item>
+<item historyLabel="wlan_mac_chan_util.h" index="1">
+<position info="not_deleted" x="5244" y="0"/>
+</item>
+<item historyLabel="wlan_mac_chan_util.c" index="2">
+<position info="not_deleted" x="12783" y="0"/>
+</item>
+<item historyLabel="wlan_mac_chan_util.h" index="1">
+<position info="not_deleted" x="5244" y="86"/>
+</item>
+<item historyLabel="wlan_mac_chan_util.c" index="2">
+<position info="not_deleted" x="12869" y="0"/>
+</item>
+<item historyLabel="wlan_mac_chan_util.h" index="1">
+<position info="not_deleted" x="5249" y="18"/>
+</item>
+<item historyLabel="wlan_mac_chan_util.c" index="2">
+<position info="not_deleted" x="12869" y="0"/>
+</item>
+<item historyLabel="wlan_mac_ap_uart_menu.c" index="3">
+<position info="not_deleted" x="17924" y="0"/>
+</item>
+<item historyLabel="wlan_mac_chan_util.c" index="4">
+<position info="not_deleted" x="12806" y="0"/>
+</item>
+<item historyLabel="wlan_mac_chan_util.h" index="5">
+<position info="not_deleted" x="5249" y="18"/>
+</item>
+<item historyLabel="wlan_mac_chan_util.c" index="4">
+<position info="not_deleted" x="7422" y="0"/>
+</item>
+<item historyLabel="wlan_mac_sta.h" index="6">
+<position info="not_deleted" x="3772" y="24"/>
+</item>
+<item historyLabel="wlan_mac_chan_util.h" index="5">
+<position info="not_deleted" x="5249" y="18"/>
+</item>
+<item historyLabel="wlan_mac_chan_util.c" index="4">
+<position info="not_deleted" x="1081" y="0"/>
+</item>
+<item historyLabel="wlan_mac_ap_uart_menu.c" index="7">
+<position info="not_deleted" x="18618" y="12"/>
+</item>
+<item historyLabel="wlan_mac_chan_util.c" index="4">
+<position info="not_deleted" x="12042" y="18"/>
+</item>
+<item historyLabel="wlan_mac_ap_uart_menu.c" index="7">
+<position info="not_deleted" x="18330" y="18"/>
+</item>
+<item historyLabel="wlan_mac_chan_util.c" index="4">
+<position info="not_deleted" x="12042" y="18"/>
+</item>
+<item historyLabel="wlan_mac_ap_uart_menu.c" index="7">
+<position info="not_deleted" x="18330" y="18"/>
+</item>
+<item historyLabel="wlan_mac_chan_util.h" index="8">
+<position info="not_deleted" x="5281" y="18"/>
+</item>
+<item historyLabel="wlan_mac_chan_util.c" index="9">
+<position info="not_deleted" x="9902" y="0"/>
+</item>
+<item historyLabel="wlan_mac_chan_util.h" index="8">
+<position info="not_deleted" x="1295" y="8"/>
+</item>
+<item historyLabel="wlan_mac_chan_util.c" index="9">
+<position info="not_deleted" x="9902" y="0"/>
+</item>
+<item historyLabel="wlan_mac_chan_util.h" index="8">
+<position info="not_deleted" x="1359" y="11"/>
+</item>
+<item historyLabel="wlan_mac_chan_util.c" index="9">
+<position info="not_deleted" x="9902" y="0"/>
+</item>
+<item historyLabel="wlan_mac_chan_util.c" index="9">
+<position info="not_deleted" x="10358" y="0"/>
+</item>
+<item historyLabel="wlan_mac_chan_util.h" index="8">
+<position info="not_deleted" x="1295" y="8"/>
+</item>
+<item historyLabel="wlan_mac_chan_util.c" index="9">
+<position info="not_deleted" x="10393" y="0"/>
+</item>
+<item historyLabel="wlan_mac_chan_util.h" index="8">
+<position info="not_deleted" x="1359" y="11"/>
+</item>
+<item historyLabel="wlan_mac_chan_util.c" index="9">
+<position info="not_deleted" x="10580" y="0"/>
+</item>
+<item historyLabel="wlan_mac_chan_util.h" index="8">
+<position info="not_deleted" x="1359" y="11"/>
+</item>
+<item historyLabel="wlan_mac_chan_util.c" index="10">
+<position info="not_deleted" x="11103" y="0"/>
+</item>
+<item historyLabel="wlan_mac_chan_util.h" index="8">
+<position info="not_deleted" x="1359" y="11"/>
+</item>
+<item historyLabel="wlan_mac_chan_util.c" index="10">
+<position info="not_deleted" x="11103" y="0"/>
+</item>
+<item historyLabel="wlan_mac_chan_util.h" index="11">
+<position info="not_deleted" x="1285" y="0"/>
+</item>
+<item historyLabel="wlan_mac_chan_util.c" index="10">
+<position info="not_deleted" x="15288" y="0"/>
+</item>
+<item historyLabel="wlan_mac_chan_util.h" index="11">
+<position info="not_deleted" x="1285" y="0"/>
+</item>
+<item historyLabel="wlan_mac_chan_util.c" index="10">
+<position info="not_deleted" x="15288" y="0"/>
+</item>
+<item historyLabel="wlan_mac_ap_uart_menu.c" index="12">
+<position info="not_deleted" x="18307" y="83"/>
+</item>
+<item historyLabel="wlan_mac_ap.c" index="13">
+<position info="not_deleted" x="53914" y="0"/>
+</item>
+<item historyLabel="wlan_mac_chan_util.c" index="14">
+<position info="not_deleted" x="19250" y="0"/>
+</item>
+<item historyLabel="wlan_mac_ap_uart_menu.c" index="15">
+<position info="not_deleted" x="18435" y="83"/>
+</item>
+<item historyLabel="wlan_mac_ap_uart_menu.c" index="15">
+<position info="not_deleted" x="14654" y="0"/>
+</item>
+<item historyLabel="wlan_mac_chan_util.c" index="14">
+<position info="not_deleted" x="22516" y="0"/>
+</item>
+<item historyLabel="wlan_mac_chan_util.h" index="16">
+<position info="not_deleted" x="1285" y="0"/>
+</item>
+<item historyLabel="wlan_mac_chan_util.c" index="17">
+<position info="not_deleted" x="22516" y="0"/>
+</item>
+<item historyLabel="wlan_mac_chan_util.h" index="16">
+<position info="not_deleted" x="5281" y="18"/>
+</item>
+<item historyLabel="wlan_mac_chan_util.c" index="17">
+<position info="not_deleted" x="22516" y="0"/>
+</item>
+<item historyLabel="wlan_mac_ap_uart_menu.c" index="18">
+<position info="not_deleted" x="14654" y="0"/>
+</item>
+<item active="true" historyLabel="wlan_mac_ap.c" index="19">
+<position info="not_deleted" x="3238" y="0"/>
+</item>
+</navigationHistory>
+<input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
+</page>
+<workbenchWindowAdvisor/>
+<actionBarAdvisor/>
+<trimLayout>
+<trimArea IMemento.internal.id="128">
+<trimItem IMemento.internal.id="org.eclipse.ui.internal.WorkbenchWindow.topBar"/>
+</trimArea>
+<trimArea IMemento.internal.id="1024">
+<trimItem IMemento.internal.id="org.eclise.ui.internal.FastViewBar"/>
+<trimItem IMemento.internal.id="org.eclipse.jface.action.StatusLineManager"/>
+<trimItem IMemento.internal.id="org.eclipse.ui.internal.progress.ProgressRegion"/>
+</trimArea>
+</trimLayout>
+</window>
+<mruList>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="wlan_mac_entries.h" tooltip="wlan_mac_high_ap/wlan_mac_high_framework/include/wlan_mac_entries.h">
+<persistable path="/wlan_mac_high_ap/wlan_mac_high_framework/include/wlan_mac_entries.h"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="wlan_mac_entries.c" tooltip="wlan_mac_high_ap/wlan_mac_high_framework/wlan_mac_entries.c">
+<persistable path="/wlan_mac_high_ap/wlan_mac_high_framework/wlan_mac_entries.c"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="wlan_mac_pkt_buf_util.h" tooltip="wlan_mac_high_ap/wlan_mac_common/include/wlan_mac_pkt_buf_util.h">
+<persistable path="/wlan_mac_high_ap/wlan_mac_common/include/wlan_mac_pkt_buf_util.h"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="wlan_exp_common.h" tooltip="wlan_mac_high_ap/wlan_mac_high_framework/include/wlan_exp_common.h">
+<persistable path="/wlan_mac_high_ap/wlan_mac_high_framework/include/wlan_exp_common.h"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="wlan_mac_packet_types.h" tooltip="wlan_mac_high_ap/wlan_mac_high_framework/include/wlan_mac_packet_types.h">
+<persistable path="/wlan_mac_high_ap/wlan_mac_high_framework/include/wlan_mac_packet_types.h"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="wlan_mac_addr_filter.h" tooltip="wlan_mac_high_ap/wlan_mac_high_framework/include/wlan_mac_addr_filter.h">
+<persistable path="/wlan_mac_high_ap/wlan_mac_high_framework/include/wlan_mac_addr_filter.h"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="wlan_mac_chan_util.c" tooltip="wlan_mac_high_ap/src/wlan_mac_chan_util.c">
+<persistable path="/wlan_mac_high_ap/src/wlan_mac_chan_util.c"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="wlan_mac_chan_util.h" tooltip="wlan_mac_high_ap/src/wlan_mac_chan_util.h">
+<persistable path="/wlan_mac_high_ap/src/wlan_mac_chan_util.h"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="wlan_mac_ap.h" tooltip="wlan_mac_high_ap/src/include/wlan_mac_ap.h">
+<persistable path="/wlan_mac_high_ap/src/include/wlan_mac_ap.h"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="wlan_mac_schedule.h" tooltip="wlan_mac_high_ap/wlan_mac_high_framework/include/wlan_mac_schedule.h">
+<persistable path="/wlan_mac_high_ap/wlan_mac_high_framework/include/wlan_mac_schedule.h"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="wlan_mac_chan_util.h" tooltip="wlan_mac_high_ap/src/include/wlan_mac_chan_util.h">
+<persistable path="/wlan_mac_high_ap/src/include/wlan_mac_chan_util.h"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="wlan_mac_station_info.h" tooltip="wlan_mac_high_sta/wlan_mac_high_framework/include/wlan_mac_station_info.h">
+<persistable path="/wlan_mac_high_sta/wlan_mac_high_framework/include/wlan_mac_station_info.h"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="wlan_mac_sta.h" tooltip="wlan_mac_high_sta/src/include/wlan_mac_sta.h">
+<persistable path="/wlan_mac_high_sta/src/include/wlan_mac_sta.h"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="wlan_mac_eth_util.h" tooltip="wlan_mac_high_sta/wlan_mac_high_framework/include/wlan_mac_eth_util.h">
+<persistable path="/wlan_mac_high_sta/wlan_mac_high_framework/include/wlan_mac_eth_util.h"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="wlan_mac_dl_list.h" tooltip="wlan_mac_high_sta/wlan_mac_high_framework/include/wlan_mac_dl_list.h">
+<persistable path="/wlan_mac_high_sta/wlan_mac_high_framework/include/wlan_mac_dl_list.h"/>
+</file>
+</mruList>
+</workbench>

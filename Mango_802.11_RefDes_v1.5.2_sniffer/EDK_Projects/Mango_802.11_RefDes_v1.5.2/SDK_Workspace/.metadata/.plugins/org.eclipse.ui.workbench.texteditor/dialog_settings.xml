@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
+		<item value="257" key="DIALOG_WIDTH"/>
+		<item value="103" key="DIALOG_Y_ORIGIN"/>
+		<item value="8" key="DIALOG_X_ORIGIN"/>
+		<item value="380" key="DIALOG_HEIGHT"/>
+		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
+	</section>
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
+		<item value="true" key="wrap"/>
+		<item value="false" key="casesensitive"/>
+		<item value="false" key="isRegEx"/>
+		<item value="false" key="incremental"/>
+		<item value="false" key="wholeword"/>
+		<item value="scan_traffic_sweep" key="selection"/>
+		<list key="findhistory">
+			<item value="scan_traffic_sweep"/>
+			<item value="mpdu_rx"/>
+			<item value="chan"/>
+			<item value="wlan_mac_high_init_chan_util"/>
+			<item value="WLAN_CHAN_UTIL_HEAVY"/>
+			<item value="WLAN_CHAN_UTIL_LIGHT"/>
+			<item value="WLAN_CHAN_UTIL_IDLE"/>
+			<item value="status"/>
+		</list>
+		<list key="replacehistory">
+			<item value="state"/>
+			<item value="mac_chan_idx_dual"/>
+			<item value="wlan_chan"/>
+			<item value="mac_chan_sel"/>
+			<item value="wlan_ch"/>
+			<item value="wlan_chan_sel"/>
+			<item value="access_point_bssid"/>
+		</list>
+	</section>
+</section>

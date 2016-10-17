@@ -1,0 +1,1421 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>wlan_exp.util &mdash; mango_wlan_exp wlan_exp v1.5.2   documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../_static/rtd_overrides.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="mango_wlan_exp wlan_exp v1.5.2   documentation" href="../../index.html"/>
+        <link rel="up" title="Module code" href="../index.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="../../index.html" class="fa fa-home"> mango_wlan_exp</a>
+        
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../wlan_exp.html">Framework</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../node.html">Node Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../wlan_exp_util.html">WLAN Exp Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ltg.html">LTG Flow Configurations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../device.html">WLAN Device</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../wlan_exp_log.html">Event Log</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../log_overview.html">Event Log Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../log_entry_types.html">Log Entry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../log_util.html">Event Log Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../log_util_hdf.html">HDF5 Utilities</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../index.html">mango_wlan_exp</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+      
+    <li>wlan_exp.util</li>
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <h1>Source code for wlan_exp.util</h1><div class="highlight"><pre>
+<span class="c"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">------------------------------------------------------------------------------</span>
+<span class="sd">Mango 802.11 Reference Design Experiments Framework - Utilities</span>
+<span class="sd">------------------------------------------------------------------------------</span>
+<span class="sd">Authors:   Chris Hunter (chunter [at] mangocomm.com)</span>
+<span class="sd">           Patrick Murphy (murphpo [at] mangocomm.com)</span>
+<span class="sd">           Erik Welsh (welsh [at] mangocomm.com)</span>
+<span class="sd">License:   Copyright 2014-2016, Mango Communications. All rights reserved.</span>
+<span class="sd">           Distributed under the WARP license (http://warpproject.org/license)</span>
+<span class="sd">------------------------------------------------------------------------------</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="kn">import</span> <span class="nn">wlan_exp.defaults</span> <span class="kn">as</span> <span class="nn">defaults</span>
+
+<span class="c"># Fix to support Python 2.x and 3.x</span>
+<span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="s">&quot;3&quot;</span><span class="p">:</span> <span class="nb">long</span><span class="o">=</span><span class="bp">None</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;consts_dict&#39;</span><span class="p">,</span> <span class="s">&#39;init_nodes&#39;</span><span class="p">,</span> <span class="s">&#39;broadcast_cmd_set_mac_time&#39;</span><span class="p">,</span> <span class="s">&#39;broadcast_cmd_write_time_to_logs&#39;</span><span class="p">,</span>
+           <span class="s">&#39;filter_nodes&#39;</span><span class="p">]</span>
+
+
+
+<span class="c"># -----------------------------------------------------------------------------</span>
+<span class="c"># Constants Dictionary Class</span>
+<span class="c"># -----------------------------------------------------------------------------</span>
+
+<span class="k">class</span> <span class="nc">consts_dict</span><span class="p">(</span><span class="nb">dict</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Contants Dictionary</span>
+
+<span class="sd">    Sub-class of dictionary, with fields accessible as immutable properties.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">consts_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="c"># Allow attribute (ie &quot;.&quot;) notation to access contents of dictionary</span>
+    <span class="k">def</span> <span class="nf">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s">&quot;No such attribute: &quot;</span> <span class="o">+</span> <span class="n">name</span><span class="p">)</span>
+
+    <span class="c"># Do not allow existing attributes or items to be modified or deleted</span>
+    <span class="k">def</span> <span class="nf">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s">&quot;Cannot change existing entries in {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">super</span><span class="p">(</span><span class="n">consts_dict</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__setitem__</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__delattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s">&quot;Cannot change existing entries in {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">super</span><span class="p">(</span><span class="n">consts_dict</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__setitem__</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__delitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+<span class="c"># End class</span>
+
+
+
+<span class="c"># -----------------------------------------------------------------------------</span>
+<span class="c"># UART Print Levels</span>
+<span class="c"># -----------------------------------------------------------------------------</span>
+
+<span class="c">#: wlan_exp UART Print Levels:</span>
+<span class="c">#:</span>
+<span class="c">#:  * ``NONE``    - Do not print messages</span>
+<span class="c">#:  * ``ERROR``   - Only print error messages</span>
+<span class="c">#:  * ``WARNING`` - Print error and warning messages</span>
+<span class="c">#:  * ``INFO``    - Print error, warning and info messages</span>
+<span class="c">#:  * ``DEBUG``   - Print error, warning, info and debug messages</span>
+<span class="c">#:    </span>
+<span class="c">#: Use this dictionary for the ``set_print_level()`` command </span>
+<span class="c"># The C counterparts are found in wlan_exp_common.h</span>
+<span class="n">uart_print_levels</span> <span class="o">=</span> <span class="n">consts_dict</span><span class="p">({</span>
+       <span class="s">&#39;NONE&#39;</span>      <span class="p">:</span>  <span class="mi">0</span><span class="p">,</span>
+       <span class="s">&#39;ERROR&#39;</span>     <span class="p">:</span>  <span class="mi">1</span><span class="p">,</span>
+       <span class="s">&#39;WARNING&#39;</span>   <span class="p">:</span>  <span class="mi">2</span><span class="p">,</span>
+       <span class="s">&#39;INFO&#39;</span>      <span class="p">:</span>  <span class="mi">3</span><span class="p">,</span>
+       <span class="s">&#39;DEBUG&#39;</span>     <span class="p">:</span>  <span class="mi">4</span><span class="p">})</span>
+
+
+
+<span class="c"># -----------------------------------------------------------------------------</span>
+<span class="c"># Rate definitions</span>
+<span class="c"># -----------------------------------------------------------------------------</span>
+
+<span class="c">#: PHY Modes</span>
+<span class="c">#:</span>
+<span class="c">#:   * &#39;DSSS&#39;  - DSSS (Rx only)</span>
+<span class="c">#:   * &#39;NONHT&#39; - NONHT OFDM (11a/g)</span>
+<span class="c">#:   * &#39;HTMF&#39;  - HTMF (11n)</span>
+<span class="c">#:</span>
+<span class="c">#: Use this dictionary to interpret ``phy_mode`` values encoded in Tx/Rx log entries</span>
+<span class="n">phy_modes</span> <span class="o">=</span> <span class="n">consts_dict</span><span class="p">({</span>
+       <span class="s">&#39;DSSS&#39;</span>      <span class="p">:</span>  <span class="mi">0</span><span class="p">,</span>
+       <span class="s">&#39;NONHT&#39;</span>     <span class="p">:</span>  <span class="mi">1</span><span class="p">,</span>
+       <span class="s">&#39;HTMF&#39;</span>      <span class="p">:</span>  <span class="mi">2</span><span class="p">})</span>
+
+
+<div class="viewcode-block" id="get_rate_info"><a class="viewcode-back" href="../../wlan_exp_util.html#wlan_exp.util.get_rate_info">[docs]</a><span class="k">def</span> <span class="nf">get_rate_info</span><span class="p">(</span><span class="n">mcs</span><span class="p">,</span> <span class="n">phy_mode</span><span class="p">,</span> <span class="n">phy_samp_rate</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">short_GI</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Generate dictionary with details about a PHY rate. The returned dictionary</span>
+<span class="sd">    has fields:</span>
+<span class="sd">    </span>
+<span class="sd">      * ``mcs``: the MCS index passed in the ``mcs`` argument, integer in 0 to 7</span>
+<span class="sd">      * ``phy_mode``: the PHY mode passed in the ``phy_mode`` argument, either ``&#39;NONHT&#39;`` or ``&#39;HTMF&#39;``</span>
+<span class="sd">      * ``desc``: string describing the rate</span>
+<span class="sd">      * ``NDBPS``: integer number of data bits per OFDM symbol for the rate</span>
+<span class="sd">      * ``phy_rate``: float data rate in Mbps</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        mcs (int):           Modulation and coding scheme (MCS) index</span>
+<span class="sd">        phy_mode (str, int): PHY mode (&#39;NONHT&#39;, &#39;HTMF&#39;)</span>
+<span class="sd">        phy_samp_rate (int): PHY sampling rate (10, 20, 40)</span>
+<span class="sd">        short_GI (bool):     Short Guard Interval (GI) (True/False)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        rate_info (dict):  Rate info dictionary</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ret_val</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+
+    <span class="c"># 802.11 a/g rates - IEEE 802.11-2012 Table 18-4</span>
+    <span class="c">#     Clause 18 doesn&#39;t use the term &quot;MCS&quot;, but it&#39;s a convenient</span>
+    <span class="c">#     way to refer to these rates.</span>
+    <span class="n">mod_orders_nonht</span>        <span class="o">=</span> <span class="p">[</span><span class="s">&#39;BPSK&#39;</span><span class="p">,</span> <span class="s">&#39;BPSK&#39;</span><span class="p">,</span> <span class="s">&#39;QPSK&#39;</span><span class="p">,</span> <span class="s">&#39;QPSK&#39;</span><span class="p">,</span> <span class="s">&#39;16-QAM&#39;</span><span class="p">,</span> <span class="s">&#39;16-QAM&#39;</span><span class="p">,</span> <span class="s">&#39;64-QAM&#39;</span><span class="p">,</span> <span class="s">&#39;64-QAM&#39;</span><span class="p">]</span>
+    <span class="n">code_rates_nonht</span>        <span class="o">=</span> <span class="p">[</span> <span class="s">&#39;1/2&#39;</span><span class="p">,</span>  <span class="s">&#39;3/4&#39;</span><span class="p">,</span>  <span class="s">&#39;1/2&#39;</span><span class="p">,</span>  <span class="s">&#39;3/4&#39;</span><span class="p">,</span>    <span class="s">&#39;1/2&#39;</span><span class="p">,</span>    <span class="s">&#39;3/4&#39;</span><span class="p">,</span>    <span class="s">&#39;2/3&#39;</span><span class="p">,</span>    <span class="s">&#39;3/4&#39;</span><span class="p">]</span>
+    <span class="n">ndbps_nonht</span>             <span class="o">=</span> <span class="p">[</span>    <span class="mi">24</span><span class="p">,</span>     <span class="mi">36</span><span class="p">,</span>     <span class="mi">48</span><span class="p">,</span>     <span class="mi">72</span><span class="p">,</span>       <span class="mi">96</span><span class="p">,</span>      <span class="mi">144</span><span class="p">,</span>      <span class="mi">192</span><span class="p">,</span>      <span class="mi">216</span><span class="p">]</span>
+    <span class="n">phy_rates_nonht</span>         <span class="o">=</span> <span class="p">[</span>   <span class="mf">6.0</span><span class="p">,</span>    <span class="mf">9.0</span><span class="p">,</span>   <span class="mf">12.0</span><span class="p">,</span>   <span class="mf">18.0</span><span class="p">,</span>     <span class="mf">24.0</span><span class="p">,</span>     <span class="mf">36.0</span><span class="p">,</span>     <span class="mf">48.0</span><span class="p">,</span>     <span class="mf">54.0</span><span class="p">]</span>
+
+    <span class="c"># 802.11n rates - IEEE 802.11-2012 Tables 20-30 to 30-37</span>
+    <span class="n">mod_orders_htmf</span>         <span class="o">=</span> <span class="p">[</span><span class="s">&#39;BPSK&#39;</span><span class="p">,</span> <span class="s">&#39;QPSK&#39;</span><span class="p">,</span> <span class="s">&#39;QPSK&#39;</span><span class="p">,</span> <span class="s">&#39;16-QAM&#39;</span><span class="p">,</span> <span class="s">&#39;16-QAM&#39;</span><span class="p">,</span> <span class="s">&#39;64-QAM&#39;</span><span class="p">,</span> <span class="s">&#39;64-QAM&#39;</span><span class="p">,</span> <span class="s">&#39;64-QAM&#39;</span><span class="p">]</span>
+    <span class="n">code_rates_htmf</span>         <span class="o">=</span> <span class="p">[</span> <span class="s">&#39;1/2&#39;</span><span class="p">,</span>  <span class="s">&#39;1/2&#39;</span><span class="p">,</span>  <span class="s">&#39;3/4&#39;</span><span class="p">,</span>    <span class="s">&#39;1/2&#39;</span><span class="p">,</span>    <span class="s">&#39;3/4&#39;</span><span class="p">,</span>    <span class="s">&#39;2/3&#39;</span><span class="p">,</span>    <span class="s">&#39;3/4&#39;</span><span class="p">,</span>    <span class="s">&#39;5/6&#39;</span><span class="p">]</span>
+    <span class="n">ndbps_htmf_bw20</span>         <span class="o">=</span> <span class="p">[</span>    <span class="mi">26</span><span class="p">,</span>     <span class="mi">52</span><span class="p">,</span>     <span class="mi">78</span><span class="p">,</span>      <span class="mi">104</span><span class="p">,</span>      <span class="mi">156</span><span class="p">,</span>      <span class="mi">208</span><span class="p">,</span>      <span class="mi">234</span><span class="p">,</span>      <span class="mi">260</span><span class="p">]</span>
+    <span class="n">phy_rates_htmf_bw20_lgi</span> <span class="o">=</span> <span class="p">[</span>   <span class="mf">6.5</span><span class="p">,</span>   <span class="mf">13.0</span><span class="p">,</span>   <span class="mf">19.5</span><span class="p">,</span>     <span class="mf">26.0</span><span class="p">,</span>     <span class="mf">39.0</span><span class="p">,</span>     <span class="mf">52.0</span><span class="p">,</span>     <span class="mf">58.5</span><span class="p">,</span>     <span class="mf">65.0</span><span class="p">]</span>
+    <span class="n">phy_rates_htmf_bw20_sgi</span> <span class="o">=</span> <span class="p">[</span>   <span class="mf">7.2</span><span class="p">,</span>   <span class="mf">14.4</span><span class="p">,</span>   <span class="mf">21.7</span><span class="p">,</span>     <span class="mf">28.9</span><span class="p">,</span>     <span class="mf">43.3</span><span class="p">,</span>     <span class="mf">57.8</span><span class="p">,</span>     <span class="mf">65.0</span><span class="p">,</span>     <span class="mf">72.2</span><span class="p">]</span>
+    <span class="c"># ndbps_htmf_bw40         = [    54,    108,    162,      216,      324,      432,      486,      540]</span>
+    <span class="c"># phy_rates_htmf_bw40_lgi = [  13.5,   27.0,   40.5,     54.0,     81.0,    108.0,    121.5,    135.0]</span>
+    <span class="c"># phy_rates_htmf_bw40_sgi = [  15.0,   30.0,   45.0,     60.0,     90.0,    120.0,    135.0,    150.0]</span>
+
+
+    <span class="c"># Check input arguments</span>
+    <span class="k">if</span> <span class="p">((</span><span class="n">mcs</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">mcs</span> <span class="o">&gt;</span> <span class="mi">7</span><span class="p">)):</span>
+        <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s">&quot;MCS must be in [0 .. 7]&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">phy_mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&#39;NONHT&#39;</span><span class="p">,</span> <span class="s">&#39;HTMF&#39;</span><span class="p">,</span> <span class="n">phy_modes</span><span class="p">[</span><span class="s">&#39;NONHT&#39;</span><span class="p">],</span> <span class="n">phy_modes</span><span class="p">[</span><span class="s">&#39;HTMF&#39;</span><span class="p">]]):</span>
+        <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s">&quot;PHY mode must be in [&#39;NONHT&#39;, &#39;HTMF&#39;, phy_modes[&#39;NONHT&#39;], phy_modes[&#39;HTMF&#39;]]&quot;</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="n">phy_samp_rate</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">40</span><span class="p">]):</span>
+        <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s">&quot;PHY sample rate must be in [10, 20, 40]&quot;</span><span class="p">)</span>
+        
+    <span class="c"># Set common values</span>
+    <span class="n">ret_val</span><span class="p">[</span><span class="s">&#39;mcs&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mcs</span>
+
+    <span class="c"># Set &#39;NONHT&#39; values</span>
+    <span class="k">if</span> <span class="p">((</span><span class="n">phy_mode</span> <span class="o">==</span> <span class="s">&#39;NONHT&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">phy_mode</span> <span class="o">==</span> <span class="n">phy_modes</span><span class="p">[</span><span class="s">&#39;NONHT&#39;</span><span class="p">])):</span>
+        <span class="n">ret_val</span><span class="p">[</span><span class="s">&#39;phy_mode&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;NONHT&#39;</span>
+        <span class="n">ret_val</span><span class="p">[</span><span class="s">&#39;desc&#39;</span><span class="p">]</span>     <span class="o">=</span> <span class="s">&#39;NONHT {0} {1}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mod_orders_nonht</span><span class="p">[</span><span class="n">mcs</span><span class="p">],</span> <span class="n">code_rates_nonht</span><span class="p">[</span><span class="n">mcs</span><span class="p">])</span>
+        <span class="n">ret_val</span><span class="p">[</span><span class="s">&#39;NDBPS&#39;</span><span class="p">]</span>    <span class="o">=</span> <span class="n">ndbps_nonht</span><span class="p">[</span><span class="n">mcs</span><span class="p">]</span>
+        <span class="n">ret_val</span><span class="p">[</span><span class="s">&#39;phy_rate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">phy_rates_nonht</span><span class="p">[</span><span class="n">mcs</span><span class="p">]</span>
+
+    <span class="c"># Set &#39;HTMF&#39; values</span>
+    <span class="k">elif</span> <span class="p">((</span><span class="n">phy_mode</span> <span class="o">==</span> <span class="s">&#39;HTMF&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">phy_mode</span> <span class="o">==</span> <span class="n">phy_modes</span><span class="p">[</span><span class="s">&#39;HTMF&#39;</span><span class="p">])):</span>
+        <span class="n">ret_val</span><span class="p">[</span><span class="s">&#39;phy_mode&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;HTMF&#39;</span>
+        <span class="n">ret_val</span><span class="p">[</span><span class="s">&#39;desc&#39;</span><span class="p">]</span>     <span class="o">=</span> <span class="s">&#39;HTMF {0} {1}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mod_orders_htmf</span><span class="p">[</span><span class="n">mcs</span><span class="p">],</span> <span class="n">code_rates_htmf</span><span class="p">[</span><span class="n">mcs</span><span class="p">])</span>
+        <span class="n">ret_val</span><span class="p">[</span><span class="s">&#39;NDBPS&#39;</span><span class="p">]</span>    <span class="o">=</span> <span class="n">ndbps_htmf_bw20</span><span class="p">[</span><span class="n">mcs</span><span class="p">]</span>
+        
+        <span class="k">if</span> <span class="p">(</span><span class="n">short_GI</span><span class="p">):</span>
+            <span class="n">ret_val</span><span class="p">[</span><span class="s">&#39;phy_rate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">phy_rates_htmf_bw20_sgi</span><span class="p">[</span><span class="n">mcs</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">ret_val</span><span class="p">[</span><span class="s">&#39;phy_rate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">phy_rates_htmf_bw20_lgi</span><span class="p">[</span><span class="n">mcs</span><span class="p">]</span>
+
+    <span class="c"># Update PHY rate for other PHY sampling rates</span>
+    <span class="n">ret_val</span><span class="p">[</span><span class="s">&#39;phy_rate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ret_val</span><span class="p">[</span><span class="s">&#39;phy_rate&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">phy_samp_rate</span> <span class="o">/</span> <span class="mi">20</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">ret_val</span>
+
+<span class="c"># End def</span>
+
+</div>
+<div class="viewcode-block" id="rate_info_to_str"><a class="viewcode-back" href="../../wlan_exp_util.html#wlan_exp.util.rate_info_to_str">[docs]</a><span class="k">def</span> <span class="nf">rate_info_to_str</span><span class="p">(</span><span class="n">rate_info</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Convert dictionary returned by ``get_rate_info()`` into a printable string.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rate_info (dict):  Dictionary returned by ``get_rate_info()``</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        output (str):  String representation of the rate</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; import wlan_exp.util as util</span>
+<span class="sd">        &gt;&gt;&gt; r = util.get_rate_info(mcs=3, phy_mode=&#39;HTMF&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; print(util.rate_info_to_str(r))</span>
+<span class="sd">        26.0 Mbps (HTMF 16-QAM 1/2)</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">msg</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">rate_info</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="n">msg</span> <span class="o">+=</span> <span class="s">&quot;{0:&gt;4.1f} Mbps ({1})&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">rate_info</span><span class="p">[</span><span class="s">&#39;phy_rate&#39;</span><span class="p">],</span> <span class="n">rate_info</span><span class="p">[</span><span class="s">&#39;desc&#39;</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">&quot;Invalid rate info type.  Needed dict, provided {0}.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">rate_info</span><span class="p">)))</span>
+    <span class="k">return</span> <span class="n">msg</span>
+
+<span class="c"># End def</span>
+
+
+
+<span class="c"># -----------------------------------------------------------------------------</span>
+<span class="c"># Channel definitions</span>
+<span class="c"># -----------------------------------------------------------------------------</span>
+
+<span class="c">#: List of supported channels. Each value represents a 20MHz channel in the 2.4GHz</span>
+<span class="c">#: or 5GHz bands. Use the ``get_channel_info`` method to lookup the actual center</span>
+<span class="c">#: frequency for a given channel index.</span></div>
+<span class="n">wlan_channels</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">36</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">44</span><span class="p">,</span> <span class="mi">48</span><span class="p">]</span>
+<span class="c">#wlan_channels = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 36, 38, 40, 44, 46, 48, 52, 54, 56, 60, 62, 64, 100, 102, 104, 108, 110, 112, 116, 118, 120, 124, 126, 128, 132, 134, 136, 140, 142, 144, 149, 151, 153, 157, 159, 161, 165, 172, 174, 175, 176, 177, 178]</span>
+
+
+<div class="viewcode-block" id="get_channel_info"><a class="viewcode-back" href="../../wlan_exp_util.html#wlan_exp.util.get_channel_info">[docs]</a><span class="k">def</span> <span class="nf">get_channel_info</span><span class="p">(</span><span class="n">channel</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Get channel info dictionary based on channel number</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        channel (int):  Number of 802.11 channel</span>
+<span class="sd">            (https://en.wikipedia.org/wiki/List_of_WLAN_channels)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        channel_info (dict):  Channel info dictionary</span>
+
+<span class="sd">    The returned dictionary has fields:</span>
+
+<span class="sd">     * ``channel``: Integer channel index</span>
+<span class="sd">     * ``freq``: Integer channel center frequency, in MHz</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; import wlan_exp.util as util</span>
+<span class="sd">        &gt;&gt;&gt; util.get_channel_info(5)</span>
+<span class="sd">        {&#39;freq&#39;: 2432, &#39;channel&#39;: 5}</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="n">channel_info</span> <span class="o">=</span> <span class="p">{</span>
+         <span class="mi">1</span> <span class="p">:</span> <span class="p">{</span><span class="s">&#39;channel&#39;</span> <span class="p">:</span>   <span class="mi">1</span><span class="p">,</span> <span class="s">&#39;freq&#39;</span><span class="p">:</span> <span class="mi">2412</span><span class="p">},</span>
+         <span class="mi">2</span> <span class="p">:</span> <span class="p">{</span><span class="s">&#39;channel&#39;</span> <span class="p">:</span>   <span class="mi">2</span><span class="p">,</span> <span class="s">&#39;freq&#39;</span><span class="p">:</span> <span class="mi">2417</span><span class="p">},</span>
+         <span class="mi">3</span> <span class="p">:</span> <span class="p">{</span><span class="s">&#39;channel&#39;</span> <span class="p">:</span>   <span class="mi">3</span><span class="p">,</span> <span class="s">&#39;freq&#39;</span><span class="p">:</span> <span class="mi">2422</span><span class="p">},</span>
+         <span class="mi">4</span> <span class="p">:</span> <span class="p">{</span><span class="s">&#39;channel&#39;</span> <span class="p">:</span>   <span class="mi">4</span><span class="p">,</span> <span class="s">&#39;freq&#39;</span><span class="p">:</span> <span class="mi">2427</span><span class="p">},</span>
+         <span class="mi">5</span> <span class="p">:</span> <span class="p">{</span><span class="s">&#39;channel&#39;</span> <span class="p">:</span>   <span class="mi">5</span><span class="p">,</span> <span class="s">&#39;freq&#39;</span><span class="p">:</span> <span class="mi">2432</span><span class="p">},</span>
+         <span class="mi">6</span> <span class="p">:</span> <span class="p">{</span><span class="s">&#39;channel&#39;</span> <span class="p">:</span>   <span class="mi">6</span><span class="p">,</span> <span class="s">&#39;freq&#39;</span><span class="p">:</span> <span class="mi">2437</span><span class="p">},</span>
+         <span class="mi">7</span> <span class="p">:</span> <span class="p">{</span><span class="s">&#39;channel&#39;</span> <span class="p">:</span>   <span class="mi">7</span><span class="p">,</span> <span class="s">&#39;freq&#39;</span><span class="p">:</span> <span class="mi">2442</span><span class="p">},</span>
+         <span class="mi">8</span> <span class="p">:</span> <span class="p">{</span><span class="s">&#39;channel&#39;</span> <span class="p">:</span>   <span class="mi">8</span><span class="p">,</span> <span class="s">&#39;freq&#39;</span><span class="p">:</span> <span class="mi">2447</span><span class="p">},</span>
+         <span class="mi">9</span> <span class="p">:</span> <span class="p">{</span><span class="s">&#39;channel&#39;</span> <span class="p">:</span>   <span class="mi">9</span><span class="p">,</span> <span class="s">&#39;freq&#39;</span><span class="p">:</span> <span class="mi">2452</span><span class="p">},</span>
+        <span class="mi">10</span> <span class="p">:</span> <span class="p">{</span><span class="s">&#39;channel&#39;</span> <span class="p">:</span>  <span class="mi">10</span><span class="p">,</span> <span class="s">&#39;freq&#39;</span><span class="p">:</span> <span class="mi">2457</span><span class="p">},</span>
+        <span class="mi">11</span> <span class="p">:</span> <span class="p">{</span><span class="s">&#39;channel&#39;</span> <span class="p">:</span>  <span class="mi">11</span><span class="p">,</span> <span class="s">&#39;freq&#39;</span><span class="p">:</span> <span class="mi">2462</span><span class="p">},</span>
+        <span class="mi">36</span> <span class="p">:</span> <span class="p">{</span><span class="s">&#39;channel&#39;</span> <span class="p">:</span>   <span class="mi">36</span><span class="p">,</span> <span class="s">&#39;freq&#39;</span><span class="p">:</span> <span class="mi">5180</span><span class="p">},</span>
+        <span class="mi">38</span> <span class="p">:</span> <span class="p">{</span><span class="s">&#39;channel&#39;</span> <span class="p">:</span>   <span class="mi">38</span><span class="p">,</span> <span class="s">&#39;freq&#39;</span><span class="p">:</span> <span class="mi">5190</span><span class="p">},</span>
+        <span class="mi">40</span> <span class="p">:</span> <span class="p">{</span><span class="s">&#39;channel&#39;</span> <span class="p">:</span>   <span class="mi">40</span><span class="p">,</span> <span class="s">&#39;freq&#39;</span><span class="p">:</span> <span class="mi">5200</span><span class="p">},</span>
+        <span class="mi">44</span> <span class="p">:</span> <span class="p">{</span><span class="s">&#39;channel&#39;</span> <span class="p">:</span>   <span class="mi">44</span><span class="p">,</span> <span class="s">&#39;freq&#39;</span><span class="p">:</span> <span class="mi">5220</span><span class="p">},</span>
+        <span class="mi">46</span> <span class="p">:</span> <span class="p">{</span><span class="s">&#39;channel&#39;</span> <span class="p">:</span>   <span class="mi">46</span><span class="p">,</span> <span class="s">&#39;freq&#39;</span><span class="p">:</span> <span class="mi">5230</span><span class="p">},</span>
+        <span class="mi">48</span> <span class="p">:</span> <span class="p">{</span><span class="s">&#39;channel&#39;</span> <span class="p">:</span>   <span class="mi">48</span><span class="p">,</span> <span class="s">&#39;freq&#39;</span><span class="p">:</span> <span class="mi">5240</span><span class="p">},</span>
+        <span class="mi">52</span> <span class="p">:</span> <span class="p">{</span><span class="s">&#39;channel&#39;</span> <span class="p">:</span>   <span class="mi">52</span><span class="p">,</span> <span class="s">&#39;freq&#39;</span><span class="p">:</span> <span class="mi">5260</span><span class="p">},</span>
+        <span class="mi">54</span> <span class="p">:</span> <span class="p">{</span><span class="s">&#39;channel&#39;</span> <span class="p">:</span>   <span class="mi">54</span><span class="p">,</span> <span class="s">&#39;freq&#39;</span><span class="p">:</span> <span class="mi">5270</span><span class="p">},</span>
+        <span class="mi">56</span> <span class="p">:</span> <span class="p">{</span><span class="s">&#39;channel&#39;</span> <span class="p">:</span>   <span class="mi">56</span><span class="p">,</span> <span class="s">&#39;freq&#39;</span><span class="p">:</span> <span class="mi">5280</span><span class="p">},</span>
+        <span class="mi">60</span> <span class="p">:</span> <span class="p">{</span><span class="s">&#39;channel&#39;</span> <span class="p">:</span>   <span class="mi">60</span><span class="p">,</span> <span class="s">&#39;freq&#39;</span><span class="p">:</span> <span class="mi">5300</span><span class="p">},</span>
+        <span class="mi">62</span> <span class="p">:</span> <span class="p">{</span><span class="s">&#39;channel&#39;</span> <span class="p">:</span>   <span class="mi">62</span><span class="p">,</span> <span class="s">&#39;freq&#39;</span><span class="p">:</span> <span class="mi">5310</span><span class="p">},</span>
+        <span class="mi">64</span> <span class="p">:</span> <span class="p">{</span><span class="s">&#39;channel&#39;</span> <span class="p">:</span>   <span class="mi">64</span><span class="p">,</span> <span class="s">&#39;freq&#39;</span><span class="p">:</span> <span class="mi">5320</span><span class="p">},</span>
+        <span class="mi">100</span> <span class="p">:</span> <span class="p">{</span><span class="s">&#39;channel&#39;</span> <span class="p">:</span>   <span class="mi">100</span><span class="p">,</span> <span class="s">&#39;freq&#39;</span><span class="p">:</span> <span class="mi">5500</span><span class="p">},</span>
+        <span class="mi">102</span> <span class="p">:</span> <span class="p">{</span><span class="s">&#39;channel&#39;</span> <span class="p">:</span>   <span class="mi">102</span><span class="p">,</span> <span class="s">&#39;freq&#39;</span><span class="p">:</span> <span class="mi">5510</span><span class="p">},</span>
+        <span class="mi">104</span> <span class="p">:</span> <span class="p">{</span><span class="s">&#39;channel&#39;</span> <span class="p">:</span>   <span class="mi">104</span><span class="p">,</span> <span class="s">&#39;freq&#39;</span><span class="p">:</span> <span class="mi">5520</span><span class="p">},</span>
+        <span class="mi">108</span> <span class="p">:</span> <span class="p">{</span><span class="s">&#39;channel&#39;</span> <span class="p">:</span>   <span class="mi">108</span><span class="p">,</span> <span class="s">&#39;freq&#39;</span><span class="p">:</span> <span class="mi">5540</span><span class="p">},</span>
+        <span class="mi">110</span> <span class="p">:</span> <span class="p">{</span><span class="s">&#39;channel&#39;</span> <span class="p">:</span>   <span class="mi">110</span><span class="p">,</span> <span class="s">&#39;freq&#39;</span><span class="p">:</span> <span class="mi">5550</span><span class="p">},</span>
+        <span class="mi">112</span> <span class="p">:</span> <span class="p">{</span><span class="s">&#39;channel&#39;</span> <span class="p">:</span>   <span class="mi">112</span><span class="p">,</span> <span class="s">&#39;freq&#39;</span><span class="p">:</span> <span class="mi">5560</span><span class="p">},</span>
+        <span class="mi">116</span> <span class="p">:</span> <span class="p">{</span><span class="s">&#39;channel&#39;</span> <span class="p">:</span>   <span class="mi">116</span><span class="p">,</span> <span class="s">&#39;freq&#39;</span><span class="p">:</span> <span class="mi">5580</span><span class="p">},</span>
+        <span class="mi">118</span> <span class="p">:</span> <span class="p">{</span><span class="s">&#39;channel&#39;</span> <span class="p">:</span>   <span class="mi">118</span><span class="p">,</span> <span class="s">&#39;freq&#39;</span><span class="p">:</span> <span class="mi">5590</span><span class="p">},</span>
+        <span class="mi">120</span> <span class="p">:</span> <span class="p">{</span><span class="s">&#39;channel&#39;</span> <span class="p">:</span>   <span class="mi">120</span><span class="p">,</span> <span class="s">&#39;freq&#39;</span><span class="p">:</span> <span class="mi">5600</span><span class="p">},</span>
+        <span class="mi">124</span> <span class="p">:</span> <span class="p">{</span><span class="s">&#39;channel&#39;</span> <span class="p">:</span>   <span class="mi">124</span><span class="p">,</span> <span class="s">&#39;freq&#39;</span><span class="p">:</span> <span class="mi">5620</span><span class="p">},</span>
+        <span class="mi">126</span> <span class="p">:</span> <span class="p">{</span><span class="s">&#39;channel&#39;</span> <span class="p">:</span>   <span class="mi">126</span><span class="p">,</span> <span class="s">&#39;freq&#39;</span><span class="p">:</span> <span class="mi">5630</span><span class="p">},</span>
+        <span class="mi">128</span> <span class="p">:</span> <span class="p">{</span><span class="s">&#39;channel&#39;</span> <span class="p">:</span>   <span class="mi">128</span><span class="p">,</span> <span class="s">&#39;freq&#39;</span><span class="p">:</span> <span class="mi">5640</span><span class="p">},</span>
+        <span class="mi">132</span> <span class="p">:</span> <span class="p">{</span><span class="s">&#39;channel&#39;</span> <span class="p">:</span>   <span class="mi">132</span><span class="p">,</span> <span class="s">&#39;freq&#39;</span><span class="p">:</span> <span class="mi">5660</span><span class="p">},</span>
+        <span class="mi">134</span> <span class="p">:</span> <span class="p">{</span><span class="s">&#39;channel&#39;</span> <span class="p">:</span>   <span class="mi">134</span><span class="p">,</span> <span class="s">&#39;freq&#39;</span><span class="p">:</span> <span class="mi">5670</span><span class="p">},</span>
+        <span class="mi">136</span> <span class="p">:</span> <span class="p">{</span><span class="s">&#39;channel&#39;</span> <span class="p">:</span>   <span class="mi">136</span><span class="p">,</span> <span class="s">&#39;freq&#39;</span><span class="p">:</span> <span class="mi">5680</span><span class="p">},</span>
+        <span class="mi">140</span> <span class="p">:</span> <span class="p">{</span><span class="s">&#39;channel&#39;</span> <span class="p">:</span>   <span class="mi">140</span><span class="p">,</span> <span class="s">&#39;freq&#39;</span><span class="p">:</span> <span class="mi">5700</span><span class="p">},</span>
+        <span class="mi">142</span> <span class="p">:</span> <span class="p">{</span><span class="s">&#39;channel&#39;</span> <span class="p">:</span>   <span class="mi">142</span><span class="p">,</span> <span class="s">&#39;freq&#39;</span><span class="p">:</span> <span class="mi">5710</span><span class="p">},</span>
+        <span class="mi">144</span> <span class="p">:</span> <span class="p">{</span><span class="s">&#39;channel&#39;</span> <span class="p">:</span>   <span class="mi">144</span><span class="p">,</span> <span class="s">&#39;freq&#39;</span><span class="p">:</span> <span class="mi">5720</span><span class="p">},</span>
+        <span class="mi">149</span> <span class="p">:</span> <span class="p">{</span><span class="s">&#39;channel&#39;</span> <span class="p">:</span>   <span class="mi">149</span><span class="p">,</span> <span class="s">&#39;freq&#39;</span><span class="p">:</span> <span class="mi">5745</span><span class="p">},</span>
+        <span class="mi">151</span> <span class="p">:</span> <span class="p">{</span><span class="s">&#39;channel&#39;</span> <span class="p">:</span>   <span class="mi">151</span><span class="p">,</span> <span class="s">&#39;freq&#39;</span><span class="p">:</span> <span class="mi">5755</span><span class="p">},</span>
+        <span class="mi">153</span> <span class="p">:</span> <span class="p">{</span><span class="s">&#39;channel&#39;</span> <span class="p">:</span>   <span class="mi">153</span><span class="p">,</span> <span class="s">&#39;freq&#39;</span><span class="p">:</span> <span class="mi">5765</span><span class="p">},</span>
+        <span class="mi">157</span> <span class="p">:</span> <span class="p">{</span><span class="s">&#39;channel&#39;</span> <span class="p">:</span>   <span class="mi">157</span><span class="p">,</span> <span class="s">&#39;freq&#39;</span><span class="p">:</span> <span class="mi">5785</span><span class="p">},</span>
+        <span class="mi">159</span> <span class="p">:</span> <span class="p">{</span><span class="s">&#39;channel&#39;</span> <span class="p">:</span>   <span class="mi">159</span><span class="p">,</span> <span class="s">&#39;freq&#39;</span><span class="p">:</span> <span class="mi">5795</span><span class="p">},</span>
+        <span class="mi">161</span> <span class="p">:</span> <span class="p">{</span><span class="s">&#39;channel&#39;</span> <span class="p">:</span>   <span class="mi">161</span><span class="p">,</span> <span class="s">&#39;freq&#39;</span><span class="p">:</span> <span class="mi">5805</span><span class="p">},</span>
+        <span class="mi">165</span> <span class="p">:</span> <span class="p">{</span><span class="s">&#39;channel&#39;</span> <span class="p">:</span>   <span class="mi">165</span><span class="p">,</span> <span class="s">&#39;freq&#39;</span><span class="p">:</span> <span class="mi">5825</span><span class="p">},</span>    
+        <span class="mi">172</span> <span class="p">:</span> <span class="p">{</span><span class="s">&#39;channel&#39;</span> <span class="p">:</span>   <span class="mi">172</span><span class="p">,</span> <span class="s">&#39;freq&#39;</span><span class="p">:</span> <span class="mi">5860</span><span class="p">},</span>
+        <span class="mi">174</span> <span class="p">:</span> <span class="p">{</span><span class="s">&#39;channel&#39;</span> <span class="p">:</span>   <span class="mi">174</span><span class="p">,</span> <span class="s">&#39;freq&#39;</span><span class="p">:</span> <span class="mi">5870</span><span class="p">},</span>
+        <span class="mi">175</span> <span class="p">:</span> <span class="p">{</span><span class="s">&#39;channel&#39;</span> <span class="p">:</span>   <span class="mi">175</span><span class="p">,</span> <span class="s">&#39;freq&#39;</span><span class="p">:</span> <span class="mi">5875</span><span class="p">},</span>
+        <span class="mi">176</span> <span class="p">:</span> <span class="p">{</span><span class="s">&#39;channel&#39;</span> <span class="p">:</span>   <span class="mi">176</span><span class="p">,</span> <span class="s">&#39;freq&#39;</span><span class="p">:</span> <span class="mi">5880</span><span class="p">},</span>
+        <span class="mi">177</span> <span class="p">:</span> <span class="p">{</span><span class="s">&#39;channel&#39;</span> <span class="p">:</span>   <span class="mi">177</span><span class="p">,</span> <span class="s">&#39;freq&#39;</span><span class="p">:</span> <span class="mi">5885</span><span class="p">},</span>
+        <span class="mi">178</span> <span class="p">:</span> <span class="p">{</span><span class="s">&#39;channel&#39;</span> <span class="p">:</span>   <span class="mi">178</span><span class="p">,</span> <span class="s">&#39;freq&#39;</span><span class="p">:</span> <span class="mi">5890</span><span class="p">}}</span>
+
+    <span class="c"># Check input arguments</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">channel</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">wlan_channels</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s">&quot;Channel must be list of supported channels.&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">channel_info</span><span class="p">[</span><span class="n">channel</span><span class="p">]</span>
+
+<span class="c"># End def</span>
+
+</div>
+<div class="viewcode-block" id="channel_info_to_str"><a class="viewcode-back" href="../../wlan_exp_util.html#wlan_exp.util.channel_info_to_str">[docs]</a><span class="k">def</span> <span class="nf">channel_info_to_str</span><span class="p">(</span><span class="n">channel_info</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Convert a channel info dictionary to a string.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        channel_info (dict):  Dictionary returned by ``get_channel_info()``</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        output (str):  String representation of the &#39;channel&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">msg</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">channel_info</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="n">msg</span> <span class="o">+=</span> <span class="s">&quot;{0:4d} ({1} MHz)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">channel_info</span><span class="p">[</span><span class="s">&#39;channel&#39;</span><span class="p">],</span> <span class="n">channel_info</span><span class="p">[</span><span class="s">&#39;freq&#39;</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">&quot;Invalid channel info type.  Needed dict, provided {0}.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">channel_info</span><span class="p">)))</span>
+    <span class="k">return</span> <span class="n">msg</span>
+
+<span class="c"># End def</span>
+
+
+
+<span class="c"># -----------------------------------------------------------------------------</span>
+<span class="c"># Antenna Mode definitions</span>
+<span class="c"># -----------------------------------------------------------------------------</span>
+
+<span class="c">#: Dictionary of supported receive interfaces.</span></div>
+<span class="n">wlan_rx_ant_modes</span> <span class="o">=</span> <span class="n">consts_dict</span><span class="p">({</span>
+       <span class="s">&#39;RF_A&#39;</span>           <span class="p">:</span> <span class="mh">0x0</span><span class="p">,</span>
+       <span class="s">&#39;RF_B&#39;</span>           <span class="p">:</span> <span class="mh">0x1</span><span class="p">,</span>
+       <span class="s">&#39;RF_C&#39;</span>           <span class="p">:</span> <span class="mh">0x2</span><span class="p">,</span>
+       <span class="s">&#39;RF_D&#39;</span>           <span class="p">:</span> <span class="mh">0x3</span><span class="p">,</span>
+       <span class="s">&#39;RF_SELDIV_AB&#39;</span>   <span class="p">:</span> <span class="mh">0x4</span><span class="p">})</span>
+       
+<span class="c">#: Dictionary of supported transmit interfaces.</span>
+<span class="n">wlan_tx_ant_modes</span> <span class="o">=</span> <span class="n">consts_dict</span><span class="p">({</span>
+       <span class="s">&#39;RF_A&#39;</span>           <span class="p">:</span> <span class="mh">0x0</span><span class="p">,</span>
+       <span class="s">&#39;RF_B&#39;</span>           <span class="p">:</span> <span class="mh">0x1</span><span class="p">})</span>
+
+
+
+<span class="c"># -----------------------------------------------------------------------------</span>
+<span class="c"># MAC Address definitions</span>
+<span class="c"># -----------------------------------------------------------------------------</span>
+
+<span class="c"># MAC Description Map</span>
+<span class="c">#   List of tuples:  (MAC value, mask, description) describe various MAC addresses</span>
+<span class="c">#</span>
+<span class="c"># IP -&gt; MAC multicast references:</span>
+<span class="c">#     http://technet.microsoft.com/en-us/library/cc957928.aspx</span>
+<span class="c">#     http://en.wikipedia.org/wiki/Multicast_address#Ethernet</span>
+<span class="c">#     http://www.cavebear.com/archive/cavebear/Ethernet/multicast.html</span>
+
+<span class="n">mac_addr_desc_map</span> <span class="o">=</span> <span class="p">[(</span><span class="mh">0xFFFFFFFFFFFF</span><span class="p">,</span> <span class="mh">0xFFFFFFFFFFFF</span><span class="p">,</span> <span class="s">&#39;Broadcast&#39;</span><span class="p">),</span>
+                     <span class="p">(</span><span class="mh">0x01005E000000</span><span class="p">,</span> <span class="mh">0xFFFFFF800000</span><span class="p">,</span> <span class="s">&#39;IP v4 Multicast&#39;</span><span class="p">),</span>
+                     <span class="p">(</span><span class="mh">0x333300000000</span><span class="p">,</span> <span class="mh">0xFFFF00000000</span><span class="p">,</span> <span class="s">&#39;IP v6 Multicast&#39;</span><span class="p">),</span>
+                     <span class="p">(</span><span class="mh">0xFEFFFF000000</span><span class="p">,</span> <span class="mh">0xFFFFFF000000</span><span class="p">,</span> <span class="s">&#39;Anonymized Device&#39;</span><span class="p">),</span>
+                     <span class="p">(</span><span class="mh">0xFFFFFFFF0000</span><span class="p">,</span> <span class="mh">0xFFFFFFFF0000</span><span class="p">,</span> <span class="s">&#39;Anonymized Device&#39;</span><span class="p">),</span>
+                     <span class="p">(</span><span class="mh">0x40D855042000</span><span class="p">,</span> <span class="mh">0xFFFFFFFFF000</span><span class="p">,</span> <span class="s">&#39;Mango WARP Hardware&#39;</span><span class="p">)]</span>
+
+
+<span class="c"># MAC bit definitions</span>
+<span class="c">#   - Reference: http://standards.ieee.org/develop/regauth/tut/macgrp.pdf</span>
+<span class="n">mac_addr_mcast_mask</span> <span class="o">=</span> <span class="mh">0x010000000000</span>
+<span class="n">mac_addr_local_mask</span> <span class="o">=</span> <span class="mh">0x020000000000</span>
+<span class="n">mac_addr_broadcast</span>  <span class="o">=</span> <span class="mh">0xFFFFFFFFFFFF</span>
+
+
+
+<span class="c"># -----------------------------------------------------------------------------</span>
+<span class="c"># Node Utilities</span>
+<span class="c"># -----------------------------------------------------------------------------</span>
+
+<span class="c"># Node Type Dictionary</span>
+<span class="c">#   This variable is not valid until init_nodes has been run.</span>
+<span class="n">node_type_dict</span> <span class="o">=</span> <span class="bp">None</span>
+
+
+
+<div class="viewcode-block" id="init_nodes"><a class="viewcode-back" href="../../wlan_exp_util.html#wlan_exp.util.init_nodes">[docs]</a><span class="k">def</span> <span class="nf">init_nodes</span><span class="p">(</span><span class="n">nodes_config</span><span class="p">,</span> <span class="n">network_config</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">node_factory</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+               <span class="n">network_reset</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Initalize wlan_exp nodes.</span>
+
+<span class="sd">    The init_nodes function serves two purposes:  1) To initialize the node for</span>
+<span class="sd">    participation in the experiment and 2) To retrieve all necessary information</span>
+<span class="sd">    from the node to provide a valid python WlanExpNode object to be used in</span>
+<span class="sd">    the experiment script.</span>
+
+<span class="sd">    When a WARP node is first configured from a bitstream, its network interface is</span>
+<span class="sd">    set to a default value such that it is part of the defalt subnet 10.0.0 but does not</span>
+<span class="sd">    have a valid IP address for communication with the host.  As part of the init_nodes</span>
+<span class="sd">    process, if network_reset is True, the host will reset the network configuration</span>
+<span class="sd">    on the node and configure the node with a valid IP address.  If the network settings</span>
+<span class="sd">    of a node have already been configured and are known to the python experiment script</span>
+<span class="sd">    a priori, then it is not necessary to issue a network reset to reset the network</span>
+<span class="sd">    settings on the node.  This can be extremely useful when trying to interact with a</span>
+<span class="sd">    node via multiple python experiment scripts at the same time.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        nodes_config (NodesConfiguration):  A NodesConfiguration describing the nodes</span>
+<span class="sd">            in the network.</span>
+<span class="sd">        network_config (NetworkConfiguration, optional): A NetworkConfiguration object</span>
+<span class="sd">            describing the network configuration</span>
+<span class="sd">        node_factory (WlanExpNodeFactory, optional):  A WlanExpNodeFactory or subclass</span>
+<span class="sd">            to create nodes of a given node type</span>
+<span class="sd">        network_reset (bool, optional):  Issue a network reset command to the nodes to</span>
+<span class="sd">            initialize / re-initialize their network interface.</span>
+<span class="sd">        output (bool, optional):         Print output about the nodes</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        nodes (list of WlanExpNode):</span>
+<span class="sd">            Initialized list of WlanExpNode / sub-classes of WlanExpNode depending on the</span>
+<span class="sd">            hardware configuration of the WARP nodes.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">global</span> <span class="n">node_type_dict</span>
+
+    <span class="c"># Create a Host Configuration if there is none provided</span>
+    <span class="k">if</span> <span class="n">network_config</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="kn">import</span> <span class="nn">wlan_exp.transport.config</span> <span class="kn">as</span> <span class="nn">config</span>
+        <span class="n">network_config</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">NetworkConfiguration</span><span class="p">()</span>
+
+    <span class="c"># If node_factory is not defined, create a default WlanExpNodeFactory</span>
+    <span class="k">if</span> <span class="n">node_factory</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="kn">import</span> <span class="nn">wlan_exp.node</span> <span class="kn">as</span> <span class="nn">node</span>
+        <span class="n">node_factory</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">WlanExpNodeFactory</span><span class="p">(</span><span class="n">network_config</span><span class="p">)</span>
+
+    <span class="c"># Record the node type dictionary from the NodeFactory for later use</span>
+    <span class="n">node_type_dict</span> <span class="o">=</span> <span class="n">node_factory</span><span class="o">.</span><span class="n">get_type_dict</span><span class="p">()</span>
+
+    <span class="c"># Use the utility, init_nodes, to initialize the nodes</span>
+    <span class="kn">import</span> <span class="nn">wlan_exp.transport.util</span> <span class="kn">as</span> <span class="nn">util</span>
+    <span class="k">return</span> <span class="n">util</span><span class="o">.</span><span class="n">init_nodes</span><span class="p">(</span><span class="n">nodes_config</span><span class="p">,</span> <span class="n">network_config</span><span class="p">,</span> <span class="n">node_factory</span><span class="p">,</span> <span class="n">network_reset</span><span class="p">,</span> <span class="n">output</span><span class="p">)</span>
+
+<span class="c"># End def</span>
+
+</div>
+<div class="viewcode-block" id="broadcast_cmd_set_mac_time"><a class="viewcode-back" href="../../wlan_exp_util.html#wlan_exp.util.broadcast_cmd_set_mac_time">[docs]</a><span class="k">def</span> <span class="nf">broadcast_cmd_set_mac_time</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">network_config</span><span class="p">,</span> <span class="n">time_id</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Initialize the MAC time on all of the wlan_exp nodes.</span>
+
+<span class="sd">    This method will iterate through all network configurations and issue a broadcast</span>
+<span class="sd">    packet on each network that will set the MAC time on the node to &#39;time&#39;.  The</span>
+<span class="sd">    method keeps track of how long it takes to send each packet so that the time on all</span>
+<span class="sd">    nodes is as close as possible even across networks.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        network_config (NetworkConfiguration): One or more NetworkConfiguration objects</span>
+<span class="sd">           that define the networks on which the set_time command will be broadcast</span>
+<span class="sd">        time (int):              Time to which the node&#39;s MAC timestamp will be set (int microseconds)</span>
+<span class="sd">        time_id (int, optional): Identifier used as part of the TIME_INFO log entry created by this command.</span>
+<span class="sd">            If not specified, then a random number will be used.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">wlan_exp.cmds</span> <span class="kn">as</span> <span class="nn">cmds</span>
+    
+    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">time</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">long</span><span class="p">]:</span>
+        <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s">&quot;Time must be expressed in int microseconds&quot;</span><span class="p">)</span>
+    
+    <span class="n">_broadcast_time_to_nodes</span><span class="p">(</span><span class="n">time_cmd</span><span class="o">=</span><span class="n">cmds</span><span class="o">.</span><span class="n">CMD_PARAM_WRITE</span><span class="p">,</span> <span class="n">network_config</span><span class="o">=</span><span class="n">network_config</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="n">time</span><span class="p">,</span> <span class="n">time_id</span><span class="o">=</span><span class="n">time_id</span><span class="p">)</span>
+
+<span class="c"># End def</span>
+
+</div>
+<div class="viewcode-block" id="broadcast_cmd_write_time_to_logs"><a class="viewcode-back" href="../../wlan_exp_util.html#wlan_exp.util.broadcast_cmd_write_time_to_logs">[docs]</a><span class="k">def</span> <span class="nf">broadcast_cmd_write_time_to_logs</span><span class="p">(</span><span class="n">network_config</span><span class="p">,</span> <span class="n">time_id</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Add the current host time to the log on each node.</span>
+
+<span class="sd">    This method will iterate through all network configurations and issue a broadcast</span>
+<span class="sd">    packet on each network that will add the current time to the log. The method</span>
+<span class="sd">    keeps track of how long it takes to send each packet so that the time on all</span>
+<span class="sd">    nodes is as close as possible even across networks.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        network_config (NetworkConfiguration): One or more NetworkConfiguration objects</span>
+<span class="sd">           that define the networks on which the log_write_time command will be broadcast</span>
+<span class="sd">        time_id (int, optional): Identifier used as part of the TIME_INFO log entry created by this command.</span>
+<span class="sd">            If not specified, then a random number will be used.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">wlan_exp.cmds</span> <span class="kn">as</span> <span class="nn">cmds</span>
+    <span class="n">_broadcast_time_to_nodes</span><span class="p">(</span><span class="n">time_cmd</span><span class="o">=</span><span class="n">cmds</span><span class="o">.</span><span class="n">CMD_PARAM_TIME_ADD_TO_LOG</span><span class="p">,</span> <span class="n">network_config</span><span class="o">=</span><span class="n">network_config</span><span class="p">,</span> <span class="n">time_id</span><span class="o">=</span><span class="n">time_id</span><span class="p">)</span>
+
+<span class="c"># End def</span>
+
+</div>
+<div class="viewcode-block" id="broadcast_cmd_write_exp_info_to_logs"><a class="viewcode-back" href="../../wlan_exp_util.html#wlan_exp.util.broadcast_cmd_write_exp_info_to_logs">[docs]</a><span class="k">def</span> <span class="nf">broadcast_cmd_write_exp_info_to_logs</span><span class="p">(</span><span class="n">network_config</span><span class="p">,</span> <span class="n">info_type</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Add the EXP INFO log entry to the log on each node.</span>
+
+<span class="sd">    This method will iterate through all network configurations and issue a broadcast</span>
+<span class="sd">    packet on each network that will add the EXP_INFO log entry to the log</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        network_config (NetworkConfiguration): One or more NetworkConfiguration objects</span>
+<span class="sd">           that define the networks on which the log_write_exp_info command will be broadcast</span>
+<span class="sd">        info_type (int): Type of the experiment info.  This is an arbitrary 16 bit number</span>
+<span class="sd">            chosen by the experimentor</span>
+<span class="sd">        message (int, str, bytes, optional): Information to be placed in the event log.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">wlan_exp.cmds</span> <span class="kn">as</span> <span class="nn">cmds</span>
+
+    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">network_config</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">list</span><span class="p">:</span>
+        <span class="n">configs</span> <span class="o">=</span> <span class="n">network_config</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">configs</span> <span class="o">=</span> <span class="p">[</span><span class="n">network_config</span><span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">config</span> <span class="ow">in</span> <span class="n">configs</span><span class="p">:</span>
+        <span class="n">_broadcast_cmd_to_nodes_helper</span><span class="p">(</span><span class="n">cmds</span><span class="o">.</span><span class="n">LogAddExpInfoEntry</span><span class="p">(</span><span class="n">info_type</span><span class="p">,</span> <span class="n">message</span><span class="p">),</span> <span class="n">config</span><span class="p">)</span>
+
+<span class="c"># End def</span>
+
+</div>
+<div class="viewcode-block" id="filter_nodes"><a class="viewcode-back" href="../../wlan_exp_util.html#wlan_exp.util.filter_nodes">[docs]</a><span class="k">def</span> <span class="nf">filter_nodes</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">mac_high</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">mac_low</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">serial_number</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">warn</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return a list of nodes that match all the values for the given filter parameters.</span>
+
+<span class="sd">    Each of these filter parameters can be a single value or a list of values.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        nodes (list of WlanExpNode):  List of WlanExpNode / sub-classes of WlanExpNode</span>
+<span class="sd">        mac_high (str, int, optional):  Filter for CPU High functionality.  This value must be either</span>
+<span class="sd">            an integer corresponding to a node type (see wlan_exp/defaults.py for node types)</span>
+<span class="sd">            or the following strings:</span>
+<span class="sd">            </span>
+<span class="sd">                * **&#39;AP&#39;**   (equivalent to WLAN_EXP_HIGH_AP);</span>
+<span class="sd">                * **&#39;STA&#39;**  (equivalent to WLAN_EXP_HIGH_STA);</span>
+<span class="sd">                * **&#39;IBSS&#39;** (equivalent to WLAN_EXP_HIGH_IBSS).</span>
+<span class="sd">                </span>
+<span class="sd">            A value of None means that no filtering will occur for CPU High Functionality</span>
+<span class="sd">        mac_low (str, int, optional): Filter for CPU Low functionality.  This value must be either</span>
+<span class="sd">            an integer corresponding to a node type (see wlan_exp/defaults.py for node types)</span>
+<span class="sd">            or the following strings:</span>
+<span class="sd">            </span>
+<span class="sd">                * **&#39;DCF&#39;**   (equivalent to WLAN_EXP_LOW_DCF);</span>
+<span class="sd">                * **&#39;NOMAC&#39;** (equivalent to WLAN_EXP_LOW_NOMAC).</span>
+<span class="sd">                </span>
+<span class="sd">            A value of None means that no filtering will occur for CPU Low Functionality</span>
+<span class="sd">        serial_number (str, optional):  Filters nodes by WARPv3 serial number.  This value must be of</span>
+<span class="sd">            the form:  &#39;W3-a-XXXXX&#39; where XXXXX is the five digit serial number of the board.</span>
+<span class="sd">        warn (bool, optional):          Print warnings (default value is True)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        nodes (list of WlanExpNode):  Filtered list of WlanExpNode / sub-classes of WlanExpNode</span>
+
+<span class="sd">    If the return list of nodes is empty, then this method will issue a warning </span>
+<span class="sd">    if the parameter warn is True.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; filter_nodes(nodes, mac_high=&#39;AP&#39;, mac_low=&#39;DCF&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; filter_nodes(nodes, mac_high=&#39;AP&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; filter_nodes(nodes, mac_high=&#39;AP&#39;, mac_low=&#39;DCF&#39;, serial_numbers=[&#39;w3-a-00001&#39;,&#39;w3-a-00002&#39;])</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ret_nodes</span>         <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">tmp_mac_high</span>      <span class="o">=</span> <span class="bp">None</span>
+    <span class="n">tmp_mac_low</span>       <span class="o">=</span> <span class="bp">None</span>
+    <span class="n">tmp_serial_number</span> <span class="o">=</span> <span class="bp">None</span>
+
+    <span class="c"># Create MAC High Filter</span>
+    <span class="k">if</span> <span class="n">mac_high</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">mac_high</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="nb">list</span><span class="p">:</span>
+            <span class="n">mac_high</span> <span class="o">=</span> <span class="p">[</span><span class="n">mac_high</span><span class="p">]</span>
+
+        <span class="n">tmp_mac_high</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">mac_high</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">str</span><span class="p">:</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s">&#39;ap&#39;</span><span class="p">):</span>
+                    <span class="n">tmp_mac_high</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">defaults</span><span class="o">.</span><span class="n">WLAN_EXP_HIGH_AP</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s">&#39;sta&#39;</span><span class="p">):</span>
+                    <span class="n">tmp_mac_high</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">defaults</span><span class="o">.</span><span class="n">WLAN_EXP_HIGH_STA</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s">&#39;ibss&#39;</span><span class="p">):</span>
+                    <span class="n">tmp_mac_high</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">defaults</span><span class="o">.</span><span class="n">WLAN_EXP_HIGH_IBSS</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">msg</span>  <span class="o">=</span> <span class="s">&quot;Unknown mac_high filter value: {0}</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+                    <span class="n">msg</span> <span class="o">+=</span> <span class="s">&quot;    Must be either &#39;AP&#39;, &#39;STA&#39;, or &#39;IBSS&#39;&quot;</span>
+                    <span class="k">print</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">int</span><span class="p">:</span>
+                <span class="n">tmp_mac_high</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+    <span class="c"># Create MAC Low Filter</span>
+    <span class="k">if</span> <span class="n">mac_low</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">mac_low</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="nb">list</span><span class="p">:</span>
+            <span class="n">mac_low</span> <span class="o">=</span> <span class="p">[</span><span class="n">mac_low</span><span class="p">]</span>
+
+        <span class="n">tmp_mac_low</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">mac_low</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">str</span><span class="p">:</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s">&#39;dcf&#39;</span><span class="p">):</span>
+                    <span class="n">tmp_mac_low</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">defaults</span><span class="o">.</span><span class="n">WLAN_EXP_LOW_DCF</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s">&#39;nomac&#39;</span><span class="p">):</span>
+                    <span class="n">tmp_mac_low</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">defaults</span><span class="o">.</span><span class="n">WLAN_EXP_LOW_NOMAC</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">msg</span>  <span class="o">=</span> <span class="s">&quot;Unknown mac_low filter value: {0}</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+                    <span class="n">msg</span> <span class="o">+=</span> <span class="s">&quot;    Must be either &#39;DCF&#39; or &#39;NOMAC&#39;&quot;</span>
+                    <span class="k">print</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">int</span><span class="p">:</span>
+                <span class="n">tmp_mac_low</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+    <span class="c"># Create Serial Number Filter</span>
+    <span class="k">if</span> <span class="n">serial_number</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="kn">import</span> <span class="nn">wlan_exp.transport.util</span> <span class="kn">as</span> <span class="nn">util</span>
+
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">serial_number</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="nb">list</span><span class="p">:</span>
+            <span class="n">serial_number</span> <span class="o">=</span> <span class="p">[</span><span class="n">serial_number</span><span class="p">]</span>
+
+        <span class="n">tmp_serial_number</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">serial_number</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="p">(</span><span class="n">sn</span><span class="p">,</span> <span class="n">_</span><span class="p">)</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">get_serial_number</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+                <span class="n">tmp_serial_number</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sn</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">TypeError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+                <span class="k">print</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+
+    <span class="n">ret_nodes</span> <span class="o">=</span> <span class="n">_get_nodes_by_type</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">tmp_mac_high</span><span class="p">,</span> <span class="n">tmp_mac_low</span><span class="p">)</span>
+    <span class="n">ret_nodes</span> <span class="o">=</span> <span class="n">_get_nodes_by_sn</span><span class="p">(</span><span class="n">ret_nodes</span><span class="p">,</span> <span class="n">tmp_serial_number</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">ret_nodes</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">and</span> <span class="n">warn</span><span class="p">):</span>
+        <span class="kn">import</span> <span class="nn">warnings</span>
+        <span class="n">msg</span>  <span class="o">=</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">No nodes match filter: </span><span class="se">\n</span><span class="s">&quot;</span>
+        <span class="n">msg</span> <span class="o">+=</span> <span class="s">&quot;    mac_high = {0}</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mac_high</span><span class="p">)</span>
+        <span class="n">msg</span> <span class="o">+=</span> <span class="s">&quot;    mac_high = {0}</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mac_high</span><span class="p">)</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">ret_nodes</span>
+
+<span class="c"># End def</span>
+
+</div>
+<div class="viewcode-block" id="check_bss_membership"><a class="viewcode-back" href="../../wlan_exp_util.html#wlan_exp.util.check_bss_membership">[docs]</a><span class="k">def</span> <span class="nf">check_bss_membership</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Check that each of the nodes in the input list are members of the same </span>
+<span class="sd">    BSS.  For a BSS to match, the &#39;bssid&#39;, &#39;ssid&#39; and &#39;channel&#39; must match.</span>
+<span class="sd">    </span>
+<span class="sd">    There are two acceptable patterns for the nodes argument</span>
+<span class="sd">    </span>
+<span class="sd">        #. 1 AP and 1+ STA and 0  IBSS (&quot;infrastructure&quot; network)</span>
+<span class="sd">        #. 0 AP and 0  STA and 2+ IBSS (&quot;ad hoc&quot; network)</span>
+<span class="sd">    </span>
+<span class="sd">    In the case that nodes is 1 AP and 1+ STA and 0 IBSS, then the following</span>
+<span class="sd">    conditions must be met in order to return True</span>
+<span class="sd">    </span>
+<span class="sd">        #. AP BSS must be non-null</span>
+<span class="sd">        #. AP must have each STA in its station_info list</span>
+<span class="sd">        #. Each STA BSS must match AP BSS</span>
+<span class="sd">        #. Each STA must have AP as its only station_info. In the current STA</span>
+<span class="sd">           implementation this condition is guaranteed if the STA BSS matches</span>
+<span class="sd">           the AP BSS (previous condition)</span>
+<span class="sd">    </span>
+<span class="sd">    In the case that nodes is 0 AP and 0 STA and 2+ IBSS, then the following</span>
+<span class="sd">    conditions must be met in order to return True</span>
+<span class="sd">    </span>
+<span class="sd">        #. BSS must match at all nodes and be non-null</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        nodes (list of WlanExpNode):  List of WlanExpNode / sub-classes of </span>
+<span class="sd">            WlanExpNode</span>
+<span class="sd">        verbose (bool):  Print details on which nodes fail BSS membership checks</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        members (bool):  Boolean indicating whether the nodes were members of the same BSS</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">wlan_exp.node_ap</span>   <span class="kn">as</span> <span class="nn">node_ap</span>
+    <span class="kn">import</span> <span class="nn">wlan_exp.node_sta</span>  <span class="kn">as</span> <span class="nn">node_sta</span>
+    <span class="kn">import</span> <span class="nn">wlan_exp.node_ibss</span> <span class="kn">as</span> <span class="nn">node_ibss</span>
+
+    <span class="c"># Define filter methods</span>
+    <span class="n">is_ap</span>   <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="ow">is</span> <span class="n">node_ap</span><span class="o">.</span><span class="n">WlanExpNodeAp</span>
+    <span class="n">is_sta</span>  <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="ow">is</span> <span class="n">node_sta</span><span class="o">.</span><span class="n">WlanExpNodeSta</span>
+    <span class="n">is_ibss</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="ow">is</span> <span class="n">node_ibss</span><span class="o">.</span><span class="n">WlanExpNodeIBSS</span>
+
+    <span class="c"># Define BSS info fields used by this method</span>
+    <span class="n">bss_info_fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;bssid&#39;</span><span class="p">,</span> <span class="s">&#39;ssid&#39;</span><span class="p">,</span> <span class="s">&#39;channel&#39;</span><span class="p">]</span>
+
+    <span class="c"># Define BSS info equality check based on bss_info_fields</span>
+    <span class="n">bss_cfg_eq</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">:</span> <span class="nb">all</span><span class="p">([</span><span class="n">x</span><span class="p">[</span><span class="n">f</span><span class="p">]</span> <span class="o">==</span> <span class="n">y</span><span class="p">[</span><span class="n">f</span><span class="p">]</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">bss_info_fields</span><span class="p">])</span>
+
+    <span class="c"># Define BSS info print method that only prints bss_info_fields    </span>
+    <span class="k">def</span> <span class="nf">print_bss_info</span><span class="p">(</span><span class="n">bss_info</span><span class="p">):</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s">&quot;BSS Info</span><span class="se">\n</span><span class="s">&quot;</span>
+        <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">bss_info_fields</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="s">&quot;    {0:10s} = {1}</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">bss_info</span><span class="p">[</span><span class="n">f</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">msg</span>
+
+    <span class="c"># Convert argument to list if it is not</span>
+    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">nodes</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="nb">list</span><span class="p">:</span>
+        <span class="n">nodes</span> <span class="o">=</span> <span class="p">[</span><span class="n">nodes</span><span class="p">]</span>
+
+    <span class="c"># Filter nodes by type</span>
+    <span class="n">ap</span>    <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="n">is_ap</span><span class="p">,</span> <span class="n">nodes</span><span class="p">))</span>
+    <span class="n">stas</span>  <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="n">is_sta</span><span class="p">,</span> <span class="n">nodes</span><span class="p">))</span>
+    <span class="n">ibsss</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="n">is_ibss</span><span class="p">,</span> <span class="n">nodes</span><span class="p">))</span>
+
+
+    <span class="c"># Check provided nodes argument</span>
+    <span class="c">#   (1) 1 AP and 1+ STA and 0  IBSS</span>
+    <span class="c">#   (2) 0 AP and 0  STA and 2+ IBSS</span>
+    <span class="k">if</span> <span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">ap</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">stas</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ibsss</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)):</span>
+        <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s">&#39;No wlan_exp nodes in list&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">ibsss</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">and</span> <span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">ap</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">stas</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">))):</span>
+        <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s">&#39;Network cannot contain mix of IBSS and other node types&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ap</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s">&#39;{0} AP nodes in list - only 0 or 1 AP supported&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ap</span><span class="p">)))</span>
+
+    <span class="k">if</span> <span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">ap</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">stas</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)):</span>
+        <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s">&#39;Network with 1 AP must include at least 1 STA&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ibsss</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s">&#39;Network with IBSS nodes must have 2 or more nodes&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">ap</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">stas</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)):</span>
+        <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s">&#39;Network with STA must include 1 AP&#39;</span><span class="p">)</span>
+
+    <span class="n">msg</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+    <span class="n">network_good</span> <span class="o">=</span> <span class="bp">True</span>
+
+    <span class="c">###################################</span>
+    <span class="c"># Infrastructure network (1 AP and 1+ STA and 0 IBSS)</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ap</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="c"># Check AP BSS info</span>
+        <span class="n">ap</span>     <span class="o">=</span> <span class="n">ap</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">ap_bss</span> <span class="o">=</span> <span class="n">ap</span><span class="o">.</span><span class="n">get_bss_info</span><span class="p">()</span>
+        
+        <span class="k">if</span> <span class="p">(</span><span class="n">ap_bss</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">):</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="s">&#39;AP BSS is None - No BSS membership possible</span><span class="se">\n</span><span class="s">&#39;</span>
+            <span class="n">network_good</span> <span class="o">=</span> <span class="bp">False</span>
+        
+        <span class="c"># Check AP station_infos</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">network_good</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">stas</span><span class="p">:</span>
+                <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">ap</span><span class="o">.</span><span class="n">is_associated</span><span class="p">(</span><span class="n">s</span><span class="p">)):</span>
+                    <span class="n">msg</span> <span class="o">+=</span> <span class="s">&#39;&quot;{0}&quot; not in AP association table</span><span class="se">\n</span><span class="s">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
+                    <span class="n">network_good</span> <span class="o">=</span> <span class="bp">False</span>
+
+        <span class="c"># Check STA BSS info</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">network_good</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">stas</span><span class="p">:</span>
+                <span class="n">sta_bss</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">get_bss_info</span><span class="p">()</span>
+
+                <span class="k">if</span> <span class="p">(</span><span class="n">sta_bss</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">):</span>
+                    <span class="n">msg</span> <span class="o">+=</span> <span class="s">&#39;&quot;{0}&quot; BSS is None - No BSS membership possible</span><span class="se">\n</span><span class="s">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
+                    <span class="n">network_good</span> <span class="o">=</span> <span class="bp">False</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">bss_cfg_eq</span><span class="p">(</span><span class="n">ap_bss</span><span class="p">,</span> <span class="n">sta_bss</span><span class="p">)):</span>
+                        <span class="n">msg</span> <span class="o">+=</span> <span class="s">&#39;Mismatch between BSS Info:</span><span class="se">\n\n</span><span class="s">&#39;</span>
+                        <span class="n">msg</span> <span class="o">+=</span> <span class="s">&#39;&quot;{0}&quot;:</span><span class="se">\n</span><span class="s">{1}</span><span class="se">\n\n</span><span class="s">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">ap</span><span class="p">),</span> <span class="n">print_bss_info</span><span class="p">(</span><span class="n">ap_bss</span><span class="p">))</span>
+                        <span class="n">msg</span> <span class="o">+=</span> <span class="s">&#39;&quot;{0}&quot;:</span><span class="se">\n</span><span class="s">{1}</span><span class="se">\n</span><span class="s">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="n">print_bss_info</span><span class="p">(</span><span class="n">sta_bss</span><span class="p">))</span>
+                        <span class="n">network_good</span> <span class="o">=</span> <span class="bp">False</span>
+        
+    <span class="c">###################################</span>
+    <span class="c"># Ad hoc network (0 AP and 0 STA and 2+ IBSS)</span>
+    <span class="k">elif</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ibsss</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="c"># Check that all BSS infos match and are non-null</span>
+        <span class="c">#     - Use first node as arbitrary &#39;golden&#39; config</span>
+        <span class="n">golden_bss</span> <span class="o">=</span> <span class="n">ibsss</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_bss_info</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">golden_bss</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">):</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="s">&#39;&quot;{0}&quot; BSS is None - No BSS membership possible</span><span class="se">\n</span><span class="s">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">ibsss</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+            <span class="n">network_good</span> <span class="o">=</span> <span class="bp">False</span>
+            
+        <span class="k">if</span> <span class="p">(</span><span class="n">network_good</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">ibsss</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+                <span class="n">n_bss</span> <span class="o">=</span> <span class="n">n</span><span class="o">.</span><span class="n">get_bss_info</span><span class="p">()</span>
+
+                <span class="k">if</span> <span class="p">(</span><span class="n">n_bss</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">):</span>
+                    <span class="n">msg</span> <span class="o">+=</span> <span class="s">&#39;&quot;{0}&quot; BSS is None - No BSS membership possible</span><span class="se">\n</span><span class="s">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+                    <span class="n">network_good</span> <span class="o">=</span> <span class="bp">False</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">bss_cfg_eq</span><span class="p">(</span><span class="n">golden_bss</span><span class="p">,</span> <span class="n">n_bss</span><span class="p">)):</span>
+                        <span class="n">msg</span> <span class="o">+=</span> <span class="s">&#39;Mismatch between BSS Info:</span><span class="se">\n\n</span><span class="s">&#39;</span>
+                        <span class="n">msg</span> <span class="o">+=</span> <span class="s">&#39;&quot;{0}&quot;:</span><span class="se">\n</span><span class="s">{1}</span><span class="se">\n\n</span><span class="s">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">ibsss</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">print_bss_info</span><span class="p">(</span><span class="n">golden_bss</span><span class="p">))</span>
+                        <span class="n">msg</span> <span class="o">+=</span> <span class="s">&#39;&quot;{0}&quot;:</span><span class="se">\n</span><span class="s">{1}</span><span class="se">\n</span><span class="s">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">print_bss_info</span><span class="p">(</span><span class="n">n_bss</span><span class="p">))</span>
+                        <span class="n">network_good</span> <span class="o">=</span> <span class="bp">False</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c"># Other combination of nodes that somehow passed the nodes type checking above</span>
+        <span class="c"># </span>
+        <span class="c"># This should be impossible with the reference AP/STA/IBSS node implementations</span>
+        <span class="c"># but will catch the case of a new WlanExpNode subclass that has not been added</span>
+        <span class="c"># to the nodes type checking</span>
+        <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s">&#39;Unreognized or invalid combination of node types&#39;</span><span class="p">)</span>
+
+    <span class="c"># Print message</span>
+    <span class="k">if</span> <span class="n">verbose</span> <span class="ow">and</span> <span class="n">msg</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">network_good</span>
+
+
+
+<span class="c"># -----------------------------------------------------------------------------</span>
+<span class="c"># Replicated Misc Utilities</span>
+<span class="c"># -----------------------------------------------------------------------------</span>
+
+<span class="c">#</span>
+<span class="c"># These utilities are replicated versions of other functions in wlan_exp.</span>
+<span class="c"># They are consolidated in util to ease import of wlan_exp for scripts.</span>
+<span class="c">#</span>
+</div>
+<div class="viewcode-block" id="int_to_ip"><a class="viewcode-back" href="../../wlan_exp_util.html#wlan_exp.util.int_to_ip">[docs]</a><span class="k">def</span> <span class="nf">int_to_ip</span><span class="p">(</span><span class="n">ip_address</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Convert an integer to IP address string (dotted notation).</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        ip_address (int):  Unsigned 32-bit integer representation of the IP address</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        ip_address (str):  String version of an IP address of the form W.X.Y.Z</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">wlan_exp.transport.transport_eth_ip_udp</span> <span class="kn">as</span> <span class="nn">transport</span>
+    <span class="k">return</span> <span class="n">transport</span><span class="o">.</span><span class="n">int_to_ip</span><span class="p">(</span><span class="n">ip_address</span><span class="p">)</span>
+
+<span class="c"># End def</span>
+
+</div>
+<div class="viewcode-block" id="ip_to_int"><a class="viewcode-back" href="../../wlan_exp_util.html#wlan_exp.util.ip_to_int">[docs]</a><span class="k">def</span> <span class="nf">ip_to_int</span><span class="p">(</span><span class="n">ip_address</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Convert IP address string (dotted notation) to an integer.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        ip_address (str):  String version of an IP address of the form W.X.Y.Z</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        ip_address (int):  Unsigned 32-bit integer representation of the IP address</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">wlan_exp.transport.transport_eth_ip_udp</span> <span class="kn">as</span> <span class="nn">transport</span>
+    <span class="k">return</span> <span class="n">transport</span><span class="o">.</span><span class="n">ip_to_int</span><span class="p">(</span><span class="n">ip_address</span><span class="p">)</span>
+
+<span class="c"># End def</span>
+
+</div>
+<div class="viewcode-block" id="mac_addr_to_str"><a class="viewcode-back" href="../../wlan_exp_util.html#wlan_exp.util.mac_addr_to_str">[docs]</a><span class="k">def</span> <span class="nf">mac_addr_to_str</span><span class="p">(</span><span class="n">mac_address</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Convert an integer to a colon separated MAC address string.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        mac_address (int):  Unsigned 48-bit integer representation of the MAC address</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        mac_address (str):  String version of an MAC address of the form XX:XX:XX:XX:XX:XX</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">wlan_exp.transport.transport_eth_ip_udp</span> <span class="kn">as</span> <span class="nn">transport</span>
+    <span class="k">return</span> <span class="n">transport</span><span class="o">.</span><span class="n">mac_addr_to_str</span><span class="p">(</span><span class="n">mac_address</span><span class="p">)</span>
+
+<span class="c"># End def</span>
+
+</div>
+<div class="viewcode-block" id="str_to_mac_addr"><a class="viewcode-back" href="../../wlan_exp_util.html#wlan_exp.util.str_to_mac_addr">[docs]</a><span class="k">def</span> <span class="nf">str_to_mac_addr</span><span class="p">(</span><span class="n">mac_address</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Convert a colon separated MAC address string to an integer.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        mac_address (str):  String version of an MAC address of the form XX:XX:XX:XX:XX:XX</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        mac_address (int):  Unsigned 48-bit integer representation of the MAC address</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">wlan_exp.transport.transport_eth_ip_udp</span> <span class="kn">as</span> <span class="nn">transport</span>
+    <span class="k">return</span> <span class="n">transport</span><span class="o">.</span><span class="n">str_to_mac_addr</span><span class="p">(</span><span class="n">mac_address</span><span class="p">)</span>
+
+<span class="c"># End def</span>
+
+</div>
+<div class="viewcode-block" id="mac_addr_to_byte_str"><a class="viewcode-back" href="../../wlan_exp_util.html#wlan_exp.util.mac_addr_to_byte_str">[docs]</a><span class="k">def</span> <span class="nf">mac_addr_to_byte_str</span><span class="p">(</span><span class="n">mac_address</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Convert an integer to a MAC address byte string.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        mac_address (int):  Unsigned 48-bit integer representation of the MAC address</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        mac_address (str):  Byte string version of an MAC address</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">wlan_exp.transport.transport_eth_ip_udp</span> <span class="kn">as</span> <span class="nn">transport</span>
+    <span class="k">return</span> <span class="n">transport</span><span class="o">.</span><span class="n">mac_addr_to_byte_str</span><span class="p">(</span><span class="n">mac_address</span><span class="p">)</span>
+
+<span class="c"># End def</span>
+
+</div>
+<div class="viewcode-block" id="byte_str_to_mac_addr"><a class="viewcode-back" href="../../wlan_exp_util.html#wlan_exp.util.byte_str_to_mac_addr">[docs]</a><span class="k">def</span> <span class="nf">byte_str_to_mac_addr</span><span class="p">(</span><span class="n">mac_address</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Convert a MAC address byte string to an integer.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        mac_address (str):  Byte string version of an MAC address</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        mac_address (int):  Unsigned 48-bit integer representation of the MAC address</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">wlan_exp.transport.transport_eth_ip_udp</span> <span class="kn">as</span> <span class="nn">transport</span>
+    <span class="k">return</span> <span class="n">transport</span><span class="o">.</span><span class="n">byte_str_to_mac_addr</span><span class="p">(</span><span class="n">mac_address</span><span class="p">)</span>
+
+<span class="c"># End def</span>
+
+</div>
+<span class="k">def</span> <span class="nf">buffer_to_str</span><span class="p">(</span><span class="nb">buffer</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Convert a buffer of bytes to a formatted string.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        buffer (bytes):  Buffer of bytes</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        output (str):  Formatted string of the buffer byte values</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">wlan_exp.transport.transport_eth_ip_udp</span> <span class="kn">as</span> <span class="nn">transport</span>
+    <span class="k">return</span> <span class="n">transport</span><span class="o">.</span><span class="n">buffer_to_str</span><span class="p">(</span><span class="nb">buffer</span><span class="p">)</span>
+
+<span class="c"># End def</span>
+
+
+<span class="k">def</span> <span class="nf">ver_code_to_str</span><span class="p">(</span><span class="n">ver_code</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Convert a wlan_exp version code to a string.&quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">wlan_exp.version</span> <span class="kn">as</span> <span class="nn">version</span>
+    <span class="k">return</span> <span class="n">version</span><span class="o">.</span><span class="n">wlan_exp_ver_code_to_str</span><span class="p">(</span><span class="n">ver_code</span><span class="p">)</span>
+
+<span class="c"># End def</span>
+
+
+<span class="c"># -----------------------------------------------------------------------------</span>
+<span class="c"># Misc Utilities</span>
+<span class="c"># -----------------------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="create_locally_administered_bssid"><a class="viewcode-back" href="../../wlan_exp_util.html#wlan_exp.util.create_locally_administered_bssid">[docs]</a><span class="k">def</span> <span class="nf">create_locally_administered_bssid</span><span class="p">(</span><span class="n">mac_address</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Create a locally administered BSSID.</span>
+
+<span class="sd">    Set &quot;locally administered&quot; bit to &#39;1&#39; and &quot;multicast&quot; bit to &#39;0&#39;</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        mac_address (int, str):  MAC address to be used as the base for the BSSID</span>
+<span class="sd">            either as a 48-bit integer or a colon delimited string of the form:</span>
+<span class="sd">            XX:XX:XX:XX:XX:XX</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        bssid (int):</span>
+<span class="sd">            BSSID with the &quot;locally administerd&quot; bit set to &#39;1&#39; and the &quot;multicast&quot; bit set to &#39;0&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">mac_address</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="n">type_is_str</span>     <span class="o">=</span> <span class="bp">True</span>
+        <span class="n">tmp_mac_address</span> <span class="o">=</span> <span class="n">str_to_mac_addr</span><span class="p">(</span><span class="n">mac_address</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">type_is_str</span>     <span class="o">=</span> <span class="bp">False</span>
+        <span class="n">tmp_mac_address</span> <span class="o">=</span> <span class="n">mac_address</span>
+
+    <span class="n">tmp_mac_address</span> <span class="o">=</span> <span class="p">(</span><span class="n">tmp_mac_address</span> <span class="o">|</span> <span class="n">mac_addr_local_mask</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">mac_addr_broadcast</span> <span class="o">-</span> <span class="n">mac_addr_mcast_mask</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">type_is_str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">mac_addr_to_str</span><span class="p">(</span><span class="n">tmp_mac_address</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">tmp_mac_address</span>
+
+<span class="c"># End def</span>
+
+</div>
+<span class="k">def</span> <span class="nf">is_locally_administered_bssid</span><span class="p">(</span><span class="n">bssid</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Is the BSSID a locally administered BSSID?</span>
+
+<span class="sd">    Is &quot;locally administered&quot; bit to &#39;1&#39; and &quot;multicast&quot; bit to &#39;0&#39; of the BSSID?</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        bssid (int, str):  BSSID either as a 48-bit integer or a colon </span>
+<span class="sd">            delimited string of the form: XX:XX:XX:XX:XX:XX</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        status (bool):</span>
+
+<span class="sd">            * True      -- BSSID is locally administered BSSID</span>
+<span class="sd">            * False     -- BSSID is not locally administered BSSID</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">bssid</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="n">tmp_bssid</span> <span class="o">=</span> <span class="n">str_to_mac_addr</span><span class="p">(</span><span class="n">bssid</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">tmp_bssid</span> <span class="o">=</span> <span class="n">bssid</span>
+
+    <span class="k">if</span> <span class="p">(((</span><span class="n">tmp_bssid</span> <span class="o">&amp;</span> <span class="n">mac_addr_local_mask</span><span class="p">)</span> <span class="o">==</span> <span class="n">mac_addr_local_mask</span><span class="p">)</span> <span class="ow">and</span> 
+        <span class="p">((</span><span class="n">tmp_bssid</span> <span class="o">&amp;</span> <span class="n">mac_addr_mcast_mask</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)):</span>
+        <span class="k">return</span> <span class="bp">True</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">False</span>
+
+<span class="c"># End def</span>
+
+
+<div class="viewcode-block" id="sn_to_str"><a class="viewcode-back" href="../../wlan_exp_util.html#wlan_exp.util.sn_to_str">[docs]</a><span class="k">def</span> <span class="nf">sn_to_str</span><span class="p">(</span><span class="n">hw_generation</span><span class="p">,</span> <span class="n">serial_number</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Convert serial number to a string for a given hardware generation.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        hw_generation (int):  WARP hardware generation (currently only &#39;3&#39; is supported)</span>
+<span class="sd">        serial_number (int):  Integer representation of the WARP serial number</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        serial_number (str):  String representation of the WARP serial number (of the form &#39;W3-a-XXXXX&#39;)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">hw_generation</span> <span class="o">==</span> <span class="mi">3</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="s">&#39;W3-a-{0:05d}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">serial_number</span><span class="p">)))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">&quot;ERROR:  Not valid Hardware Generation: {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">hw_generation</span><span class="p">))</span>
+
+<span class="c"># End def</span>
+
+</div>
+<div class="viewcode-block" id="node_type_to_str"><a class="viewcode-back" href="../../wlan_exp_util.html#wlan_exp.util.node_type_to_str">[docs]</a><span class="k">def</span> <span class="nf">node_type_to_str</span><span class="p">(</span><span class="n">node_type</span><span class="p">,</span> <span class="n">node_factory</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Convert the Node Type to a string description.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        node_type (int):  node type ID (u32)</span>
+<span class="sd">        node_factory (WlanExpNodeFactory): A WlanExpNodeFactory or subclass to</span>
+<span class="sd">            create nodes of a given type</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        node_type (str):  String representation of the node type</span>
+
+<span class="sd">    By default, a dictionary of node types is built dynamically during init_nodes().</span>
+<span class="sd">    If init_nodes() has not been run, then the method will try to create a node</span>
+<span class="sd">    type dictionary.  If a node_factory is not provided then a default WlanExpNodeFactory</span>
+<span class="sd">    will be used to determine the node type.  If a default WlanExpNodeFactory is used,</span>
+<span class="sd">    then only framework node types will be known and custom node types will return:</span>
+<span class="sd">    &quot;Unknown node type: &lt;value&gt;&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">global</span> <span class="n">node_type_dict</span>
+
+    <span class="c"># Build a node_type_dict if it is not present</span>
+    <span class="k">if</span> <span class="n">node_type_dict</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+
+        <span class="c"># Build a default node_factory if it is not present</span>
+        <span class="k">if</span> <span class="n">node_factory</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="kn">import</span> <span class="nn">wlan_exp.node</span> <span class="kn">as</span> <span class="nn">node</span>
+            <span class="kn">import</span> <span class="nn">wlan_exp.transport.config</span> <span class="kn">as</span> <span class="nn">config</span>
+
+            <span class="n">network_config</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">NetworkConfiguration</span><span class="p">()</span>
+            <span class="n">node_factory</span>   <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">WlanExpNodeFactory</span><span class="p">(</span><span class="n">network_config</span><span class="p">)</span>
+
+        <span class="c"># Record the node type dictionary from the NodeFactory for later use</span>
+        <span class="n">node_type_dict</span> <span class="o">=</span> <span class="n">node_factory</span><span class="o">.</span><span class="n">get_type_dict</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">node_type</span> <span class="ow">in</span> <span class="n">node_type_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+        <span class="k">return</span> <span class="n">node_type_dict</span><span class="p">[</span><span class="n">node_type</span><span class="p">][</span><span class="s">&#39;description&#39;</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s">&quot;Unknown node type: 0x{0:8x}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">node_type</span><span class="p">)</span>
+
+<span class="c"># End def</span>
+
+</div>
+<div class="viewcode-block" id="mac_addr_desc"><a class="viewcode-back" href="../../wlan_exp_util.html#wlan_exp.util.mac_addr_desc">[docs]</a><span class="k">def</span> <span class="nf">mac_addr_desc</span><span class="p">(</span><span class="n">mac_addr</span><span class="p">,</span> <span class="n">desc_map</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns a string description of a MAC address.</span>
+
+<span class="sd">    This is useful when printing a table of addresses.  Custom MAC address</span>
+<span class="sd">    descriptions can be provided via the desc_map argument.  In addition</span>
+<span class="sd">    to the provided desc_map, the global mac_addr_desc_map that describes </span>
+<span class="sd">    mappings of different MAC addresses will also be used.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        mac_address (int):  64-bit integer representing 48-bit MAC address</span>
+<span class="sd">        desc_map (list of tuple, optional): list of tuple or tuple of the form</span>
+<span class="sd">            (addr_mask, addr_value, descritpion)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        description (str):  Description of the MAC address or &#39;&#39; if address </span>
+<span class="sd">        does not match any descriptions</span>
+
+<span class="sd">    The mac_address argument will be bitwise AND&#39;d with each addr_mask, then </span>
+<span class="sd">    compared to addr_value. If the result is non-zero the corresponding </span>
+<span class="sd">    descprition will be returned.  This will only return the first description </span>
+<span class="sd">    in the [desc_map, mac_addr_desc_map] list.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c"># Cast to python int in case input is still numpy uint64</span>
+    <span class="n">mac_addr</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">mac_addr</span><span class="p">)</span>
+
+    <span class="n">desc_out</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="n">desc_map</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">):</span>
+        <span class="n">desc_map</span> <span class="o">=</span> <span class="n">mac_addr_desc_map</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">desc_map</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">desc_map</span><span class="p">)</span> <span class="o">+</span> <span class="n">mac_addr_desc_map</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="n">req</span><span class="p">,</span> <span class="n">mask</span><span class="p">,</span> <span class="n">desc</span><span class="p">)</span> <span class="ow">in</span> <span class="n">desc_map</span><span class="p">:</span>
+        <span class="k">if</span><span class="p">(</span> <span class="p">(</span><span class="n">mac_addr</span> <span class="o">&amp;</span> <span class="n">mask</span><span class="p">)</span> <span class="o">==</span> <span class="n">req</span><span class="p">):</span>
+            <span class="n">desc_out</span> <span class="o">+=</span> <span class="n">desc</span>
+            <span class="k">break</span>
+
+    <span class="k">return</span> <span class="n">desc_out</span>
+
+<span class="c"># End def</span>
+
+
+<span class="c"># Excellent util function for dropping into interactive Python shell</span>
+<span class="c">#   From http://vjethava.blogspot.com/2010/11/matlabs-keyboard-command-in-python.html</span></div>
+<div class="viewcode-block" id="debug_here"><a class="viewcode-back" href="../../wlan_exp_util.html#wlan_exp.util.debug_here">[docs]</a><span class="k">def</span> <span class="nf">debug_here</span><span class="p">(</span><span class="n">banner</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Function that mimics the matlab keyboard command for interactive debbug.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        banner (str):  Banner message to be displayed before the interactive prompt</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">code</span>
+    <span class="c"># Use exception trick to pick up the current frame</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="bp">None</span>
+    <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+        <span class="n">frame</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">tb_frame</span><span class="o">.</span><span class="n">f_back</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="s">&quot;# Use quit() or Ctrl-D to exit&quot;</span><span class="p">)</span>
+
+    <span class="c"># evaluate commands in current namespace</span>
+    <span class="n">namespace</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">f_globals</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">namespace</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">frame</span><span class="o">.</span><span class="n">f_locals</span><span class="p">)</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">code</span><span class="o">.</span><span class="n">interact</span><span class="p">(</span><span class="n">banner</span><span class="o">=</span><span class="n">banner</span><span class="p">,</span> <span class="n">local</span><span class="o">=</span><span class="n">namespace</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">SystemExit</span><span class="p">:</span>
+        <span class="k">return</span>
+
+<span class="c"># End def</span>
+
+
+<span class="c"># -----------------------------------------------------------------------------</span>
+<span class="c"># Internal Methods</span>
+<span class="c"># -----------------------------------------------------------------------------</span></div>
+<span class="k">def</span> <span class="nf">_get_nodes_by_type</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">mac_high</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">mac_low</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns all nodes in the list that have the given node_type.&quot;&quot;&quot;</span>
+
+    <span class="c"># Check that these nodes are 802.11 nodes</span>
+    <span class="n">tmp_nodes</span> <span class="o">=</span> <span class="p">[</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">nodes</span> <span class="k">if</span> <span class="p">(</span><span class="n">n</span><span class="o">.</span><span class="n">node_type</span> <span class="o">&amp;</span> <span class="mh">0xFFFF0000</span> <span class="o">==</span> <span class="n">defaults</span><span class="o">.</span><span class="n">WLAN_EXP_80211_BASE</span><span class="p">)]</span>
+
+    <span class="c"># Filter the 8 bits for MAC High node type</span>
+    <span class="k">if</span> <span class="n">mac_high</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">mac_high</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="nb">list</span><span class="p">:</span>
+            <span class="n">mac_high</span> <span class="o">=</span> <span class="p">[</span><span class="n">mac_high</span><span class="p">]</span>
+        <span class="n">tmp_nodes</span> <span class="o">=</span> <span class="p">[</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">tmp_nodes</span> <span class="k">if</span> <span class="p">((</span><span class="n">n</span><span class="o">.</span><span class="n">node_type</span> <span class="o">&amp;</span> <span class="mh">0x0000FF00</span><span class="p">)</span> <span class="ow">in</span> <span class="n">mac_high</span><span class="p">)]</span>
+
+    <span class="c"># Filter the 8 bits for MAC Low node type</span>
+    <span class="k">if</span> <span class="n">mac_low</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">mac_low</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="nb">list</span><span class="p">:</span>
+            <span class="n">mac_low</span> <span class="o">=</span> <span class="p">[</span><span class="n">mac_low</span><span class="p">]</span>
+        <span class="n">tmp_nodes</span> <span class="o">=</span> <span class="p">[</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">tmp_nodes</span> <span class="k">if</span> <span class="p">((</span><span class="n">n</span><span class="o">.</span><span class="n">node_type</span> <span class="o">&amp;</span> <span class="mh">0x000000FF</span><span class="p">)</span> <span class="ow">in</span> <span class="n">mac_low</span><span class="p">)]</span>
+
+    <span class="k">return</span> <span class="n">tmp_nodes</span>
+
+<span class="c"># End def</span>
+
+
+<span class="k">def</span> <span class="nf">_get_nodes_by_sn</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">serial_number</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns all nodes in the list that have the given serial number.&quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">serial_number</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">serial_number</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="nb">list</span><span class="p">:</span>
+            <span class="n">serial_number</span> <span class="o">=</span> <span class="p">[</span><span class="n">serial_number</span><span class="p">]</span>
+        <span class="n">nodes</span> <span class="o">=</span> <span class="p">[</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">nodes</span> <span class="k">if</span> <span class="p">(</span><span class="n">n</span><span class="o">.</span><span class="n">serial_number</span> <span class="ow">in</span> <span class="n">serial_number</span><span class="p">)]</span>
+
+    <span class="k">return</span> <span class="n">nodes</span>
+
+<span class="c"># End def</span>
+
+
+<span class="k">def</span> <span class="nf">_time</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Time function to handle differences between Python 2.7 and 3.3&quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+    <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">time</span><span class="o">.</span><span class="n">clock</span><span class="p">()</span>
+
+<span class="c"># End def</span>
+
+
+<span class="k">def</span> <span class="nf">_broadcast_time_to_nodes</span><span class="p">(</span><span class="n">time_cmd</span><span class="p">,</span> <span class="n">network_config</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">time_id</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Internal method to issue broadcast time commands</span>
+
+<span class="sd">    This method will iterate through all host interfaces and issue a</span>
+<span class="sd">    broadcast packet on each interface that will set the time to the</span>
+<span class="sd">    timebase.  The method keeps track of how long it takes to send</span>
+<span class="sd">    each packet so that the time on all nodes is as close as possible</span>
+<span class="sd">    even across interface.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        time_cmd       -- NodeProcTime command to issue</span>
+<span class="sd">        network_config -- A NetworkConfiguration object</span>
+<span class="sd">        time           -- Optional time to broadcast to the nodes (defaults to 0)</span>
+<span class="sd">                          as an integer number of microseconds</span>
+<span class="sd">        time_id        -- Optional value to identify broadcast time commands across nodes</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">wlan_exp.cmds</span> <span class="kn">as</span> <span class="nn">cmds</span>
+
+    <span class="n">time_factor</span> <span class="o">=</span> <span class="mi">6</span>               <span class="c"># Time can be in # of microseconds (ie 10^(-6) seconds)</span>
+
+    <span class="c"># Need to convert time input to float so that it can be added to _time()</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">time</span><span class="p">)</span> <span class="ow">in</span> <span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">long</span><span class="p">]):</span>
+        <span class="n">node_time</span>   <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">time</span> <span class="o">/</span> <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="n">time_factor</span><span class="p">))</span>   <span class="c"># Convert to float</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&quot;Time must be an integer number of microseconds.&quot;</span><span class="p">)</span>
+
+    <span class="c"># Determine if data is being sent to multiple networks</span>
+    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">network_config</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">list</span><span class="p">:</span>
+        <span class="n">configs</span> <span class="o">=</span> <span class="n">network_config</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">configs</span> <span class="o">=</span> <span class="p">[</span><span class="n">network_config</span><span class="p">]</span>
+
+    <span class="c"># Send command to each network</span>
+    <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">config</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">configs</span><span class="p">):</span>
+        <span class="n">network_addr</span>    <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get_param</span><span class="p">(</span><span class="s">&#39;network&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">idx</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
+            <span class="n">node_time</span>   <span class="o">=</span> <span class="n">node_time</span>
+            <span class="n">start_time</span>  <span class="o">=</span> <span class="n">_time</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">node_time</span>   <span class="o">=</span> <span class="n">node_time</span> <span class="o">+</span> <span class="p">(</span><span class="n">_time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span><span class="p">)</span>
+
+        <span class="n">cmd</span>             <span class="o">=</span> <span class="n">cmds</span><span class="o">.</span><span class="n">NodeProcTime</span><span class="p">(</span><span class="n">time_cmd</span><span class="p">,</span> <span class="n">node_time</span><span class="p">,</span> <span class="n">time_id</span><span class="p">);</span>
+
+        <span class="n">_broadcast_cmd_to_nodes_helper</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">network_config</span><span class="p">)</span>
+
+        <span class="n">msg</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">time_cmd</span> <span class="o">==</span> <span class="n">cmds</span><span class="o">.</span><span class="n">CMD_PARAM_WRITE</span><span class="p">):</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="s">&quot;Initializing the time of all nodes on network &quot;</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="s">&quot;{0} to: {1}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">network_addr</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">node_time</span> <span class="o">*</span> <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="n">time_factor</span><span class="p">)))</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="n">time_cmd</span> <span class="o">==</span> <span class="n">cmds</span><span class="o">.</span><span class="n">CMD_PARAM_TIME_ADD_TO_LOG</span><span class="p">):</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="s">&quot;Adding current time to log for nodes on network {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">network_addr</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+<span class="c"># End def</span>
+
+
+<span class="k">def</span> <span class="nf">_broadcast_cmd_to_nodes_helper</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">network_config</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Internal method to issue broadcast commands</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        network_config -- A NetworkConfiguration object</span>
+<span class="sd">        cmd            -- A message.Cmd object describing the command</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">wlan_exp.transport.transport_eth_ip_udp_py_broadcast</span> <span class="kn">as</span> <span class="nn">broadcast</span>
+
+    <span class="c"># Get information out of the NetworkConfiguration</span>
+    <span class="n">tx_buf_size</span>  <span class="o">=</span> <span class="n">network_config</span><span class="o">.</span><span class="n">get_param</span><span class="p">(</span><span class="s">&#39;tx_buffer_size&#39;</span><span class="p">)</span>
+    <span class="n">rx_buf_size</span>  <span class="o">=</span> <span class="n">network_config</span><span class="o">.</span><span class="n">get_param</span><span class="p">(</span><span class="s">&#39;rx_buffer_size&#39;</span><span class="p">)</span>
+
+    <span class="c"># Create broadcast transport and send message</span>
+    <span class="n">transport_broadcast</span> <span class="o">=</span> <span class="n">broadcast</span><span class="o">.</span><span class="n">TransportEthIpUdpPyBroadcast</span><span class="p">(</span><span class="n">network_config</span><span class="p">);</span>
+
+    <span class="n">transport_broadcast</span><span class="o">.</span><span class="n">transport_open</span><span class="p">(</span><span class="n">tx_buf_size</span><span class="p">,</span> <span class="n">rx_buf_size</span><span class="p">)</span>
+
+    <span class="n">transport_broadcast</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">payload</span><span class="o">=</span><span class="n">cmd</span><span class="o">.</span><span class="n">serialize</span><span class="p">())</span>
+
+    <span class="n">transport_broadcast</span><span class="o">.</span><span class="n">transport_close</span><span class="p">()</span>
+
+<span class="c"># End def</span>
+</pre></div>
+
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Mango Communications, Inc..
+    </p>
+  </div>
+
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'wlan_exp v1.5.2  ',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

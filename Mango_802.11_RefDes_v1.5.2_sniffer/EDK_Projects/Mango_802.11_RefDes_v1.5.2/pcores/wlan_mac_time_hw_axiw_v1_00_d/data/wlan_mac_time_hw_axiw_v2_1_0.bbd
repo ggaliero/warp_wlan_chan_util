@@ -1,0 +1,17 @@
+#############################################################
+# Copyright (c) 1995-2016 Xilinx, Inc.  All rights reserved.
+# 
+# You may copy and modify these files for your own internal
+# use solely with Xilinx programmable logic devices and
+# Xilinx EDK system or create IP modules solely for Xilinx
+# programmable logic devices and Xilinx EDK system.
+# No rights are granted to distribute any files unless they
+# are distributed in Xilinx programmable logic devices.
+#
+# Black Box Definition (BBD) file
+# created by System Generator
+# Jan 6, 2016 12:52:09 PM
+#############################################################
+
+FILES
+xlpersistentdff.ngc, cntr_11_0_86806e294f737f4c.ngc, cntr_11_0_78c1092db561b4bc.ngc, cntr_11_0_5e62871cb125c52e.ngc

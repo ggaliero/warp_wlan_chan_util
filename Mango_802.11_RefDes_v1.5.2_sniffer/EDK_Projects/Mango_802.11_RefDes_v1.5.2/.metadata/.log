@@ -1,0 +1,27 @@
+!SESSION 2016-07-13 23:26:47.342 -----------------------------------------------
+eclipse.buildId=Release 14.4 Build SDK_P.49d
+java.version=1.6.0_21
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=sv_SE
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY org.eclipse.cdt.core 1 0 2016-07-13 23:55:20.112
+!MESSAGE Indexed 'wlan_bsp_cpu_high' (0 sources, 8 headers) in 0,33 sec: 0 declarations; 0 references; 8 unresolved inclusions; 0 syntax errors; 0 unresolved names (0,00 %)
+
+!ENTRY org.eclipse.cdt.core 1 0 2016-07-13 23:55:20.870
+!MESSAGE Indexed 'wlan_mac_high_ap' (0 sources, 21 headers) in 0,75 sec: 143 declarations; 311 references; 3 unresolved inclusions; 0 syntax errors; 1 unresolved names (0,22 %)
+
+!ENTRY org.eclipse.cdt.core 1 0 2016-07-13 23:55:21.102
+!MESSAGE Indexed 'wlan_mac_high_sta' (0 sources, 21 headers) in 0,23 sec: 143 declarations; 311 references; 3 unresolved inclusions; 0 syntax errors; 1 unresolved names (0,22 %)
+
+!ENTRY org.eclipse.cdt.core 1 0 2016-07-13 23:55:21.154
+!MESSAGE Indexed 'wlan_bsp_cpu_low' (0 sources, 8 headers) in 0,05 sec: 0 declarations; 0 references; 8 unresolved inclusions; 0 syntax errors; 0 unresolved names (0,00 %)
+
+!ENTRY org.eclipse.cdt.core 1 0 2016-07-13 23:55:21.314
+!MESSAGE Indexed 'wlan_mac_low_nomac' (0 sources, 21 headers) in 0,16 sec: 143 declarations; 311 references; 3 unresolved inclusions; 0 syntax errors; 1 unresolved names (0,22 %)
+
+!ENTRY org.eclipse.cdt.core 1 0 2016-07-13 23:55:21.486
+!MESSAGE Indexed 'wlan_mac_high_ibss' (0 sources, 21 headers) in 0,17 sec: 143 declarations; 311 references; 3 unresolved inclusions; 0 syntax errors; 1 unresolved names (0,22 %)
+
+!ENTRY org.eclipse.cdt.core 1 0 2016-07-13 23:55:21.648
+!MESSAGE Indexed 'wlan_mac_low_dcf' (0 sources, 21 headers) in 0,16 sec: 143 declarations; 311 references; 3 unresolved inclusions; 0 syntax errors; 1 unresolved names (0,22 %)

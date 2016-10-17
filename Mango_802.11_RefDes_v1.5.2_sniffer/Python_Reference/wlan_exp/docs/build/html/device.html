@@ -1,0 +1,273 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>WLAN Device &mdash; mango_wlan_exp wlan_exp v1.5.2   documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/rtd_overrides.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="mango_wlan_exp wlan_exp v1.5.2   documentation" href="index.html"/>
+        <link rel="up" title="Framework" href="wlan_exp.html"/>
+        <link rel="next" title="Event Log" href="wlan_exp_log.html"/>
+        <link rel="prev" title="LTG Flow Configurations" href="ltg.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="index.html" class="fa fa-home"> mango_wlan_exp</a>
+        
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="wlan_exp.html">Framework</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="node.html">Node Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wlan_exp_util.html">WLAN Exp Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ltg.html">LTG Flow Configurations</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">WLAN Device</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="wlan_exp_log.html">Event Log</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="log_overview.html">Event Log Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="log_entry_types.html">Log Entry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="log_util.html">Event Log Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="log_util_hdf.html">HDF5 Utilities</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">mango_wlan_exp</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="wlan_exp.html">Framework</a> &raquo;</li>
+      
+    <li>WLAN Device</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="_sources/device.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="wlan-device">
+<span id="wlan-exp-device"></span><h1>WLAN Device<a class="headerlink" href="#wlan-device" title="Permalink to this headline">¶</a></h1>
+<p>The WLAN device represents an 802.11 device in a WLAN network.  This can
+be used to define non-WARP nodes so that the experiments framework can
+interact with them.</p>
+<div class="section" id="class">
+<h2>Class<a class="headerlink" href="#class" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="wlan_exp.device.WlanDevice">
+<em class="property">class </em><code class="descname">WlanDevice</code><span class="sig-paren">(</span><em>mac_address</em>, <em>name=None</em>, <em>ht_capable=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wlan_exp/device.html#WlanDevice"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#wlan_exp.device.WlanDevice" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class for WLAN Device. This is the parent class for all wlan_exp node class definitions.
+This class also provides a node type for devices which exist in a wireless network but are not
+controlled by wlan_exp (i.e. a Wi-Fi client connected to an 802.11 Reference Design AP).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>mac_address</strong> (<em>int, str</em>) &#8211;
+Medium Access Control (MAC) address of the WLAN device (48-bits)
+The mac_address should be of the format:  0x0123456789AB or &#8216;01:23:45:67:89:AB&#8217;</li>
+<li><strong>name</strong> (<em>string</em>) &#8211;
+User generated description of the WLAN device</li>
+<li><strong>ht_capable</strong> (<em>bool</em>) &#8211;
+Indicates if device has PHY capable of HT (802.11n) rates</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Class Members:</strong></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Variables:</th><td class="field-body"><ul class="first last simple">
+<li><strong>device_type</strong> (<em>int</em>) &#8211; Unique type of the WLAN Device</li>
+<li><strong>name</strong> (<em>string</em>) &#8211; User generated description of the WLAN device</li>
+<li><strong>wlan_mac_address</strong> (<em>int</em>) &#8211; MAC Address of WLAN Device</li>
+<li><strong>ht_capable</strong> (<em>bool</em>) &#8211; Indicates if device has PHY capable of HT (802.11n) rates</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<p>To create a WLAN device, first specify the MAC address and name of the device:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># WLAN devices</span>
+<span class="c"># Contains a list of tuples: (MAC Address, &#39;String description of device&#39;)</span>
+<span class="c">#  MAC addresses must be expressed as uint64 values</span>
+<span class="c">#  For example, use 0x0123456789AB for MAC address 01:23:45:67:89:AB</span>
+<span class="n">WLAN_DEVICE_LIST</span>  <span class="o">=</span> <span class="p">[(</span><span class="mh">0x000000000000</span><span class="p">,</span> <span class="s">&#39;My Device&#39;</span><span class="p">)]</span>
+</pre></div>
+</div>
+<p>Given the device parameters, create WLAN devices for each device:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># Setup WLAN devices</span>
+<span class="n">devices</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">device</span> <span class="ow">in</span> <span class="n">WLAN_DEVICE_LIST</span><span class="p">:</span>
+    <span class="n">devices</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">wlan_device</span><span class="o">.</span><span class="n">WlanDevice</span><span class="p">(</span><span class="n">mac_address</span><span class="o">=</span><span class="n">device</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="n">device</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+</pre></div>
+</div>
+<p>Finally, interact with the devices within the 802.11 Reference Design Experiments Framework:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># Wait for devices to associate with the AP</span>
+<span class="k">print</span><span class="p">(</span><span class="s">&quot;Waiting for devices to join:&quot;</span><span class="p">)</span>
+
+<span class="n">total_devices</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">devices</span><span class="p">)</span>
+<span class="n">tmp_devices</span>   <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">devices</span><span class="p">)</span>
+<span class="n">num_joined</span>    <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">while</span> <span class="p">(</span><span class="n">total_devices</span> <span class="o">!=</span> <span class="n">num_joined</span><span class="p">):</span>
+
+    <span class="k">for</span> <span class="n">device</span> <span class="ow">in</span> <span class="n">tmp_devices</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">n_ap</span><span class="o">.</span><span class="n">is_associated</span><span class="p">(</span><span class="n">device</span><span class="p">):</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">&quot;    {0} joined&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">device</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+            <span class="n">num_joined</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">tmp_devices</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="wlan_exp_log.html" class="btn btn-neutral float-right" title="Event Log">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="ltg.html" class="btn btn-neutral" title="LTG Flow Configurations"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Mango Communications, Inc..
+    </p>
+  </div>
+
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'wlan_exp v1.5.2  ',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
