@@ -206,12 +206,15 @@ This is a description for all functionalities that were developed during the res
         - If there was a startup association, but we do not know to what WiFi channel the AP switched to, therefore the STA 
           performs an active scan to re-associate with the AP.
     
-    The demonstration of this functionality with traffic flows can be seen at the link below:
+    A demonstration of this functionality with traffic flows can be seen at the link below:
     https://www.youtube.com/watch?v=ZKTEMk8PVzA
     
 - Mango_802.11_RefDes_v1.5.2_sniffer
   This software implements exactly the same as Mango_802.11_RefDes_v1.3.0_sniffer adapted to the new software architecture.
   It also extends the user for amendment 802.11n.
+  
+  A demonstration of this functionality with traffic flows can be seen at the link below:
+  https://www.youtube.com/watch?v=eDATlJRPphU
   
 - Mango_802.11_RefDes_v1.5.2_sniffer_dca
   This software integrates a simplified version of the sniffer at Mango_802.11_RefDes_v1.5.2_sniffer, within the AP. So 
@@ -270,24 +273,51 @@ This is a description for all functionalities that were developed during the res
   
   
 The main purpose of this project was to build up a WiFi prototype device compatible with 802.11n/a/g which is able to measure the percentage of a WiFi channel being used at a certain time instant. Then the next step was to find an application
-to this metric. 
+to apply this metric. 
+
+If an AP was able to analyze the channel state based on the current traffic conditions, then it could choose its operation channel and allocate all clients dinamically avoiding heavy traffic conditions. Integrating this feature to the AP would make these devices intelligent, not only to migrate into idle channels, but being able to send special frames to others APs or even a server comprising information of the channel state. This could be used to establish patterns and even predict the channel estate or traffic conditions.
+
+The final demonstration of AP dynamic channel allocation based on the channel utilization may be seen in the following link:
+https://www.youtube.com/watch?v=ybpTnZ4mw4Y
+
+The scenario consists of two links:
+ - 1st Link: WARP AP + SNIFFER <--- WARP STA
+ - 2nd Link: WARP AP <--- Commercial STA
 
 
+                          --------------                         ------------
+                          |  WARPv1.3  |                         | WARPv1.3 |
+                          | AP+SNIFFER |        <--------        |   STA    |
+                          --------------                         ------------
+                                [1]                                   [2]
+                                              --------------
+                                              |  WARPv1.3  |
+                                              |  SNIFFER   |
+                                              --------------
+                                                    [3]
+                          --------------                         --------------
+                          |  WARPv1.3  |                         | COMMERCIAL |
+                          |     AP     |        <--------        |     STA    |
+                          --------------                         --------------                    
+                                [4]                                    [5]
 
-The basic scenario to use the sniffer capabilities is depicted below:
+Software intallation:
+    [1] - Mango_802.11_RefDes_v1.5.2_sniffer_dca_ctrl, AP
+    [2] - Mango_802.11_RefDes_v1.5.2, STA
+    [3] - Mango_802.11_RefDes_v1.5.2_sniffer_ctrl
+    [4] - Mango_802.11_RefDes_v1.5.2, AP
+                                
+Experiment flow:
 
+    - Enable Channel utilization and dynamic channel allcation in [1]
+    - Enable automatic re-association in [2]
+    - Start traffic flow [2] -> [1] at CH 36
+    - Check the traffic with the sniffer [3]
+    - Start traffic flow [5] -> [6] at CH 36
+    - [1] detects inteferer traffic, CH_UTIL > 60%, and switches to CH 48, [2] automatically re-associates
+    - Check with the sniffer [3] that 1st link is now at CH 48 and 2nd link stays at CH 36
+    - Force 2nd link to move to CH 48, by pushing [t] in [4]. AP switches to CH 48, and STA [5] automatically re-associates
+    - [1] detects again interferer traffic and switches back to CH 36
+    - Check with the sniffer [3] that 1st link moved back to CH 36 and 2nd link stayed at CH 48
+    
 
---------------                         ------------
-|  WARPv1.3  |                         | WARPv1.3 |
-| AP+SNIFFER |        <-------->       |   STA    |
---------------                         ------------
-
-                    --------------
-                    |  WARPv1.3  |
-                    |  SNIFFER   |
-                    --------------
-                    
---------------                         --------------
-| COMMERCIAL |                         | COMMERCIAL |
-|     AP     |        <-------->       |     STA    |
---------------                         --------------                    
